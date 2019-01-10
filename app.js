@@ -4,9 +4,10 @@ const favicon = require("serve-favicon");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const db = require("./db");
 const cors = require("cors");
 require("dotenv").config();
+
+const db = require("./db");
 
 const index = require("./routes/index");
 

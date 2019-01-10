@@ -2,6 +2,7 @@ const to = require("../lib/to.js");
 const Movie = require("../models/movie.js");
 const User = require("../models/user.js");
 const GroupMe = require("../lib/GroupMe");
+const moment = require("moment");
 
 const add = async (req, res) => {
   let err, newMovie;
@@ -12,12 +13,45 @@ const add = async (req, res) => {
     res.status(500).json(err);
   }
 
+  let movies;
+  [err, movies] = await to(Movie.find());
+
   if (newMovie) {
     await GroupMe.sendBotMessage(`🍿 ${newMovie.title} 🍿 ${newMovie.summary}`);
     await GroupMe.sendBotMessage(`${newMovie.trailer}`);
   }
 
-  res.json({ movie: newMovie });
+  res.json({ movie: newMovie, movies });
+};
+
+const edit = async (req, res) => {
+  // console.log(req.params.id, req.body);
+
+  let err, updatedMovie;
+  [err, updatedMovie] = await to(
+    Movie.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+  );
+
+  let movies;
+  [err, movies] = await to(Movie.find());
+
+  console.log("UPDATED", updatedMovie);
+
+  res.json({ movie: updatedMovie, movies });
+};
+
+const deleteMovie = async (req, res) => {
+  // console.log(req.params.id, req.body);
+
+  let err, updatedMovie;
+  [err, updatedMovie] = await to(Movie.deleteOne({ _id: req.params.id }));
+
+  let movies;
+  [err, movies] = await to(Movie.find());
+
+  console.log("UPDATED", updatedMovie);
+
+  res.json({ movie: updatedMovie, movies });
 };
 
 const predict = async (req, res) => {
@@ -49,10 +83,26 @@ const predict = async (req, res) => {
   }
 };
 
-const getAllMovies = async (req, res) => {
+const getMovies = async (req, res) => {
   let err, movies;
+  let query = { ...req.query };
 
-  [err, movies] = await to(Movie.find());
+  if ("isClosed" in query) {
+    query.isClosed = Number(query.isClosed);
+    if (Number(query.isClosed) === 0) {
+      query.releaseDate = { $gte: moment().unix() };
+    }
+  }
+
+  if ("rtScore" in query) {
+    if (Number(query.rtScore) < 0) {
+      query.rtScore = { $lt: 0 };
+    } else {
+      query.rtScore = { $gte: query.rtScore };
+    }
+  }
+
+  [err, movies] = await to(Movie.find(query));
 
   if (err) {
     res.status(500).json(err);
@@ -63,6 +113,8 @@ const getAllMovies = async (req, res) => {
 
 module.exports = {
   add,
-  getAllMovies,
+  edit,
+  deleteMovie,
+  getMovies,
   predict
 };

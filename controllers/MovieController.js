@@ -74,7 +74,7 @@ const _sendResultsToGroup = async (movie, score) => {
     let vote = sorted[i];
     scoreMessage =
       scoreMessage +
-      `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"} ${Math.abs(
+      `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
         vote.diff
       )}% (${vote.vote}% vs. ${score}%)` +
       "\n";
@@ -129,7 +129,7 @@ const getMovies = async (req, res) => {
   let err, movies;
   let query = { ...req.query };
   let cutoffDate = moment()
-    .subtract(7, "days")
+    .add(7, "days")
     .unix();
 
   let mongoQuery = {};
@@ -140,13 +140,15 @@ const getMovies = async (req, res) => {
     } else {
       mongoQuery.rtScore = { $gte: query.rtScore };
     }
-  } else if ("isClosed" in query) {
+  }
+
+  if ("isClosed" in query) {
     if (Number(query.isClosed) === 0) {
       mongoQuery.releaseDate = { $gt: cutoffDate };
-      mongoQuery.isClosed = 0;
+      // mongoQuery.isClosed = 0;
     } else {
       mongoQuery.releaseDate = { $lte: cutoffDate };
-      mongoQuery.isClosed = 1;
+      // mongoQuery.isClosed = 1;
     }
   }
 

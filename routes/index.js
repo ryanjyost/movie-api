@@ -13,7 +13,7 @@ router.post(
 router.post("/groupme/:group/users", require("../lib/GroupMe").getUsersInGroup);
 
 router.post("/users/login", require("../controllers/UserController").login);
-router.post("/users/:id", require("../controllers/UserController").getUser);
+router.get("/users/:id", require("../controllers/UserController").getUser);
 
 router.get("/movies", require("../controllers/MovieController").getMovies);
 router.post("/movies/add", require("../controllers/MovieController").add);

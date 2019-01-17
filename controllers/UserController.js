@@ -1,7 +1,6 @@
 const to = require("../lib/to.js");
 const GroupMe = require("../lib/GroupMe");
 const User = require("../models/user.js");
-const Cryptr = require("cryptr");
 
 const login = async (req, res) => {
   let token = req.body.access_token;
@@ -67,7 +66,7 @@ const getUser = async (req, res) => {
   let existingUser;
   [err, existingUser] = await to(
     User.findOne({
-      id: req.params.userId
+      _id: req.params.id
     })
   );
   res.json({ user: existingUser });

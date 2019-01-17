@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="remove env">
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MovieController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MovieController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/GroupMe.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GroupMe.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovieController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MovieController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="77" column="17" lean-forward="true" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+            <state relative-caret-position="349">
+              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="e#324#360#0" />
               </folding>
@@ -62,11 +62,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupMe.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GroupMe.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="820">
-              <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
+            <state relative-caret-position="377">
+              <caret line="106" column="34" lean-forward="true" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+              <folding>
+                <element signature="e#986#2200#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,7 +133,6 @@
         <option value="$PROJECT_DIR$/models/movie.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
-        <option value="$PROJECT_DIR$/lib/GroupMe.js" />
         <option value="$PROJECT_DIR$/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/controllers/UserController.js" />
@@ -138,6 +140,7 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/controllers/MovieController.js" />
+        <option value="$PROJECT_DIR$/lib/GroupMe.js" />
       </list>
     </option>
   </component>
@@ -158,7 +161,7 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="29" />
+    <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="778" />
   </component>
@@ -168,7 +171,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,6 +211,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,7 +265,8 @@
       <workItem from="1547597299526" duration="6204000" />
       <workItem from="1547679076012" duration="6063000" />
       <workItem from="1547688437706" duration="417000" />
-      <workItem from="1547689898242" duration="578000" />
+      <workItem from="1547689898242" duration="798000" />
+      <workItem from="1547691683115" duration="203000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -292,11 +296,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547688523480</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix getting movies">
+      <created>1547690688310</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1547690688310</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72806000" />
+    <option name="totallyTimeSpent" value="73229000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -315,13 +326,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32892805" />
-      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32599118" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29644588" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.30129242" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -332,6 +342,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +356,8 @@
     <MESSAGE value="tons of updates" />
     <MESSAGE value="tweaks" />
     <MESSAGE value="remove env" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove env" />
+    <MESSAGE value="fix getting movies" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix getting movies" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.env">
@@ -626,13 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="41" column="43" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -684,10 +689,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="77" column="17" lean-forward="true" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+        <state relative-caret-position="349">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
           <folding>
             <element signature="e#324#360#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="106" column="34" lean-forward="true" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+          <folding>
+            <element signature="e#986#2200#0" />
           </folding>
         </state>
       </provider>

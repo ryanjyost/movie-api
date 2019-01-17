@@ -5,9 +5,15 @@ const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const CronJob = require("cron").CronJob;
 require("dotenv").config();
 
 const db = require("./db");
+
+const job = new CronJob(
+  "0 0 0 * * *",
+  require("./lib/cron").handleMovieCutoffs
+);
 
 const index = require("./routes/index");
 

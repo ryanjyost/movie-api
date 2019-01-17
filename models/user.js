@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   name: String,
   nickname: String,
-  phoneNumber: { type: String, unique: true },
+  phoneNumber: { type: String },
   accessToken: String,
   votes: mongoose.Schema.Types.Mixed,
   created_at: { type: Date, default: new Date() }

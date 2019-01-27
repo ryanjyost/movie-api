@@ -44,8 +44,7 @@ const _sendResultsToGroup = async (movie, score) => {
   let mainMessage = `🍿 "${
     movie.title
   }" has a Rotten Tomatoes Score of ${score}% `;
-  let scoreMessage =
-    `The prediction rankings for "${movie.title}" are...` + "\n";
+  let scoreMessage = ``;
 
   let votes = [];
   for (let user in movie.votes) {
@@ -128,28 +127,34 @@ const predict = async (req, res) => {
 const getMovies = async (req, res) => {
   let err, movies;
   let query = { ...req.query };
+
+  // what day are predictions cut off
   let cutoffDate = moment()
-    .subtract(7, "days")
+    .add(7, "days")
     .unix();
 
   let mongoQuery = {};
 
-  if ("rtScore" in query) {
-    if (Number(query.rtScore) < 0) {
-      mongoQuery.rtScore = { $lt: 0 };
-    } else {
-      mongoQuery.rtScore = { $gte: query.rtScore };
-    }
-  } else if ("isClosed" in query) {
-    if (Number(query.isClosed) === 0) {
-      mongoQuery.releaseDate = { $gt: cutoffDate };
-      mongoQuery.isClosed = 0;
-    } else {
-      mongoQuery.releaseDate = { $lte: cutoffDate };
-      mongoQuery.isClosed = 1;
-    }
+  if (Number(query.isClosed) < 1 && Number(query.rtScore) < 0) {
+    console.log("Upcoming");
+    mongoQuery = {
+      isClosed: 0,
+      rtScore: { $lt: 0 },
+      releaseDate: { $gt: cutoffDate }
+    };
+  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) < 0) {
+    console.log("Purgatory");
+    mongoQuery = {
+      rtScore: { $lt: 0 },
+      releaseDate: { $lte: cutoffDate }
+    };
+  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {
+    console.log("Past");
+    mongoQuery = {
+      rtScore: { $gte: 0 }
+      // releaseDate: { $lte: cutoffDate }
+    };
   }
-
   [err, movies] = await to(Movie.find(mongoQuery));
 
   if (err) {

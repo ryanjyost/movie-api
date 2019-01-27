@@ -15,6 +15,14 @@ const job = new CronJob(
   require("./lib/cron").handleMovieCutoffs
 );
 
+const job2 = new CronJob(
+  "* * * * * *",
+  require("./lib/cron").handleDayBeforeCutoffNotifications
+);
+
+// require("./lib/cron").handleMovieCutoffs();
+// require("./lib/cron").handleDayBeforeCutoffNotifications();
+
 const index = require("./routes/index");
 
 const app = express();

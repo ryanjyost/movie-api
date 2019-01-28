@@ -20,8 +20,7 @@ const job2 = new CronJob(
   require("./lib/cron").handleDayBeforeCutoffNotifications
 );
 
-// require("./lib/cron").handleMovieCutoffs();
-// require("./lib/cron").handleDayBeforeCutoffNotifications();
+require("./lib/updateMovieScoreMap")(null);
 
 const index = require("./routes/index");
 

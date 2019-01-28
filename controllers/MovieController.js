@@ -1,10 +1,11 @@
 const to = require("../lib/to.js");
 const Movie = require("../models/movie.js");
+const updateMovieScoreMap = require("../lib/updateMovieScoreMap.js");
 const User = require("../models/user.js");
-const GroupMe = require("../lib/GroupMe");
 const moment = require("moment");
 
 const add = async (req, res) => {
+  const GroupMe = require("../lib/GroupMe.js");
   let err, newMovie;
 
   [err, newMovie] = await to(Movie.create(req.body));
@@ -21,6 +22,8 @@ const add = async (req, res) => {
     await GroupMe.sendBotMessage(`${newMovie.trailer}`);
   }
 
+  updateMovieScoreMap(newMovie.id, -1);
+
   res.json({ movie: newMovie, movies });
 };
 
@@ -32,6 +35,7 @@ const edit = async (req, res) => {
 
   if (movie.rtScore < 0 && Number(req.body.rtScore) > 0) {
     _sendResultsToGroup(movie, Number(req.body.rtScore));
+    updateMovieScoreMap(req.params.id, Number(req.body.rtScore));
   }
 
   let movies;
@@ -41,6 +45,7 @@ const edit = async (req, res) => {
 };
 
 const _sendResultsToGroup = async (movie, score) => {
+  const GroupMe = require("../lib/GroupMe.js");
   let mainMessage = `🍿 "${
     movie.title
   }" has a Rotten Tomatoes Score of ${score}% `;
@@ -124,10 +129,8 @@ const predict = async (req, res) => {
   }
 };
 
-const getMovies = async (req, res) => {
+const _getMovies = async query => {
   let err, movies;
-  let query = { ...req.query };
-
   // what day are predictions cut off
   let cutoffDate = moment()
     .add(7, "days")
@@ -157,17 +160,27 @@ const getMovies = async (req, res) => {
   }
   [err, movies] = await to(Movie.find(mongoQuery));
 
+  return movies;
+};
+
+const getMovies = async (req, res) => {
+  let err, movies;
+  let query = { ...req.query };
+
+  [err, movies] = await to(_getMovies(query));
+
   if (err) {
     res.status(500).json(err);
   }
 
-  res.json({ movies: movies });
+  res.json({ movies });
 };
 
 module.exports = {
   add,
   edit,
   deleteMovie,
+  _getMovies,
   getMovies,
   predict
 };

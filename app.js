@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const favicon = require("serve-favicon");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -21,6 +20,7 @@ const job2 = new CronJob(
 );
 
 require("./lib/updateMovieScoreMap")(null);
+// require("./controllers/GroupController").create(46885156);
 
 const index = require("./routes/index");
 

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/GroupController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/updateMovieScoreMap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/group.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/movieScoreMap.js" afterDir="false" />
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MovieController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MovieController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/GroupController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/GroupController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/GroupMe.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GroupMe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/updateMovieScoreMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/updateMovieScoreMap.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,90 +17,64 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.60339254">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GroupMe.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-29">
-                  <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-                  <folding>
-                    <element signature="e#460#605#0" />
-                    <element signature="e#653#1021#0" />
-                    <element signature="e#703#1017#0" />
-                    <element signature="e#817#883#0" />
-                    <element signature="e#906#932#0" />
-                    <element signature="e#952#984#0" />
-                    <element signature="e#990#1013#0" />
-                    <element signature="e#1076#2231#0" />
-                    <element signature="e#1155#2229#0" />
-                    <element signature="e#1322#2225#0" />
-                    <element signature="e#1409#2219#0" />
-                    <element signature="e#1598#2211#0" />
-                    <element signature="e#1689#1889#0" />
-                    <element signature="e#1924#1976#0" />
-                    <element signature="e#2281#3475#0" />
-                    <element signature="e#2659#2751#0" />
-                    <element signature="e#2781#2854#0" />
-                    <element signature="e#2982#3221#0" />
-                    <element signature="e#3253#3392#0" />
-                    <element signature="e#3398#3426#0" />
-                    <element signature="e#3529#5742#0" />
-                    <element signature="e#3781#5724#0" />
-                    <element signature="e#3978#4172#0" />
-                    <element signature="e#4092#4129#0" />
-                    <element signature="e#4135#4166#0" />
-                    <element signature="e#4320#4448#0" />
-                    <element signature="e#4465#4928#0" />
-                    <element signature="e#4544#4732#0" />
-                    <element signature="e#4953#5473#0" />
-                    <element signature="e#4965#5397#0" />
-                    <element signature="e#5408#5447#0" />
-                    <element signature="e#5479#5702#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="167">
-                  <caret line="137" column="45" lean-forward="true" selection-start-line="137" selection-start-column="45" selection-end-line="137" selection-end-column="45" />
-                  <folding>
-                    <element signature="e#270#374#0" />
-                    <element signature="e#411#2212#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="MovieController.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="370">
-                  <caret line="86" column="44" lean-forward="true" selection-start-line="86" selection-start-column="2" selection-end-line="86" selection-end-column="44" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="320">
-                  <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="GroupMe.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="171" column="32" lean-forward="true" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
+              <folding>
+                <element signature="e#358#613#0" />
+                <element signature="e#653#1021#0" />
+                <element signature="e#1076#2231#0" />
+                <element signature="e#2281#3475#0" />
+                <element signature="e#5785#5888#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MovieController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1607">
+              <caret line="82" column="42" lean-forward="true" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="773">
+              <caret line="149" column="2" lean-forward="true" selection-start-line="149" selection-start-column="2" selection-end-line="149" selection-end-column="2" />
+              <folding>
+                <element signature="e#270#374#0" />
+                <element signature="e#2361#3910#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -124,6 +94,7 @@
       <find>createApi</find>
       <find>user.save</find>
       <find>groupme</find>
+      <find>movie</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
@@ -133,7 +104,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
   </component>
@@ -146,8 +117,6 @@
         <option value="$PROJECT_DIR$/controllers/AuthController.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/db.js" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/models/movie.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
@@ -155,11 +124,13 @@
         <option value="$PROJECT_DIR$/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/models/group.js" />
         <option value="$PROJECT_DIR$/models/movieScoreMap.js" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/lib/updateMovieScoreMap.js" />
         <option value="$PROJECT_DIR$/controllers/MovieController.js" />
-        <option value="$PROJECT_DIR$/lib/GroupMe.js" />
+        <option value="$PROJECT_DIR$/db.js" />
+        <option value="$PROJECT_DIR$/lib/updateMovieScoreMap.js" />
+        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/controllers/GroupController.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/lib/GroupMe.js" />
       </list>
     </option>
   </component>
@@ -191,6 +162,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -228,7 +200,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,6 +208,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
@@ -280,7 +252,7 @@
       <workItem from="1547259637011" duration="4867000" />
       <workItem from="1547597299526" duration="6204000" />
       <workItem from="1547679076012" duration="6063000" />
-      <workItem from="1548646661996" duration="3178000" />
+      <workItem from="1548646661996" duration="8175000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -310,11 +282,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548551865045</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="improvements">
+      <created>1548651500156</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1548651500157</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103104000" />
+    <option name="totallyTimeSpent" value="108101000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,12 +312,13 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3263158" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2924071" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47518796" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17689823" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -349,7 +329,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +342,8 @@
     <MESSAGE value="tons of updates" />
     <MESSAGE value="tweaks" />
     <MESSAGE value="collect cutoff times, fix movie query" />
-    <option name="LAST_COMMIT_MESSAGE" value="collect cutoff times, fix movie query" />
+    <MESSAGE value="improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="improvements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -375,40 +355,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
           <caret line="68" selection-start-line="68" selection-end-line="68" />
-          <folding>
-            <element signature="e#460#605#0" />
-            <element signature="e#653#1021#0" />
-            <element signature="e#703#1017#0" />
-            <element signature="e#817#883#0" />
-            <element signature="e#906#932#0" />
-            <element signature="e#952#984#0" />
-            <element signature="e#990#1013#0" />
-            <element signature="e#1076#2231#0" />
-            <element signature="e#1155#2229#0" />
-            <element signature="e#1322#2225#0" />
-            <element signature="e#1409#2219#0" />
-            <element signature="e#1598#2211#0" />
-            <element signature="e#1689#1889#0" />
-            <element signature="e#1924#1976#0" />
-            <element signature="e#2281#3475#0" />
-            <element signature="e#2659#2751#0" />
-            <element signature="e#2781#2854#0" />
-            <element signature="e#2982#3221#0" />
-            <element signature="e#3253#3392#0" />
-            <element signature="e#3398#3426#0" />
-            <element signature="e#3529#5742#0" />
-            <element signature="e#3781#5724#0" />
-            <element signature="e#3978#4172#0" />
-            <element signature="e#4092#4129#0" />
-            <element signature="e#4135#4166#0" />
-            <element signature="e#4320#4448#0" />
-            <element signature="e#4465#4928#0" />
-            <element signature="e#4544#4732#0" />
-            <element signature="e#4953#5473#0" />
-            <element signature="e#4965#5397#0" />
-            <element signature="e#5408#5447#0" />
-            <element signature="e#5479#5702#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -634,27 +580,6 @@
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -694,31 +619,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/movieScoreMap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/updateMovieScoreMap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -729,61 +633,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="86" column="44" lean-forward="true" selection-start-line="86" selection-start-column="2" selection-end-line="86" selection-end-column="44" />
+        <state relative-caret-position="280">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
+    <entry file="file://$PROJECT_DIR$/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding>
-            <element signature="e#460#605#0" />
-            <element signature="e#653#1021#0" />
-            <element signature="e#703#1017#0" />
-            <element signature="e#817#883#0" />
-            <element signature="e#906#932#0" />
-            <element signature="e#952#984#0" />
-            <element signature="e#990#1013#0" />
-            <element signature="e#1076#2231#0" />
-            <element signature="e#1155#2229#0" />
-            <element signature="e#1322#2225#0" />
-            <element signature="e#1409#2219#0" />
-            <element signature="e#1598#2211#0" />
-            <element signature="e#1689#1889#0" />
-            <element signature="e#1924#1976#0" />
-            <element signature="e#2281#3475#0" />
-            <element signature="e#2659#2751#0" />
-            <element signature="e#2781#2854#0" />
-            <element signature="e#2982#3221#0" />
-            <element signature="e#3253#3392#0" />
-            <element signature="e#3398#3426#0" />
-            <element signature="e#3529#5742#0" />
-            <element signature="e#3781#5724#0" />
-            <element signature="e#3978#4172#0" />
-            <element signature="e#4092#4129#0" />
-            <element signature="e#4135#4166#0" />
-            <element signature="e#4320#4448#0" />
-            <element signature="e#4465#4928#0" />
-            <element signature="e#4544#4732#0" />
-            <element signature="e#4953#5473#0" />
-            <element signature="e#4965#5397#0" />
-            <element signature="e#5408#5447#0" />
-            <element signature="e#5479#5702#0" />
-          </folding>
+        <state relative-caret-position="140">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1607">
+          <caret line="82" column="42" lean-forward="true" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/updateMovieScoreMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="22" column="45" lean-forward="true" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="137" column="45" lean-forward="true" selection-start-line="137" selection-start-column="45" selection-end-line="137" selection-end-column="45" />
+        <state relative-caret-position="773">
+          <caret line="149" column="2" lean-forward="true" selection-start-line="149" selection-start-column="2" selection-end-line="149" selection-end-column="2" />
           <folding>
             <element signature="e#270#374#0" />
-            <element signature="e#411#2212#0" />
+            <element signature="e#2361#3910#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/GroupMe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="171" column="32" lean-forward="true" selection-start-line="171" selection-start-column="32" selection-end-line="171" selection-end-column="32" />
+          <folding>
+            <element signature="e#358#613#0" />
+            <element signature="e#653#1021#0" />
+            <element signature="e#1076#2231#0" />
+            <element signature="e#2281#3475#0" />
+            <element signature="e#5785#5888#0" />
           </folding>
         </state>
       </provider>

@@ -12,7 +12,6 @@ const getGroups = async (req, res, nonHTTPQuery) => {
 };
 
 const create = async groupMeId => {
-  console.log("CREATE", groupMeId);
   // const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
   const GroupMeApi = axios.create({
     baseURL: "https://api.groupme.com/v3",
@@ -56,8 +55,9 @@ const create = async groupMeId => {
             votes: { placholder: 1 }
           })
         );
-
-        membersForGroup.push(newUser._id);
+        if (newUser) {
+          membersForGroup.push(newUser._id);
+        }
 
         if (err) {
           console.log("ERROR", err);
@@ -69,26 +69,24 @@ const create = async groupMeId => {
 
     let createdGroup;
     [err, createdGroup] = await to(Group.create(newGroup));
+    return createdGroup;
   } else {
     console.log("NO GROUP");
+    return null;
   }
-  //
-  // let existingUser;
-  // [err, existingUser] = await to(
-  //   User.findOne({
-  //     _id: req.params.id
-  //   })
-  // );
-
-  console.log("final");
+  return null;
 };
 
 const calcRankings = async groupmeId => {
-  try {
-    const GroupMe = require("../lib/GroupMe.js");
-    let err, group, users, movieScoreMap;
+  const GroupMe = require("../lib/GroupMe.js");
+  let err, group, users, movieScoreMap;
+  [err, group] = await to(Group.findOne({ groupmeId }));
 
-    [err, group] = await to(Group.findOne({ groupmeId }));
+  if (!group) {
+    create(groupmeId);
+  }
+
+  try {
     [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
 
     // console.log(movieScoreMap);

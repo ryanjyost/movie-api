@@ -15,6 +15,13 @@ const job = new CronJob(
   require("./lib/cron").handleMovieCutoffs
 );
 
+const job2 = new CronJob(
+  "* * * * * *",
+  require("./lib/cron").handleDayBeforeCutoffNotifications
+);
+
+require("./lib/updateMovieScoreMap")(null);
+
 const index = require("./routes/index");
 
 const app = express();

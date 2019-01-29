@@ -1,10 +1,11 @@
 const to = require("../lib/to.js");
 const Movie = require("../models/movie.js");
+const updateMovieScoreMap = require("../lib/updateMovieScoreMap.js");
 const User = require("../models/user.js");
-const GroupMe = require("../lib/GroupMe");
 const moment = require("moment");
 
 const add = async (req, res) => {
+  const GroupMe = require("../lib/GroupMe.js");
   let err, newMovie;
 
   [err, newMovie] = await to(Movie.create(req.body));
@@ -21,6 +22,8 @@ const add = async (req, res) => {
     await GroupMe.sendBotMessage(`${newMovie.trailer}`);
   }
 
+  updateMovieScoreMap(newMovie.id, -1);
+
   res.json({ movie: newMovie, movies });
 };
 
@@ -32,6 +35,7 @@ const edit = async (req, res) => {
 
   if (movie.rtScore < 0 && Number(req.body.rtScore) > 0) {
     _sendResultsToGroup(movie, Number(req.body.rtScore));
+    updateMovieScoreMap(req.params.id, Number(req.body.rtScore));
   }
 
   let movies;
@@ -41,11 +45,11 @@ const edit = async (req, res) => {
 };
 
 const _sendResultsToGroup = async (movie, score) => {
+  const GroupMe = require("../lib/GroupMe.js");
   let mainMessage = `🍿 "${
     movie.title
   }" has a Rotten Tomatoes Score of ${score}% `;
-  let scoreMessage =
-    `The prediction rankings for "${movie.title}" are...` + "\n";
+  let scoreMessage = ``;
 
   let votes = [];
   for (let user in movie.votes) {
@@ -74,7 +78,7 @@ const _sendResultsToGroup = async (movie, score) => {
     let vote = sorted[i];
     scoreMessage =
       scoreMessage +
-      `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
+      `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"} ${Math.abs(
         vote.diff
       )}% (${vote.vote}% vs. ${score}%)` +
       "\n";
@@ -125,46 +129,58 @@ const predict = async (req, res) => {
   }
 };
 
-const getMovies = async (req, res) => {
+const _getMovies = async query => {
   let err, movies;
-  let query = { ...req.query };
+  // what day are predictions cut off
   let cutoffDate = moment()
     .add(7, "days")
     .unix();
 
   let mongoQuery = {};
 
-  if ("rtScore" in query) {
-    if (Number(query.rtScore) < 0) {
-      mongoQuery.rtScore = { $lt: 0 };
-    } else {
-      mongoQuery.rtScore = { $gte: query.rtScore };
-    }
+  if (Number(query.isClosed) < 1 && Number(query.rtScore) < 0) {
+    console.log("Upcoming");
+    mongoQuery = {
+      isClosed: 0,
+      rtScore: { $lt: 0 },
+      releaseDate: { $gt: cutoffDate }
+    };
+  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) < 0) {
+    console.log("Purgatory");
+    mongoQuery = {
+      rtScore: { $lt: 0 },
+      releaseDate: { $lte: cutoffDate }
+    };
+  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {
+    console.log("Past");
+    mongoQuery = {
+      rtScore: { $gte: 0 }
+      // releaseDate: { $lte: cutoffDate }
+    };
   }
-
-  if ("isClosed" in query) {
-    if (Number(query.isClosed) === 0) {
-      mongoQuery.releaseDate = { $gt: cutoffDate };
-      // mongoQuery.isClosed = 0;
-    } else {
-      mongoQuery.releaseDate = { $lte: cutoffDate };
-      // mongoQuery.isClosed = 1;
-    }
-  }
-
   [err, movies] = await to(Movie.find(mongoQuery));
+
+  return movies;
+};
+
+const getMovies = async (req, res) => {
+  let err, movies;
+  let query = { ...req.query };
+
+  [err, movies] = await to(_getMovies(query));
 
   if (err) {
     res.status(500).json(err);
   }
 
-  res.json({ movies: movies });
+  res.json({ movies });
 };
 
 module.exports = {
   add,
   edit,
   deleteMovie,
+  _getMovies,
   getMovies,
   predict
 };

@@ -13,6 +13,6 @@ const userSchema = new mongoose.Schema({
   created_at: { type: Date, default: new Date() }
 });
 
-// userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("user", userSchema);

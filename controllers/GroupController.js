@@ -25,7 +25,7 @@ const create = async groupMeId => {
   });
 
   let err, groupMeGroup;
-  [err, groupMeGroup] = await to(GroupMeApi.get(`groups/${groupMeId}`));
+  [err, groupMeGroup] = await to(GroupMeApi.get(`groups/46885156`));
   if (groupMeGroup) {
     let newGroup = {
       name: groupMeGroup.data.response.name,
@@ -96,29 +96,43 @@ const calcRankings = async groupmeId => {
       let err, user;
       [err, user] = await to(User.findOne({ _id: member }));
 
-      let numMoviesUserPredicted = 0,
-        totalDiff = 0;
+      if (user && user.name !== "Movie Medium") {
+        let numMoviesUserPredicted = 0,
+          totalDiff = 0;
 
-      for (let movieId in user.votes) {
-        let actualScore = movieScoreMap.map[movieId];
-        if (actualScore < 0) continue;
-        numMoviesUserPredicted++;
+        for (let movieId in user.votes) {
+          let actualScore = movieScoreMap.map[movieId];
+          if (!actualScore || actualScore < 0) continue;
+          numMoviesUserPredicted++;
 
-        let diff = Math.abs(actualScore - user.votes[movieId]);
-        // console.log(actualScore, user.votes[movieId], diff);
+          let diff = Math.abs(actualScore - user.votes[movieId]);
+          // console.log(actualScore, user.votes[movieId], diff);
 
-        totalDiff = totalDiff + diff;
+          totalDiff = totalDiff + diff;
+        }
+
+        const avgDiff = totalDiff / numMoviesUserPredicted;
+
+        if (!numMoviesUserPredicted) {
+          let data = {
+            name: user.name,
+            avgDiff: 10000000,
+            totalDiff: 1000000000,
+            numMoviesUserPredicted: 0
+          };
+
+          dataForRankings.push(data);
+        } else {
+          let data = {
+            name: user.name,
+            avgDiff,
+            totalDiff,
+            numMoviesUserPredicted
+          };
+
+          dataForRankings.push(data);
+        }
       }
-
-      const avgDiff = totalDiff / numMoviesUserPredicted;
-      let data = {
-        name: user.name,
-        avgDiff,
-        totalDiff,
-        numMoviesUserPredicted
-      };
-
-      dataForRankings.push(data);
     }
 
     const sorted = dataForRankings.sort((a, b) => {
@@ -134,10 +148,14 @@ const calcRankings = async groupmeId => {
     let text = `🏆 GROUP RANKINGS 🏆` + "\n";
 
     for (let i = 0; i < sorted.length; i++) {
-      text =
-        text +
-        `${i + 1}) ${sorted[i].name} - ${sorted[i].avgDiff.toFixed(1)}%` +
-        "\n";
+      if (!sorted[i].numMoviesUserPredicted) {
+        text = text + `${i + 1}) ${sorted[i].name} - N/A` + "\n";
+      } else {
+        text =
+          text +
+          `${i + 1}) ${sorted[i].name} - ${sorted[i].avgDiff.toFixed(1)}%` +
+          "\n";
+      }
     }
 
     text =

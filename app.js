@@ -20,7 +20,7 @@ const job2 = new CronJob(
 );
 
 require("./lib/updateMovieScoreMap")(null);
-// require("./controllers/GroupController").create(46885156);
+// require("./controllers/GroupController").calcRankings(46885156);
 
 const index = require("./routes/index");
 

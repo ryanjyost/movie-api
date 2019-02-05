@@ -6,24 +6,30 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
-
 const db = require("./db");
 
-const job = new CronJob(
+const handleMovieCutoffs = new CronJob(
+  "0 05 0 * * *",
+  require("./lib/cron").handleMovieCutoffs,
+  null,
+  true,
+  "America/New_York"
+);
+handleMovieCutoffs.start();
+
+const handleDayBeforeCutoffNotifications = new CronJob(
   "0 0 0 * * *",
-  require("./lib/cron").handleMovieCutoffs
+  require("./lib/cron").handleDayBeforeCutoffNotifications,
+  null,
+  true,
+  "America/New_York"
 );
+handleDayBeforeCutoffNotifications.start();
 
-const job2 = new CronJob(
-  "* * * * * *",
-  require("./lib/cron").handleDayBeforeCutoffNotifications
-);
-
-require("./lib/updateMovieScoreMap")(null);
-// require("./controllers/GroupController").calcRankings(46885156);
+// require("./lib/updateMovieScoreMap")(null);
+//require("./lib/syncUsersAndGroups")(null);
 
 const index = require("./routes/index");
-
 const app = express();
 
 // view engine setup

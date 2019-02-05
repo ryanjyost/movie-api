@@ -11,8 +11,11 @@ router.post(
   require("../lib/GroupMe").receiveMessage
 );
 router.post("/groupme/:group/users", require("../lib/GroupMe").getUsersInGroup);
+router.post("/groupme/groups", require("../lib/GroupMe").getSingleUserGroups);
+router.post("/groupme/users/me", require("../lib/GroupMe").getUser);
 
 router.post("/users/login", require("../controllers/UserController").login);
+router.post("/users/groupme", require("../controllers/UserController").login);
 router.get("/users/:id", require("../controllers/UserController").getUser);
 
 router.get("/movies", require("../controllers/MovieController").getMovies);

@@ -7,8 +7,10 @@ const moment = require("moment");
 const add = async (req, res) => {
   const GroupMe = require("../lib/GroupMe.js");
   let err, newMovie;
+  let newMovieData = { ...req.body };
+  newMovieData.title_lower = req.body.title_lower.replace(/[^\w ]/g, "");
 
-  [err, newMovie] = await to(Movie.create(req.body));
+  [err, newMovie] = await to(Movie.create(newMovieData));
 
   if (err) {
     res.status(500).json(err);
@@ -34,8 +36,8 @@ const edit = async (req, res) => {
   );
 
   if (movie.rtScore < 0 && Number(req.body.rtScore) > 0) {
-    _sendResultsToGroup(movie, Number(req.body.rtScore));
-    updateMovieScoreMap(req.params.id, Number(req.body.rtScore));
+    await to(_sendResultsToGroup(movie, Number(req.body.rtScore)));
+    await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
   }
 
   let movies;

@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String },
   accessToken: String,
   votes: mongoose.Schema.Types.Mixed,
+  groups: mongoose.Schema.Types.Mixed,
   created_at: { type: Date, default: new Date() }
 });
 

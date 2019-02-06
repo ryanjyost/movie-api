@@ -84,7 +84,7 @@ const _sendResultsToGroup = async (movie, score) => {
       let vote = sorted[i];
       scoreMessage =
         scoreMessage +
-        `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"} ${Math.abs(
+        `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
           vote.diff
         )}% (${vote.vote}% vs. ${score}%)` +
         "\n";
@@ -147,14 +147,13 @@ const _getMovies = async query => {
 
   let mongoQuery = {};
 
-  if (Number(query.isClosed) < 1 && Number(query.rtScore) < 0) {
+  if (!Number(query.isClosed) && Number(query.rtScore) < 0) {
     console.log("Upcoming");
     mongoQuery = {
-      isClosed: 0,
       rtScore: { $lt: 0 },
       releaseDate: { $gt: cutoffDate }
     };
-  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) < 0) {
+  } else if (Number(query.isClosed) && Number(query.rtScore) < 0) {
     console.log("Purgatory");
     mongoQuery = {
       rtScore: { $lt: 0 },
@@ -164,7 +163,6 @@ const _getMovies = async query => {
     console.log("Past");
     mongoQuery = {
       rtScore: { $gte: 0 }
-      // releaseDate: { $lte: cutoffDate }
     };
   }
   [err, movies] = await to(Movie.find(mongoQuery));

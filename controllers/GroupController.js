@@ -64,7 +64,7 @@ const _calcRankings = async groupmeId => {
   const UserController = require("../controllers/UserController.js");
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
   let err, response;
-  [err, response] = await to(GroupMeApi.get(`groups/${46885156}`));
+  [err, response] = await to(GroupMeApi.get(`groups/${groupmeId}`));
 
   let group = response.data.response;
 

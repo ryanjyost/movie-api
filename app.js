@@ -15,7 +15,7 @@ const handleMovieCutoffs = new CronJob(
   true,
   "America/New_York"
 );
-handleMovieCutoffs.start();
+//handleMovieCutoffs.start();
 
 const handleDayBeforeCutoffNotifications = new CronJob(
   "0 0 0 * * *",
@@ -24,8 +24,9 @@ const handleDayBeforeCutoffNotifications = new CronJob(
   true,
   "America/New_York"
 );
-handleDayBeforeCutoffNotifications.start();
+//handleDayBeforeCutoffNotifications.start();
 
+//require("./controllers/GroupController").create(46925214);
 // require("./lib/updateMovieScoreMap")(null);
 //require("./lib/syncUsersAndGroups")(null);
 
@@ -36,8 +37,6 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

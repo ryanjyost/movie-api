@@ -1,8 +1,11 @@
 const to = require("../lib/to.js");
-const GroupMe = require("../lib/GroupMe");
 const User = require("../models/user.js");
 
+/*
+* Auth user
+*/
 const login = async (req, res) => {
+  const GroupMe = require("../lib/groupme/index");
   let token = req.body.access_token;
 
   const api = GroupMe.createApi(token);
@@ -62,6 +65,9 @@ const login = async (req, res) => {
   }
 };
 
+/*
+* Return user data
+*/
 const getUser = async (req, res) => {
   let existingUser;
   [err, existingUser] = await to(
@@ -72,7 +78,39 @@ const getUser = async (req, res) => {
   res.json({ user: existingUser });
 };
 
+/*
+* Find or create a MM user based on GroupMe info
+*/
+const _findOrCreateUser = async (groupmeMemberData, groupmeGroupId) => {
+  let isNew = false;
+  try {
+    let err, user;
+    [err, user] = await to(
+      User.findOne({ groupmeId: groupmeMemberData.user_id })
+    );
+
+    if (!user) {
+      isNew = true;
+      [err, user] = await to(
+        User.create({
+          groupme: groupmeMemberData,
+          groupmeId: groupmeMemberData.user_id,
+          name: groupmeMemberData.name,
+          nickname: groupmeMemberData.nickname,
+          votes: { placeholder: 1 },
+          groups: [groupmeGroupId]
+        })
+      );
+    }
+
+    return user;
+  } catch (e) {
+    return null;
+  }
+};
+
 module.exports = {
   login,
-  getUser
+  getUser,
+  _findOrCreateUser
 };

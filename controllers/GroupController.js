@@ -2,99 +2,88 @@ const to = require("../lib/to.js");
 const User = require("../models/user.js");
 const MovieScoreMap = require("../models/movieScoreMap.js");
 const Group = require("../models/group.js");
-const axios = require("axios");
 
-const getGroups = async (req, res, nonHTTPQuery) => {
-  let query = nonHTTPQuery || {};
-
-  let err, groups;
-  [err, groups] = await to(Group.find(query));
-};
-
+/*
+* Create an MM group from GroupMe group
+*/
 const create = async groupMeId => {
-  // const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
-  const GroupMeApi = axios.create({
-    baseURL: "https://api.groupme.com/v3",
-    timeout: 10000,
-    headers: {
-      "X-Custom-Header": "foobar",
-      "Content-Type": "application/json",
-      Host: "api.groupme.com",
-      "X-Access-Token": process.env.GROUPME_ACCESS_TOKEN
-    }
-  });
+  // 46925214
+  // stuff we need
+  const GroupMe = require("../lib/groupme/index.js");
+  const UserController = require("../controllers/UserController.js");
+  const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
 
-  let err, groupMeGroup;
-  [err, groupMeGroup] = await to(GroupMeApi.get(`groups/46885156`));
-  if (groupMeGroup) {
+  //..... get group info from GroupMe
+  let err, groupmeGroup;
+  [err, groupmeGroup] = await to(GroupMeApi.get(`groups/${groupMeId}`));
+
+  // if the groupme group was found
+  if (groupmeGroup) {
+    // start building new group
     let newGroup = {
-      name: groupMeGroup.data.response.name,
-      groupmeId: groupMeGroup.data.response.group_id,
-      groupme: { ...groupMeGroup.data.response }
+      name: groupmeGroup.data.response.name,
+      groupmeId: groupmeGroup.data.response.group_id,
+      groupme: { ...groupmeGroup.data.response }
     };
 
+    //...loop through GroupMe members and find or create MM users
     let membersForGroup = [];
-    const members = groupMeGroup.data.response.members;
+    const members = groupmeGroup.data.response.members;
     for (let member of members) {
-      let err,
-        existingMember = null;
-      [err, existingMember] = await to(
-        User.findOne({ groupmeId: member.user_id })
+      let err, user;
+      [err, user] = await to(
+        UserController._findOrCreateUser(
+          member,
+          groupmeGroup.data.response.group_id
+        )
       );
 
-      if (existingMember) {
-        membersForGroup.push(existingMember._id);
-      } else {
-        let err, newUser;
-        [err, newUser] = await to(
-          User.create({
-            groupme: member,
-            groupmeId: member.user_id,
-            name: member.name,
-            nickname: member.nickname,
-            votes: { placholder: 1 }
-          })
-        );
-        if (newUser) {
-          membersForGroup.push(newUser._id);
-        }
-
-        if (err) {
-          console.log("ERROR", err);
-        }
+      // add user ids to new group
+      if (user) {
+        membersForGroup.push(user._id);
       }
     }
 
     newGroup.members = membersForGroup;
 
+    // actually create the MM group
     let createdGroup;
     [err, createdGroup] = await to(Group.create(newGroup));
     return createdGroup;
   } else {
-    console.log("NO GROUP");
+    // GroupMe didn't send back a group, so nothing
     return null;
   }
-  return null;
 };
 
-const calcRankings = async groupmeId => {
-  const GroupMe = require("../lib/GroupMe.js");
-  let err, group, users, movieScoreMap;
-  [err, group] = await to(Group.findOne({ groupmeId }));
+/*
+* Send rankings to group
+*/
+const _calcRankings = async groupmeId => {
+  const GroupMe = require("../lib/groupme/index.js");
+  const UserController = require("../controllers/UserController.js");
+  const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
+  let err, response;
+  [err, response] = await to(GroupMeApi.get(`groups/${46885156}`));
 
-  if (!group) {
-    create(groupmeId);
-  }
+  let group = response.data.response;
+
+  let movieScoreMap;
+  [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
+
+  // if (!group) {
+  //   await to(create(groupmeId));
+  // }
 
   try {
-    [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
-
     // console.log(movieScoreMap);
     let dataForRankings = [];
 
     for (let member of group.members) {
       let err, user;
-      [err, user] = await to(User.findOne({ _id: member }));
+      [err, user] = await to(
+        UserController._findOrCreateUser(member, group.group_id)
+      );
 
       if (user && user.name !== "Movie Medium") {
         let numMoviesUserPredicted = 0,
@@ -167,8 +156,15 @@ const calcRankings = async groupmeId => {
   }
 };
 
+const _addUserToGroup = async (userId, groupmeId) => {
+  let err, group;
+  [err, group] = await to(
+    Group.findOneAndUpdate({ groupmeId }, { $push: { members: userId } })
+  );
+};
+
 module.exports = {
   create,
-  getGroups,
-  calcRankings
+  _calcRankings,
+  _addUserToGroup
 };

@@ -8,11 +8,17 @@ router.get("/", function(req, res, next) {
 
 router.post(
   "/groupme/receive_message",
-  require("../lib/GroupMe").receiveMessage
+  require("../lib/groupme/index").receiveMessage
 );
-router.post("/groupme/:group/users", require("../lib/GroupMe").getUsersInGroup);
-router.post("/groupme/groups", require("../lib/GroupMe").getSingleUserGroups);
-router.post("/groupme/users/me", require("../lib/GroupMe").getUser);
+router.post(
+  "/groupme/:group/users",
+  require("../lib/groupme/index").getUsersInGroup
+);
+router.post(
+  "/groupme/groups",
+  require("../lib/groupme/index").getSingleUserGroups
+);
+router.post("/groupme/users/me", require("../lib/groupme/index").getUser);
 
 router.post("/users/login", require("../controllers/UserController").login);
 router.post("/users/groupme", require("../controllers/UserController").login);

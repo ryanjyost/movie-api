@@ -15,7 +15,7 @@ const handleMovieCutoffs = new CronJob(
   true,
   "America/New_York"
 );
-//handleMovieCutoffs.start();
+handleMovieCutoffs.start();
 
 const handleDayBeforeCutoffNotifications = new CronJob(
   "0 0 0 * * *",
@@ -24,7 +24,7 @@ const handleDayBeforeCutoffNotifications = new CronJob(
   true,
   "America/New_York"
 );
-//handleDayBeforeCutoffNotifications.start();
+handleDayBeforeCutoffNotifications.start();
 
 //require("./controllers/GroupController").create(46925214);
 // require("./lib/updateMovieScoreMap")(null);

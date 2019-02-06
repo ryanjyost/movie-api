@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/GroupController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/GroupController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/MovieController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MovieController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/groupme/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/groupme/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +16,20 @@
     <splitter split-orientation="horizontal" split-proportion="0.5161499">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="378">
-                  <caret line="74" column="35" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
+                <state relative-caret-position="498">
+                  <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="480">
+                  <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -159,7 +166,6 @@
         <option value="$PROJECT_DIR$/models/group.js" />
         <option value="$PROJECT_DIR$/lib/groupme/GroupMe.js" />
         <option value="$PROJECT_DIR$/lib/groupme/handleGroupmeAutomatedMessage.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/lib/updateMovieScoreMap.js" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/controllers/UserController.js" />
@@ -167,6 +173,7 @@
         <option value="$PROJECT_DIR$/lib/groupme/index.js" />
         <option value="$PROJECT_DIR$/controllers/MovieController.js" />
         <option value="$PROJECT_DIR$/controllers/GroupController.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -305,7 +312,7 @@
       <workItem from="1549152824680" duration="3928000" />
       <workItem from="1549222455007" duration="21206000" />
       <workItem from="1549416744142" duration="6781000" />
-      <workItem from="1549492875641" duration="1076000" />
+      <workItem from="1549492875641" duration="1124000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -370,11 +377,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549425179760</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="refactoring">
+      <created>1549494309547</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1549494309547</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146341000" />
+    <option name="totallyTimeSpent" value="146389000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -705,17 +719,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/groupme/handleGroupmeAutomatedMessage.js" />
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="e#1330#1404#0" />
-            <element signature="e#1463#1709#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/updateMovieScoreMap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -777,8 +780,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="74" column="35" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
+        <state relative-caret-position="498">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
         </state>
       </provider>
     </entry>

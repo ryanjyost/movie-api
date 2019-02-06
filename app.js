@@ -27,7 +27,7 @@ const handleDayBeforeCutoffNotifications = new CronJob(
 handleDayBeforeCutoffNotifications.start();
 
 //require("./controllers/GroupController").create(46925214);
-// require("./lib/updateMovieScoreMap")(null);
+require("./lib/updateMovieScoreMap")(null);
 //require("./lib/syncUsersAndGroups")(null);
 
 const index = require("./routes/index");

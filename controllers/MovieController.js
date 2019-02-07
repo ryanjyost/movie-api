@@ -1,5 +1,5 @@
-const to = require("../lib/to.js");
-const Movie = require("../models/movie.js");
+const { to } = require("../helpers");
+const Movie = require("../src/movies/model.js");
 const updateMovieScoreMap = require("../lib/updateMovieScoreMap.js");
 const updateUserVoteMaps = require("../lib/updateUserVoteMaps.js");
 const User = require("../models/user.js");

@@ -1,4 +1,4 @@
-module.exports = function to(promise) {
+exports = function to(promise) {
   return promise
     .then(data => {
       return [null, data];

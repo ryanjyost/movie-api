@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/config/winston.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups/controllers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups/services/addUserToGroup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups/services/calculateRankings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/groups/services/create.js" afterDir="false" />
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="refactoring, set up winston">
+      <change afterPath="$PROJECT_DIR$/helpers/to.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/groups/controllers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/groups/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/movies/controllers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/movies/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/movies/services/addMovie.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/winston.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/winston.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/GroupController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/GroupController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/MovieController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/MovieController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/UserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/services/addUserToGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/addUserToGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/services/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/calculateRankings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/groups/services/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/createGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/cron/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/groupme/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/groupme/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/syncUsersAndGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/syncUsersAndGroups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/group.js" beforeDir="false" afterPath="$PROJECT_DIR$/groups/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/to.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/updateMovieScoreMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/updateMovieScoreMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/updateUserVoteMaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/updateUserVoteMaps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/movie.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,56 +38,35 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7013678">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="320">
-                  <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="winston.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/config/winston.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="460">
-                  <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="158" column="21" selection-start-line="158" selection-start-column="6" selection-end-line="158" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#232#270#0" />
-                    <element signature="e#1719#4268#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/groupme/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="144">
-                  <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/movies/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/movies/model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -85,16 +77,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>var</find>
-      <find>con</find>
-      <find>isStranger</find>
-      <find>NONE</find>
-      <find>res</find>
-      <find>hey</find>
-      <find>createApi</find>
-      <find>user.save</find>
       <find>groupme</find>
-      <find>movie</find>
       <find>findOneAnd</find>
       <find>groups</find>
       <find>getGroups</find>
@@ -108,16 +91,28 @@
       <find>i assumed</find>
       <find>assumed</find>
       <find>sendre</find>
-      <find>create</find>
       <find>GroupController</find>
       <find>_calcRankings</find>
       <find>_addUserToGroup</find>
       <find>calc</find>
+      <find>GroupControll</find>
+      <find>createGroup</find>
+      <find>create</find>
+      <find>createGr</find>
+      <find>../to</find>
+      <find>const to = require(&quot;../../hel</find>
+      <find>const to =</find>
+      <find>const to</find>
+      <find>movie</find>
+      <find>tio</find>
+      <find>const {to</find>
+      <find>helpers</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
       <replace>_calcRankings</replace>
       <replace>groupmeGroup</replace>
+      <replace>const {to}</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -131,7 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bin/www" />
         <option value="$PROJECT_DIR$/controllers.js" />
         <option value="$PROJECT_DIR$/lib/GroupMeApi.js" />
         <option value="$PROJECT_DIR$/controllers/AuthController.js" />
@@ -141,30 +135,37 @@
         <option value="$PROJECT_DIR$/models/movieScoreMap.js" />
         <option value="$PROJECT_DIR$/db.js" />
         <option value="$PROJECT_DIR$/models/user.js" />
-        <option value="$PROJECT_DIR$/lib/syncUsersAndGroups.js" />
-        <option value="$PROJECT_DIR$/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/lib/GroupMe.js" />
         <option value="$PROJECT_DIR$/models/group.js" />
         <option value="$PROJECT_DIR$/lib/groupme/GroupMe.js" />
         <option value="$PROJECT_DIR$/lib/groupme/handleGroupmeAutomatedMessage.js" />
-        <option value="$PROJECT_DIR$/lib/updateMovieScoreMap.js" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/controllers/UserController.js" />
-        <option value="$PROJECT_DIR$/lib/updateUserVoteMaps.js" />
-        <option value="$PROJECT_DIR$/controllers/MovieController.js" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/groups/controllers/index.js" />
         <option value="$PROJECT_DIR$/groups/services/index.js" />
-        <option value="$PROJECT_DIR$/groups/services/create.js" />
-        <option value="$PROJECT_DIR$/groups/services/calculateRankings.js" />
-        <option value="$PROJECT_DIR$/controllers/GroupController.js" />
-        <option value="$PROJECT_DIR$/groups/services/addUserToGroup.js" />
-        <option value="$PROJECT_DIR$/lib/groupme/index.js" />
-        <option value="$PROJECT_DIR$/groups/index.js" />
         <option value="$PROJECT_DIR$/lib/logger.js" />
         <option value="$PROJECT_DIR$/config/logger.js" />
+        <option value="$PROJECT_DIR$/controllers/GroupController.js" />
+        <option value="$PROJECT_DIR$/groups/index.js" />
+        <option value="$PROJECT_DIR$/groups/services/addUserToGroup.js" />
+        <option value="$PROJECT_DIR$/groups/services/calculateRankings.js" />
+        <option value="$PROJECT_DIR$/groups/services/create.js" />
+        <option value="$PROJECT_DIR$/src/movies/services/create.js" />
+        <option value="$PROJECT_DIR$/src/movies/index.js" />
+        <option value="$PROJECT_DIR$/src/movies/services/addMovie.js" />
+        <option value="$PROJECT_DIR$/src/movies/controllers/index.js" />
+        <option value="$PROJECT_DIR$/controllers/MovieController.js" />
+        <option value="$PROJECT_DIR$/lib/cron/index.js" />
+        <option value="$PROJECT_DIR$/lib/groupme/index.js" />
+        <option value="$PROJECT_DIR$/lib/syncUsersAndGroups.js" />
+        <option value="$PROJECT_DIR$/lib/updateMovieScoreMap.js" />
+        <option value="$PROJECT_DIR$/lib/updateUserVoteMaps.js" />
+        <option value="$PROJECT_DIR$/helpers/index.js" />
+        <option value="$PROJECT_DIR$/helpers/to.js" />
+        <option value="$PROJECT_DIR$/bin/www" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/config/winston.js" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/controllers/UserController.js" />
       </list>
     </option>
   </component>
@@ -184,11 +185,10 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-389" />
-    <option name="y" value="-1058" />
-    <option name="width" value="1669" />
-    <option name="height" value="1058" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="22" />
+    <option name="width" value="1280" />
+    <option name="height" value="778" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -196,6 +196,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -206,7 +207,22 @@
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
@@ -216,18 +232,74 @@
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="logs" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="cron" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="groupme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="movies" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="movies" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="movies" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,15 +313,19 @@
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/helpers" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/movies" />
+      <recent name="$PROJECT_DIR$/groups" />
+      <recent name="$PROJECT_DIR$/lib/groupme" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/movies" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$/controllers" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/groups" />
-      <recent name="$PROJECT_DIR$/lib/groupme" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -293,7 +369,9 @@
       <workItem from="1549222455007" duration="21206000" />
       <workItem from="1549416744142" duration="6781000" />
       <workItem from="1549492875641" duration="4200000" />
-      <workItem from="1549499431449" duration="4473000" />
+      <workItem from="1549499431449" duration="11413000" />
+      <workItem from="1549513598820" duration="285000" />
+      <workItem from="1549514303612" duration="1451000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -379,11 +457,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549494380409</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="refactoring, set up winston">
+      <created>1549506015214</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1549506015214</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153938000" />
+    <option name="totallyTimeSpent" value="162614000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -395,20 +480,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-389" y="-1058" width="1669" height="1058" extended-state="0" />
+    <frame x="0" y="22" width="1280" height="778" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.47407407" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19114935" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21405493" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32910052" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -436,7 +521,8 @@
     <MESSAGE value="refactoring" />
     <MESSAGE value="active cron jobs" />
     <MESSAGE value="update movie map at start just because" />
-    <option name="LAST_COMMIT_MESSAGE" value="update movie map at start just because" />
+    <MESSAGE value="refactoring, set up winston" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring, set up winston" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -444,34 +530,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/movie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -486,13 +544,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/to.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/to.js" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -521,13 +573,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/to.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/to.js" />
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -565,13 +611,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers.js" />
     <entry file="file://$PROJECT_DIR$/routes/users.js" />
-    <entry file="file://$PROJECT_DIR$/lib/to.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -581,13 +620,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/movie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="40" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/movieScoreMap.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -610,14 +642,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/groups/model.js">
+    <entry file="file://$PROJECT_DIR$/src/groups/model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="49" lean-forward="true" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
@@ -632,37 +657,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/groupme/handleGroupmeAutomatedMessage.js" />
-    <entry file="file://$PROJECT_DIR$/lib/updateMovieScoreMap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/syncUsersAndGroups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/updateUserVoteMaps.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -670,103 +664,182 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
+    <entry file="file://$PROJECT_DIR$/groups/services/index.js" />
+    <entry file="file://$PROJECT_DIR$/lib/logger.js" />
+    <entry file="file://$PROJECT_DIR$/src/groups/services/createGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        <state relative-caret-position="400">
+          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cron/index.js">
+    <entry file="file://$PROJECT_DIR$/src/groups/services/calculateRankings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="65" column="2" lean-forward="true" selection-start-line="65" selection-start-column="2" selection-end-line="65" selection-end-column="2" />
+        <state relative-caret-position="1980">
+          <caret line="99" column="28" lean-forward="true" selection-start-line="99" selection-start-column="28" selection-end-line="99" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/UserController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/groups/services/index.js">
+    <entry file="file://$PROJECT_DIR$/src/groups/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/groups/controllers/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/groups/services/create.js">
+    <entry file="file://$PROJECT_DIR$/logs/app.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+        <state relative-caret-position="309">
+          <caret line="57" column="79" selection-start-line="57" selection-start-column="71" selection-end-line="57" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groups/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/movies/services/addMovie.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/GroupController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="158" column="21" selection-start-line="158" selection-start-column="6" selection-end-line="158" selection-end-column="21" />
-          <folding>
-            <element signature="e#232#270#0" />
-            <element signature="e#1719#4268#0" />
-          </folding>
+        <state relative-caret-position="3100">
+          <caret line="155" column="6" lean-forward="true" selection-start-line="155" selection-start-column="6" selection-end-line="155" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/groups/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/logger.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/controllers/MovieController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/groups/services/addUserToGroup.js">
+    <entry file="file://$PROJECT_DIR$/lib/cron/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/groups/services/calculateRankings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        <state relative-caret-position="100">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/groupme/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
+        <state relative-caret-position="260">
+          <caret line="13" column="2" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs/app.log">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/lib/syncUsersAndGroups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/updateMovieScoreMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="31" column="44" lean-forward="true" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/updateUserVoteMaps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="25" column="2" lean-forward="true" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groups/services/addUserToGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="338">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <marker date="1549515053385" expanded="true" signature="808:850" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/winston.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="322">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="2" lean-forward="true" selection-start-column="13" selection-end-line="6" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/UserController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/to.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/movies/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/movies/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
         </state>
       </provider>
     </entry>

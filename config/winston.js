@@ -2,7 +2,6 @@ const appRoot = require("app-root-path");
 const winston = require("winston");
 const { format } = winston;
 
-console.log(process.env.NODE_ENV);
 const options = {
   file: {
     // level: process.env.NODE_ENV !== "production" ? "error" : "info",

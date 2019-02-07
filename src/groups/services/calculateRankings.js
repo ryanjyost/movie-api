@@ -1,12 +1,12 @@
-const MovieScoreMap = require("../../models/movieScoreMap.js");
+const MovieScoreMap = require("../../../models/movieScoreMap.js");
 
 /*
 * Send rankings to group
 */
 
-module.exports = async groupmeId => {
-  const GroupMe = require("../../lib/groupme/index.js");
-  const UserController = require("../../controllers/UserController.js");
+const calculateRankings = async groupmeId => {
+  const GroupMe = require("../../../lib/groupme/index.js");
+  const UserController = require("../../../controllers/UserController.js");
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
   let err, response;
   [err, response] = await to(GroupMeApi.get(`groups/${groupmeId}`));
@@ -100,3 +100,5 @@ module.exports = async groupmeId => {
     console.log("ERROR", e);
   }
 };
+
+exports = calculateRankings;

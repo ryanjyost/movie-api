@@ -1,14 +1,14 @@
-const to = require("../../lib/to.js");
-const Group = require("../../groups/model.js");
+const { to } = require("../../../helpers");
+const Group = require("../model.js");
 
 /*
 * Create an MM group from GroupMe group
 */
-module.exports = async groupMeId => {
+const create = async groupMeId => {
   // 46925214
   // stuff we need
-  const GroupMe = require("../../lib/groupme/index.js");
-  const UserController = require("../../controllers/UserController.js");
+  const GroupMe = require("../../../lib/groupme/index.js");
+  const UserController = require("../../../controllers/UserController.js");
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
 
   //..... get group info from GroupMe
@@ -53,3 +53,5 @@ module.exports = async groupMeId => {
     return null;
   }
 };
+
+exports = create;

@@ -1,4 +1,4 @@
-const to = require("../lib/to.js");
+const { to } = require("../helpers");
 const User = require("../models/user.js");
 
 /*
@@ -68,13 +68,15 @@ const login = async (req, res) => {
 /*
 * Return user data
 */
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   let existingUser;
   [err, existingUser] = await to(
     User.findOne({
       _id: req.params.id
     })
   );
+
+  // if (err) next(err);
   res.json({ user: existingUser });
 };
 

@@ -18,16 +18,6 @@ const login = async (req, res) => {
   //   console.log(err.response.data, token);
   // }
 
-  let group;
-  [err, group] = await to(api.get("/groups/46885156"));
-
-  //temporary retriction
-  let isMember =
-    group &&
-    group.data.response.members.find(
-      member => member.user_id === user.data.response.id
-    );
-
   let newUser;
   if (user) {
     [err, newUser] = await to(
@@ -51,8 +41,7 @@ const login = async (req, res) => {
   if (newUser) {
     res.json({
       user: newUser,
-      token: req.body.access_token,
-      isMember: isMember ? 1 : 0
+      token: req.body.access_token
     });
   } else {
     let existingUser;
@@ -61,7 +50,7 @@ const login = async (req, res) => {
         groupmeId: user.data.response.id
       })
     );
-    res.json({ user: existingUser, isMember: isMember ? 1 : 0 });
+    res.json({ user: existingUser });
   }
 };
 

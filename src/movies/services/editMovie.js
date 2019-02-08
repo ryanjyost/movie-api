@@ -2,9 +2,9 @@ const Movie = require("../model");
 const { to, sanitizeTitle } = require("../../../helpers");
 
 /*
-* Add a new movie to the DB
+* Edit movie
 */
-const addMovie = async newMovieData => {
+const editMovie = async newMovieData => {
   let err, newMovie;
 
   newMovieData.title_lower = sanitizeTitle(newMovieData.title);
@@ -13,4 +13,4 @@ const addMovie = async newMovieData => {
   return newMovie;
 };
 
-module.exports = addMovie;
+module.exports = editMovie;

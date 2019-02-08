@@ -7,17 +7,34 @@ const MoviesController = require("../src/movies/controllers");
 /* ======================
  Movies
 ========================*/
-router.get("/movies", require("../controllers/MovieController").getMovies);
+
+/* Get all movies */
+router.get("/movies", MoviesController.getMovies);
+
+/* Add a movie */
 router.post("/movies/add", MoviesController.addMovie);
-router.post("/movies/edit/:id", require("../controllers/MovieController").edit);
-router.post(
-  "/movies/delete/:id",
-  require("../controllers/MovieController").deleteMovie
-);
+
+/* Edit movie */
+router.post("/movies/edit/:id", MoviesController.editMovie);
+
+/* Delete movie */
+router.post("/movies/delete/:id", MoviesController.deleteMovie);
+
+/* TODO predict movie */
 router.post(
   "/movies/predict/:movieId",
   require("../controllers/MovieController").predict
 );
+
+/* ======================
+ User
+========================*/
+
+/* With auth token */
+router.post("/users/login", require("../controllers/UserController").login);
+
+/* Get user info */
+router.get("/users/:id", require("../controllers/UserController").getUser);
 
 /* ======================
  GroupMe
@@ -43,13 +60,6 @@ router.post(
 
 /* Get info of current;y authorized user */
 router.post("/groupme/users/me", require("../lib/groupme/index").getUser);
-
-/* ======================
- User
-========================*/
-router.post("/users/login", require("../controllers/UserController").login);
-router.post("/users/groupme", require("../controllers/UserController").login);
-router.get("/users/:id", require("../controllers/UserController").getUser);
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

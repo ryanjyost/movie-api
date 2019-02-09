@@ -10,6 +10,15 @@ process.on("uncaughtException", function(exception) {
  * Module dependencies.
  */
 
+process
+	.on('unhandledRejection', (reason, p) => {
+		console.error(reason, 'Unhandled Rejection at Promise', p);
+	})
+	.on('uncaughtException', err => {
+		console.error(err, 'Uncaught Exception thrown');
+		process.exit(1);
+	});
+
 var app = require('../app');
 var debug = require('debug')('movie-api:server');
 var http = require('http');

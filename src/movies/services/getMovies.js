@@ -3,7 +3,6 @@ const { moviePredictionCutoffDate, to } = require("../../helpers");
 
 const getMovies = async query => {
   let err, movies;
-  // what day are predictions cut off
 
   let mongoQuery = {};
 

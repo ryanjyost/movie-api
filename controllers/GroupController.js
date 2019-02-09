@@ -138,11 +138,11 @@ const _calcRankings = async groupmeId => {
 
     for (let i = 0; i < sorted.length; i++) {
       if (!sorted[i].numMoviesUserPredicted) {
-        text = text + `${i + 1}) ${sorted[i].name} - N/A` + "\n";
+        text = text + `${i + 1}) ${sorted[i].name}: N/A` + "\n";
       } else {
         text =
           text +
-          `${i + 1}) ${sorted[i].name} - ${sorted[i].avgDiff.toFixed(1)}%` +
+          `${i + 1}) ${sorted[i].name}: ${sorted[i].avgDiff.toFixed(1)}%` +
           "\n";
       }
     }
@@ -152,7 +152,7 @@ const _calcRankings = async groupmeId => {
       `*percentage is how close your predictions are on average. Low scores are good, high scores are bad.`;
     await GroupMe.sendBotMessage(text);
   } catch (e) {
-    console.log("ERROR", e);
+    // console.log("ERROR", e);
   }
 };
 

@@ -25,6 +25,7 @@
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "^1.9.1",
     "query-string": "^6.2.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "string-similarity": "^3.0.0"
   }
 }

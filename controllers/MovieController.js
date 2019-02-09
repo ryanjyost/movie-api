@@ -1,12 +1,12 @@
 const to = require("../lib/to.js");
 const Movie = require("../models/movie.js");
-const updateMovieScoreMap = require("../lib/updateMovieScoreMap.js");
 const updateUserVoteMaps = require("../lib/updateUserVoteMaps.js");
 const User = require("../models/user.js");
 const moment = require("moment");
 
 const add = async (req, res) => {
   const GroupMe = require("../lib/groupme/index.js");
+  const updateMovieScoreMap = require("../lib/updateMovieScoreMap");
   let err, newMovie;
   let newMovieData = { ...req.body };
   newMovieData.title_lower = req.body.title_lower.replace(/[^\w ]/g, "");
@@ -36,6 +36,7 @@ const edit = async (req, res) => {
     Movie.findOneAndUpdate({ _id: req.params.id }, req.body, { new: false })
   );
 
+  const updateMovieScoreMap = require("../lib/updateMovieScoreMap");
   await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
 
   if (movie.rtScore < 0 && Number(req.body.rtScore) >= 0) {
@@ -86,14 +87,16 @@ const _sendResultsToGroup = async (movie, score) => {
         scoreMessage +
         `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
           vote.diff
-        )}% (${vote.vote}% vs. ${score}%)` +
+        )}% (${vote.vote}% prediction)` +
         "\n";
     }
 
     await GroupMe.sendBotMessage(mainMessage);
-    await GroupMe.sendBotMessage(scoreMessage);
+    if (scoreMessage.length) {
+      await GroupMe.sendBotMessage(scoreMessage);
+    }
   } catch (e) {
-    console.log(e);
+    // console.log("ERROR SENDING RESULTS", e);
   }
 };
 
@@ -148,19 +151,19 @@ const _getMovies = async query => {
   let mongoQuery = {};
 
   if (!Number(query.isClosed) && Number(query.rtScore) < 0) {
-    console.log("Upcoming");
+    // console.log("Upcoming");
     mongoQuery = {
       rtScore: { $lt: 0 },
       releaseDate: { $gt: cutoffDate }
     };
   } else if (Number(query.isClosed) && Number(query.rtScore) < 0) {
-    console.log("Purgatory");
+    // console.log("Purgatory");
     mongoQuery = {
       rtScore: { $lt: 0 },
       releaseDate: { $lte: cutoffDate }
     };
   } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {
-    console.log("Past");
+    // console.log("Past");
     mongoQuery = {
       rtScore: { $gte: 0 }
     };

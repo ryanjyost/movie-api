@@ -1,4 +1,4 @@
-const { to } = require("../../../helpers");
+const { to } = require("../../helpers");
 const Group = require("../model.js");
 
 /*
@@ -7,7 +7,7 @@ const Group = require("../model.js");
 const create = async groupMeId => {
   // 46925214
   // stuff we need
-  const GroupMe = require("../../../lib/groupme/index.js");
+  const GroupMe = require("../../lib/groupme/index.js");
   const UserController = require("../../../controllers/UserController.js");
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
 

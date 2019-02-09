@@ -1,6 +1,6 @@
-const to = require("../helpers").to;
-const User = require("../models/user.js");
-const Group = require("../src/groups/model.js");
+const to = require("../helpers/index").to;
+const User = require("../../models/model.js");
+const Group = require("../groups/model.js");
 
 module.exports = async () => {
   let err, groups;

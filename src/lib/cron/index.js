@@ -1,6 +1,6 @@
-const Movie = require("../../src/movies/model");
-const User = require("../../models/user");
-const { to } = require("../../helpers");
+const Movie = require("../../movies/model");
+const User = require("../../../models/user");
+const { to } = require("../../helpers/index");
 const moment = require("moment");
 const GroupMe = require("../groupme/index");
 

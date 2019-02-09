@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { to } = require("../../helpers");
-const Movie = require("../../src/movies/model.js");
-const User = require("../../models/user.js");
-const Group = require("../../src/groups/model.js");
-const UserController = require("../../controllers/UserController");
-const Groups = require("../../src/groups");
+const { to } = require("../../helpers/index");
+const Movie = require("../../movies/model.js");
+const User = require("../../../models/model.js");
+const Group = require("../../groups/model.js");
+const UserController = require("../../../controllers/UserController");
+const Groups = require("../../groups/index");
 const moment = require("moment");
 const Fuse = require("fuse.js");
 const queryString = require("query-string");

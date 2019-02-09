@@ -5,7 +5,7 @@ const MovieScoreMap = require("../../../models/movieScoreMap.js");
 */
 
 const calculateRankings = async groupmeId => {
-  const GroupMe = require("../../../lib/groupme/index.js");
+  const GroupMe = require("../../lib/groupme/index.js");
   const UserController = require("../../../controllers/UserController.js");
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
   let err, response;

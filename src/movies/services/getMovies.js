@@ -1,5 +1,5 @@
 const Movie = require("../model");
-const { moviePredictionCutoffDate, to } = require("../../../helpers");
+const { moviePredictionCutoffDate, to } = require("../../helpers");
 
 const getMovies = async query => {
   let err, movies;

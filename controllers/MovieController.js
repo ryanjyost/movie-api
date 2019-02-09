@@ -1,8 +1,8 @@
-const { to } = require("../helpers");
+const { to } = require("../src/helpers");
 const Movie = require("../src/movies/model.js");
-const updateMovieScoreMap = require("../lib/updateMovieScoreMap.js");
-const updateUserVoteMaps = require("../lib/updateUserVoteMaps.js");
-const User = require("../models/user.js");
+const updateMovieScoreMap = require("../src/lib/updateMovieScoreMap.js");
+const updateUserVoteMaps = require("../src/lib/updateUserVoteMaps.js");
+const User = require("../models/model.js");
 const moment = require("moment");
 
 // const add = async (req, res) => {

@@ -1,5 +1,5 @@
 // const {to} = require("../lib/to.js");
-// const User = require("../models/user.js");
+// const User = require("../models/model.js");
 // const MovieScoreMap = require("../models/movieScoreMap.js");
 // const Group = require("../groups/model.js");
 //

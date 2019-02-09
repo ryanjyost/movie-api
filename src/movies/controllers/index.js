@@ -1,11 +1,11 @@
 const Movie = require("../model");
-const { to } = require("../../../helpers");
+const { to } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 
 // big operations
-const updateMovieScoreMap = require("../../../lib/updateMovieScoreMap");
-const updateUserVoteMaps = require("../../../lib/updateUserVoteMaps");
-const sendMovieScoreResultsToAllGroups = require("../../../lib/sendMovieScoreResultsToAllGroups");
+const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
+const updateUserVoteMaps = require("../../lib/updateUserVoteMaps");
+const sendMovieScoreResultsToAllGroups = require("../../lib/sendMovieScoreResultsToAllGroups");
 
 // Movie services
 const addMovie = require("../services/addMovie");

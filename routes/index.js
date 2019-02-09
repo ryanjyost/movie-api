@@ -43,23 +43,23 @@ router.get("/users/:id", require("../controllers/UserController").getUser);
 /* Receive a bot message */
 router.post(
   "/groupme/receive_message",
-  require("../lib/groupme/index").receiveMessage
+  require("../src/lib/groupme/index").receiveMessage
 );
 
 /* Get members of a GroupMe group */
 router.post(
   "/groupme/:group/users",
-  require("../lib/groupme/index").getUsersInGroup
+  require("../src/lib/groupme/index").getUsersInGroup
 );
 
 /*  Get groups that authorized user is a member of */
 router.post(
   "/groupme/groups",
-  require("../lib/groupme/index").getSingleUserGroups
+  require("../src/lib/groupme/index").getSingleUserGroups
 );
 
 /* Get info of current;y authorized user */
-router.post("/groupme/users/me", require("../lib/groupme/index").getUser);
+router.post("/groupme/users/me", require("../src/lib/groupme/index").getUser);
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

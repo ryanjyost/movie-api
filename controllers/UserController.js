@@ -1,11 +1,11 @@
-const { to } = require("../helpers");
-const User = require("../models/user.js");
+const { to } = require("../src/helpers");
+const User = require("../models/model.js");
 
 /*
 * Auth user
 */
 const login = async (req, res) => {
-  const GroupMe = require("../lib/groupme/index");
+  const GroupMe = require("../src/lib/groupme/index");
   let token = req.body.access_token;
 
   const api = GroupMe.createApi(token);

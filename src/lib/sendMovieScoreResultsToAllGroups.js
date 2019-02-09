@@ -1,4 +1,4 @@
-const GroupMe = require("../src/platforms/groupme");
+const GroupMe = require("../platforms/groupme/index");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {
   let mainMessage = `🍿 "${

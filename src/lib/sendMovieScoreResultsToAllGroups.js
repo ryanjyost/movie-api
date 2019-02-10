@@ -1,4 +1,7 @@
 const GroupMe = require("../platforms/groupme/index");
+const Users = require("../users");
+const Groups = require("../groups");
+const { to } = require("../helpers");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {
   let mainMessage = `🍿 "${
@@ -9,7 +12,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
   let votes = [];
   for (let user in movie.votes) {
     let err, userInfo;
-    [err, userInfo] = await to(User.findOne({ _id: user }));
+    [err, userInfo] = await to(Users.getUser({ _id: user }));
     if (userInfo && userInfo.name !== "Movie Medium") {
       votes.push({
         name: userInfo.nickname || userInfo.name,

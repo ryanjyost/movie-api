@@ -1,6 +1,6 @@
-const { to } = require("../src/helpers");
-const Movie = require("../src/movies/model.js");
-const User = require("../src/users/model");
+// const { to } = require("../src/helpers");
+// const Movie = require("../src/movies/model.js");
+// const User = require("../src/users/model");
 
 // const add = async (req, res) => {
 //   const GroupMe = require("../lib/groupme/index.js");
@@ -26,7 +26,7 @@ const User = require("../src/users/model");
 //
 //   res.json({ movie: newMovie, movies });
 // };
-
+//
 // const edit = async (req, res) => {
 //   let err, movie;
 //   [err, movie] = await to(
@@ -106,34 +106,34 @@ const User = require("../src/users/model");
 //   res.json({ movie: updatedMovie, movies });
 // };
 
-const predict = async (req, res) => {
-  let err, movie;
-  [err, movie] = await to(Movie.findOne({ _id: req.params.movieId }));
-
-  let user;
-  [err, user] = await to(User.findOne({ _id: req.body.userId }));
-
-  if (movie && user) {
-    let updatedMovie;
-    movie.votes =
-      "votes" in movie
-        ? { ...movie.votes, ...{ [user.id]: Number(req.body.prediction) } }
-        : { [user.id]: Number(req.body.prediction) };
-
-    await to(movie.save());
-
-    let updatedUser;
-    user.votes =
-      "votes" in user
-        ? { ...user.votes, ...{ [movie.id]: Number(req.body.prediction) } }
-        : { [movie.id]: Number(req.body.prediction) };
-
-    [err, updatedUser] = await to(user.save());
-    res.json({ user: updatedUser });
-  } else {
-    res.status(500).json({ error: "No movie or user" });
-  }
-};
+// const predict = async (req, res) => {
+//   let err, movie;
+//   [err, movie] = await to(Movie.findOne({ _id: req.params.movieId }));
+//
+//   let user;
+//   [err, user] = await to(User.findOne({ _id: req.body.userId }));
+//
+//   if (movie && user) {
+//     let updatedMovie;
+//     movie.votes =
+//       "votes" in movie
+//         ? { ...movie.votes, ...{ [user.id]: Number(req.body.prediction) } }
+//         : { [user.id]: Number(req.body.prediction) };
+//
+//     await to(movie.save());
+//
+//     let updatedUser;
+//     user.votes =
+//       "votes" in user
+//         ? { ...user.votes, ...{ [movie.id]: Number(req.body.prediction) } }
+//         : { [movie.id]: Number(req.body.prediction) };
+//
+//     [err, updatedUser] = await to(user.save());
+//     res.json({ user: updatedUser });
+//   } else {
+//     res.status(500).json({ error: "No movie or user" });
+//   }
+// };
 
 // const _getMovies = async query => {
 //   let err, movies;
@@ -180,8 +180,8 @@ const predict = async (req, res) => {
 //   res.json({ movies });
 // };
 
-module.exports = {
-  // deleteMovie,
-  // getMovies,
-  predict
-};
+// module.exports = {
+//   // deleteMovie,
+//   // getMovies,
+//   // predict
+// };

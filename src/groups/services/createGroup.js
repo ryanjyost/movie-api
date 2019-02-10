@@ -1,19 +1,17 @@
 const { to } = require("../../helpers");
 const Group = require("../model.js");
+const { findOrCreateUser } = require("../../users");
+const GroupMe = require("../../platforms/groupme");
 
 /*
 * Create an MM group from GroupMe group
 */
 const create = async groupMeId => {
   // 46925214
-  // stuff we need
-  const GroupMe = require("../../lib/groupme/index.js");
-  const UserController = require("../../../controllers/UserController.js");
-  const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
 
   //..... get group info from GroupMe
   let err, groupmeGroup;
-  [err, groupmeGroup] = await to(GroupMeApi.get(`groups/${groupMeId}`));
+  [err, groupmeGroup] = await to(GroupMe.getGroup(groupMeId));
 
   // if the groupme group was found
   if (groupmeGroup) {
@@ -30,10 +28,7 @@ const create = async groupMeId => {
     for (let member of members) {
       let err, user;
       [err, user] = await to(
-        UserController._findOrCreateUser(
-          member,
-          groupmeGroup.data.response.group_id
-        )
+        findOrCreateUser(member, groupmeGroup.data.response.group_id)
       );
 
       // add user ids to new group

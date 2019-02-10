@@ -67,10 +67,16 @@ exports.editMovie = async (req, res, next) => {
   await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
 
   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
-    [err, response] = await to(
-      sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore))
-    );
     [err, response] = await to(updateUserVoteMaps(movieBeforeUpdate));
+    if (err) next(err);
+
+    [err, response] = await to(
+      sendMovieScoreResultsToAllGroups(
+        movieBeforeUpdate,
+        Number(req.body.rtScore)
+      )
+    );
+    if (err) next(err);
   }
 
   // return all movies to make updating admin easier
@@ -94,4 +100,24 @@ exports.deleteMovie = async (req, res, next) => {
   if (err) next(err);
 
   res.json({ movies });
+};
+
+/*
+* Handle user prediction
+*/
+exports.handleUserPrediction = async (req, res, next) => {
+  let err, movie;
+  [err, movie] = await to(Movie.findOne({ _id: req.params.movieId }));
+  if (err || !movie) next(err);
+
+  movie.votes =
+    "votes" in movie
+      ? {
+          ...movie.votes,
+          ...{ [req.body.userId]: Number(req.body.prediction) }
+        }
+      : { [req.body.userId]: Number(req.body.prediction) };
+
+  await to(movie.save());
+  next();
 };

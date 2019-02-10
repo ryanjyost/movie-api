@@ -20,12 +20,15 @@ const createApi = token => {
 
   const getCurrentUser = () => api.get("/users/me");
 
+  const getCurrentUsersGroups = params => api.get("/groups", params);
+
   const getGroup = groupMeId => api.get(`groups/${groupMeId}`);
 
   const likeMessage = (groupId, messageId) =>
     api.post(`/messages/${groupId}/${messageId}/like`);
 
   return {
+    getCurrentUsersGroups,
     sendBotMessage,
     getCurrentUser,
     getGroup,

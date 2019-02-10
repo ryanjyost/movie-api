@@ -22,10 +22,11 @@ router.post("/movies/edit/:id", MoviesController.editMovie);
 /* Delete movie */
 router.post("/movies/delete/:id", MoviesController.deleteMovie);
 
-/* TODO predict movie */
+/* Update a user's movie prediction */
 router.post(
   "/movies/predict/:movieId",
-  require("../controllers/MovieController").predict
+  MoviesController.handleUserPrediction,
+  UsersController.updateUserPrediction
 );
 
 /* ======================
@@ -45,20 +46,14 @@ router.get("/users/:id", UsersController.getUser);
 /* Receive a bot message */
 router.post("/groupme/receive_message", GroupMeController.receiveMessage);
 
-/* Get members of a GroupMe group */
-router.post(
-  "/groupme/:group/users",
-  require("../src/lib/groupme/index").getUsersInGroup
-);
+/* Get info on GroupMe group */
+router.post("/groupme/:group/users", GroupMeController.getGroup);
 
 /*  Get groups that authorized user is a member of */
-router.post(
-  "/groupme/groups",
-  require("../src/lib/groupme/index").getSingleUserGroups
-);
+router.post("/groupme/groups", GroupMeController.getCurrentUsersGroups);
 
-/* Get info of current;y authorized user */
-router.post("/groupme/users/me", require("../src/lib/groupme/index").getUser);
+/* Get info of currently authorized user */
+router.post("/groupme/users/me", GroupMeController.getUser);
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

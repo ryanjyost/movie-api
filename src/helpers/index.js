@@ -31,10 +31,11 @@ exports.to = promise => {
 exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
 
 const moviePredictionCutoffDate = moment()
-  .add(8, "days")
+  .endOf("day")
+  .add(7, "days")
   .unix();
 exports.moviePredictionCutoffDate = moviePredictionCutoffDate;
 
-exports.isMoviePastPredictionDeadline = async releaseTimestamp => {
+exports.isMoviePastPredictionDeadline = releaseTimestamp => {
   return moment.unix(releaseTimestamp).isBefore(moviePredictionCutoffDate);
 };

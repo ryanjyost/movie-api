@@ -20,7 +20,7 @@ const findOrCreateUser = async (groupmeMemberData, groupmeGroupId) => {
         groupme: groupmeMemberData,
         groupmeId: groupmeMemberData.user_id,
         name: groupmeMemberData.name,
-        nickname: groupmeMemberData.nickname,
+        nickname: groupmeMemberData.nickname || groupmeMemberData.name,
         votes: { placeholder: 1 },
         groups: [groupmeGroupId]
       })

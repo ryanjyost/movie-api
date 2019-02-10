@@ -1,9 +1,13 @@
 const { to } = require("../../../helpers");
+const queryString = require("query-string");
 
 // GroupMe Services
+const createGroupMeApi = require("../services/GroupMeApi");
+
+// Big operations with tons of deps
 const handleGroupMeAutomatedMessage = require("../controllers/handleGroupMeAutomatedMessage");
 const sendGroupRankings = require("../controllers/sendGroupRankings");
-const handleUserPrediction = require("../controllers/handleUserPrediction");
+const handleUserPrediction = require("../../../lib/handleUserPrediction");
 
 /* Receive a message from GroupMe */
 exports.receiveMessage = async (req, res, next) => {
@@ -29,4 +33,44 @@ exports.receiveMessage = async (req, res, next) => {
   } else if (text.includes("=") || text.includes("-")) {
     await to(handleUserPrediction(req, res, next));
   }
+};
+
+/* Get all users in a groupme group */
+exports.getGroup = async (req, res, next) => {
+  const GroupMeApi = createGroupMeApi(process.env.GROUPME_ACCESS_TOKEN);
+
+  let err, response;
+  [err, response] = await to(GroupMeApi.getGroup(req.params.groupId));
+  if (err) next(err);
+
+  res.json({ group: response });
+};
+
+/* Get all of the GroupMe groups that a user is a member of */
+exports.getCurrentUsersGroups = async (req, res, next) => {
+  const GroupMeApi = createGroupMeApi(req.body.access_token);
+
+  const params = {
+    omit: "memberships",
+    per_page: 100
+  };
+
+  let paramsString = queryString.stringify(params);
+
+  let err, response;
+  [err, response] = await to(GroupMeApi.getCurrentUsersGroups(paramsString));
+  if (err) next(err);
+
+  res.json({ groups: response.data.response });
+};
+
+/* Get single GroupMe user */
+exports.getUser = async (req, res, next) => {
+  const GroupMeApi = createGroupMeApi(req.body.access_token);
+
+  let err, response;
+  [err, response] = await to(GroupMeApi.getCurrentUser());
+  if (err) next(err);
+
+  res.json({ user: response.data.response });
 };

@@ -10,3 +10,6 @@ exports.getMovies = require("./services/getMovies");
 exports.getMovie = (query = {}) => {
   return Movie.findOne(query);
 };
+
+/* Fuzzy search movies */
+exports.fuzzySearchMovies = require("./services/fuzzySearchMovies");

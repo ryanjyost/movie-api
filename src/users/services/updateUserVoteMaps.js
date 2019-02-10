@@ -11,7 +11,6 @@ const User = require("../model");
 const { to } = require("../../helpers");
 
 module.exports = async newMovie => {
-  console.log("UPDATE USER VOTE MAPS", newMovie);
   // this updates any user that hasn't predicted with a placeholder of -1
   let err, result;
   [err, result] = await to(

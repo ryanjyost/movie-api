@@ -1,20 +1,21 @@
-const MovieScoreMap = require("../../../models/movieScoreMap.js");
+const MovieScoreMap = require("../../models/movieScoreMap.js");
+const Users = require("../users");
+const GroupMe = require("../platforms/groupme");
+const { to } = require("../helpers");
 
 /*
 * Send rankings to group
 */
 
 const calculateRankings = async groupmeId => {
-  const GroupMe = require("../../lib/groupme/index.js");
-  const UserController = require("../../../controllers/UserController.js");
-  const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
-  let err, response;
-  [err, response] = await to(GroupMeApi.get(`groups/${groupmeId}`));
-
-  let group = response.data.response;
+  console.log("CALCULATE");
+  let err, group;
+  [err, group] = await to(GroupMe.getGroup(groupmeId));
+  if (err) throw new Error();
 
   let movieScoreMap;
   [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
+  if (err) throw new Error();
 
   // if (!group) {
   //   await to(create(groupmeId));
@@ -26,9 +27,7 @@ const calculateRankings = async groupmeId => {
 
     for (let member of group.members) {
       let err, user;
-      [err, user] = await to(
-        UserController._findOrCreateUser(member, group.group_id)
-      );
+      [err, user] = await to(Users.findOrCreateUser(member, group.group_id));
 
       if (user && user.name !== "Movie Medium") {
         let numMoviesUserPredicted = 0,
@@ -79,26 +78,10 @@ const calculateRankings = async groupmeId => {
       }
     });
 
-    let text = `🏆 GROUP RANKINGS 🏆` + "\n";
-
-    for (let i = 0; i < sorted.length; i++) {
-      if (!sorted[i].numMoviesUserPredicted) {
-        text = text + `${i + 1}) ${sorted[i].name} - N/A` + "\n";
-      } else {
-        text =
-          text +
-          `${i + 1}) ${sorted[i].name} - ${sorted[i].avgDiff.toFixed(1)}%` +
-          "\n";
-      }
-    }
-
-    text =
-      text +
-      `*percentage is how close your predictions are on average. Low scores are good, high scores are bad.`;
-    await GroupMe.sendBotMessage(text);
+    return sorted;
   } catch (e) {
     console.log("ERROR", e);
   }
 };
 
-exports = calculateRankings;
+module.exports = calculateRankings;

@@ -18,8 +18,18 @@ const createApi = token => {
       bot_id: process.env.GROUPME_BOT_ID
     });
 
+  const getCurrentUser = () => api.get("/users/me");
+
+  const getGroup = groupMeId => api.get(`groups/${groupMeId}`);
+
+  const likeMessage = (groupId, messageId) =>
+    api.post(`/messages/${groupId}/${messageId}/like`);
+
   return {
-    sendBotMessage
+    sendBotMessage,
+    getCurrentUser,
+    getGroup,
+    likeMessage
   };
 };
 

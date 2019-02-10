@@ -3,6 +3,8 @@ const router = express.Router();
 
 // controllers
 const MoviesController = require("../src/movies/controllers");
+const UsersController = require("../src/users/controllers");
+const GroupMeController = require("../src/platforms/groupme/controllers");
 
 /* ======================
  Movies
@@ -31,20 +33,17 @@ router.post(
 ========================*/
 
 /* With auth token */
-router.post("/users/login", require("../controllers/UserController").login);
+router.post("/users/login", UsersController.login);
 
 /* Get user info */
-router.get("/users/:id", require("../controllers/UserController").getUser);
+router.get("/users/:id", UsersController.getUser);
 
 /* ======================
  GroupMe
 ========================*/
 
 /* Receive a bot message */
-router.post(
-  "/groupme/receive_message",
-  require("../src/lib/groupme/index").receiveMessage
-);
+router.post("/groupme/receive_message", GroupMeController.receiveMessage);
 
 /* Get members of a GroupMe group */
 router.post(

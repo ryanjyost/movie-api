@@ -54,4 +54,4 @@ const create = async groupMeId => {
   }
 };
 
-exports = create;
+module.exports = create;

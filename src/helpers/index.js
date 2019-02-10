@@ -8,7 +8,21 @@ const moment = require("moment");
 exports.to = promise => {
   return promise
     .then(data => {
-      return [null, data];
+      if (!data) {
+        return [null, data];
+      }
+
+      // handle axios response
+
+      if ("ok" in data) {
+        if (data.ok) {
+          return [null, data.data ? data.data.response : data.data];
+        } else {
+          return [data, null];
+        }
+      } else {
+        return [null, data];
+      }
     })
     .catch(err => [err]);
 };
@@ -16,6 +30,11 @@ exports.to = promise => {
 /* Make easier searching/matching */
 exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
 
-exports.moviePredictionCutoffDate = moment()
-  .add(7, "days")
+const moviePredictionCutoffDate = moment()
+  .add(8, "days")
   .unix();
+exports.moviePredictionCutoffDate = moviePredictionCutoffDate;
+
+exports.isMoviePastPredictionDeadline = async releaseTimestamp => {
+  return moment.unix(releaseTimestamp).isBefore(moviePredictionCutoffDate);
+};

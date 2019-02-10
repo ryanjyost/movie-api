@@ -1,5 +1,5 @@
 const { to } = require("../src/helpers");
-const User = require("../models/model.js");
+const User = require("../src/users/model");
 
 /*
 * Auth user
@@ -82,16 +82,19 @@ const _findOrCreateUser = async (groupmeMemberData, groupmeGroupId) => {
 
     if (!user) {
       isNew = true;
-      [err, user] = await to(
-        User.create({
-          groupme: groupmeMemberData,
-          groupmeId: groupmeMemberData.user_id,
-          name: groupmeMemberData.name,
-          nickname: groupmeMemberData.nickname,
-          votes: { placeholder: 1 },
-          groups: [groupmeGroupId]
-        })
-      );
+      let newUserData = {
+        groupme: groupmeMemberData,
+        groupmeId: groupmeMemberData.user_id,
+        name: groupmeMemberData.name,
+        nickname: groupmeMemberData.nickname,
+        votes: { placeholder: 1 }
+      };
+
+      if (groupmeGroupId) {
+        newUserData.groups = [groupmeGroupId];
+      }
+
+      [err, user] = await to(User.create(newUserData));
     }
 
     return user;

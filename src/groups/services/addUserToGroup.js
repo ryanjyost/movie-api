@@ -11,4 +11,4 @@ const addUserToGroup = async (userId, groupmeId) => {
   );
 };
 
-exports = addUserToGroup;
+module.exports = addUserToGroup;

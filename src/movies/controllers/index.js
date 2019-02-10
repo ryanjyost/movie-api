@@ -4,17 +4,18 @@ const GroupMe = require("../../platforms/groupme");
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
-const updateUserVoteMaps = require("../../lib/updateUserVoteMaps");
 const sendMovieScoreResultsToAllGroups = require("../../lib/sendMovieScoreResultsToAllGroups");
 
 // Movie services
 const addMovie = require("../services/addMovie");
 const getMovies = require("../services/getMovies");
 
+// User services
+const { updateUserVoteMaps } = require("../../users");
+
 /*
 * Get Movies
 */
-
 exports.getMovies = async (req, res, next) => {
   let err, movies;
   [err, movies] = await to(getMovies(req.query));

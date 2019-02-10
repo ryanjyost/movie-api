@@ -7,8 +7,8 @@
 *
  */
 
-const User = require("../../models/model.js");
-const { to } = require("../helpers/index");
+const User = require("../model");
+const { to } = require("../../helpers");
 
 module.exports = async newMovie => {
   console.log("UPDATE USER VOTE MAPS", newMovie);

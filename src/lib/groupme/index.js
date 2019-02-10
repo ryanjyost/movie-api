@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { to } = require("../../helpers/index");
 const Movie = require("../../movies/model.js");
-const User = require("../../../models/model.js");
+const User = require("../../users/model.js");
 const Group = require("../../groups/model.js");
 const UserController = require("../../../controllers/UserController");
 const Groups = require("../../groups/index");
@@ -13,43 +13,43 @@ const stringSimilarity = require("string-similarity");
 /*
 * Create GroupMe App API
 */
-const createApi = token => {
-  return axios.create({
-    baseURL: "https://api.groupme.com/v3",
-    timeout: 10000,
-    headers: {
-      "X-Custom-Header": "foobar",
-      "Content-Type": "application/json",
-      Host: "api.groupme.com",
-      "X-Access-Token": token
-    }
-  });
-};
+// const createApi = token => {
+//   return axios.create({
+//     baseURL: "https://api.groupme.com/v3",
+//     timeout: 10000,
+//     headers: {
+//       "X-Custom-Header": "foobar",
+//       "Content-Type": "application/json",
+//       Host: "api.groupme.com",
+//       "X-Access-Token": token
+//     }
+//   });
+// };
 
 /*
 * Send Bot Message to GroupMe chat
 */
-const sendBotMessage = async text => {
-  return new Promise(async (resolve, reject) => {
-    let err, response;
-    [err, response] = await to(
-      axios.post("https://api.groupme.com/v3/bots/post", {
-        text,
-        bot_id: process.env.GROUPME_BOT_ID
-      })
-    );
-
-    if (err) {
-      reject(err);
-    }
-
-    if (response) {
-      resolve(response);
-    } else {
-      reject();
-    }
-  });
-};
+// const sendBotMessage = async text => {
+//   return new Promise(async (resolve, reject) => {
+//     let err, response;
+//     [err, response] = await to(
+//       axios.post("https://api.groupme.com/v3/bots/post", {
+//         text,
+//         bot_id: process.env.GROUPME_BOT_ID
+//       })
+//     );
+//
+//     if (err) {
+//       reject(err);
+//     }
+//
+//     if (response) {
+//       resolve(response);
+//     } else {
+//       reject();
+//     }
+//   });
+// };
 
 /*
 * Like a specific message
@@ -141,10 +141,10 @@ const receiveMessage = async (req, res) => {
         text.toLowerCase().includes("ranking?") ||
         text.toLowerCase().includes("rankings?")
       ) {
-        [err, payload] = await to(
-          GroupController._calcRankings(req.body.group_id)
-        );
-        res.json({ msg: payload || err });
+        // [err, payload] = await to(
+        //   GroupController._calcRankings(req.body.group_id)
+        // );
+        // res.json({ msg: payload || err });
       } else if (text.includes("=") || text.includes("-")) {
         [err, payload] = await to(_handleUserPrediction(req, text));
         res.json({ msg: payload || err });
@@ -379,8 +379,8 @@ const _handleUserPrediction = async (req, text) => {
 };
 
 module.exports = {
-  createApi,
-  sendBotMessage,
+  // createApi,
+  // sendBotMessage,
   receiveMessage,
   getUsersInGroup,
   getUser,

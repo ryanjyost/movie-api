@@ -1,5 +1,5 @@
 const Movie = require("../model");
-const { to } = require("../../helpers");
+const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 
 // big operations
@@ -17,8 +17,27 @@ const { updateUserVoteMaps } = require("../../users");
 * Get Movies
 */
 exports.getMovies = async (req, res, next) => {
+  let query = req.query;
+  let mongoQuery = {};
+
+  if (!Number(query.isClosed) && Number(query.rtScore) < 0) {
+    mongoQuery = {
+      rtScore: { $lt: 0 },
+      releaseDate: { $gt: moviePredictionCutoffDate }
+    };
+  } else if (Number(query.isClosed) && Number(query.rtScore) < 0) {
+    mongoQuery = {
+      rtScore: { $lt: 0 },
+      releaseDate: { $lte: moviePredictionCutoffDate }
+    };
+  } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {
+    mongoQuery = {
+      rtScore: { $gte: 0 }
+    };
+  }
+
   let err, movies;
-  [err, movies] = await to(getMovies(req.query));
+  [err, movies] = await to(getMovies(mongoQuery));
   if (err) next(err);
 
   res.json({ movies });

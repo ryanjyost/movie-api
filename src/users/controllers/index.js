@@ -20,6 +20,16 @@ exports.login = async (req, res, next) => {
   [err, user] = await to(findOrCreateUser(groupMeUser));
   if (err) next(err);
 
+  if (user.isNew) {
+    console.log("NEW LOGIN USER");
+    //... get user's groups
+    let usersGroups;
+    [err, usersGroups] = await to(GroupMeApi.getCurrentUsersGroups());
+    if (err) next(err);
+
+    console.log("USERS GROUPS", usersGroups);
+  }
+
   res.json({ user, token: user ? (user.isNew ? token : null) : null });
 };
 

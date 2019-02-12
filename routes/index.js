@@ -4,6 +4,7 @@ const router = express.Router();
 // controllers
 const MoviesController = require("../src/movies/controllers");
 const UsersController = require("../src/users/controllers");
+const GroupsController = require("../src/groups/controllers");
 const GroupMeController = require("../src/platforms/groupme/controllers");
 
 /* ======================
@@ -38,6 +39,13 @@ router.post("/users/login", UsersController.login);
 
 /* Get user info */
 router.get("/users/:id", UsersController.getUser);
+
+/* ======================
+ Groups
+========================*/
+
+/* Get group info */
+router.get("/groups/:id", GroupsController.getGroup);
 
 /* ======================
  GroupMe

@@ -1,4 +1,5 @@
 const { create } = require("apisauce");
+const queryString = require("query-string");
 
 const createApi = token => {
   const api = create({
@@ -20,7 +21,15 @@ const createApi = token => {
 
   const getCurrentUser = () => api.get("/users/me");
 
-  const getCurrentUsersGroups = params => api.get("/groups", params);
+  const getCurrentUsersGroups = (
+    params = {
+      omit: "memberships",
+      per_page: 100
+    }
+  ) => {
+    let paramsString = queryString.stringify(params);
+    return api.get("/groups", paramsString);
+  };
 
   const getGroup = groupMeId => api.get(`groups/${groupMeId}`);
 

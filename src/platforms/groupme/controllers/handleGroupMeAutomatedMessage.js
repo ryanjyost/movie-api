@@ -8,7 +8,6 @@ const { to } = require("../../../helpers");
 */
 
 const handleGroupMeAutomatedMessage = async (req, res, next) => {
-  console.log("GRPUPS", Groups);
   try {
     if (req.body.text.includes("added") || req.body.text.includes("rejoined")) {
       const GroupMeApi = createGroupMeApi(process.env.GROUPME_ACCESS_TOKEN);
@@ -21,7 +20,9 @@ const handleGroupMeAutomatedMessage = async (req, res, next) => {
       // if nothing went wrong fetching the group info
       if (groupMeGroup) {
         let group;
-        [err, group] = await to(Groups.getGroup(groupMeGroup.group_id));
+        [err, group] = await to(
+          Groups.getGroup({ groupmeId: groupMeGroup.group_id })
+        );
         if (err) next(err);
 
         const members = groupMeGroup.members;
@@ -30,6 +31,7 @@ const handleGroupMeAutomatedMessage = async (req, res, next) => {
 
         // check if groupme members are MM users
         for (let member of members) {
+          console.log("MEMBER", member);
           let err, user;
           [err, user] = await to(Users.findOrCreateUser(member, group._id));
           if (err) next(err);
@@ -37,7 +39,7 @@ const handleGroupMeAutomatedMessage = async (req, res, next) => {
           updatedMembers.push(user._id);
 
           // if user id isn't in group members, add it
-          if (group.members.indexOf(user._id) < 0) {
+          if (user.isNew) {
             hasNewMember = true;
             // await to(GroupController._addUserToGroup(user._id, group._id));
             await GroupMeApi.sendBotMessage(`Welcome ${user.name} 👋`);

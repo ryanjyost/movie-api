@@ -8,28 +8,42 @@ const cors = require("cors");
 const CronJob = require("cron").CronJob;
 require("dotenv").config();
 const db = require("./db");
+const {
+  handleMovieCutoffs,
+  handleDayBeforeCutoffNotifications,
+  syncUsersAndGroups
+} = require("./src/lib/cron");
 
-// const handleMovieCutoffs = new CronJob(
-//   "0 05 0 * * *",
-//   require("./lib/cron").handleMovieCutoffs,
+const job1 = new CronJob(
+  "39 23 * * *",
+  handleMovieCutoffs,
+  null,
+  true,
+  "America/New_York"
+);
+job1.start();
+
+const job2 = new CronJob(
+  "40 23 * * *",
+  handleDayBeforeCutoffNotifications,
+  null,
+  true,
+  "America/New_York"
+);
+job2.start();
+
+// const job3 = new CronJob(
+//   "26 22 * * *",
+//   syncUsersAndGroups,
 //   null,
 //   true,
 //   "America/New_York"
 // );
-// handleMovieCutoffs.start();
-//
-// const handleDayBeforeCutoffNotifications = new CronJob(
-//   "0 0 0 * * *",
-//   require("./lib/cron").handleDayBeforeCutoffNotifications,
-//   null,
-//   true,
-//   "America/New_York"
-// );
-// handleDayBeforeCutoffNotifications.start();
+// job3.start();
 
 // require("./src/groups").createGroup(1234);
 // require("./lib/updateMovieScoreMap")(null);
-//require("./lib/syncUsersAndGroups")(null);
+// require("./src/lib/syncUsersAndGroups")(null);
 
 const app = express();
 

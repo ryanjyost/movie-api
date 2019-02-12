@@ -15,7 +15,7 @@ const {
 } = require("./src/lib/cron");
 
 const job1 = new CronJob(
-  "39 23 * * *",
+  "10 0 * * *",
   handleMovieCutoffs,
   null,
   true,
@@ -24,7 +24,7 @@ const job1 = new CronJob(
 job1.start();
 
 const job2 = new CronJob(
-  "40 23 * * *",
+  "0 7 * * *",
   handleDayBeforeCutoffNotifications,
   null,
   true,
@@ -32,14 +32,14 @@ const job2 = new CronJob(
 );
 job2.start();
 
-// const job3 = new CronJob(
-//   "26 22 * * *",
-//   syncUsersAndGroups,
-//   null,
-//   true,
-//   "America/New_York"
-// );
-// job3.start();
+const job3 = new CronJob(
+  "0 5 * * *",
+  syncUsersAndGroups,
+  null,
+  true,
+  "America/New_York"
+);
+job3.start();
 
 // require("./src/groups").createGroup(1234);
 // require("./lib/updateMovieScoreMap")(null);

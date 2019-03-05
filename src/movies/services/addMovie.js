@@ -14,13 +14,6 @@ const addMovie = async newMovieData => {
     .startOf("day")
     .unix();
 
-  console.log(
-    "NEW MOVIE DATE",
-    moment
-      .unix(newMovieData.releaseDate)
-      .startOf("day")
-      .format("MM/DD/YYYY hh:mm A")
-  );
   [err, newMovie] = await to(Movie.create(newMovieData));
 
   return newMovie;

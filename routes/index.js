@@ -6,6 +6,7 @@ const MoviesController = require("../src/movies/controllers");
 const UsersController = require("../src/users/controllers");
 const GroupsController = require("../src/groups/controllers");
 const GroupMeController = require("../src/platforms/groupme/controllers");
+const SpecialCaseController = require("../src/lib/controllers");
 
 /* ======================
  Movies
@@ -47,6 +48,12 @@ router.get("/users/:id", UsersController.getUser);
 /* Get group info */
 router.get("/groups/:id", GroupsController.getGroup);
 
+/* Get group info */
+router.post("/groups/create", GroupsController.createGroup);
+
+/* Get group info */
+router.get("/groups/:id/rankings", GroupsController.getGroupRankings);
+
 /* ======================
  GroupMe
 ========================*/
@@ -62,6 +69,16 @@ router.post("/groupme/groups", GroupMeController.getCurrentUsersGroups);
 
 /* Get info of currently authorized user */
 router.post("/groupme/users/me", GroupMeController.getUser);
+
+/* ======================
+ SPECIAL CASES
+========================*/
+
+/* Send group's vote breakdowns for movies in purgatory */
+router.get(
+  "/group_breakdowns/:groupId/:type",
+  SpecialCaseController.getGroupPredictionData
+);
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

@@ -1,9 +1,11 @@
 const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Movies = require("../../movies");
+const Groups = require("../../groups");
 const moment = require("moment");
 
 const handleDayBeforeCutoffNotifications = async () => {
+  console.log("DAY BEFORE CUTOFF");
   let err, movies;
 
   [err, movies] = await to(
@@ -25,7 +27,12 @@ const handleDayBeforeCutoffNotifications = async () => {
     text = text + "\n" + `${movie.title}`;
   }
 
-  await GroupMe.sendBotMessage(text);
+  let groups;
+  [err, groups] = await to(Groups.getGroups());
+
+  for (let group of groups) {
+    await GroupMe.sendBotMessage(text, group.bot.bot_id);
+  }
 };
 
 module.exports = handleDayBeforeCutoffNotifications;

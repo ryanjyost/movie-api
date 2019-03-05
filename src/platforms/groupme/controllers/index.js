@@ -57,11 +57,12 @@ exports.getCurrentUsersGroups = async (req, res, next) => {
 
   let paramsString = queryString.stringify(params);
 
-  let err, response;
-  [err, response] = await to(GroupMeApi.getCurrentUsersGroups(paramsString));
+  let err, groups;
+  [err, groups] = await to(GroupMeApi.getCurrentUsersGroups(paramsString));
+  console.log("ERROR", err);
   if (err) next(err);
 
-  res.json({ groups: response.data.response });
+  res.json({ groups });
 };
 
 /* Get single GroupMe user */

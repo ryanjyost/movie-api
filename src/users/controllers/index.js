@@ -1,5 +1,6 @@
 const { to } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
+const Groups = require("../../groups");
 
 // User services
 const getUser = require("../services/getUser");
@@ -20,23 +21,56 @@ exports.login = async (req, res, next) => {
   [err, user] = await to(findOrCreateUser(groupMeUser));
   if (err) next(err);
 
+  let userMongoObject;
+
   if (user.isNew) {
-    console.log("NEW LOGIN USER");
+    [err, userMongoObject] = await to(
+      findOrCreateUser(groupMeUser, null, true)
+    );
+    if (err) next(err);
+
+    let userMMGroups = [...userMongoObject.groups];
     //... get user's groups
     let usersGroups;
     [err, usersGroups] = await to(GroupMeApi.getCurrentUsersGroups());
     if (err) next(err);
 
-    console.log("USERS GROUPS", usersGroups);
+    for (let group of usersGroups) {
+      let err, existingGroup;
+      [err, existingGroup] = await to(
+        Groups.getGroup({ groupmeId: group.group_id })
+      );
+
+      if (existingGroup) {
+        await to(
+          Groups.addUserToGroup(userMongoObject._id, {
+            groupmeId: group.group_id
+          })
+        );
+        userMMGroups.push(existingGroup._id);
+      }
+    }
+
+    userMongoObject.groups = userMMGroups;
+    userMongoObject.save();
   }
 
-  res.json({ user, token: user ? (user.isNew ? token : null) : null });
+  res.json({
+    user: user.isNew ? userMongoObject.toObject() : user,
+    token: user ? (user.isNew ? token : null) : null
+  });
 };
 
 /* Get user data */
 exports.getUser = async (req, res, next) => {
   let err, existingUser;
-  [err, existingUser] = await to(getUser(req.params.id));
+  [err, existingUser] = await to(
+    getUser(
+      { _id: req.params.id },
+      {},
+      { path: "groups", populate: { path: "members" } }
+    )
+  );
   if (err) next(err);
 
   res.json({ user: existingUser });
@@ -44,7 +78,7 @@ exports.getUser = async (req, res, next) => {
 
 exports.updateUserPrediction = async (req, res, next) => {
   let err, user;
-  [err, user] = await to(getUser(req.body.userId));
+  [err, user] = await to(getUser({ _id: req.body.userId }));
   if (err) next(err);
 
   let updatedUser;

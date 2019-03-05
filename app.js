@@ -5,45 +5,10 @@ const winston = require("./config/winston.js");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const CronJob = require("cron").CronJob;
+
 require("dotenv").config();
 const db = require("./db");
-const {
-  handleMovieCutoffs,
-  handleDayBeforeCutoffNotifications,
-  syncUsersAndGroups
-} = require("./src/lib/cron");
-
-const job1 = new CronJob(
-  "10 0 * * *",
-  handleMovieCutoffs,
-  null,
-  true,
-  "America/New_York"
-);
-job1.start();
-
-const job2 = new CronJob(
-  "0 7 * * *",
-  handleDayBeforeCutoffNotifications,
-  null,
-  true,
-  "America/New_York"
-);
-job2.start();
-
-const job3 = new CronJob(
-  "0 5 * * *",
-  syncUsersAndGroups,
-  null,
-  true,
-  "America/New_York"
-);
-job3.start();
-
-// require("./src/groups").createGroup(1234);
-// require("./lib/updateMovieScoreMap")(null);
-// require("./src/lib/syncUsersAndGroups")(null);
+const runCronJobs = require("./src/lib/cron");
 
 const app = express();
 
@@ -71,7 +36,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // Log error message
-  console.error("ERROR HANDLER", err.message);
+  console.error("ERROR HANDLER", err.data || err.message || err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = process.env.ENV === "development" ? err : {};
@@ -79,5 +44,8 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500).json({ error: err.message });
 });
+
+/* RUN CRON JOBS */
+runCronJobs();
 
 module.exports = app;

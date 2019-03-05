@@ -14,7 +14,7 @@ const options = {
     colorize: false
   },
   console: {
-    level: "info",
+    level: "warning",
     format: format.combine(format.colorize(), format.simple())
   }
 };

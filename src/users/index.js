@@ -6,7 +6,8 @@ exports.updateUserVoteMaps = require("./services/updateUserVoteMaps");
 /* Find user based on platform data, and create one if currently none exists */
 exports.findOrCreateUser = require("./services/findOrCreateUser");
 
+/* Find MM users */
+exports.getUsers = require("./services/getUsers");
+
 /* Return MM user */
-exports.getUser = (query = {}) => {
-  return User.findOne(query);
-};
+exports.getUser = require("./services/getUser");

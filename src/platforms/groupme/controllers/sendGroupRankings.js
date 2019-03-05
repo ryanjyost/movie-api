@@ -1,11 +1,14 @@
-const calculateRankings = require("../../../lib/calculateRankings");
+const calculateRankings = require("../../../groups/services/calculateRankings");
 const createGroupMeApi = require("../services/GroupMeApi");
 const { to } = require("../../../helpers");
+const getGroup = require("../../../groups/services/getGroup");
 
 const sendGroupRankings = async (req, res, next) => {
   try {
     let err, rankings;
-    [err, rankings] = await to(calculateRankings(req.body.group_id));
+    [err, rankings] = await to(
+      calculateRankings({ groupmeId: req.body.group_id })
+    );
     if (err) next(err);
 
     let text = `🏆 GROUP RANKINGS 🏆` + "\n";
@@ -29,7 +32,12 @@ const sendGroupRankings = async (req, res, next) => {
     text =
       text +
       `*percentage is how close your predictions are on average. Low scores are good, high scores are bad.`;
-    await GroupMeApi.sendBotMessage(text);
+
+    let group;
+    [err, group] = await to(getGroup({ groupmeId: req.body.group_id }));
+    if (err) next(err);
+
+    await GroupMeApi.sendBotMessage(text, group.bot.bot_id);
   } catch (e) {
     next(e);
   }

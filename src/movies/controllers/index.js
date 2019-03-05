@@ -1,6 +1,8 @@
 const Movie = require("../model");
 const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
+const Users = require("../../users");
+const Groups = require("../../groups");
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
@@ -21,16 +23,27 @@ exports.getMovies = async (req, res, next) => {
   let mongoQuery = {};
 
   if (!Number(query.isClosed) && Number(query.rtScore) < 0) {
+    // upcoming
     mongoQuery = {
       rtScore: { $lt: 0 },
-      releaseDate: { $gt: moviePredictionCutoffDate }
+      releaseDate: { $gt: moviePredictionCutoffDate },
+      isClosed: 0
     };
   } else if (Number(query.isClosed) && Number(query.rtScore) < 0) {
+    // purgatory
     mongoQuery = {
-      rtScore: { $lt: 0 },
-      releaseDate: { $lte: moviePredictionCutoffDate }
+      $and: [
+        { rtScore: { $lt: 0 } },
+        {
+          $or: [
+            { releaseDate: { $lte: moviePredictionCutoffDate } },
+            { isClosed: 1 }
+          ]
+        }
+      ]
     };
   } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {
+    // past
     mongoQuery = {
       rtScore: { $gte: 0 }
     };
@@ -40,7 +53,7 @@ exports.getMovies = async (req, res, next) => {
   [err, movies] = await to(getMovies(mongoQuery));
   if (err) next(err);
 
-  res.json({ movies });
+  res.json({ movies, moviePredictionCutoffDate });
 };
 
 /*
@@ -57,8 +70,18 @@ exports.addMovie = async (req, res, next) => {
   //...let groups know that a movie was added
   let response;
   if (newMovie) {
-    [err, response] = await to(GroupMe.sendBotMessage(`🍿 ${newMovie.title}`));
-    [err, response] = await to(GroupMe.sendBotMessage(`${newMovie.trailer}`));
+    let err, groups;
+    [err, groups] = await to(Groups.getGroups());
+    if (err) next(err);
+
+    for (let group of groups) {
+      [err, response] = await to(
+        GroupMe.sendBotMessage(`🍿 ${newMovie.title}`, group.bot.bot_id)
+      );
+      [err, response] = await to(
+        GroupMe.sendBotMessage(`${newMovie.trailer}`, group.bot.bot_id)
+      );
+    }
 
     //...record that we have a new movie without a RT score yet
     await to(updateMovieScoreMap(newMovie.id, -1));
@@ -86,8 +109,7 @@ exports.editMovie = async (req, res, next) => {
   await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
 
   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
-    [err, response] = await to(updateUserVoteMaps(movieBeforeUpdate));
-    if (err) next(err);
+    let err, response;
 
     [err, response] = await to(
       sendMovieScoreResultsToAllGroups(
@@ -95,6 +117,13 @@ exports.editMovie = async (req, res, next) => {
         Number(req.body.rtScore)
       )
     );
+    if (err) next(err);
+  }
+
+  // add movie to user vote map with -1 if no vote
+  if (!movieBeforeUpdate.isClosed && Number(req.body.isClosed) > 0) {
+    let err, response;
+    [err, response] = await to(Users.updateUserVoteMaps(movieBeforeUpdate));
     if (err) next(err);
   }
 

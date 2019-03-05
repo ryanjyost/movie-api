@@ -21,13 +21,14 @@
     "express": "^4.16.4",
     "fuse.js": "^3.3.0",
     "hbs": "~4.0.1",
+    "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "mongoose": "^5.4.1",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "^1.9.1",
     "query-string": "^6.2.0",
     "serve-favicon": "^2.5.0",
-    "winston": "^3.2.1",
-    "string-similarity": "^3.0.0"
+    "string-similarity": "^3.0.0",
+    "winston": "^3.2.1"
   }
 }

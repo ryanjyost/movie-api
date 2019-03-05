@@ -10,14 +10,21 @@
 const User = require("../model");
 const { to } = require("../../helpers");
 
-module.exports = async newMovie => {
-  // this updates any user that hasn't predicted with a placeholder of -1
-  let err, result;
-  [err, result] = await to(
-    User.update(
-      { [`votes.${newMovie._id}`]: { $exists: false } },
-      { $set: { [`votes.${newMovie._id}`]: -1 } },
-      { multi: true }
-    )
-  );
+module.exports = async movie => {
+  try {
+    // this updates any user that hasn't predicted with a placeholder of -1
+    let err, result;
+    [err, result] = await to(
+      User.update(
+        { [`votes.${movie._id}`]: { $exists: false } },
+        { $set: { [`votes.${movie._id}`]: -1 } },
+        { multi: true }
+      )
+    );
+
+    return result;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 };

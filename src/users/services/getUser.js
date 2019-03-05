@@ -5,15 +5,14 @@ const { to } = require("../../helpers");
 * Get a single user's data
 */
 
-const getUser = async userId => {
-  let existingUser;
-  [err, existingUser] = await to(
-    User.findOne({
-      _id: userId
-    })
+const getUser = async (query = {}, select = null, populate = null) => {
+  let err, user;
+  [err, user] = await to(
+    User.findOne(query)
+      .populate(populate)
+      .select(select)
   );
-
-  return existingUser;
+  return user;
 };
 
 module.exports = getUser;

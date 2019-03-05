@@ -1,5 +1,4 @@
 const GroupMe = require("../platforms/groupme");
-const Users = require("../users");
 const User = require("../users/model");
 const Groups = require("../groups");
 const Group = require("../groups/model");
@@ -26,18 +25,22 @@ const handleUserPrediction = async (req, res, next) => {
     const rawScore = split[1].trim().replace("%", "");
     const scoreNum = Number(rawScore);
 
+    let err, group;
+    [err, group] = await to(Groups.getGroup({ groupmeId: req.body.group_id }));
+
     // handle invalid prediction
     if (isNaN(scoreNum)) {
       return next("error");
     } else if (!(scoreNum >= 0 && scoreNum <= 100)) {
       await GroupMe.sendBotMessage(
-        `Your prediction has to be a percentage between 0% and 100%️`
+        `Your prediction has to be a percentage between 0% and 100%️`,
+        group.bot.bot_id
       );
       return next("error");
     }
 
     // look for exact match
-    let err, movie;
+    let movie;
     [err, movie] = await to(Movies.getMovie({ title_lower: cleanTitle }));
     if (err) next(err);
 
@@ -68,7 +71,8 @@ const handleUserPrediction = async (req, res, next) => {
           await GroupMe.sendBotMessage(
             `I assumed you meant "${
               closestMatch.title
-            }". If that's wrong, try again and learn how to type 😏️`
+            }". If that's wrong, try again and learn how to type 😏️`,
+            group.bot.bot_id
           );
           foundMovie = closestMatch;
         }
@@ -89,7 +93,8 @@ const handleUserPrediction = async (req, res, next) => {
       movie.rtScore > -1
     ) {
       await GroupMe.sendBotMessage(
-        `"${movie.title}" is passed the prediction deadline ☹️`
+        `"${movie.title}" is passed the prediction deadline ☹️`,
+        group.bot.bot_id
       );
       return false;
     }
@@ -129,22 +134,24 @@ const handleUserPrediction = async (req, res, next) => {
           name: req.body.name,
           nickname: req.body.name,
           votes: { [movie._id]: rawScore },
-          groups: [group._id || null]
+          groups: group ? [group._id] : []
         })
       );
 
       if (newUser) {
-        await to(Groups.addUserToGroup(newUser._id, group._id));
+        await to(Groups.addUserToGroup(newUser._id, { _id: group._id }));
 
         await GroupMe.sendBotMessage(
           `Solid first prediction ${
             req.body.name
-          } 👌 Track how accurate you are at https://moviemedium.io.`
+          } 👌 You're officially in the game! Learn more at https://moviemedium.io.`,
+          group.bot.bot_id
         );
       }
     } else {
       await GroupMe.sendBotMessage(
-        `Crap 💩 Your prediction didn't get saved for some reason. Use moviemedium.io for now and send Movie Medium a direct message if the problem persists.`
+        `Crap 💩 Your prediction didn't get saved for some reason. Use moviemedium.io for now and send Movie Medium a direct message if the problem persists.`,
+        group.bot.bot_id
       );
       return false;
     }

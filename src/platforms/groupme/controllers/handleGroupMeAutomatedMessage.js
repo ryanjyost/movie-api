@@ -9,54 +9,34 @@ const { to } = require("../../../helpers");
 
 const handleGroupMeAutomatedMessage = async (req, res, next) => {
   try {
-    if (req.body.text.includes("added") || req.body.text.includes("rejoined")) {
-      const GroupMeApi = createGroupMeApi(process.env.GROUPME_ACCESS_TOKEN);
+    if (req.body.text.includes("added")) {
+      const isMovieMediumInitiated = req.body.text
+        .split("added")[0]
+        .includes("Movie Medium");
 
-      // get info on the groupme group that received the message
-      let err, groupMeGroup;
-      [err, groupMeGroup] = await to(GroupMeApi.getGroup(req.body.group_id));
-      if (err) next(err);
+      if (!isMovieMediumInitiated) {
+        const name = req.body.text.split("added ")[1].split(" to")[0];
 
-      // if nothing went wrong fetching the group info
-      if (groupMeGroup) {
-        let group;
-        [err, group] = await to(
-          Groups.getGroup({ groupmeId: groupMeGroup.group_id })
-        );
+        const GroupMeApi = createGroupMeApi(process.env.GROUPME_ACCESS_TOKEN);
+
+        // get info on the groupme group that received the message
+        let err, groupMeGroup;
+        [err, groupMeGroup] = await to(GroupMeApi.getGroup(req.body.group_id));
         if (err) next(err);
 
-        const members = groupMeGroup.members;
-        let updatedMembers = [];
-        let hasNewMember = false;
-
-        // check if groupme members are MM users
-        for (let member of members) {
-          console.log("MEMBER", member);
-          let err, user;
-          [err, user] = await to(Users.findOrCreateUser(member, group._id));
+        // if nothing went wrong fetching the group info
+        if (groupMeGroup) {
+          let group;
+          [err, group] = await to(
+            Groups.getGroup({ groupmeId: groupMeGroup.group_id })
+          );
           if (err) next(err);
 
-          updatedMembers.push(user._id);
-
-          // if user id isn't in group members, add it
-          if (user.isNew) {
-            hasNewMember = true;
-            // await to(GroupController._addUserToGroup(user._id, group._id));
-            await GroupMeApi.sendBotMessage(`Welcome ${user.name} 👋`);
-          }
-        }
-
-        // send some helper text if there are any new members
-        if (hasNewMember) {
           await GroupMeApi.sendBotMessage(
-            `Learn how to play and manage your predictions at ${
-              process.env.CLIENT_URL
-            }`
+            `Hey ${name} 👋 Predict a movie in this chat or go to moviemedium.io to officially get in on the action! (By doing so, you agree to our terms of service and privacy policy ☺️).`,
+            group.bot.bot_id
           );
         }
-
-        group.members = updatedMembers;
-        await group.save();
       }
     } else {
       res.json({ message: "No op" });
@@ -67,3 +47,62 @@ const handleGroupMeAutomatedMessage = async (req, res, next) => {
 };
 
 module.exports = handleGroupMeAutomatedMessage;
+
+// try {
+// 	if (req.body.text.includes("added") || req.body.text.includes("rejoined")) {
+// 		const GroupMeApi = createGroupMeApi(process.env.GROUPME_ACCESS_TOKEN);
+//
+// 		// get info on the groupme group that received the message
+// 		let err, groupMeGroup;
+// 		[err, groupMeGroup] = await to(GroupMeApi.getGroup(req.body.group_id));
+// 		if (err) next(err);
+//
+// 		// if nothing went wrong fetching the group info
+// 		if (groupMeGroup) {
+// 			let group;
+// 			[err, group] = await to(
+// 				Groups.getGroup({ groupmeId: groupMeGroup.group_id })
+// 			);
+// 			if (err) next(err);
+//
+// 			const members = groupMeGroup.members;
+// 			let updatedMembers = [];
+// 			let hasNewMember = false;
+//
+// 			// check if groupme members are MM users
+// 			for (let member of members) {
+// 				let err, user;
+// 				[err, user] = await to(Users.findOrCreateUser(member, group._id));
+// 				if (err) next(err);
+//
+// 				if (user) {
+// 					updatedMembers.push(user._id);
+//
+// 					// if user id isn't in group members, add it
+// 					if (user.isNew) {
+// 						hasNewMember = true;
+// 						// await to(GroupController._addUserToGroup(user._id, group._id));
+// 						await GroupMeApi.sendBotMessage(
+// 							`Welcome ${user.name} 👋`,
+// 							group.bot.bot_id
+// 						);
+// 					}
+// 				}
+// 			}
+//
+// 			// send some helper text if there are any new members
+// 			if (hasNewMember) {
+// 				await GroupMeApi.sendBotMessage(
+// 					`Learn how to play and manage your predictions at ${
+// 						process.env.CLIENT_URL
+// 						}`,
+// 					group.bot.bot_id
+// 				);
+// 			}
+//
+// 			group.members = updatedMembers;
+// 			await group.save();
+// 		}
+// 	} else {
+// 		res.json({ message: "No op" });
+// 	}

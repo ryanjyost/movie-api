@@ -1,49 +1,40 @@
 const GroupMe = require("../platforms/groupme/index");
-const Users = require("../users");
 const Groups = require("../groups");
 const { to } = require("../helpers");
+const calculateRankings = require("../groups/services/calculateRankings");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {
-  let mainMessage = `🍿 "${
-    movie.title
-  }" has a Rotten Tomatoes Score of ${score}% `;
-  let scoreMessage = ``;
+  let err, groups;
+  [err, groups] = await to(Groups.getGroups({}, "members"));
+  if (err) throw new Error(err);
 
-  let votes = [];
-  for (let user in movie.votes) {
-    let err, userInfo;
-    [err, userInfo] = await to(Users.getUser({ _id: user }));
-    if (userInfo && userInfo.name !== "Movie Medium") {
-      votes.push({
-        name: userInfo.nickname || userInfo.name,
-        vote: userInfo.votes[movie._id],
-        diff: userInfo.votes[movie._id] - score
-      });
+  for (let group of groups) {
+    let mainMessage = `🍿 "${
+      movie.title
+    }" has a Rotten Tomatoes Score of ${score}% `;
+    let scoreMessage = ``;
+
+    const rankings = Groups.prepSortGroupPredictions(group, {
+      ...movie.toObject(),
+      ...{ rtScore: score }
+    });
+
+    for (let i = 0; i < rankings.length; i++) {
+      let vote = rankings[i];
+      console.log("VOTE", vote);
+      scoreMessage =
+        scoreMessage +
+        `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
+          vote.diff
+        )}% (${vote.vote < 0 ? "No prediction" : vote.vote}${
+          vote.vote < 0 ? "" : "%"
+        })` +
+        "\n";
     }
+
+    await GroupMe.sendBotMessage(mainMessage, group.bot.bot_id);
+    await GroupMe.sendBotMessage(scoreMessage, group.bot.bot_id);
   }
-
-  let sorted = votes.sort((a, b) => {
-    if (Math.abs(a.diff) > Math.abs(b.diff)) {
-      return 1;
-    } else if (Math.abs(b.diff) > Math.abs(a.diff)) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-
-  for (let i = 0; i < sorted.length; i++) {
-    let vote = sorted[i];
-    scoreMessage =
-      scoreMessage +
-      `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
-        vote.diff
-      )}% (${vote.vote}% vs. ${score}%)` +
-      "\n";
-  }
-
-  await GroupMe.sendBotMessage(mainMessage);
-  await GroupMe.sendBotMessage(scoreMessage);
 };
 
 module.exports = sendMovieScoreResultsToAllGroups;

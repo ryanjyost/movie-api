@@ -5,7 +5,11 @@ const { to } = require("../../helpers");
 * Find or create a MM user based on GroupMe info
 */
 
-const findOrCreateUser = async (groupmeMemberData, groupId) => {
+const findOrCreateUser = async (
+  groupmeMemberData,
+  groupId,
+  returnMongoObject = false
+) => {
   let isNew = false;
 
   let err, user;
@@ -22,11 +26,14 @@ const findOrCreateUser = async (groupmeMemberData, groupId) => {
         name: groupmeMemberData.name,
         nickname: groupmeMemberData.nickname || groupmeMemberData.name,
         votes: { placeholder: 1 },
-        groups: [groupId]
+        groups: groupId ? [groupId] : []
       })
     );
   }
 
+  if (returnMongoObject) {
+    return user;
+  }
   return { ...user.toObject(), ...{ isNew } };
 };
 

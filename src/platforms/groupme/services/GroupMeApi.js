@@ -16,7 +16,11 @@ const createApi = token => {
   const createGroupMeGroup = () =>
     api.post("/groups", {
       name:
-        process.env.ENV === "development" ? "MM Development" : "Movie Medium",
+        process.env.ENV === "development"
+          ? "MM Development"
+          : process.env.ENV === "staging"
+            ? "MM Staging"
+            : "Movie Medium",
       share: true,
       image_url:
         "https://i.groupme.com/1200x1200.png.aae8cb764cd447f2b60bd670e8e6ac67"
@@ -25,7 +29,7 @@ const createApi = token => {
   const sendBotMessage = (text, bot_id) =>
     api.post("/bots/post", {
       text,
-      bot_id: bot_id || process.env.GROUPME_BOT_ID
+      bot_id: bot_id
     });
 
   const getCurrentUser = () => api.get("/users/me");
@@ -51,7 +55,12 @@ const createApi = token => {
   const createBot = groupMeGroupId =>
     api.post("bots", {
       bot: {
-        name: "Movie Bot",
+        name:
+          process.env.ENV === "development"
+            ? "Dev Bot"
+            : process.env.ENV === "staging"
+              ? "Staging Bot"
+              : "Movie Bot",
         group_id: groupMeGroupId,
         avatar_url:
           "https://i.groupme.com/1500x1000.jpeg.b193ff43adf048bba7292952fb85d6d7",

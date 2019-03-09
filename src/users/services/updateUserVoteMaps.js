@@ -24,7 +24,6 @@ module.exports = async movie => {
 
     return result;
   } catch (e) {
-    console.log(e);
     return e;
   }
 };

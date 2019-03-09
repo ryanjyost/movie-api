@@ -5,7 +5,6 @@ const Group = require("../model.js");
 * Fetch a single MM group
 */
 const getGroup = async (query = {}, populate = null) => {
-  console.log(query, populate);
   try {
     let err, group;
     [err, group] = await to(Group.findOne(query).populate(populate));

@@ -5,7 +5,6 @@ const Groups = require("../../groups");
 const moment = require("moment");
 
 const handleDayBeforeCutoffNotifications = async () => {
-  console.log("DAY BEFORE CUTOFF");
   let err, movies;
 
   [err, movies] = await to(

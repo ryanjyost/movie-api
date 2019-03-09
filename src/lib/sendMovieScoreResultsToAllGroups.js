@@ -21,7 +21,6 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
 
     for (let i = 0; i < rankings.length; i++) {
       let vote = rankings[i];
-      console.log("VOTE", vote);
       scoreMessage =
         scoreMessage +
         `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(

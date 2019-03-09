@@ -10,18 +10,15 @@ const _ = require("lodash");
 */
 
 module.exports = async () => {
-  console.log("SYNC!!!!");
   try {
     let err, groups;
     [err, groups] = await to(Groups.getGroups({}, "members"));
 
     for (let group of groups) {
       let updatedGroupMemberIds = [];
-      // console.log("GROUP", group);
 
       let err, groupMeData;
       [err, groupMeData] = await to(GroupMe.getGroup(group.groupmeId));
-      // console.log("DATA", groupMeData);
 
       for (let member of groupMeData.members) {
         let user;
@@ -60,12 +57,9 @@ module.exports = async () => {
           let err, newUser;
           [err, newUser] = await to(Users.findOrCreateUser(member, group._id));
 
-          // console.log("CREATED", newUser);
           updatedGroupMemberIds.push(newUser._id);
         }
       }
-
-      // console.log("UPDATED MEMBERS", updatedGroupMemberIds);
 
       group.members = updatedGroupMemberIds;
       group.save();

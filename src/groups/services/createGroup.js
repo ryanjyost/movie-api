@@ -25,7 +25,6 @@ const create = async (groupmeGroupData, extraData) => {
     for (let member of members) {
       let err, user;
       [err, user] = await to(findOrCreateUser(member, null, true));
-      console.log("MEMBER", member, user);
       // add user ids to new group
       if (user) {
         membersForGroup.push(user._id);

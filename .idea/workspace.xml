@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="everything">
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/groups/services/addUserToGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/addUserToGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/groups/services/createGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/createGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/groups/services/getGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/getGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cron/syncUsersAndGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/syncUsersAndGroups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/platforms/groupme/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/controllers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/services/getUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/services/getUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/users/services/updateUserVoteMaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/users/services/updateUserVoteMaps.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,16 +26,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GroupMeApi.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GroupMeApi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+            <state relative-caret-position="306">
+              <caret line="56" column="12" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="12" />
               <folding>
                 <element signature="e#136#363#0" />
                 <element signature="e#214#359#0" />
                 <element signature="e#1692#1855#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/users/controllers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getUser.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/users/services/getUser.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1882">
+              <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -66,12 +111,12 @@
       <find>sendBotMes</find>
       <find>sendBotMe</find>
       <find>sendBotMess</find>
-      <find>console.log</find>
       <find>handle</find>
       <find>addUserToGroup</find>
       <find>getGroup</find>
       <find>path:</find>
       <find>populate</find>
+      <find>console.log</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
@@ -133,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js" />
         <option value="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js" />
-        <option value="$PROJECT_DIR$/src/movies/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/movies/services/getMovies.js" />
         <option value="$PROJECT_DIR$/config/winston.js" />
         <option value="$PROJECT_DIR$/src/groups/services/createGroup.js" />
@@ -141,14 +185,15 @@
         <option value="$PROJECT_DIR$/src/platforms/groupme/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/groups/services/addUserToGroup.js" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/src/users/services/getUser.js" />
-        <option value="$PROJECT_DIR$/src/users/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/groups/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/lib/controllers/getGroupPredictionData.js" />
         <option value="$PROJECT_DIR$/src/groups/services/getGroup.js" />
         <option value="$PROJECT_DIR$/src/lib/handleUserPrediction.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/controllers/handleGroupMeAutomatedMessage.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" />
+        <option value="$PROJECT_DIR$/src/movies/controllers/index.js" />
+        <option value="$PROJECT_DIR$/src/users/controllers/index.js" />
+        <option value="$PROJECT_DIR$/src/users/services/getUser.js" />
       </list>
     </option>
   </component>
@@ -168,7 +213,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
@@ -371,7 +416,7 @@
       <workItem from="1550278065254" duration="11255000" />
       <workItem from="1550381968309" duration="30206000" />
       <workItem from="1550882036666" duration="26210000" />
-      <workItem from="1551570699899" duration="8717000" />
+      <workItem from="1551570699899" duration="12117000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -513,11 +558,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551750670747</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="diff names for environments">
+      <created>1551926774789</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1551926774789</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307347000" />
+    <option name="totallyTimeSpent" value="310747000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -529,7 +581,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
@@ -539,7 +591,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.47289157" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24878837" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24878837" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32838982" />
@@ -597,7 +649,8 @@
     <MESSAGE value="refactoring, improving" />
     <MESSAGE value="legit cron times" />
     <MESSAGE value="everything" />
-    <option name="LAST_COMMIT_MESSAGE" value="everything" />
+    <MESSAGE value="diff names for environments" />
+    <option name="LAST_COMMIT_MESSAGE" value="diff names for environments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -760,30 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-          <folding>
-            <element signature="e#573#591#0" />
-            <element signature="e#959#1205#0" />
-            <element signature="e#995#1200#0" />
-            <element signature="e#1009#1194#0" />
-            <element signature="e#1052#1186#0" />
-            <element signature="e#1069#1176#0" />
-            <element signature="e#1273#1343#0" />
-            <element signature="e#1304#1338#0" />
-            <element signature="e#1493#1520#0" />
-            <element signature="e#2294#2312#0" />
-            <element signature="e#3292#3312#0" />
-            <element signature="e#3361#3590#0" />
-            <element signature="e#3593#3623#0" />
-            <element signature="e#3681#4050#0" />
-            <element signature="e#3850#3951#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/movies/services/getMovies.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -861,13 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/users/services/getUser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/users/services/findOrCreateUser.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -903,13 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/users/controllers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/handleUserPrediction.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -933,13 +948,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+        <state relative-caret-position="306">
+          <caret line="56" column="12" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="12" />
           <folding>
             <element signature="e#136#363#0" />
             <element signature="e#214#359#0" />
             <element signature="e#1692#1855#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1882">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/users/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="84" column="14" selection-start-line="84" selection-start-column="14" selection-end-line="84" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/users/services/getUser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
         </state>
       </provider>
     </entry>

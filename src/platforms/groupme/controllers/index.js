@@ -11,7 +11,6 @@ const handleUserPrediction = require("../../../lib/handleUserPrediction");
 
 /* Receive a message from GroupMe */
 exports.receiveMessage = async (req, res, next) => {
-  console.log("RECEIVED", req.body);
   // if it's a GroupMe automated message
   if (req.body.sender_type === "bot") {
     return null;
@@ -59,7 +58,6 @@ exports.getCurrentUsersGroups = async (req, res, next) => {
 
   let err, groups;
   [err, groups] = await to(GroupMeApi.getCurrentUsersGroups(paramsString));
-  console.log("ERROR", err);
   if (err) next(err);
 
   res.json({ groups });

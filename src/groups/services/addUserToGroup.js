@@ -7,7 +7,6 @@ const { to } = require("../../helpers");
 
 const addUserToGroup = async (userId, query) => {
   try {
-    console.log("ADD TO GROUP", userId, query);
     await to(Group.findOneAndUpdate(query, { $push: { members: userId } }));
   } catch (e) {
     console.log(e);

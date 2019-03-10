@@ -4,7 +4,7 @@ const Group = require("../model.js");
 /*
 * Fetch groups
 */
-const getGroups = async (query = {}, populate = null) => {
+const getGroups = async (query = {}, populate = "") => {
   let err, groups;
   [err, groups] = await to(Group.find(query).populate(populate));
 

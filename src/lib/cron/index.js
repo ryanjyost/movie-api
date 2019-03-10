@@ -36,6 +36,6 @@ const runCronJobs = () => {
 };
 
 // syncUsersAndGroups();
-handleMovieCutoffs();
+//handleMovieCutoffs();
 
 module.exports = runCronJobs;

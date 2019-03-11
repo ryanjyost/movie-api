@@ -36,6 +36,7 @@ exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
 
 // what release date does movie need to have to be cutoff to further predictions
 const moviePredictionCutoffDate = moment()
+  .tz("America/New_York")
   .endOf("day")
   .add(7, "days")
   .unix();

@@ -6,19 +6,19 @@ const syncUsersAndGroups = require("./syncUsersAndGroups");
 const handleDayBeforeCutoffNotifications = require("./handleDayBeforeCutoffNotifications");
 
 const job1 = new CronJob(
-  "0 09 20 * * *",
+  "0 01 0 * * *",
   handleMovieCutoffs,
   null,
   true,
-  "America/Chicago"
+  "America/New_York"
 );
 
 const job2 = new CronJob(
-  "0 0 9 * * *",
+  "0 0 08 * * *",
   handleDayBeforeCutoffNotifications,
   null,
   true,
-  "America/Chicago"
+  "America/New_York"
 );
 
 const job3 = new CronJob(
@@ -26,16 +26,15 @@ const job3 = new CronJob(
   syncUsersAndGroups,
   null,
   true,
-  "America/Chicago"
+  "America/New_York"
 );
 
 const runCronJobs = () => {
   job1.start();
   job2.start();
-  job3.start();
 };
 
-// syncUsersAndGroups();
+syncUsersAndGroups();
 //handleMovieCutoffs();
 
 module.exports = runCronJobs;

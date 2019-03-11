@@ -55,8 +55,18 @@ exports.login = async (req, res, next) => {
     userMongoObject.save();
   }
 
+  let existingUser;
+  [err, existingUser] = await to(
+    getUser(
+      { _id: user ? user._id : userMongoObject._id },
+      {},
+      { path: "groups", populate: { path: "members" } }
+    )
+  );
+  if (err) next(err);
+
   res.json({
-    user: user.isNew ? userMongoObject.toObject() : user,
+    user: existingUser,
     token: user ? (user.isNew ? token : null) : null
   });
 };

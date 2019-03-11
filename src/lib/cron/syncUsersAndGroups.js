@@ -10,6 +10,7 @@ const _ = require("lodash");
 */
 
 module.exports = async () => {
+  console.log("SYNC USERS");
   try {
     let err, groups;
     [err, groups] = await to(Groups.getGroups({}, "members"));

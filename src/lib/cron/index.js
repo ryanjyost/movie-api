@@ -10,7 +10,7 @@ const job1 = new CronJob(
   handleMovieCutoffs,
   null,
   true,
-  "America/New_York"
+  "America/Chicago"
 );
 
 const job2 = new CronJob(
@@ -18,7 +18,7 @@ const job2 = new CronJob(
   handleDayBeforeCutoffNotifications,
   null,
   true,
-  "America/New_York"
+  "America/Chicago"
 );
 
 const job3 = new CronJob(
@@ -26,7 +26,7 @@ const job3 = new CronJob(
   syncUsersAndGroups,
   null,
   true,
-  "America/New_York"
+  "America/Chicago"
 );
 
 const runCronJobs = () => {

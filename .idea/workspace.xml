@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="cleaning up">
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,10 +27,19 @@
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="44" column="61" lean-forward="true" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
+            <state relative-caret-position="339">
+              <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -47,8 +55,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getUser</find>
-      <find>updateUserVoteMaps</find>
       <find>getGroupPurgatoryData</find>
       <find>calculateRankings</find>
       <find>response</find>
@@ -77,6 +83,8 @@
       <find>bot</find>
       <find>populate</find>
       <find>America/</find>
+      <find>America/N</find>
+      <find>America/New_York</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
@@ -90,6 +98,7 @@
       <replace>getGroupPurgatoryData</replace>
       <replace>getGroupPredictionData</replace>
       <replace>groupmeGroupData</replace>
+      <replace>America/Chicago</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -152,8 +161,8 @@
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/src/groups/services/getGroup.js" />
         <option value="$PROJECT_DIR$/src/users/controllers/index.js" />
-        <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/src/helpers/index.js" />
+        <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
       </list>
     </option>
   </component>
@@ -409,7 +418,7 @@
       <workItem from="1550278065254" duration="11255000" />
       <workItem from="1550381968309" duration="30206000" />
       <workItem from="1550882036666" duration="26210000" />
-      <workItem from="1551570699899" duration="19645000" />
+      <workItem from="1551570699899" duration="20419000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -586,11 +595,25 @@
       <option name="project" value="LOCAL" />
       <updated>1552271136818</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="cleaning up">
+      <created>1552272927901</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1552272927901</updated>
+    </task>
+    <task id="LOCAL-00027" summary="cleaning up">
+      <created>1552273726842</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1552273726842</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="318275000" />
+    <option name="totallyTimeSpent" value="319049000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -612,7 +635,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.47289157" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24878837" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24878837" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32838982" />
@@ -960,13 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/cron/syncUsersAndGroups.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -988,6 +1004,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="743">
@@ -995,10 +1018,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+    <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="44" column="61" lean-forward="true" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
+        <state relative-caret-position="239">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
         </state>
       </provider>
     </entry>

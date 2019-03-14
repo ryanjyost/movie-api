@@ -20,6 +20,10 @@ const handleDayBeforeCutoffNotifications = async () => {
     })
   );
 
+  if (!movies.length) {
+    return null;
+  }
+
   let text = `️👇 Predictions for these movies close at midnight tonight ⏲`;
 
   for (let movie of movies) {

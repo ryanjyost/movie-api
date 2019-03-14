@@ -88,7 +88,13 @@ exports.getUser = async (req, res, next) => {
 
 exports.updateUserPrediction = async (req, res, next) => {
   let err, user;
-  [err, user] = await to(getUser({ _id: req.body.userId }));
+  [err, user] = await to(
+    getUser(
+      { _id: req.body.userId },
+      {},
+      { path: "groups", populate: { path: "members" } }
+    )
+  );
   if (err) next(err);
 
   let updatedUser;

@@ -1,0 +1,1 @@
+exports.getGroupPredictionData = require("./getGroupPredictionData");

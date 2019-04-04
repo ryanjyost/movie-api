@@ -47,7 +47,7 @@ const handleDayBeforeCutoffNotifications = async () => {
   [err, groups] = await to(Groups.getGroups());
 
   for (let group of groups) {
-    // await GroupMe.sendBotMessage(text, group.bot.bot_id);
+    await GroupMe.sendBotMessage(text, group.bot.bot_id);
   }
 };
 

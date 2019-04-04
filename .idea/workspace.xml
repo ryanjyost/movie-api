@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="cleaning up">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/groups/services/createGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/createGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/movies/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/controllers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/movies/services/addMovie.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/services/addMovie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="handleDayBeforeCutoffNotifications.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="handleDayBeforeCutoffNotifications.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+            <state relative-caret-position="330">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -60,11 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
+            <state relative-caret-position="199">
+              <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prepSortGroupPredictions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -186,8 +188,8 @@
         <option value="$PROJECT_DIR$/src/movies/services/addMovie.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" />
         <option value="$PROJECT_DIR$/src/helpers/index.js" />
-        <option value="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" />
         <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
+        <option value="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" />
       </list>
     </option>
   </component>
@@ -207,7 +209,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
@@ -235,6 +237,19 @@
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="groups" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
@@ -411,7 +426,7 @@
       <workItem from="1552528950928" duration="6197000" />
       <workItem from="1553462051084" duration="2000" />
       <workItem from="1554158783252" duration="854000" />
-      <workItem from="1554416729533" duration="246000" />
+      <workItem from="1554416729533" duration="582000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -602,11 +617,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552273726842</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="cleaning up">
+      <created>1554417021153</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1554417021153</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="326348000" />
+    <option name="totallyTimeSpent" value="326684000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -618,10 +640,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
@@ -912,13 +935,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -982,13 +998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/cron/handleMovieCutoffs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1380">
@@ -1005,8 +1014,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
+        <state relative-caret-position="199">
+          <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>

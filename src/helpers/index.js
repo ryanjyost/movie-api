@@ -38,7 +38,7 @@ exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
 const moviePredictionCutoffDate = moment()
   .tz("America/Chicago")
   .endOf("day")
-  .add(7, "days")
+  .add(14, "days")
   .unix();
 exports.moviePredictionCutoffDate = moviePredictionCutoffDate;
 

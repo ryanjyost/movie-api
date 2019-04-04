@@ -1,6 +1,6 @@
 const Movie = require("../model");
 const { to, sanitizeTitle } = require("../../helpers");
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 /*
 * Add a new movie to the DB
@@ -10,7 +10,7 @@ const addMovie = async newMovieData => {
 
   newMovieData.title_lower = sanitizeTitle(newMovieData.title);
   newMovieData.releaseDate = moment
-    .unix(newMovieData.releaseDate)
+    .unix(newMovieData.releaseDate).tz('America/Chicago')
     .startOf("day")
     .unix();
 

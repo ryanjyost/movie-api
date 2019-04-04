@@ -35,7 +35,7 @@ const create = async (groupmeGroupData, extraData) => {
     newGroup.members = membersForGroup;
 
     // actually create the MM group
-    let createdGroup;
+    let err, createdGroup;
     [err, createdGroup] = await to(Group.create(newGroup));
 
     for (let user of arrayOfUsers) {

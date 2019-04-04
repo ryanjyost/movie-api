@@ -7,6 +7,15 @@ const moment = require("moment");
 const handleDayBeforeCutoffNotifications = async () => {
   let err, movies;
 
+  // console.log('CUTOFF', moviePredictionCutoffDate, moment
+  // 	.unix(moviePredictionCutoffDate)
+  // 	.add(1, "day")
+  // 	.unix());
+  //
+  // console.log('CUTOFF', moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"), moment
+  // 	.unix(moviePredictionCutoffDate)
+  // 	.add(1, "day").format("MM/DD/YYYY hh:mm A"));
+
   [err, movies] = await to(
     Movies.getMovies({
       isClosed: 0,
@@ -19,6 +28,10 @@ const handleDayBeforeCutoffNotifications = async () => {
       }
     })
   );
+
+  // for(let movie of movies){
+  //   console.log(movie.title, moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A"))
+  // }
 
   if (!movies.length) {
     return null;

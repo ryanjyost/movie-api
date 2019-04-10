@@ -54,6 +54,8 @@ router.post("/groups/create", GroupsController.createGroup);
 /* Get group info */
 router.get("/groups/:id/rankings", GroupsController.getGroupRankings);
 
+router.post("/groups/message", GroupsController.sendMessageToAllGroups);
+
 /* ======================
  GroupMe
 ========================*/

@@ -2,18 +2,17 @@ const prepSortGroupPredictions = (groupWithMemberData, movie = {}) => {
   // console.log("PREP", groupWithMemberData, movie);
   let votes = [];
   for (let user of groupWithMemberData.members) {
-    if(typeof user.votes[movie._id] !== 'undefined'){
-			votes.push({
-				name: user.nickname || user.name,
-				vote: user.name === "Movie Medium" ? 50 : user.votes[movie._id] || null,
-				diff:
-					user.votes[movie._id] < 0 && user.name !== "Movie Medium"
-						? 100
-						: (user.name === "Movie Medium" ? 50 : user.votes[movie._id]) -
-						movie.rtScore
-			});
+    if (typeof user.votes[movie._id] !== "undefined") {
+      votes.push({
+        name: user.nickname || user.name,
+        vote: user.name === "Movie Medium" ? 50 : user.votes[movie._id] || null,
+        diff:
+          user.votes[movie._id] < 0 && user.name !== "Movie Medium"
+            ? 100
+            : (user.name === "Movie Medium" ? 50 : user.votes[movie._id]) -
+              movie.rtScore
+      });
     }
-
   }
 
   return votes.sort((a, b) => {

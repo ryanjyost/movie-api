@@ -5,7 +5,7 @@ const Users = require("../../users");
 const Movies = require("../../movies");
 
 // servces
-const getGroup = require("../services/getGroup.js");
+const getGroups = require("../services/getGroups");
 const createGroup = require("../services/createGroup.js");
 const calculateRankings = require("../services/calculateRankings");
 
@@ -139,4 +139,16 @@ exports.createGroup = async (req, res, next) => {
   if (err) next(err);
 
   res.json({ createdGroup, user });
+};
+
+exports.sendMessageToAllGroups = async (req, res, next) => {
+  let err, groups;
+  [err, groups] = await to(getGroups());
+  if (err) next(err);
+
+  for (let group of groups) {
+    await GroupMe.sendBotMessage(req.body.message, group.bot.bot_id);
+  }
+
+  res.json({ message: req.body.message, groups: groups });
 };

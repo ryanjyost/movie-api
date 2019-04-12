@@ -59,7 +59,6 @@ exports.getMovieScoreMap = async () => {
 };
 
 /* Sort array */
-
 exports.sortArrayByProperty = (array, property, asc = false) => {
   return array.sort((a, b) => {
     a = _.get(a, property);
@@ -73,4 +72,12 @@ exports.sortArrayByProperty = (array, property, asc = false) => {
       return 0;
     }
   });
+};
+
+/* Calc movie penalty */
+exports.calcNoPredictionPenalty = movie => {
+  const MMScore = Math.abs(50 - movie.rtScore);
+  return Math.round(
+    Math.min(100, Math.max(MMScore * 1.1, movie.metrics.average * 1.1))
+  );
 };

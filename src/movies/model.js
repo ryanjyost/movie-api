@@ -11,6 +11,7 @@ const movieSchema = new mongoose.Schema({
   releaseDate: Number,
   isClosed: mongoose.Schema.Types.Mixed,
   votes: mongoose.Schema.Types.Mixed,
+  metrics: mongoose.Schema.Types.Mixed,
   created_at: { type: Date, default: new Date() }
 });
 

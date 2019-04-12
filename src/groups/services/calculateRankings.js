@@ -1,5 +1,6 @@
 const MovieScoreMap = require("../../../models/movieScoreMap");
-const { to } = require("../../helpers");
+const Movies = require("../../movies");
+const { to, calcNoPredictionPenalty } = require("../../helpers");
 const getGroup = require("./getGroup");
 
 /*
@@ -7,20 +8,20 @@ const getGroup = require("./getGroup");
 */
 
 const calculateRankings = async query => {
-  let err, group;
-  [err, group] = await to(getGroup(query, "members"));
-  if (err) throw new Error();
-
-  let movieScoreMap;
-  [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
-  if (err) throw new Error();
-
-  // if (!group) {
-  //   await to(create(groupmeId));
-  // }
-
   try {
-    // console.log(movieScoreMap);
+    let err, group;
+    [err, group] = await to(getGroup(query, "members"));
+    if (err) throw new Error();
+
+    let movieScoreMap;
+    [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
+    if (err) throw new Error();
+
+    // get movies currently in purgatory
+    let movies;
+    [err, movies] = await to(Movies.getMovies());
+    console.log(movies);
+
     let dataForRankings = [];
 
     for (let member of group.members) {
@@ -39,8 +40,14 @@ const calculateRankings = async query => {
           numMoviesUserPredicted++;
 
           // 100 point penalty
-          let diff =
-            userPrediction < 0 ? 100 : Math.abs(actualScore - userPrediction);
+          let diff = 0;
+          if (userPrediction < 0) {
+            let movie = movies.find(item => item._id.toString() === movieId);
+            if (!movie) continue;
+            diff = calcNoPredictionPenalty(movie);
+          } else {
+            diff = Math.abs(actualScore - userPrediction);
+          }
 
           totalDiff = totalDiff + diff;
         }
@@ -101,7 +108,7 @@ const calculateRankings = async query => {
       }
     }
 
-    const sorted = dataForRankings.sort((a, b) => {
+    return dataForRankings.sort((a, b) => {
       a = a < 0 ? { avgDiff: 101 } : a;
       b = b < 0 ? { avgDiff: 101 } : b;
       if (a.avgDiff > b.avgDiff) {
@@ -112,8 +119,6 @@ const calculateRankings = async query => {
         return 0;
       }
     });
-
-    return sorted;
   } catch (e) {
     console.log("ERROR", e);
   }

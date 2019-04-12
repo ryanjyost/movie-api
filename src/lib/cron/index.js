@@ -4,6 +4,7 @@ const CronJob = require("cron").CronJob;
 const handleMovieCutoffs = require("./handleMovieCutoffs");
 const syncUsersAndGroups = require("./syncUsersAndGroups");
 const handleDayBeforeCutoffNotifications = require("./handleDayBeforeCutoffNotifications");
+const calcMovieMetrics = require("../calcMovieMetrics");
 
 const job1 = new CronJob(
   "0 10 0 * * *",
@@ -35,6 +36,7 @@ const runCronJobs = () => {
 };
 
 syncUsersAndGroups();
+calcMovieMetrics();
 // handleDayBeforeCutoffNotifications();
 
 module.exports = runCronJobs;

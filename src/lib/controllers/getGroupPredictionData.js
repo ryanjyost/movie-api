@@ -4,7 +4,8 @@ const {
   to,
   moviePredictionCutoffDate,
   getMovieScoreMap,
-  createObjectId
+  createObjectId,
+  calcNoPredictionPenalty
 } = require("../../helpers");
 
 /*
@@ -61,12 +62,17 @@ const getGroupPredictionData = async (req, res, next) => {
               ? member.votes[movie._id]
               : null;
 
+        let diff =
+          prediction < 0
+            ? calcNoPredictionPenalty(movie)
+            : movie.rtScore - prediction;
+
         userData.push({
           id: member._id,
           name: member.name,
           prediction: member.name === "Movie Medium" ? 50 : prediction,
-          diff: prediction < 0 ? 100 : movie.rtScore - prediction,
-          absDiff: prediction < 0 ? 100 : Math.abs(movie.rtScore - prediction)
+          diff,
+          absDiff: Math.abs(diff)
         });
       }
 

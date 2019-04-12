@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="cleaning up">
-      <change afterPath="$PROJECT_DIR$/src/lib/calcMovieMetrics.js" afterDir="false" />
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="tweak">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/groups/services/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/calculateRankings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/controllers/getGroupPredictionData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/controllers/getGroupPredictionData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/movies/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/model.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,11 +17,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sendGroupRankings.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sendGroupRankings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+            <state relative-caret-position="285">
+              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="handleDayBeforeCutoffNotifications.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+              <folding>
+                <element signature="e#163#187#0" />
+                <element signature="e#189#228#0" />
+                <element signature="e#251#641#0" />
+                <element signature="e#288#612#0" />
+                <element signature="e#307#345#0" />
+                <element signature="e#403#562#0" />
+                <element signature="e#426#506#0" />
+                <element signature="e#512#554#0" />
+                <element signature="e#568#606#0" />
+                <element signature="e#661#697#0" />
+                <element signature="e#1093#1172#0" />
+                <element signature="e#1175#1208#0" />
+                <element signature="e#1282#1336#0" />
+                <element signature="e#1376#1528#0" />
+                <element signature="e#1531#1547#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="691">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
@@ -144,12 +192,12 @@
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/src/groups/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/movies/model.js" />
-        <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/src/lib/calcMovieMetrics.js" />
-        <option value="$PROJECT_DIR$/src/helpers/index.js" />
         <option value="$PROJECT_DIR$/src/lib/controllers/getGroupPredictionData.js" />
         <option value="$PROJECT_DIR$/src/groups/services/calculateRankings.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js" />
+        <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
+        <option value="$PROJECT_DIR$/src/helpers/index.js" />
       </list>
     </option>
   </component>
@@ -361,7 +409,7 @@
       <workItem from="1554158783252" duration="854000" />
       <workItem from="1554416729533" duration="582000" />
       <workItem from="1554689222533" duration="1399000" />
-      <workItem from="1554937412053" duration="7208000" />
+      <workItem from="1554937412053" duration="8914000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -566,11 +614,25 @@
       <option name="project" value="LOCAL" />
       <updated>1554937500128</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix penalty">
+      <created>1555036029095</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1555036029096</updated>
+    </task>
+    <task id="LOCAL-00031" summary="tweak">
+      <created>1555038663071</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1555038663071</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="337289000" />
+    <option name="totallyTimeSpent" value="338995000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -591,7 +653,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47289157" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47218046" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25686592" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -655,7 +717,9 @@
     <MESSAGE value="diff names for environments" />
     <MESSAGE value="ranndom stuff" />
     <MESSAGE value="cleaning up" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaning up" />
+    <MESSAGE value="fix penalty" />
+    <MESSAGE value="tweak" />
+    <option name="LAST_COMMIT_MESSAGE" value="tweak" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -877,13 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="50" column="3" selection-start-line="48" selection-start-column="2" selection-end-line="50" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/cron/handleMovieCutoffs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="559">
@@ -905,13 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/updateMovieScoreMap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -923,13 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-138">
           <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -951,35 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
-          <folding>
-            <element signature="e#163#187#0" />
-            <element signature="e#189#228#0" />
-            <element signature="e#251#641#0" />
-            <element signature="e#288#612#0" />
-            <element signature="e#307#345#0" />
-            <element signature="e#403#562#0" />
-            <element signature="e#426#506#0" />
-            <element signature="e#512#554#0" />
-            <element signature="e#568#606#0" />
-            <element signature="e#661#697#0" />
-            <element signature="e#1093#1172#0" />
-            <element signature="e#1175#1208#0" />
-            <element signature="e#1282#1336#0" />
-            <element signature="e#1376#1528#0" />
-            <element signature="e#1531#1547#0" />
-            <element signature="e#1613#1841#0" />
-            <element signature="e#1645#1837#0" />
-            <element signature="e#1719#1753#0" />
-            <element signature="e#1770#1804#0" />
-            <element signature="e#1810#1833#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1015,8 +1029,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+        <state relative-caret-position="285">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#163#187#0" />
+            <element signature="e#189#228#0" />
+            <element signature="e#251#641#0" />
+            <element signature="e#288#612#0" />
+            <element signature="e#307#345#0" />
+            <element signature="e#403#562#0" />
+            <element signature="e#426#506#0" />
+            <element signature="e#512#554#0" />
+            <element signature="e#568#606#0" />
+            <element signature="e#661#697#0" />
+            <element signature="e#1093#1172#0" />
+            <element signature="e#1175#1208#0" />
+            <element signature="e#1282#1336#0" />
+            <element signature="e#1376#1528#0" />
+            <element signature="e#1531#1547#0" />
+          </folding>
         </state>
       </provider>
     </entry>

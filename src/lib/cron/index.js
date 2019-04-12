@@ -7,7 +7,7 @@ const handleDayBeforeCutoffNotifications = require("./handleDayBeforeCutoffNotif
 const calcMovieMetrics = require("../calcMovieMetrics");
 
 const job1 = new CronJob(
-  "0 10 0 * * *",
+  "0 1 0 * * *",
   handleMovieCutoffs,
   null,
   true,

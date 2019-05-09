@@ -7,31 +7,30 @@ const moment = require("moment");
 const handleDayBeforeCutoffNotifications = async () => {
   let err, movies;
 
-  // console.log('CUTOFF', moviePredictionCutoffDate, moment
-  // 	.unix(moviePredictionCutoffDate)
-  // 	.add(1, "day")
-  // 	.unix());
+  // console.log(
+  //   "CUTOFF",
+  //   moviePredictionCutoffDate,
+  //   moment
+  //     .unix(moviePredictionCutoffDate)
+  //     .add(1, "day")
+  //     .unix()
+  // );
   //
-  // console.log('CUTOFF', moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"), moment
-  // 	.unix(moviePredictionCutoffDate)
-  // 	.add(1, "day").format("MM/DD/YYYY hh:mm A"));
+  // console.log(
+  //   "CUTOFF",
+  //   moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"),
+  //   moment
+  //     .unix(moviePredictionCutoffDate)
+  //     .add(1, "day")
+  //     .format("MM/DD/YYYY hh:mm A")
+  // );
 
   [err, movies] = await to(
     Movies.getMovies({
       isClosed: 0,
-      releaseDate: {
-        $gt: moviePredictionCutoffDate,
-        $lte: moment
-          .unix(moviePredictionCutoffDate)
-          .add(1, "day")
-          .unix()
-      }
+      rtScore: -1
     })
   );
-
-  // for(let movie of movies){
-  //   console.log(movie.title, moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A"))
-  // }
 
   if (!movies.length) {
     return null;
@@ -40,7 +39,18 @@ const handleDayBeforeCutoffNotifications = async () => {
   let text = `️👇 Predictions for these movies close at midnight tonight ⏲`;
 
   for (let movie of movies) {
-    text = text + "\n" + `${movie.title}`;
+    if (
+      moment
+        .unix(movie.releaseDate)
+        .isSame(moment.unix(moviePredictionCutoffDate), "day")
+    ) {
+      // console.log(
+      //   "MOVIE CUTOFF",
+      //   movie,
+      //   moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A")
+      // );
+      text = text + "\n" + `${movie.title}`;
+    }
   }
 
   let groups;

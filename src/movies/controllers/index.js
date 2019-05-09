@@ -3,10 +3,12 @@ const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");
+const Seasons = require("../../seasons");
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
 const sendMovieScoreResultsToAllGroups = require("../../lib/sendMovieScoreResultsToAllGroups");
+const calcSingleMovieMetrics = require("../../lib/calcSingleMovieMetrics");
 
 // Movie services
 const addMovie = require("../services/addMovie");
@@ -108,6 +110,9 @@ exports.editMovie = async (req, res, next) => {
 
   await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
 
+  const movie = await Movie.findOne({ _id: req.params.id });
+
+  // movie is getting a score
   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
     let err, response;
 
@@ -118,6 +123,17 @@ exports.editMovie = async (req, res, next) => {
       )
     );
     if (err) next(err);
+
+    const metrics = await calcSingleMovieMetrics({
+      ...movie.toObject(),
+      ...{ rtScore: req.body.rtScore }
+    });
+
+    movie.metrics = metrics;
+
+    const season = await Seasons.addMovieToSeason(movieBeforeUpdate);
+    movie.season = season.id;
+    movie.save();
   }
 
   // add movie to user vote map with -1 if no vote

@@ -5,6 +5,7 @@ const router = express.Router();
 const MoviesController = require("../src/movies/controllers");
 const UsersController = require("../src/users/controllers");
 const GroupsController = require("../src/groups/controllers");
+const SeasonsController = require("../src/seasons/controllers");
 const GroupMeController = require("../src/platforms/groupme/controllers");
 const SpecialCaseController = require("../src/lib/controllers");
 
@@ -48,13 +49,30 @@ router.get("/users/:id", UsersController.getUser);
 /* Get group info */
 router.get("/groups/:id", GroupsController.getGroup);
 
-/* Get group info */
+/* Create a group */
 router.post("/groups/create", GroupsController.createGroup);
 
-/* Get group info */
+/* Get group rankings */
 router.get("/groups/:id/rankings", GroupsController.getGroupRankings);
 
+/* Get group rankings for a specific season */
+router.get("/groups/:id/rankings/:seasonId", GroupsController.getGroupRankings);
+
+/* Get season breakdowns for groups */
+router.get(
+  "/groups/:groupId/seasons/:seasonId",
+  GroupsController.getGroupSeasons
+);
+
+// send message to all groups
 router.post("/groups/message", GroupsController.sendMessageToAllGroups);
+
+/* ======================
+ Seasons
+========================*/
+
+/* Get all seasons */
+router.get("/seasons", SeasonsController.getSeasons);
 
 /* ======================
  GroupMe

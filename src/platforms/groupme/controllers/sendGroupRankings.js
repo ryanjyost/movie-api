@@ -1,4 +1,4 @@
-const calculateRankings = require("../../../groups/services/calculateRankings");
+const calculateRankings = require("../../../lib/calculateRankings");
 const createGroupMeApi = require("../services/GroupMeApi");
 const { to } = require("../../../helpers");
 const getGroup = require("../../../groups/services/getGroup");

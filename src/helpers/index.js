@@ -76,8 +76,9 @@ exports.sortArrayByProperty = (array, property, asc = false) => {
 
 /* Calc movie penalty */
 exports.calcNoPredictionPenalty = movie => {
-  const MMScore = Math.abs(50 - movie.rtScore);
-  return Math.round(
-    Math.min(100, Math.max(MMScore * 1.1, movie.metrics.high * 1.1))
-  );
+  if (movie.metrics) {
+    return Math.round(Math.min(100, movie.metrics.high * 1.1));
+  } else {
+    return 0;
+  }
 };

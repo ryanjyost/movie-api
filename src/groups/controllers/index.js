@@ -4,21 +4,47 @@ const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Movies = require("../../movies");
 
-// servces
+// services
 const getGroups = require("../services/getGroups");
 const createGroup = require("../services/createGroup.js");
-const calculateRankings = require("../services/calculateRankings");
+const calculateRankings = require("../../lib/calculateRankings");
+const getSeasonBreakdowns = require("../services/getSeasonBreakdowns");
 
 exports.getGroup = async (req, res, next) => {
-  res.json({ group: "HEY" });
+  try {
+    const group = await Group.findOne({ _id: req.params.id }).populate(
+      "members"
+    );
+    res.json({ group });
+  } catch (e) {
+    next(e);
+  }
 };
 
 exports.getGroupRankings = async (req, res, next) => {
   let err, rankings;
-  [err, rankings] = await to(calculateRankings({ _id: req.params.id }));
+  [err, rankings] = await to(
+    calculateRankings(
+      req.params.id === "all" ? null : { _id: req.params.id },
+      req.params.seasonId ? { _id: req.params.seasonId } : null
+    )
+  );
   if (err) next(err);
 
-  res.json({ rankings: rankings });
+  res.json({ rankings });
+};
+
+exports.getGroupSeasons = async (req, res, next) => {
+  let err, rankings;
+  [err, rankings] = await to(
+    getSeasonBreakdowns(
+      req.params.groupId === "all" ? null : { _id: req.params.groupId },
+      req.params.seasonId || { _id: req.params.seasonId }
+    )
+  );
+  if (err) next(err);
+
+  res.json({ rankings });
 };
 
 exports.createGroup = async (req, res, next) => {

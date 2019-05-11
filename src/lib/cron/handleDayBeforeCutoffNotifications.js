@@ -7,23 +7,23 @@ const moment = require("moment");
 const handleDayBeforeCutoffNotifications = async () => {
   let err, movies;
 
-  // console.log(
-  //   "CUTOFF",
-  //   moviePredictionCutoffDate,
-  //   moment
-  //     .unix(moviePredictionCutoffDate)
-  //     .add(1, "day")
-  //     .unix()
-  // );
-  //
-  // console.log(
-  //   "CUTOFF",
-  //   moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"),
-  //   moment
-  //     .unix(moviePredictionCutoffDate)
-  //     .add(1, "day")
-  //     .format("MM/DD/YYYY hh:mm A")
-  // );
+  console.log(
+    "CUTOFF",
+    moviePredictionCutoffDate,
+    moment
+      .unix(moviePredictionCutoffDate)
+      .add(1, "day")
+      .unix()
+  );
+
+  console.log(
+    "CUTOFF",
+    moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"),
+    moment
+      .unix(moviePredictionCutoffDate)
+      .add(1, "day")
+      .format("MM/DD/YYYY hh:mm A")
+  );
 
   [err, movies] = await to(
     Movies.getMovies({
@@ -36,7 +36,8 @@ const handleDayBeforeCutoffNotifications = async () => {
     return null;
   }
 
-  let text = `️👇 Predictions for these movies close at midnight tonight ⏲`;
+  let text = `️👇 Predictions for these movies close soon!`;
+  let atleastOneMovie = false;
 
   for (let movie of movies) {
     if (
@@ -49,9 +50,12 @@ const handleDayBeforeCutoffNotifications = async () => {
       //   movie,
       //   moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A")
       // );
+      atleastOneMovie = true;
       text = text + "\n" + `${movie.title}`;
     }
   }
+
+  if (!atleastOneMovie) return null;
 
   let groups;
   [err, groups] = await to(Groups.getGroups());

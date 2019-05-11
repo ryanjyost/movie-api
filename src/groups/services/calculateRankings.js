@@ -20,7 +20,6 @@ const calculateRankings = async query => {
     // get movies currently in purgatory
     let movies;
     [err, movies] = await to(Movies.getMovies());
-    console.log(movies);
 
     let dataForRankings = [];
 

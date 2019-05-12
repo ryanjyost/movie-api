@@ -32,15 +32,12 @@ const handleDayBeforeCutoffNotifications = async () => {
     })
   );
 
-  // for(let movie of movies){
-  //   console.log(movie.title, moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A"))
-  // }
-
   if (!movies.length) {
     return null;
   }
 
-  let text = `️👇 Predictions for these movies close at midnight tonight ⏲`;
+  let text = `️👇 Predictions for these movies close soon!`;
+  let atleastOneMovie = false;
 
   for (let movie of movies) {
     if (
@@ -48,14 +45,17 @@ const handleDayBeforeCutoffNotifications = async () => {
         .unix(movie.releaseDate)
         .isSame(moment.unix(moviePredictionCutoffDate), "day")
     ) {
-      console.log(
-        "MOVIE CUTOFF",
-        movie,
-        moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A")
-      );
+      // console.log(
+      //   "MOVIE CUTOFF",
+      //   movie,
+      //   moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A")
+      // );
+      atleastOneMovie = true;
       text = text + "\n" + `${movie.title}`;
     }
   }
+
+  if (!atleastOneMovie) return null;
 
   let groups;
   [err, groups] = await to(Groups.getGroups());

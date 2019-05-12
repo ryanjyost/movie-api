@@ -34,7 +34,8 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
     let movies;
     [err, movies] = await to(Movies.getMovies(movieQuery));
 
-    let dataForRankings = [];
+    let dataForRankings = [],
+      userPrediction = null;
 
     for (let member of users) {
       let user = { ...member.toObject() };
@@ -47,7 +48,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       for (let movie of movies) {
         let actualScore = movieScoreMap.map[movie._id];
-        let userPrediction = user.votes[movie._id];
+        userPrediction = user.votes[movie._id];
 
         if (!actualScore || actualScore < 0 || userPrediction === undefined)
           continue;
@@ -84,6 +85,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
           id: user._id,
           user,
           name: user.name,
+          vote: userPrediction,
           avgDiff: moviesInCalc > 0 ? Math.max(Number(avgDiff), 0) : 101,
           totalDiff,
           moviesInCalc

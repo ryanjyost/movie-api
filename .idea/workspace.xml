@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="high dictates!">
-      <change afterPath="$PROJECT_DIR$/src/lib/calcSingleMovieMetrics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/calculateRankings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/createWinnerMap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/controllers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/services/addMovieToSeason.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/services/calculateSeasonMetrics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/services/getSeason.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/seasons/services/getSeasons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/groups/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/controllers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/groups/services/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/groups/services/getSeasonBreakdowns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/calcMovieMetrics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/calcMovieMetrics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/movies/controllers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/controllers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/movies/model.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/movies/model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/controllers/sendGroupRankings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/calculateRankings.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,19 +17,58 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/cron/index.js">
+        <entry file="file://$PROJECT_DIR$/src/groups/controllers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="200">
+              <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="handleDayBeforeCutoffNotifications.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="handleDayBeforeCutoffNotifications.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="52" column="14" lean-forward="true" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+            <state relative-caret-position="369">
+              <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calculateRankings.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1140">
+              <caret line="79" column="63" lean-forward="true" selection-start-line="79" selection-start-column="63" selection-end-line="79" selection-end-column="63" />
+              <folding>
+                <element signature="e#163#187#0" />
+                <element signature="e#189#228#0" />
+                <element signature="e#251#641#0" />
+                <element signature="e#288#612#0" />
+                <element signature="e#307#345#0" />
+                <element signature="e#403#562#0" />
+                <element signature="e#426#506#0" />
+                <element signature="e#512#554#0" />
+                <element signature="e#568#606#0" />
+                <element signature="e#661#697#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getSeasons.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/seasons/services/getSeasons.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -119,7 +137,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -177,9 +195,9 @@
         <option value="$PROJECT_DIR$/src/seasons/services/addMovieToSeason.js" />
         <option value="$PROJECT_DIR$/src/groups/index.js" />
         <option value="$PROJECT_DIR$/src/seasons/services/getSeasons.js" />
-        <option value="$PROJECT_DIR$/src/lib/calculateRankings.js" />
         <option value="$PROJECT_DIR$/src/lib/cron/index.js" />
         <option value="$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js" />
+        <option value="$PROJECT_DIR$/src/lib/calculateRankings.js" />
       </list>
     </option>
   </component>
@@ -233,6 +251,12 @@
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -272,19 +296,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/lib" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/src/groups/services" />
-      <recent name="$PROJECT_DIR$/src/lib/controllers" />
-      <recent name="$PROJECT_DIR$/src/lib/cron" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/seasons/services" />
       <recent name="$PROJECT_DIR$/src/lib" />
       <recent name="$PROJECT_DIR$/src/seasons/controllers" />
       <recent name="$PROJECT_DIR$/src/groups/services" />
       <recent name="$PROJECT_DIR$/src/seasons" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib" />
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/src/groups/services" />
+      <recent name="$PROJECT_DIR$/src/lib/controllers" />
+      <recent name="$PROJECT_DIR$/src/lib/cron" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -576,7 +600,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375265000" />
+    <option name="totallyTimeSpent" value="375384000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -592,14 +616,15 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
+      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Command Line Tools Console" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32794118" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47138554" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.23344104" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47058824" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23344104" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32838982" />
@@ -608,21 +633,35 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TypeScript" order="8" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25686592" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32932332" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Command Line Tools Console" order="9" weight="0.32941177" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838982" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.47218046" />
+      <window_info id="Favorites" order="2" side_tool="true" weight="0.32956383" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.32932332" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.32932332" />
+      <window_info id="Favorites" order="3" side_tool="true" weight="0.32956383" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23344104" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.3298193" />
@@ -634,11 +673,11 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.47138554" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.32932332" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Messages" order="13" />
-      <window_info id="Favorites" order="3" side_tool="true" weight="0.32956383" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23344104" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -718,7 +757,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="311">
           <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
         </state>
       </provider>
@@ -831,8 +870,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/groups/services/prepSortGroupPredictions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+        <state relative-caret-position="200">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -885,41 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
-          <folding>
-            <element signature="e#218#300#0" />
-            <element signature="e#467#715#0" />
-            <element signature="e#483#708#0" />
-            <element signature="e#499#700#0" />
-            <element signature="e#546#690#0" />
-            <element signature="e#565#678#0" />
-            <element signature="e#753#814#0" />
-            <element signature="e#769#807#0" />
-            <element signature="e#1663#1851#0" />
-            <element signature="e#1954#1992#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
-          <folding>
-            <element signature="e#163#187#0" />
-            <element signature="e#189#228#0" />
-            <element signature="e#251#641#0" />
-            <element signature="e#288#612#0" />
-            <element signature="e#307#345#0" />
-            <element signature="e#403#562#0" />
-            <element signature="e#426#506#0" />
-            <element signature="e#512#554#0" />
-            <element signature="e#568#606#0" />
-            <element signature="e#661#697#0" />
-            <element signature="e#1093#1172#0" />
-            <element signature="e#1175#1208#0" />
-            <element signature="e#1282#1336#0" />
-            <element signature="e#1531#1547#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -939,27 +943,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/movies/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="133" column="46" selection-start-line="133" selection-start-column="46" selection-end-line="133" selection-end-column="46" />
-          <folding>
-            <element signature="e#731#749#0" />
-            <element signature="e#796#1648#0" />
-            <element signature="e#907#1054#0" />
-            <element signature="e#942#1049#0" />
-            <element signature="e#1117#1363#0" />
-            <element signature="e#1153#1358#0" />
-            <element signature="e#1167#1352#0" />
-            <element signature="e#1210#1344#0" />
-            <element signature="e#1227#1334#0" />
-            <element signature="e#1431#1501#0" />
-            <element signature="e#1462#1496#0" />
-            <element signature="e#1651#1678#0" />
-            <element signature="e#1724#2655#0" />
-            <element signature="e#1968#2479#0" />
-            <element signature="e#2096#2334#0" />
-            <element signature="e#2658#2676#0" />
-            <element signature="e#3383#3456#0" />
-          </folding>
+        <state relative-caret-position="-940">
+          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1031,30 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/groups/controllers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/seasons/services/getSeasons.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="e#1355#1815#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1072,10 +1033,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/seasons/services/getSeasons.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/groups/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/cron/handleDayBeforeCutoffNotifications.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="52" column="14" lean-forward="true" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+        <state relative-caret-position="369">
+          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="79" column="63" lean-forward="true" selection-start-line="79" selection-start-column="63" selection-end-line="79" selection-end-column="63" />
+          <folding>
+            <element signature="e#163#187#0" />
+            <element signature="e#189#228#0" />
+            <element signature="e#251#641#0" />
+            <element signature="e#288#612#0" />
+            <element signature="e#307#345#0" />
+            <element signature="e#403#562#0" />
+            <element signature="e#426#506#0" />
+            <element signature="e#512#554#0" />
+            <element signature="e#568#606#0" />
+            <element signature="e#661#697#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>

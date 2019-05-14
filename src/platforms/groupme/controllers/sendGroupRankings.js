@@ -14,7 +14,7 @@ const sendGroupRankings = async (req, res, next) => {
     let text = `🏆 GROUP RANKINGS 🏆` + "\n";
 
     for (let i = 0; i < rankings.length; i++) {
-      if (!rankings[i].numMoviesUserPredicted) {
+      if (!rankings[i].moviesInCalc) {
         text =
           text +
           `${i + 1}) ${rankings[i].name}: No prediction history (yet)` +

@@ -3,7 +3,7 @@ const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");
-const Seasons = require("../../seasons");
+const addMovieToSeason = require("../../lib/addMovieToSeason");
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
@@ -78,7 +78,7 @@ exports.addMovie = async (req, res, next) => {
 
     for (let group of groups) {
       [err, response] = await to(
-        GroupMe.sendBotMessage(`🍿 ${newMovie.title}`, group.bot.bot_id)
+        GroupMe.sendBotMessage(`🎥 ${newMovie.title}`, group.bot.bot_id)
       );
       [err, response] = await to(
         GroupMe.sendBotMessage(`${newMovie.trailer}`, group.bot.bot_id)
@@ -116,14 +116,6 @@ exports.editMovie = async (req, res, next) => {
   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
     let err, response;
 
-    [err, response] = await to(
-      sendMovieScoreResultsToAllGroups(
-        movieBeforeUpdate,
-        Number(req.body.rtScore)
-      )
-    );
-    if (err) next(err);
-
     const metrics = await calcSingleMovieMetrics({
       ...movie.toObject(),
       ...{ rtScore: req.body.rtScore }
@@ -131,8 +123,14 @@ exports.editMovie = async (req, res, next) => {
 
     movie.metrics = metrics;
 
-    const season = await Seasons.addMovieToSeason(movieBeforeUpdate);
+    const season = await addMovieToSeason(movieBeforeUpdate);
     movie.season = season.id;
+
+    [err, response] = await to(
+      sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore))
+    );
+    if (err) next(err);
+
     movie.save();
   }
 

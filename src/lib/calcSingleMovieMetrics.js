@@ -10,6 +10,8 @@ module.exports = async movie => {
     low = -1;
   if (movie.votes && movie.rtScore >= 0) {
     for (let user in movie.votes) {
+      if (user.isMM) continue;
+
       if (movie.votes[user] >= 0) {
         numVotes++;
         const diff = Math.abs(movie.votes[user] - movie.rtScore);

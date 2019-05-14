@@ -12,7 +12,8 @@ const getGroup = require("../groups/services/getGroup");
 const calculateRankings = async (groupQuery, movieQuery = {}) => {
   try {
     let group = null,
-      users = [];
+      users = [],
+      season = null;
     if (groupQuery) {
       group = await getGroup(groupQuery, "members");
       users = group.members;
@@ -24,18 +25,16 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
     [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
     if (err) throw new Error();
 
-    // get movies currently in purgatory
-
     if (movieQuery && movieQuery._id === "recent") {
       let seasons = await Seasons.getSeasons();
-      movieQuery = { season: seasons[0].id };
+      movieQuery = { season: seasons[0] ? seasons[0].id : 0 };
+      season = seasons[0];
     }
 
     let movies;
     [err, movies] = await to(Movies.getMovies(movieQuery));
 
-    let dataForRankings = [],
-      userPrediction = null;
+    let dataForRankings = [];
 
     for (let member of users) {
       let user = { ...member.toObject() };
@@ -48,7 +47,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       for (let movie of movies) {
         let actualScore = movieScoreMap.map[movie._id];
-        userPrediction = user.votes[movie._id];
+        let userPrediction = user.votes[movie._id];
 
         if (!actualScore || actualScore < 0 || userPrediction === undefined)
           continue;
@@ -69,14 +68,20 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       const avgDiff = (totalDiff / moviesInCalc).toFixed(1);
 
-      if (!moviesInCalc) {
+      let notInSeason = false;
+      if (season) {
+        notInSeason = !!movies.find(movie => !(movie._id in user.votes));
+      }
+
+      if (!moviesInCalc || notInSeason) {
         let data = {
           id: user._id,
           user,
           name: user.name,
           avgDiff: 101,
           totalDiff: -1,
-          moviesInCalc: 0
+          moviesInCalc: 0,
+          notInSeason
         };
 
         dataForRankings.push(data);
@@ -85,16 +90,17 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
           id: user._id,
           user,
           name: user.name,
-          vote: userPrediction,
           avgDiff: moviesInCalc > 0 ? Math.max(Number(avgDiff), 0) : 101,
           totalDiff,
-          moviesInCalc
+          moviesInCalc,
+          notInSeason
         };
 
         dataForRankings.push(data);
       }
     }
 
+    console.log("RANKINGS", dataForRankings);
     return dataForRankings.sort((a, b) => {
       a = a < 0 ? { avgDiff: 101 } : a;
       b = b < 0 ? { avgDiff: 101 } : b;

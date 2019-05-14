@@ -33,10 +33,11 @@ const job3 = new CronJob(
 const runCronJobs = () => {
   job1.start();
   job2.start();
+  job3.start();
 };
 
 syncUsersAndGroups();
-handleDayBeforeCutoffNotifications();
+//handleDayBeforeCutoffNotifications();
 // calcMovieMetrics();
 // handleDayBeforeCutoffNotifications();
 

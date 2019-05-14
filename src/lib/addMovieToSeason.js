@@ -1,5 +1,6 @@
-const Season = require("../model");
-const Groups = require("../../groups");
+const Season = require("../seasons/model");
+const Groups = require("../groups/index");
+const calculateRankings = require("./calculateRankings");
 
 /*
 * Handle movie getting an RT Scores
@@ -24,7 +25,6 @@ const addMovieToSeason = async movie => {
       // update winner map with groups and user winner in object
       const winnerMap = await createWinnerMap(seasonToUpdate);
       seasonToUpdate.winnerMap = winnerMap;
-      console.log("WINNER MAP", winnerMap);
     } else if (seasonToUpdate.movies.length === seasonToUpdate.length) {
       // create a new season
       seasonToUpdate = await createNewSeason(seasonToUpdate);
@@ -32,7 +32,6 @@ const addMovieToSeason = async movie => {
     } else {
       // just adding a movie to the season
       seasonToUpdate.movies.push(movie._id);
-      seasonToUpdate.save();
     }
 
     seasonToUpdate.save();
@@ -46,7 +45,7 @@ const createNewSeason = async mostRecentSeason => {
   return await Season.create({
     id: !mostRecentSeason ? 1 : mostRecentSeason.id + 1,
     movies: [],
-    length: 5,
+    length: 10,
     winnerMap: { placeholder: 1 }
   });
 };
@@ -60,7 +59,7 @@ const createWinnerMap = async season => {
     const winnerMap = {};
 
     for (let group of groups) {
-      const rankings = await Groups.calculateRankings(
+      const rankings = await calculateRankings(
         { _id: group._id },
         { season: season.id }
       );

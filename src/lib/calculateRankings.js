@@ -100,7 +100,6 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       }
     }
 
-    console.log("RANKINGS", dataForRankings);
     return dataForRankings.sort((a, b) => {
       a = a < 0 ? { avgDiff: 101 } : a;
       b = b < 0 ? { avgDiff: 101 } : b;

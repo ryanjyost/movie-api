@@ -36,7 +36,7 @@ const handleDayBeforeCutoffNotifications = async () => {
     return null;
   }
 
-  let text = `️👇 Predictions for these movies close soon!`;
+  let text = `️⏳ Predictions for these movies close soon!`;
   let atleastOneMovie = false;
 
   for (let movie of movies) {

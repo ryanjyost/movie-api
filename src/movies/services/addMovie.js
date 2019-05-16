@@ -11,7 +11,7 @@ const addMovie = async newMovieData => {
   newMovieData.title_lower = sanitizeTitle(newMovieData.title);
   newMovieData.releaseDate = moment
     .unix(newMovieData.releaseDate)
-    .tz("America/Chicago")
+    .utc()
     .startOf("day")
     .unix();
 

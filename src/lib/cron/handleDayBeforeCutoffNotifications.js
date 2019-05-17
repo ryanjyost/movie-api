@@ -1,4 +1,8 @@
-const { to, moviePredictionCutoffDate } = require("../../helpers");
+const {
+  to,
+  moviePredictionCutoffDate,
+  isMoviePastPredictionDeadline
+} = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Movies = require("../../movies");
 const Groups = require("../../groups");
@@ -6,24 +10,18 @@ const moment = require("moment");
 
 const handleDayBeforeCutoffNotifications = async () => {
   let err, movies;
-
-  console.log(
-    "CUTOFF",
-    moviePredictionCutoffDate,
-    moment
-      .unix(moviePredictionCutoffDate)
-      .add(1, "day")
-      .unix()
-  );
-
-  console.log(
-    "CUTOFF",
-    moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm A"),
-    moment
-      .unix(moviePredictionCutoffDate)
-      .add(1, "day")
-      .format("MM/DD/YYYY hh:mm A")
-  );
+  //
+  // console.log(
+  //   "CURRENT",
+  //   moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+  // );
+  // console.log(
+  //   "CUTOFF",
+  //   moment
+  //     .unix(moviePredictionCutoffDate)
+  //     .utc()
+  //     .format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+  // );
 
   [err, movies] = await to(
     Movies.getMovies({
@@ -40,16 +38,30 @@ const handleDayBeforeCutoffNotifications = async () => {
   let atleastOneMovie = false;
 
   for (let movie of movies) {
+    // console.log(`====== ${movie.title}======`);
+    // console.log(
+    //   "Release",
+    //   moment
+    //     .unix(movie.releaseDate)
+    //     .utc()
+    //     .format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+    // );
+    // console.log("PASSED?", isMoviePastPredictionDeadline(movie.releaseDate));
+    // console.log(
+    //   "DIFF DAYS",
+    //   moment
+    //     .unix(movie.releaseDate)
+    //     .utc()
+    //     .diff(moment.unix(moviePredictionCutoffDate), "day")
+    // );
     if (
       moment
         .unix(movie.releaseDate)
-        .isSame(moment.unix(moviePredictionCutoffDate), "day")
+        .utc()
+        .diff(moment.unix(moviePredictionCutoffDate), "day") < 1 &&
+      !isMoviePastPredictionDeadline(movie.releaseDate)
     ) {
-      // console.log(
-      //   "MOVIE CUTOFF",
-      //   movie,
-      //   moment.unix(movie.releaseDate).format("MM/DD/YYYY hh:mm A")
-      // );
+      console.log("MOVIE Warning", movie.title);
       atleastOneMovie = true;
       text = text + "\n" + `${movie.title}`;
     }

@@ -24,7 +24,7 @@ const runCronJobs = () => {
 };
 
 syncUsersAndGroups();
-handleDayBeforeCutoffNotifications();
+// handleDayBeforeCutoffNotifications();
 // calcMovieMetrics();
 
 module.exports = runCronJobs;

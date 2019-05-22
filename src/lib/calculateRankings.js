@@ -10,6 +10,7 @@ const getGroup = require("../groups/services/getGroup");
 */
 
 const calculateRankings = async (groupQuery, movieQuery = {}) => {
+  console.log("CALC Rankings");
   try {
     let group = null,
       users = [],
@@ -100,7 +101,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       }
     }
 
-    return dataForRankings.sort((a, b) => {
+    const sorted = dataForRankings.sort((a, b) => {
       a = a < 0 ? { avgDiff: 101 } : a;
       b = b < 0 ? { avgDiff: 101 } : b;
       if (a.avgDiff > b.avgDiff) {
@@ -111,6 +112,19 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
         return 0;
       }
     });
+
+    const rankingsWithPlaces = [{ ...sorted[0], ...{ place: 1 } }];
+
+    let lastRanking = 1,
+      lastRankingScore = sorted[0].avgDiff;
+    for (let i = 1; i < sorted.length; i++) {
+      let currRanking =
+        sorted[i].avgDiff === lastRankingScore ? lastRanking : i;
+
+      rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
+    }
+
+    return rankingsWithPlaces;
   } catch (e) {
     console.log("ERROR", e);
   }

@@ -2,6 +2,7 @@ const GroupMe = require("../platforms/groupme/index");
 const Groups = require("../groups");
 const Seasons = require("../seasons");
 const { to } = require("../helpers");
+const calculateRankings = require("./calculateRankings");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {
   let err, groups;
@@ -12,12 +13,11 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
   [err, season] = await to(Seasons.getSeason({ id: movie.season }));
   if (err) throw new Error(err);
 
-  const emojiMap = [`🥇`, `🥈`, `🥉`];
-
   for (let group of groups) {
     let mainMessage =
       `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
-    let scoreMessage = ``;
+    let scoreMessage =
+      `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
 
     const rankings = Groups.prepSortGroupPredictions(group, {
       ...movie.toObject(),
@@ -31,15 +31,11 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
       const notActiveMessage = ` User wasn't around yet`;
 
       if (!vote.wasActiveForMovie) {
-        scoreMessage =
-          scoreMessage +
-          `${emojiMap[i] || i + 1}) ${vote.name}:` +
-          notActiveMessage +
-          "\n";
+        scoreMessage = scoreMessage + `${vote.name}:` + notActiveMessage + "\n";
       } else {
         scoreMessage =
           scoreMessage +
-          `${i + 1}) ${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
+          `${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
             vote.diff
           )}% (${!vote.didVote ? noPredictionMessage : vote.vote}${
             !vote.didVote ? "" : "%"
@@ -55,16 +51,34 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
     if (moviesLeftInSeason) {
       seasonMessage = `Only ${moviesLeftInSeason} movies left in the season...`;
     } else {
+      const rankings = await calculateRankings(
+        { _id: group._id },
+        { season: season.id }
+      );
+
+      const emojiMap = [`🥇`, `🥈`, `🥉`];
+      let rankingMessage = "";
+      for (let player of rankings) {
+        if (player.place < 4) {
+          rankingMessage =
+            rankingMessage + `${emojiMap[player.place]} ${player.name}`;
+        }
+      }
+
       seasonMessage =
-        `Season ${season.id} has a winner 🏆` +
+        `🏆 Season ${season.id} is over!` +
         "\n" +
-        `Find out who at https://www.moviemedium.io/current`;
+        rankingMessage +
+        "\n" +
+        `See more details at https://www.moviemedium.io/current`;
     }
 
     await GroupMe.sendBotMessage(
-      mainMessage + "\n" + scoreMessage + "\n" + seasonMessage,
+      mainMessage + "\n" + scoreMessage,
       group.bot.bot_id
     );
+
+    await GroupMe.sendBotMessage(seasonMessage, group.bot.bot_id);
   }
 };
 

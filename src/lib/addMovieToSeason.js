@@ -63,7 +63,11 @@ const createWinnerMap = async season => {
         { _id: group._id },
         { season: season.id }
       );
-      winnerMap[group._id] = rankings[0].id;
+      winnerMap[group._id] = rankings
+        .filter(player => {
+          return player.place === 1;
+        })
+        .map(player => player.id);
     }
     return winnerMap;
   } catch (e) {

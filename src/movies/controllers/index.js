@@ -28,20 +28,20 @@ exports.getMovies = async (req, res, next) => {
     // upcoming
     mongoQuery = {
       rtScore: { $lt: 0 },
-      releaseDate: { $gt: moviePredictionCutoffDate },
+      // releaseDate: { $gt: moviePredictionCutoffDate },
       isClosed: 0
     };
   } else if (Number(query.isClosed) && Number(query.rtScore) < 0) {
     // purgatory
     mongoQuery = {
       $and: [
-        { rtScore: { $lt: 0 } },
-        {
-          $or: [
-            { releaseDate: { $lte: moviePredictionCutoffDate } },
-            { isClosed: 1 }
-          ]
-        }
+        { rtScore: { $lt: 0 }, isClosed: 1 }
+        // {
+        //   $or: [
+        //     { releaseDate: { $lte: moviePredictionCutoffDate } },
+        //     { isClosed: 1 }
+        //   ]
+        // }
       ]
     };
   } else if (Number(query.isClosed) > 0 && Number(query.rtScore) >= 0) {

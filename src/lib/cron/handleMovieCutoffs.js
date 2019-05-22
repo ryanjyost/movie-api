@@ -39,7 +39,8 @@ const handleMovieCutoffs = async () => {
       if (err) throw new Error(err);
 
       for (let group of groups) {
-        let movieMessage = `🔒 "${movie.title}" predictions are locked in!`;
+        let movieMessage =
+          `🔒 "${movie.title}" predictions are locked in!` + "\n";
 
         let sortedMembers = sortArrayByProperty(
           group.members,
@@ -52,7 +53,7 @@ const handleMovieCutoffs = async () => {
           if (user && user.name !== "Movie Medium") {
             voteMessage =
               voteMessage +
-              `> ${user.nickname || user.name}: ${
+              `${user.nickname || user.name}: ${
                 user.votes[movie._id] < 0
                   ? `Forgot to predict 😬`
                   : `${user.votes[movie._id]}%`

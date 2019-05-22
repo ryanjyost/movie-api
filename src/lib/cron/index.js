@@ -14,13 +14,13 @@ const job1 = new CronJob(
   "America/Chicago"
 );
 
-const job2 = new CronJob(
-  "0 0 8 * * *",
-  handleDayBeforeCutoffNotifications,
-  null,
-  true,
-  "America/Chicago"
-);
+// const job2 = new CronJob(
+//   "0 0 8 * * *",
+//   handleDayBeforeCutoffNotifications,
+//   null,
+//   true,
+//   "America/Chicago"
+// );
 
 const job3 = new CronJob(
   "0 0 1 * * *",
@@ -32,7 +32,7 @@ const job3 = new CronJob(
 
 const runCronJobs = () => {
   job1.start();
-  job2.start();
+  // job2.start();
 };
 
 syncUsersAndGroups();

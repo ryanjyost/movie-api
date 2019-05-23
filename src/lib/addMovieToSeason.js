@@ -45,7 +45,7 @@ const createNewSeason = async mostRecentSeason => {
   return await Season.create({
     id: !mostRecentSeason ? 1 : mostRecentSeason.id + 1,
     movies: [],
-    length: 10,
+    length: 5,
     winnerMap: { placeholder: 1 }
   });
 };

@@ -3,7 +3,7 @@ const { to, moviePredictionCutoffDate } = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");
-const addMovieToSeason = require("../../lib/addMovieToSeason");
+const addMovieToSeason = require("../../lib/addMovieToSeason").addMovieToSeason;
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");

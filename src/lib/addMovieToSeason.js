@@ -5,7 +5,7 @@ const calculateRankings = require("./calculateRankings");
 /*
 * Handle movie getting an RT Scores
 */
-const addMovieToSeason = async movie => {
+exports.addMovieToSeason = async movie => {
   try {
     // find the most recent season
     const mostRecentSeasons = await Season.find()
@@ -53,7 +53,7 @@ const createNewSeason = async mostRecentSeason => {
 /*
 * Handle movie getting an RT Score
 */
-const createWinnerMap = async season => {
+exports.createWinnerMap = async season => {
   try {
     const groups = await Groups.getGroups();
     const winnerMap = {};
@@ -75,4 +75,4 @@ const createWinnerMap = async season => {
   }
 };
 
-module.exports = addMovieToSeason;
+// module.exports = addMovieToSeason;

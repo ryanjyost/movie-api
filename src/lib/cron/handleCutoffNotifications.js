@@ -38,30 +38,13 @@ const handleDayBeforeCutoffNotifications = async () => {
   let atleastOneMovie = false;
 
   for (let movie of movies) {
-    // console.log(`====== ${movie.title}======`);
-    // console.log(
-    //   "Release",
-    //   moment
-    //     .unix(movie.releaseDate)
-    //     .utc()
-    //     .format("dddd, MMMM Do YYYY, h:mm:ss a Z")
-    // );
-    // console.log("PASSED?", isMoviePastPredictionDeadline(movie.releaseDate));
-    // console.log(
-    //   "DIFF DAYS",
-    //   moment
-    //     .unix(movie.releaseDate)
-    //     .utc()
-    //     .diff(moment.unix(moviePredictionCutoffDate), "day")
-    // );
     if (
       moment
         .unix(movie.releaseDate)
         .utc()
-        .diff(moment.unix(moviePredictionCutoffDate), "day") < 1 &&
+        .diff(moment.unix(moviePredictionCutoffDate), "day") === 4 &&
       !isMoviePastPredictionDeadline(movie.releaseDate)
     ) {
-      console.log("MOVIE Warning", movie.title);
       atleastOneMovie = true;
       text = text + "\n" + `${movie.title}`;
     }

@@ -79,7 +79,14 @@ exports.sortArrayByProperty = (array, property, asc = false) => {
 /* Calc movie penalty */
 exports.calcNoPredictionPenalty = movie => {
   if (movie.metrics) {
-    return Math.abs(Math.ceil(Math.min(100, movie.metrics.high * 1.1)));
+    return Math.abs(
+      Math.ceil(
+        Math.min(
+          100,
+          Math.max(movie.metrics.high * 1.1, Math.abs(movie.metrics.high) + 1)
+        )
+      )
+    );
   } else {
     return 0;
   }

@@ -26,6 +26,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
 
     for (let i = 0; i < rankings.length; i++) {
       let vote = rankings[i];
+      console.log("VOTE", vote);
 
       const noPredictionMessage = "Penalty for not predicting";
       const notActiveMessage = ` User wasn't around yet`;
@@ -51,22 +52,34 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
     if (moviesLeftInSeason) {
       seasonMessage = `Only ${moviesLeftInSeason} movies left in the season...`;
     } else {
-      const rankings = await calculateRankings(
+      const seasonRankings = await calculateRankings(
         { _id: group._id },
         { season: season.id }
       );
 
       const emojiMap = [`🥇`, `🥈`, `🥉`];
+
       let rankingMessage = "";
-      for (let player of rankings) {
-        if (player.place < 4) {
+      for (let player of seasonRankings) {
+        if (player.notInSeason) {
           rankingMessage =
-            rankingMessage + `${emojiMap[player.place]} ${player.name}`;
+            rankingMessage +
+            `${player.name}: Joined mid-season, will be eligible next season.` +
+            "\n";
+        } else {
+          rankingMessage =
+            rankingMessage +
+            `${player.name}: ${Math.abs(player.avgDiff)}% (${
+              !player.didVote ? "test" : player.vote
+            }${!player.didVote ? "" : "%"}` +
+            "\n";
         }
       }
 
       seasonMessage =
-        `🏆 Season ${season.id} is over!` +
+        `🏆 Season ${
+          season.id
+        } is over! Here are the results, sorted from best to worst average MM Metric for the season.` +
         "\n" +
         rankingMessage +
         "\n" +

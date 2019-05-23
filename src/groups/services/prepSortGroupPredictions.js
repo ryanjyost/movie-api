@@ -22,7 +22,7 @@ const prepSortGroupPredictions = (groupWithMemberData, movie = {}) => {
 
       votes.push({
         name: user.nickname || user.name,
-        vote: user.name === "Movie Medium" ? 50 : userPrediction || null,
+        vote: user.name === "Movie Medium" ? 50 : userPrediction,
         diff,
         didVote: !noVote,
         wasActiveForMovie: true

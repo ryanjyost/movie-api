@@ -64,9 +64,9 @@ const handleUserPrediction = async (req, res, next) => {
         );
 
         // close enough to just assume
-        if (similarity > 0.7) {
+        if (similarity > 0.4) {
           foundMovie = closestMatch;
-        } else if (similarity > 0.4) {
+        } else if (similarity > 0.2) {
           // warn user, but record the prediction
           await GroupMe.sendBotMessage(
             `I assumed you meant "${

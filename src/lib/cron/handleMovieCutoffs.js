@@ -13,20 +13,29 @@ const handleMovieCutoffs = async () => {
   try {
     console.log(
       "cutoff",
-      moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm")
+      moment
+        .unix(moviePredictionCutoffDate)
+        .utc()
+        .format("dddd, MMMM Do YYYY, h:mm:ss a Z")
     );
+    console.log("now", moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z"));
 
     let err, moviesToClose;
     [err, moviesToClose] = await to(
       Movies.getMovies({
-        isClosed: 0,
-        releaseDate: {
-          $lte: moviePredictionCutoffDate
-        }
+        isClosed: 0
       })
     );
 
     for (let movie of moviesToClose) {
+      if (
+        moment
+          .unix(movie.releaseDate)
+          .isAfter(moment.unix(moviePredictionCutoffDate).utc())
+      ) {
+        continue;
+      }
+      console.log("Closing...", movie.title);
       movie.isClosed = 1;
       await to(movie.save());
 

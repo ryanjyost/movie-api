@@ -45,7 +45,8 @@ exports.moviePredictionCutoffDate = moviePredictionCutoffDate;
 exports.isMoviePastPredictionDeadline = releaseTimestamp => {
   return moment
     .unix(releaseTimestamp)
-    .isBefore(moment.unix(moviePredictionCutoffDate));
+    .utc()
+    .isBefore(moment.unix(moviePredictionCutoffDate).utc());
 };
 
 /* convert string to object id */

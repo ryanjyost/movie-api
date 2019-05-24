@@ -4,7 +4,7 @@ const router = express.Router();
 // controllers
 const MoviesController = require("../src/movies/controllers");
 const UsersController = require("../src/users/controllers");
-const GroupsController = require("../src/groups/controllers");
+const GroupsController = require("./handlers/groups/index");
 const SeasonsController = require("../src/seasons/controllers");
 const GroupMeController = require("../src/platforms/groupme/controllers");
 const SpecialCaseController = require("../src/lib/controllers");

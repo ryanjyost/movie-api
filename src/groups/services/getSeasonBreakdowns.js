@@ -1,4 +1,4 @@
-const MovieScoreMap = require("../../../models/movieScoreMap");
+const MovieScoreMap = require("../../movieScoreMap/model");
 const Movies = require("../../movies");
 const Seasons = require("../../seasons");
 const Users = require("../../users");

@@ -1,5 +1,5 @@
 const Movie = require("../movies/model.js");
-const MovieScoreMap = require("../../models/movieScoreMap.js");
+const MovieScoreMap = require("../movieScoreMap/model");
 const { to } = require("../helpers/index");
 
 module.exports = async (movieId, score) => {

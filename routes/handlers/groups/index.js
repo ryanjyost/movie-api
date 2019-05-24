@@ -1,14 +1,14 @@
-const Group = require("../model");
-const { to, moviePredictionCutoffDate } = require("../../helpers");
-const GroupMe = require("../../platforms/groupme");
-const Users = require("../../users");
-const Movies = require("../../movies");
+const Group = require("../../../src/groups/model");
+const { to, moviePredictionCutoffDate } = require("../../../src/helpers/index");
+const GroupMe = require("../../../src/platforms/groupme/index");
+const Users = require("../../../src/users/index");
+const Movies = require("../../../src/movies/index");
 
 // services
-const getGroups = require("../services/getGroups");
-const createGroup = require("../services/createGroup.js");
-const calculateRankings = require("../../lib/calculateRankings");
-const getSeasonBreakdowns = require("../services/getSeasonBreakdowns");
+const getGroups = require("../../../src/groups/services/getGroups");
+const createGroup = require("../../../src/groups/services/createGroup.js");
+const calculateRankings = require("../../../src/lib/calculateRankings");
+const getSeasonBreakdowns = require("../../../src/groups/services/getSeasonBreakdowns");
 
 exports.getGroup = async (req, res, next) => {
   try {

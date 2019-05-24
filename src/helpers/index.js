@@ -1,6 +1,6 @@
 const moment = require("moment");
 const mongoose = require("mongoose");
-const MovieScoreMap = require("../../models/movieScoreMap");
+const MovieScoreMap = require("../movieScoreMap/model");
 const _ = require("lodash");
 
 /*

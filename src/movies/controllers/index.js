@@ -4,6 +4,7 @@ const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");
 const addMovieToSeason = require("../../lib/addMovieToSeason").addMovieToSeason;
+const moment = require("moment");
 
 // big operations
 const updateMovieScoreMap = require("../../lib/updateMovieScoreMap");
@@ -55,7 +56,11 @@ exports.getMovies = async (req, res, next) => {
   [err, movies] = await to(getMovies(mongoQuery));
   if (err) next(err);
 
-  res.json({ movies, moviePredictionCutoffDate });
+  res.json({
+    movies,
+    moviePredictionCutoffDate,
+    currentTime: moment.utc().unix()
+  });
 };
 
 /*

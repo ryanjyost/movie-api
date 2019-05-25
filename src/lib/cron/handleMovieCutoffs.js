@@ -76,8 +76,6 @@ const handleMovieCutoffs = async () => {
           group.bot.bot_id
         );
       }
-
-      // await GroupMe.sendBotMessage(voteMessage);
     }
   } catch (e) {
     console.log("CUTOFF ERROR", e);

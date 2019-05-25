@@ -36,11 +36,9 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
       } else {
         scoreMessage =
           scoreMessage +
-          `${vote.name}: ${vote.diff >= 0 ? "+" : "-"}${Math.abs(
-            vote.diff
-          )}% (${!vote.didVote ? noPredictionMessage : vote.vote}${
-            !vote.didVote ? "" : "%"
-          })` +
+          `${vote.name}: ${Math.abs(vote.diff)}% (${
+            !vote.didVote ? noPredictionMessage : vote.vote
+          }${!vote.didVote ? "" : "% prediction"})` +
           "\n";
       }
     }
@@ -50,7 +48,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
     let moviesLeftInSeason = season.length - season.movies.length;
 
     if (moviesLeftInSeason) {
-      seasonMessage = `Only ${moviesLeftInSeason} movies left in the season...`;
+      seasonMessage = `Only ${moviesLeftInSeason} movies left in the current season...`;
     } else {
       const seasonRankings = await calculateRankings(
         { _id: group._id },
@@ -69,9 +67,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
         } else {
           rankingMessage =
             rankingMessage +
-            `${player.name}: ${Math.abs(player.avgDiff)}% (${
-              !player.didVote ? "test" : player.vote
-            }${!player.didVote ? "" : "%"}` +
+            `${player.name}: ${Math.abs(player.avgDiff)}%}` +
             "\n";
         }
       }

@@ -50,7 +50,11 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
         let actualScore = movieScoreMap.map[movie._id];
         let userPrediction = user.votes[movie._id];
 
-        if (!actualScore || actualScore < 0 || userPrediction === undefined)
+        if (
+          actualScore === null ||
+          actualScore < 0 ||
+          userPrediction === undefined
+        )
           continue;
 
         // we know this is a legit movie that the user had a chance to predict
@@ -119,7 +123,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       lastRankingScore = sorted[0].avgDiff;
     for (let i = 1; i < sorted.length; i++) {
       let currRanking =
-        sorted[i].avgDiff === lastRankingScore ? lastRanking : i;
+        sorted[i].avgDiff === lastRankingScore ? lastRanking : i + 1;
 
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }

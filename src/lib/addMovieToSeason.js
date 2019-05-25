@@ -53,7 +53,7 @@ const createNewSeason = async mostRecentSeason => {
 /*
 * Handle movie getting an RT Score
 */
-exports.createWinnerMap = async season => {
+const createWinnerMap = async season => {
   try {
     const groups = await Groups.getGroups();
     const winnerMap = {};

@@ -1,5 +1,9 @@
 const Movie = require("../model");
-const { to, moviePredictionCutoffDate } = require("../../helpers");
+const {
+  to,
+  moviePredictionCutoffDate,
+  sortArrayByProperty
+} = require("../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");
@@ -144,6 +148,40 @@ exports.editMovie = async (req, res, next) => {
     let err, response;
     [err, response] = await to(Users.updateUserVoteMaps(movieBeforeUpdate));
     if (err) next(err);
+
+    let groups;
+    [err, groups] = await to(Groups.getGroups({}, "members"));
+    if (err) throw new Error(err);
+
+    for (let group of groups) {
+      let movieMessage =
+        `🔒 "${movie.title}" predictions are locked in!` + "\n";
+
+      let sortedMembers = sortArrayByProperty(
+        group.members,
+        `votes.${movie._id}`,
+        false
+      );
+
+      let voteMessage = ``;
+      for (let user of sortedMembers) {
+        if (user && user.name !== "Movie Medium") {
+          voteMessage =
+            voteMessage +
+            `${user.name}: ${
+              user.votes[movie._id] < 0
+                ? `Forgot to predict 😬`
+                : `${user.votes[movie._id]}%`
+            }` +
+            "\n";
+        }
+      }
+
+      await GroupMe.sendBotMessage(
+        movieMessage + "\n" + voteMessage,
+        group.bot.bot_id
+      );
+    }
   }
 
   // return all movies to make updating admin easier

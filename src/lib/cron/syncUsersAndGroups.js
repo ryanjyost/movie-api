@@ -1,4 +1,4 @@
-const { to, createObjectId } = require("../../helpers/index");
+const { to, createObjectId } = require("../../../helpers/index");
 const Users = require("../../users");
 const Groups = require("../../groups");
 const GroupMe = require("../../platforms/groupme");

@@ -1,5 +1,5 @@
 const User = require("../model");
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 
 /*
 * Get a single user's data

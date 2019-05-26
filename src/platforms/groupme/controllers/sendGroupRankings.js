@@ -1,6 +1,6 @@
 const calculateRankings = require("../../../lib/calculateRankings");
 const createGroupMeApi = require("../services/GroupMeApi");
-const { to } = require("../../../helpers");
+const { to } = require("../../../../helpers");
 const getGroup = require("../../../groups/services/getGroup");
 
 const sendGroupRankings = async (req, res, next) => {

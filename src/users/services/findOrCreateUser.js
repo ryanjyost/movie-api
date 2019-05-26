@@ -1,5 +1,5 @@
 const User = require("../model");
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 
 /*
 * Find or create a MM user based on GroupMe info

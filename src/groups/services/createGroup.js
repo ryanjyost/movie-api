@@ -1,4 +1,4 @@
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 const Group = require("../model.js");
 const { findOrCreateUser } = require("../../users");
 const GroupMe = require("../../platforms/groupme");

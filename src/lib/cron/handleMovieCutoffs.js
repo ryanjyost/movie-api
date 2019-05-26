@@ -6,7 +6,7 @@ const {
   to,
   moviePredictionCutoffDate,
   sortArrayByProperty
-} = require("../../helpers");
+} = require("../../../helpers");
 const moment = require("moment");
 
 const handleMovieCutoffs = async () => {

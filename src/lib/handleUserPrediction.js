@@ -8,7 +8,7 @@ const {
   isMoviePastPredictionDeadline,
   moviePredictionCutoffDate,
   sanitizeTitle
-} = require("../helpers");
+} = require("../../helpers");
 const stringSimilarity = require("string-similarity");
 
 /*

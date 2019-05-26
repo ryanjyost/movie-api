@@ -1,6 +1,6 @@
 const Movie = require("../movies/model.js");
 const MovieScoreMap = require("../movieScoreMap/model");
-const { to } = require("../helpers/index");
+const { to } = require("../../helpers/index");
 const calculateSingleMovieMetrics = require("./calcSingleMovieMetrics");
 
 module.exports = async () => {

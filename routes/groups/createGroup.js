@@ -1,53 +1,6 @@
-const Group = require("../../../src/groups/model");
-const { to, moviePredictionCutoffDate } = require("../../../src/helpers/index");
-const GroupMe = require("../../../src/platforms/groupme/index");
-const Users = require("../../../src/users/index");
-const Movies = require("../../../src/movies/index");
+const GroupMe = require("../../src/platforms/groupme");
 
-// services
-const getGroups = require("../../../src/groups/services/getGroups");
-const createGroup = require("../../../src/groups/services/createGroup.js");
-const calculateRankings = require("../../../src/lib/calculateRankings");
-const getSeasonBreakdowns = require("../../../src/groups/services/getSeasonBreakdowns");
-
-exports.getGroup = async (req, res, next) => {
-  try {
-    const group = await Group.findOne({ _id: req.params.id }).populate(
-      "members"
-    );
-    res.json({ group });
-  } catch (e) {
-    next(e);
-  }
-};
-
-exports.getGroupRankings = async (req, res, next) => {
-  let err, rankings;
-  [err, rankings] = await to(
-    calculateRankings(
-      req.params.id === "all" ? null : { _id: req.params.id },
-      req.params.seasonId ? { _id: req.params.seasonId } : null
-    )
-  );
-  if (err) next(err);
-
-  res.json({ rankings });
-};
-
-exports.getGroupSeasons = async (req, res, next) => {
-  let err, rankings;
-  [err, rankings] = await to(
-    getSeasonBreakdowns(
-      req.params.groupId === "all" ? null : { _id: req.params.groupId },
-      req.params.seasonId || { _id: req.params.seasonId }
-    )
-  );
-  if (err) next(err);
-
-  res.json({ rankings });
-};
-
-exports.createGroup = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
 
   //... create GroupMe group
@@ -165,16 +118,4 @@ exports.createGroup = async (req, res, next) => {
   if (err) next(err);
 
   res.json({ createdGroup, user });
-};
-
-exports.sendMessageToAllGroups = async (req, res, next) => {
-  let err, groups;
-  [err, groups] = await to(getGroups());
-  if (err) next(err);
-
-  for (let group of groups) {
-    await GroupMe.sendBotMessage(req.body.message, group.bot.bot_id);
-  }
-
-  res.json({ message: req.body.message, groups: groups });
 };

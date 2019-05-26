@@ -1,4 +1,4 @@
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Groups = require("../../groups");
 

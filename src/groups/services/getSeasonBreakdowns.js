@@ -2,7 +2,7 @@ const MovieScoreMap = require("../../movieScoreMap/model");
 const Movies = require("../../movies");
 const Seasons = require("../../seasons");
 const Users = require("../../users");
-const { to, calcNoPredictionPenalty } = require("../../helpers");
+const { to, calcNoPredictionPenalty } = require("../../../helpers");
 const getGroup = require("./getGroup");
 
 /*

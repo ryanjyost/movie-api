@@ -2,7 +2,7 @@ const {
   to,
   moviePredictionCutoffDate,
   isMoviePastPredictionDeadline
-} = require("../../helpers");
+} = require("../../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Movies = require("../../movies");
 const Groups = require("../../groups");

@@ -1,6 +1,6 @@
 const moment = require("moment");
 const mongoose = require("mongoose");
-const MovieScoreMap = require("../movieScoreMap/model");
+const MovieScoreMap = require("../src/movieScoreMap/model");
 const _ = require("lodash");
 
 /*
@@ -91,4 +91,12 @@ exports.calcNoPredictionPenalty = movie => {
   } else {
     return 0;
   }
+};
+
+exports.catchErrors = function catchErrors(fn) {
+  return function(req, res, next) {
+    // Make sure to `.catch()` any errors and pass them along to the `next()`
+    // middleware in the chain, in this case the error handler.
+    fn(req, res, next).catch(next);
+  };
 };

@@ -1,4 +1,4 @@
-const { calcNoPredictionPenalty } = require("../../helpers");
+const { calcNoPredictionPenalty } = require("../../../helpers");
 
 const prepSortGroupPredictions = (groupWithMemberData, movie = {}) => {
   // console.log("PREP", groupWithMemberData, movie);

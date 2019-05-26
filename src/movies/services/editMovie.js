@@ -1,5 +1,5 @@
 const Movie = require("../model");
-const { to, sanitizeTitle } = require("../../helpers");
+const { to, sanitizeTitle } = require("../../../helpers");
 
 /*
 * Edit movie

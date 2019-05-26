@@ -1,5 +1,5 @@
 const Movie = require("../model");
-const { to, moviePredictionCutoffDate } = require("../../helpers");
+const { to, moviePredictionCutoffDate } = require("../../../helpers");
 const GroupMe = require("../../platforms/groupme");
 const Users = require("../../users");
 const Groups = require("../../groups");

@@ -1,7 +1,7 @@
 const GroupMe = require("../platforms/groupme/index");
 const Groups = require("../groups");
 const Seasons = require("../seasons");
-const { to } = require("../helpers");
+const { to } = require("../../helpers");
 const calculateRankings = require("./calculateRankings");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {

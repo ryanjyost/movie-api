@@ -1,5 +1,5 @@
 const Group = require("../model.js");
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 
 /*
 * Add new user to the group

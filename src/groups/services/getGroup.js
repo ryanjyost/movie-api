@@ -1,4 +1,4 @@
-const { to } = require("../../helpers");
+const { to } = require("../../../helpers");
 const Group = require("../model.js");
 
 /*

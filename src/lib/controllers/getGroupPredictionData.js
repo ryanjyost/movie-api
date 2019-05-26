@@ -6,7 +6,7 @@ const {
   getMovieScoreMap,
   createObjectId,
   calcNoPredictionPenalty
-} = require("../../helpers");
+} = require("../../../helpers");
 
 /*
 * For movies in purgatory, we want to show the group's prediction breakdowns

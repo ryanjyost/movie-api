@@ -10,5 +10,5 @@ module.exports = async newMovieData => {
     .startOf("day")
     .unix();
 
-  return await to(Movie.create(newMovieData));
+  return await Movie.create(newMovieData);
 };

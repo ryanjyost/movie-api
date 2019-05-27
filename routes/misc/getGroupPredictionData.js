@@ -1,5 +1,4 @@
-const Movies = require("../../src/movies");
-const Groups = require("../../src/groups");
+const { Groups, Movies } = require("../../src");
 const {
   moviePredictionCutoffDate,
   calcNoPredictionPenalty

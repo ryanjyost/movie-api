@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { catchErrors } = require("../helpers");
 
 const getGroupPredictionData = require("./misc/getGroupPredictionData");
 
@@ -11,7 +12,10 @@ router.use("/seasons", require("./seasons"));
 router.use("/groupme", require("./platforms/groupme"));
 
 /* Misc stuff */
-router.get("/group_breakdowns/:groupId/:type", getGroupPredictionData);
+router.get(
+  "/group_breakdowns/:groupId/:type",
+  catchErrors(getGroupPredictionData)
+);
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

@@ -83,12 +83,10 @@ module.exports = async (req, res) => {
   }
 
   // ...send updated user info for inital entry into the app
-  const user = await to(
-    Users.getUser(
-      { groupmeId: currentUser.user_id },
-      {},
-      { path: "groups", populate: { path: "members" } }
-    )
+  const user = await Users.getUser(
+    { groupmeId: currentUser.user_id },
+    {},
+    { path: "groups", populate: { path: "members" } }
   );
 
   res.json({ createdGroup, user });

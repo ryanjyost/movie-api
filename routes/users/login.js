@@ -1,4 +1,4 @@
-const { Users, GroupMe } = require("../../src");
+const { Users, GroupMe, Groups } = require("../../src");
 
 module.exports = async (req, res) => {
   let token = req.body.access_token;
@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
 
   //... get user's groupme data
   const groupMeUser = await GroupMeApi.getCurrentUser();
+  console.log("CURRENT", groupMeUser);
 
   //... find or create user with groupme data
   const user = await Users.findOrCreateUser(groupMeUser.data.response);
@@ -13,13 +14,17 @@ module.exports = async (req, res) => {
   let userMongoObject;
 
   if (user.isNew) {
-    userMongoObject = await Users.findOrCreateUser(groupMeUser, null, true);
+    userMongoObject = await Users.findOrCreateUser(
+      groupMeUser.data.response,
+      null,
+      true
+    );
 
     let userMMGroups = [...userMongoObject.groups];
     //... get user's groups
     const usersGroups = await GroupMeApi.getCurrentUsersGroups();
 
-    for (let group of usersGroups) {
+    for (let group of usersGroups.data.response) {
       const existingGroup = await Groups.getGroup({
         groupmeId: group.group_id
       });

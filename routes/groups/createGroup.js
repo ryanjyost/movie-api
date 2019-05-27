@@ -6,14 +6,15 @@ module.exports = async (req, res) => {
   const GroupMeApi = await GroupMe.createApi();
 
   //... create GroupMe group
-  const newGroup = await GroupMeApi.createGroupMeGroup();
+  const newGroupRes = await GroupMeApi.createGroupMeGroup();
+  const newGroup = newGroupRes.data.response;
 
   //... get user who's creating the group
   const UserGroupMeApi = GroupMe.createApi(req.body.accessToken);
   const currentUser = await UserGroupMeApi.getCurrentUser();
 
   // add user to GroupMe group who's creating the group
-  newGroup.members.push(currentUser);
+  newGroup.members.push(currentUser.data.response);
 
   //... add user who created the MM group to the GroupMe group
   await GroupMeApi.addMemberToGroup(newGroup.id, {
@@ -29,7 +30,7 @@ module.exports = async (req, res) => {
   const groupMeBotResult = await GroupMeApi.createBot(newGroup.id);
 
   // add new bot info to group
-  newGroup.bot = groupMeBotResult.bot;
+  newGroup.bot = groupMeBotResult.data.response.bot;
 
   //... create MM group
   const createdGroup = await Groups.createGroup(newGroup);

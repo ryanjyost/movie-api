@@ -1,7 +1,8 @@
 const GroupMe = require("../platforms/groupme");
 const Groups = require("../groups");
 
-module.exports = async text => {
+module.exports = async req => {
+  const { text } = req.body;
   if (text.includes("added")) {
     const isMovieMediumInitiated = text
       .split("added")[0]
@@ -18,7 +19,7 @@ module.exports = async text => {
       // if nothing went wrong fetching the group info
       if (groupMeGroup) {
         const group = await Groups.getGroup({
-          groupmeId: groupMeGroup.group_id
+          groupmeId: groupMeGroup.data.response.group_id
         });
 
         await GroupMeApi.sendBotMessage(

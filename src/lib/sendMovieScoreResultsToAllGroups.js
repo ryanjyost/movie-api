@@ -26,7 +26,6 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
 
     for (let i = 0; i < rankings.length; i++) {
       let vote = rankings[i];
-      console.log("VOTE", vote);
 
       const noPredictionMessage = "Penalty for not predicting";
       const notActiveMessage = ` User wasn't around yet`;
@@ -67,7 +66,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
         } else {
           rankingMessage =
             rankingMessage +
-            `${player.name}: ${Math.abs(player.avgDiff)}%}` +
+            `${player.name}: ${Math.abs(player.avgDiff)}%` +
             "\n";
         }
       }

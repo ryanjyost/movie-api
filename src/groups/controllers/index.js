@@ -23,10 +23,11 @@ exports.getGroup = async (req, res, next) => {
 
 exports.getGroupRankings = async (req, res, next) => {
   let err, rankings;
+  console.log(req.params);
   [err, rankings] = await to(
     calculateRankings(
       req.params.id === "all" ? null : { _id: req.params.id },
-      req.params.seasonId ? { _id: req.params.seasonId } : null
+      req.params.seasonId ? { season: req.params.seasonId } : null
     )
   );
   if (err) next(err);

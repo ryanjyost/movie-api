@@ -26,13 +26,15 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
     [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
     if (err) throw new Error();
 
-    if (movieQuery && movieQuery._id === "recent") {
+    if (movieQuery && movieQuery.season === "recent") {
       let seasons = await Seasons.getSeasons();
       movieQuery = { season: seasons[0] ? seasons[0].id : 0 };
       season = seasons[0];
+      console.log("SEASON", season);
     }
 
     let movies;
+    console.log("Movie QUERY", movieQuery);
     [err, movies] = await to(Movies.getMovies(movieQuery));
 
     let dataForRankings = [];
@@ -127,6 +129,8 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }
+
+    console.log("FINAL", rankingsWithPlaces);
 
     return rankingsWithPlaces;
   } catch (e) {

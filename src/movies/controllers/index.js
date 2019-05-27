@@ -134,13 +134,12 @@ exports.editMovie = async (req, res, next) => {
 
     const season = await addMovieToSeason(movieBeforeUpdate);
     movie.season = season.id;
+    await movie.save();
 
     [err, response] = await to(
       sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore))
     );
     if (err) next(err);
-
-    movie.save();
   }
 
   // add movie to user vote map with -1 if no vote

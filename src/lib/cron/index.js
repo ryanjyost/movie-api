@@ -18,7 +18,7 @@ const runCronJobs = () => {
   job3.start();
 };
 
-syncUsersAndGroups();
+// syncUsersAndGroups();
 // handleCutoffNotifications();
 // calcMovieMetrics();
 

@@ -37,6 +37,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // Log error message
   console.error("ERROR HANDLER", err.data || err.message || err);
+  console.error("ERROR HANDLER", err.stack);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = process.env.ENV === "development" ? err : {};

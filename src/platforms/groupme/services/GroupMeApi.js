@@ -1,7 +1,7 @@
 const { create } = require("apisauce");
 const queryString = require("query-string");
 
-const createApi = token => {
+const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
   const api = create({
     baseURL: "https://api.groupme.com/v3",
     timeout: 30000,

@@ -4,13 +4,6 @@ const { to, sanitizeTitle } = require("../../../helpers");
 /*
 * Edit movie
 */
-const editMovie = async newMovieData => {
-  let err, newMovie;
-
-  newMovieData.title_lower = sanitizeTitle(newMovieData.title);
-  [err, newMovie] = await to(Movie.create(newMovieData));
-
-  return newMovie;
+module.exports = async (query, update, returnNew = true) => {
+  return await Movie.findOneAndUpdate(query, update, { new: returnNew });
 };
-
-module.exports = editMovie;

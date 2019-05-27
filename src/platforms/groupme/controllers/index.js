@@ -5,8 +5,8 @@ const queryString = require("query-string");
 const createGroupMeApi = require("../services/GroupMeApi");
 
 // Big operations with tons of deps
-const handleGroupMeAutomatedMessage = require("../controllers/handleGroupMeAutomatedMessage");
-const sendGroupRankings = require("../controllers/sendGroupRankings");
+const handleGroupMeAutomatedMessage = require("../../../lib/handleGroupMeAutomatedMessage");
+const sendGroupRankings = require("../../../lib/sendGroupRankings");
 const handleUserPrediction = require("../../../lib/handleUserPrediction");
 
 /* Receive a message from GroupMe */

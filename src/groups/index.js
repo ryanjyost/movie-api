@@ -3,5 +3,6 @@ module.exports = {
   getGroup: require("./services/getGroup.js"),
   getGroups: require("./services/getGroups.js"),
   addUserToGroup: require("./services/addUserToGroup.js"),
-  prepSortGroupPredictions: require("./services/prepSortGroupPredictions")
+  prepSortGroupPredictions: require("./services/prepSortGroupPredictions"),
+  getSeasonBreakdowns: require("./services/getSeasonBreakdowns")
 };

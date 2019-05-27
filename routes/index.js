@@ -1,67 +1,62 @@
 const express = require("express");
 const router = express.Router();
 
-// controllers
-const MoviesController = require("../src/movies/controllers");
-const UsersController = require("../src/users/controllers");
-
-const SeasonsController = require("../src/seasons/controllers");
 const GroupMeController = require("../src/platforms/groupme/controllers");
 const SpecialCaseController = require("../src/lib/controllers");
 
-const GroupRoutes = require("./groups");
+// Hook up routes
+router.use("/groups", require("./groups"));
+router.use("/movies", require("./movies"));
+router.use("/users", require("./users"));
+router.use("/seasons", require("./seasons"));
+router.use("/groupme", require("./platforms/groupme"));
 
 /* ======================
  Movies
 ========================*/
 
 /* Get all movies */
-router.get("/movies", MoviesController.getMovies);
+// router.get("/movies", MoviesController.getMovies);
 
-/* Add a movie */
-router.post("/movies/add", MoviesController.addMovie);
-
-/* Edit movie */
-router.post("/movies/edit/:id", MoviesController.editMovie);
-
-/* Delete movie */
-router.post("/movies/delete/:id", MoviesController.deleteMovie);
-
-/* Update a user's movie prediction */
-router.post(
-  "/movies/predict/:movieId",
-  MoviesController.handleUserPrediction,
-  UsersController.updateUserPrediction
-);
+// /* Add a movie */
+// router.post("/movies/add", MoviesController.addMovie);
+//
+// /* Edit movie */
+// router.post("/movies/edit/:id", MoviesController.editMovie);
+//
+// /* Delete movie */
+// router.post("/movies/delete/:id", MoviesController.deleteMovie);
+//
+// /* Update a user's movie prediction */
+// router.post(
+//   "/movies/predict/:movieId",
+//   MoviesController.handleUserPrediction,
+//   UsersController.updateUserPrediction
+// );
 
 /* ======================
  User
 ========================*/
 
-/* With auth token */
-router.post("/users/login", UsersController.login);
+// /* With auth token */
+// router.post("/users/login", UsersController.login);
 
 /* Get user info */
-router.get("/users/:id", UsersController.getUser);
-
-/* ======================
- Groups
-========================*/
-router.use("/groups", GroupRoutes);
+// router.get("/users/:id", UsersController.getUser);
 
 /* ======================
  Seasons
 ========================*/
 
 /* Get all seasons */
-router.get("/seasons", SeasonsController.getSeasons);
+// router.get("/seasons", SeasonsController.getSeasons);
 
 /* ======================
  GroupMe
 ========================*/
 
 /* Receive a bot message */
-router.post("/groupme/receive_message", GroupMeController.receiveMessage);
+// router.post("/groupme/receive_message", GroupMeController.receiveMessage);
 
 /* Get info on GroupMe group */
 router.post("/groupme/:group/users", GroupMeController.getGroup);

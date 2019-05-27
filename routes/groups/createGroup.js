@@ -1,121 +1,100 @@
-const GroupMe = require("../../src/platforms/groupme");
+const { GroupMe, Groups, Movies, Users } = require("../../src");
+const { moviePredictionCutoffDate } = require("../../helpers");
 
-module.exports = async (req, res, next) => {
-  const GroupMeApi = GroupMe.createApi(process.env.GROUPME_ACCESS_TOKEN);
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
+ */
+module.exports = async (req, res) => {
+  // need API with Movie Medium access token to create the group
+  const GroupMeApi = GroupMe.createApi();
 
   //... create GroupMe group
-  let err, newGroupMeGroup;
-  [err, newGroupMeGroup] = await to(GroupMeApi.createGroupMeGroup());
-  if (err) {
-    next(err);
-    return;
-  }
+  const newGroup = await GroupMeApi.createGroupMeGroup();
 
   //... get user who's creating the group
   const UserGroupMeApi = GroupMe.createApi(req.body.accessToken);
-  let currentUser;
-  [err, currentUser] = await to(UserGroupMeApi.getCurrentUser());
-  if (err) next(err);
+  const currentUser = await UserGroupMeApi.getCurrentUser();
 
   //... add user to GroupMe group who's creating the group
-  newGroupMeGroup.members.push(currentUser);
+  newGroup.members.push(currentUser);
 
-  let addUserResult;
-  [err, addUserResult] = await to(
-    GroupMeApi.addMemberToGroup(newGroupMeGroup.id, {
-      members: [
-        {
-          user_id: currentUser.id,
-          nickname: currentUser.nickname || currentUser.name
-        }
-      ]
-    })
-  );
-  if (err) next(err);
+  //... add user who created the MM group to the GroupMe group
+  await GroupMeApi.addMemberToGroup(newGroup.id, {
+    members: [
+      {
+        user_id: currentUser.id,
+        nickname: currentUser.nickname || currentUser.name
+      }
+    ]
+  });
 
-  //... create bot
-  let groupMeBotResult;
-  [err, groupMeBotResult] = await to(GroupMeApi.createBot(newGroupMeGroup.id));
-  if (err) next(err);
+  //... create bot for the new group
+  const groupMeBotResult = await GroupMeApi.createBot(newGroup.id);
 
-  newGroupMeGroup.bot = groupMeBotResult.bot;
+  // add new bot info to group
+  newGroup.bot = groupMeBotResult.bot;
 
-  //... create MM group TODO with members
-  let createdGroup;
-  [err, createdGroup] = await to(createGroup(newGroupMeGroup));
-  if (err) next(err);
+  //... create MM group
+  const createdGroup = await Groups.createGroup(newGroup);
 
   // send welcome message
-  await to(
-    GroupMe.sendBotMessage(
-      `You're ready to start predicting Rotten Tomatoes Scores 🎉 Invite more friends to this chat and they'll be ready to play, too.` +
-        "\n" +
-        "\n" +
-        `Learn how to play and manage predictions at moviemedium.io`,
-      groupMeBotResult.bot.bot_id
-    )
+  await GroupMe.sendBotMessage(
+    `You're ready to start predicting Rotten Tomatoes Scores 🎉 Invite more friends to this chat and they'll be ready to play, too.` +
+      "\n" +
+      "\n" +
+      `Learn how to play and manage predictions at moviemedium.io`,
+    groupMeBotResult.bot.bot_id
   );
 
-  let upcomingMovies;
-  [err, upcomingMovies] = await to(
-    Movies.getMovies(
-      {
-        rtScore: { $lt: 0 },
-        releaseDate: { $gt: moviePredictionCutoffDate },
-        isClosed: 0
-      },
-      { releaseDate: 1 }
-    )
+  //.... get upcoming movies to show example of one to predict
+  const upcomingMovies = await Movies.getMovies(
+    {
+      rtScore: { $lt: 0 },
+      releaseDate: { $gt: moviePredictionCutoffDate },
+      isClosed: 0
+    },
+    { releaseDate: 1 }
   );
-
-  if (err) next(err);
 
   if (upcomingMovies.length) {
-    await to(
-      GroupMe.sendBotMessage(
-        `There are ${
-          upcomingMovies.length
-        } upcoming movies for you to predict. Get started with this one that's close to locking in predictions!`,
-        groupMeBotResult.bot.bot_id
-      )
+    await GroupMe.sendBotMessage(
+      `There are ${
+        upcomingMovies.length
+      } upcoming movies for you to predict. Get started with this one that's close to locking in predictions!`,
+      groupMeBotResult.bot.bot_id
     );
 
-    [err, response] = await to(
-      GroupMe.sendBotMessage(
-        `🍿 ${upcomingMovies[0].title}`,
-        groupMeBotResult.bot.bot_id
-      )
-    );
-    [err, response] = await to(
-      GroupMe.sendBotMessage(
-        `${upcomingMovies[0].trailer}`,
-        groupMeBotResult.bot.bot_id
-      )
+    await GroupMe.sendBotMessage(
+      `🍿 ${upcomingMovies[0].title}`,
+      groupMeBotResult.bot.bot_id
     );
 
-    await to(
-      GroupMe.sendBotMessage(
-        `To predict within this GroupMe chat, simply post a message with the structure "movie title = percentage%" So if you think ${
-          upcomingMovies[0].title
-        } is going to get a Rotten Tomatoes Score of 59%, simply send the message "${
-          upcomingMovies[0].title
-        } = 59%"`,
-        groupMeBotResult.bot.bot_id
-      )
+    await GroupMe.sendBotMessage(
+      `${upcomingMovies[0].trailer}`,
+      groupMeBotResult.bot.bot_id
+    );
+
+    await GroupMe.sendBotMessage(
+      `To predict within this GroupMe chat, simply post a message with the structure "movie title = percentage%" So if you think ${
+        upcomingMovies[0].title
+      } is going to get a Rotten Tomatoes Score of 59%, simply send the message "${
+        upcomingMovies[0].title
+      } = 59%"`,
+      groupMeBotResult.bot.bot_id
     );
   }
 
-  if (err) next(err);
-
-  let user;
-  [err, user] = await to(
+  const user = await to(
     Users.getUser(
       { groupmeId: currentUser.user_id },
       {},
       { path: "groups", populate: { path: "members" } }
     )
   );
-  if (err) next(err);
 
   res.json({ createdGroup, user });
 };

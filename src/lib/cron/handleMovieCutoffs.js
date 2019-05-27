@@ -3,7 +3,6 @@ const Users = require("../../users");
 const Groups = require("../../groups");
 const GroupMe = require("../../platforms/groupme");
 const {
-  to,
   moviePredictionCutoffDate,
   sortArrayByProperty
 } = require("../../../helpers");
@@ -11,21 +10,9 @@ const moment = require("moment");
 
 const handleMovieCutoffs = async () => {
   try {
-    console.log(
-      "cutoff",
-      moment
-        .unix(moviePredictionCutoffDate)
-        .utc()
-        .format("dddd, MMMM Do YYYY, h:mm:ss a Z")
-    );
-    console.log("now", moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z"));
-
-    let err, moviesToClose;
-    [err, moviesToClose] = await to(
-      Movies.getMovies({
-        isClosed: 0
-      })
-    );
+    const moviesToClose = await Movies.getMovies({
+      isClosed: 0
+    });
 
     for (let movie of moviesToClose) {
       if (
@@ -35,17 +22,12 @@ const handleMovieCutoffs = async () => {
       ) {
         continue;
       }
-      console.log("Closing...", movie.title);
       movie.isClosed = 1;
-      await to(movie.save());
+      await movie.save();
 
-      let err, response;
-      [err, response] = await to(Users.updateUserVoteMaps(movie));
-      if (err) throw new Error(err);
+      await Users.updateUserVoteMaps(movie);
 
-      let groups;
-      [err, groups] = await to(Groups.getGroups({}, "members"));
-      if (err) throw new Error(err);
+      const groups = await Groups.getGroups({}, "members");
 
       for (let group of groups) {
         let movieMessage =
@@ -78,7 +60,7 @@ const handleMovieCutoffs = async () => {
       }
     }
   } catch (e) {
-    console.log("CUTOFF ERROR", e);
+    throw new Error(e);
   }
 };
 

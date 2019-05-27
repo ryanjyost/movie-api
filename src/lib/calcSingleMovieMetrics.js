@@ -1,7 +1,3 @@
-// const Movie = require("../movies/model.js");
-// const MovieScoreMap = require("../../models/movieScoreMap.js");
-// const { to } = require("../helpers/index");
-
 module.exports = async movie => {
   let average = -1,
     numVotes = 0,

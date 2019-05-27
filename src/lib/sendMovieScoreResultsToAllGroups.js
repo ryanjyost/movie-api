@@ -1,17 +1,12 @@
 const GroupMe = require("../platforms/groupme/index");
 const Groups = require("../groups");
 const Seasons = require("../seasons");
-const { to } = require("../../helpers");
 const calculateRankings = require("./calculateRankings");
 
 const sendMovieScoreResultsToAllGroups = async (movie, score) => {
-  let err, groups;
-  [err, groups] = await to(Groups.getGroups({}, "members"));
-  if (err) throw new Error(err);
+  const groups = await Groups.getGroups({}, "members");
 
-  let season;
-  [err, season] = await to(Seasons.getSeason({ id: movie.season }));
-  if (err) throw new Error(err);
+  const season = await Seasons.getSeason({ id: movie.season });
 
   for (let group of groups) {
     let mainMessage =

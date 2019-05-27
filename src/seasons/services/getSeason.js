@@ -1,5 +1,5 @@
 const Season = require("../model");
-
+``;
 /*
 * Handle movie getting an RT Score
 */

@@ -8,7 +8,7 @@ module.exports = async () => {
   [err, movies] = await to(Movie.find());
 
   for (let movie of movies) {
-    movie.metrics = calculateSingleMovieMetrics(movie);
-    movie.save();
+    movie.metrics = await calculateSingleMovieMetrics(movie);
+    await movie.save();
   }
 };

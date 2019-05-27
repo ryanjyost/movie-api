@@ -2,7 +2,7 @@ const MovieScoreMap = require("../movieScoreMap/model");
 const Movies = require("../movies/index");
 const Users = require("../users/index");
 const Seasons = require("../seasons/index");
-const { to, calcNoPredictionPenalty } = require("../../helpers/index");
+const { calcNoPredictionPenalty } = require("../../helpers/index");
 const getGroup = require("../groups/services/getGroup");
 
 /*
@@ -10,7 +10,6 @@ const getGroup = require("../groups/services/getGroup");
 */
 
 const calculateRankings = async (groupQuery, movieQuery = {}) => {
-  console.log("CALC Rankings");
   try {
     let group = null,
       users = [],
@@ -22,20 +21,15 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       users = await Users.getUsers();
     }
 
-    let err, movieScoreMap;
-    [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
-    if (err) throw new Error();
+    const movieScoreMap = await MovieScoreMap.findOne({ id: 1 });
 
     if (movieQuery && movieQuery.season === "recent") {
       let seasons = await Seasons.getSeasons();
       movieQuery = { season: seasons[0] ? seasons[0].id : 0 };
       season = seasons[0];
-      console.log("SEASON", season);
     }
 
-    let movies;
-    console.log("Movie QUERY", movieQuery);
-    [err, movies] = await to(Movies.getMovies(movieQuery));
+    const movies = await Movies.getMovies(movieQuery);
 
     let dataForRankings = [];
 
@@ -129,8 +123,6 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }
-
-    console.log("FINAL", rankingsWithPlaces);
 
     return rankingsWithPlaces;
   } catch (e) {

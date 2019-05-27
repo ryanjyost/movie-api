@@ -1,16 +1,9 @@
 const { GroupMe, Groups, Movies, Users } = require("../../src");
 const { moviePredictionCutoffDate } = require("../../helpers");
 
-/**
- *
- * @param req
- * @param res
- * @param next
- * @returns {Promise<void>}
- */
 module.exports = async (req, res) => {
   // need API with Movie Medium access token to create the group
-  const GroupMeApi = GroupMe.createApi();
+  const GroupMeApi = await GroupMe.createApi();
 
   //... create GroupMe group
   const newGroup = await GroupMeApi.createGroupMeGroup();
@@ -19,7 +12,7 @@ module.exports = async (req, res) => {
   const UserGroupMeApi = GroupMe.createApi(req.body.accessToken);
   const currentUser = await UserGroupMeApi.getCurrentUser();
 
-  //... add user to GroupMe group who's creating the group
+  // add user to GroupMe group who's creating the group
   newGroup.members.push(currentUser);
 
   //... add user who created the MM group to the GroupMe group
@@ -41,7 +34,7 @@ module.exports = async (req, res) => {
   //... create MM group
   const createdGroup = await Groups.createGroup(newGroup);
 
-  // send welcome message
+  // ...send welcome message
   await GroupMe.sendBotMessage(
     `You're ready to start predicting Rotten Tomatoes Scores 🎉 Invite more friends to this chat and they'll be ready to play, too.` +
       "\n" +
@@ -60,6 +53,7 @@ module.exports = async (req, res) => {
     { releaseDate: 1 }
   );
 
+  // ...as long as there's an upcoming movie to predict, send onboarding info
   if (upcomingMovies.length) {
     await GroupMe.sendBotMessage(
       `There are ${
@@ -88,6 +82,7 @@ module.exports = async (req, res) => {
     );
   }
 
+  // ...send updated user info for inital entry into the app
   const user = await to(
     Users.getUser(
       { groupmeId: currentUser.user_id },

@@ -11,10 +11,11 @@ module.exports = async (req, res) => {
 
   //... get user who's creating the group
   const UserGroupMeApi = GroupMe.createApi(req.body.accessToken);
-  const currentUser = await UserGroupMeApi.getCurrentUser();
+  const currentUserRes = await UserGroupMeApi.getCurrentUser();
+  const currentUser = currentUserRes.data.response;
 
   // add user to GroupMe group who's creating the group
-  newGroup.members.push(currentUser.data.response);
+  newGroup.members.push(currentUser);
 
   //... add user who created the MM group to the GroupMe group
   await GroupMeApi.addMemberToGroup(newGroup.id, {
@@ -28,9 +29,10 @@ module.exports = async (req, res) => {
 
   //... create bot for the new group
   const groupMeBotResult = await GroupMeApi.createBot(newGroup.id);
+  const newBot = groupMeBotResult.data.response;
 
   // add new bot info to group
-  newGroup.bot = groupMeBotResult.data.response.bot;
+  newGroup.bot = newBot.bot;
 
   //... create MM group
   const createdGroup = await Groups.createGroup(newGroup);
@@ -41,7 +43,7 @@ module.exports = async (req, res) => {
       "\n" +
       "\n" +
       `Learn how to play and manage predictions at moviemedium.io`,
-    groupMeBotResult.bot.bot_id
+    newBot.bot.bot_id
   );
 
   //.... get upcoming movies to show example of one to predict
@@ -60,17 +62,17 @@ module.exports = async (req, res) => {
       `There are ${
         upcomingMovies.length
       } upcoming movies for you to predict. Get started with this one that's close to locking in predictions!`,
-      groupMeBotResult.bot.bot_id
+      newBot.bot.bot_id
     );
 
     await GroupMe.sendBotMessage(
       `🍿 ${upcomingMovies[0].title}`,
-      groupMeBotResult.bot.bot_id
+      newBot.bot.bot_id
     );
 
     await GroupMe.sendBotMessage(
       `${upcomingMovies[0].trailer}`,
-      groupMeBotResult.bot.bot_id
+      newBot.bot.bot_id
     );
 
     await GroupMe.sendBotMessage(
@@ -79,7 +81,7 @@ module.exports = async (req, res) => {
       } is going to get a Rotten Tomatoes Score of 59%, simply send the message "${
         upcomingMovies[0].title
       } = 59%"`,
-      groupMeBotResult.bot.bot_id
+      newBot.bot.bot_id
     );
   }
 

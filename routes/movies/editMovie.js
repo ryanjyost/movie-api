@@ -1,4 +1,5 @@
-const { Movies, Lib, Users } = require("../../src");
+const { Movies, Lib, Users, Groups, GroupMe } = require("../../src");
+const { sortArrayByProperty } = require("../../helpers");
 
 module.exports = async (req, res) => {
   //... update movie, return before update so can compare for conditional actions below
@@ -11,11 +12,11 @@ module.exports = async (req, res) => {
   //... update map of movie keys
   await Lib.updateMovieScoreMap(req.params.id, Number(req.body.rtScore));
 
+  //... get movie that's being updated
+  const movie = await Movies.getMovie({ _id: req.params.id });
+
   // movie is getting a score
   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
-    //... get movie that's being updated
-    const movie = await Movies.getMovie({ _id: req.params.id });
-
     // ...b/c the movie has an RT Score, calc user prediction metrics
     const metrics = await Lib.calcSingleMovieMetrics({
       ...movie.toObject(),
@@ -36,6 +37,38 @@ module.exports = async (req, res) => {
   // ...add movie to user vote map with -1 if no vote
   if (!movieBeforeUpdate.isClosed && Number(req.body.isClosed) > 0) {
     await Users.updateUserVoteMaps(movieBeforeUpdate);
+
+    const groups = await Groups.getGroups({}, "members");
+
+    for (let group of groups) {
+      let movieMessage =
+        `🔒 "${movie.title}" predictions are locked in!` + "\n";
+
+      let sortedMembers = sortArrayByProperty(
+        group.members,
+        `votes.${movie._id}`,
+        false
+      );
+
+      let voteMessage = ``;
+      for (let user of sortedMembers) {
+        if (user && user.name !== "Movie Medium") {
+          voteMessage =
+            voteMessage +
+            `${user.name}: ${
+              user.votes[movie._id] < 0
+                ? `Forgot to predict 😬`
+                : `${user.votes[movie._id]}%`
+            }` +
+            "\n";
+        }
+      }
+
+      await GroupMe.sendBotMessage(
+        movieMessage + "\n" + voteMessage,
+        group.bot.bot_id
+      );
+    }
   }
 
   //...return all movies to make updating admin easier

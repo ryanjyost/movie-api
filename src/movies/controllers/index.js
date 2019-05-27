@@ -106,53 +106,53 @@ const { updateUserVoteMaps } = require("../../users");
 /*
 * EDIT MOVIE
 */
-// exports.editMovie = async (req, res, next) => {
-//   let err, movieBeforeUpdate;
-//   [err, movieBeforeUpdate] = await to(
-//     Movie.findOneAndUpdate({ _id: req.params.id }, req.body, { new: false })
-//   );
-//   if (err) next(err);
-//
-//   await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
-//
-//   const movie = await Movie.findOne({ _id: req.params.id });
-//
-//   // movie is getting a score
-//   if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
-//     let err, response;
-//
-//     const metrics = await calcSingleMovieMetrics({
-//       ...movie.toObject(),
-//       ...{ rtScore: req.body.rtScore }
-//     });
-//
-//     movie.metrics = metrics;
-//
-//     const season = await addMovieToSeason(movieBeforeUpdate);
-//     movie.season = season.id;
-//
-//     [err, response] = await to(
-//       sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore))
-//     );
-//     if (err) next(err);
-//
-//     movie.save();
-//   }
-//
-//   // add movie to user vote map with -1 if no vote
-//   if (!movieBeforeUpdate.isClosed && Number(req.body.isClosed) > 0) {
-//     let err, response;
-//     [err, response] = await to(Users.updateUserVoteMaps(movieBeforeUpdate));
-//     if (err) next(err);
-//   }
-//
-//   // return all movies to make updating admin easier
-//   let movies;
-//   [err, movies] = await to(Movie.find());
-//   if (err) next(err);
-//
-//   res.json({ movies });
-// };
+exports.editMovie = async (req, res, next) => {
+  let err, movieBeforeUpdate;
+  [err, movieBeforeUpdate] = await to(
+    Movie.findOneAndUpdate({ _id: req.params.id }, req.body, { new: false })
+  );
+  if (err) next(err);
+
+  await to(updateMovieScoreMap(req.params.id, Number(req.body.rtScore)));
+
+  const movie = await Movie.findOne({ _id: req.params.id });
+
+  // movie is getting a score
+  if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
+    let err, response;
+
+    const metrics = await calcSingleMovieMetrics({
+      ...movie.toObject(),
+      ...{ rtScore: req.body.rtScore }
+    });
+
+    movie.metrics = metrics;
+
+    const season = await addMovieToSeason(movieBeforeUpdate);
+    movie.season = season.id;
+
+    [err, response] = await to(
+      sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore))
+    );
+    if (err) next(err);
+
+    movie.save();
+  }
+
+  // add movie to user vote map with -1 if no vote
+  if (!movieBeforeUpdate.isClosed && Number(req.body.isClosed) > 0) {
+    let err, response;
+    [err, response] = await to(Users.updateUserVoteMaps(movieBeforeUpdate));
+    if (err) next(err);
+  }
+
+  // return all movies to make updating admin easier
+  let movies;
+  [err, movies] = await to(Movie.find());
+  if (err) next(err);
+
+  res.json({ movies });
+};
 
 /*
 * DELETE MOVIE

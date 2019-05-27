@@ -5,7 +5,6 @@ const handleMovieCutoffs = require("./handleMovieCutoffs");
 const syncUsersAndGroups = require("./syncUsersAndGroups");
 const handleCutoffNotifications = require("./handleCutoffNotifications");
 const calcMovieMetrics = require("../calcMovieMetrics");
-const { createWinnerMap } = require("../addMovieToSeason");
 
 const job1 = new CronJob("0 20 0,1,2 * * *", handleMovieCutoffs, null, true);
 
@@ -19,7 +18,7 @@ const runCronJobs = () => {
   job3.start();
 };
 
-syncUsersAndGroups();
+// syncUsersAndGroups();
 // handleCutoffNotifications();
 // calcMovieMetrics();
 

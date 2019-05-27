@@ -26,13 +26,15 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
     [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
     if (err) throw new Error();
 
-    if (movieQuery && movieQuery._id === "recent") {
+    if (movieQuery && movieQuery.season === "recent") {
       let seasons = await Seasons.getSeasons();
       movieQuery = { season: seasons[0] ? seasons[0].id : 0 };
       season = seasons[0];
+      console.log("SEASON", season);
     }
 
     let movies;
+    console.log("Movie QUERY", movieQuery);
     [err, movies] = await to(Movies.getMovies(movieQuery));
 
     let dataForRankings = [];
@@ -50,7 +52,11 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
         let actualScore = movieScoreMap.map[movie._id];
         let userPrediction = user.votes[movie._id];
 
-        if (!actualScore || actualScore < 0 || userPrediction === undefined)
+        if (
+          actualScore === null ||
+          actualScore < 0 ||
+          userPrediction === undefined
+        )
           continue;
 
         // we know this is a legit movie that the user had a chance to predict
@@ -119,10 +125,12 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       lastRankingScore = sorted[0].avgDiff;
     for (let i = 1; i < sorted.length; i++) {
       let currRanking =
-        sorted[i].avgDiff === lastRankingScore ? lastRanking : i;
+        sorted[i].avgDiff === lastRankingScore ? lastRanking : i + 1;
 
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }
+
+    console.log("FINAL", rankingsWithPlaces);
 
     return rankingsWithPlaces;
   } catch (e) {

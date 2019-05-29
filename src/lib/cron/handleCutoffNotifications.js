@@ -7,7 +7,7 @@ const Movies = require("../../movies");
 const Groups = require("../../groups");
 const moment = require("moment");
 
-const handleDayBeforeCutoffNotifications = async () => {
+const handleDayBeforeCutoffNotifications = async daysBeforeCutoff => {
   try {
     const movies = await Movies.getMovies({
       isClosed: 0,

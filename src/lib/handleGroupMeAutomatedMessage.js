@@ -23,7 +23,7 @@ module.exports = async req => {
         });
 
         await GroupMeApi.sendBotMessage(
-          `Hey ${name} 👋 Predict a movie in this chat or go to moviemedium.io to officially get in on the action! (By doing so, you agree to our terms of service and privacy policy ☺️).`,
+          `Hey ${name} 👋 Predict a movie in this chat or go to moviemedium.io to officially start proving your movie prowess! (By doing so, you agree to our terms of service and privacy policy️.)`,
           group.bot.bot_id
         );
       }

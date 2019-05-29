@@ -10,10 +10,10 @@ const getGroup = require("../groups/services/getGroup");
 */
 
 const calculateRankings = async (groupQuery, movieQuery = {}) => {
+  console.log("QUERY", groupQuery, movieQuery);
   try {
     let group = null,
-      users = [],
-      season = null;
+      users = [];
     if (groupQuery) {
       group = await getGroup(groupQuery, "members");
       users = group.members;
@@ -26,7 +26,6 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
     if (movieQuery && movieQuery.season === "recent") {
       let seasons = await Seasons.getSeasons();
       movieQuery = { season: seasons[0] ? seasons[0].id : 0 };
-      season = seasons[0];
     }
 
     const movies = await Movies.getMovies(movieQuery);
@@ -50,8 +49,9 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
           actualScore === null ||
           actualScore < 0 ||
           userPrediction === undefined
-        )
+        ) {
           continue;
+        }
 
         // we know this is a legit movie that the user had a chance to predict
         moviesInCalc++;
@@ -70,7 +70,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       const avgDiff = (totalDiff / moviesInCalc).toFixed(1);
 
       let notInSeason = false;
-      if (season) {
+      if ("season" in movieQuery) {
         notInSeason = !!movies.find(movie => !(movie._id in user.votes));
       }
 
@@ -123,6 +123,8 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
 
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }
+
+    console.log("RANKINGS", rankingsWithPlaces);
 
     return rankingsWithPlaces;
   } catch (e) {

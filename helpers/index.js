@@ -54,7 +54,7 @@ exports.createObjectId = stringId => mongoose.Types.ObjectId(stringId);
 
 /* Retrieve object of movie ids mapped to rt scores */
 exports.getMovieScoreMap = async () => {
-  let movieScoreMap;
+  let err, movieScoreMap;
   [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
   if (err) throw new Error();
 

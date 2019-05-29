@@ -65,7 +65,7 @@ const createWinnerMap = async season => {
       );
       winnerMap[group._id] = rankings
         .filter(player => {
-          return player.place === 1;
+          return player.place === 1 && !player.notInSeason;
         })
         .map(player => player.id);
     }

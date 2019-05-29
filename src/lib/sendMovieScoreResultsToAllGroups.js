@@ -23,7 +23,7 @@ const sendMovieScoreResultsToAllGroups = async (movie, score) => {
       let vote = rankings[i];
 
       const noPredictionMessage = "Penalty for not predicting";
-      const notActiveMessage = ` User wasn't around yet`;
+      const notActiveMessage = `N/A (Not a user when predictions closed)`;
 
       if (!vote.wasActiveForMovie) {
         scoreMessage = scoreMessage + `${vote.name}:` + notActiveMessage + "\n";

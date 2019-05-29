@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="refactoring">
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/addMovieToSeason.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/addMovieToSeason.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/calculateRankings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cron/handleCutoffNotifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cron/handleCutoffNotifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/handleGroupMeAutomatedMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/handleGroupMeAutomatedMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,38 +18,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/helpers/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="calculateRankings.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sendMovieScoreResultsToAllGroups.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="68" column="21" lean-forward="true" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="createGroup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/groups/createGroup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+            <state relative-caret-position="80">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -136,7 +113,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/routes/movies/updateMovieVotes.js" />
         <option value="$PROJECT_DIR$/src/movies/controllers/index.js" />
         <option value="$PROJECT_DIR$/src/platforms/groupme/services/GroupMeApi.js" />
         <option value="$PROJECT_DIR$/src/users/services/getUser.js" />
@@ -179,14 +155,15 @@
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/routes/misc/getGroupPredictionData.js" />
         <option value="$PROJECT_DIR$/src/movies/services/getMovies.js" />
-        <option value="$PROJECT_DIR$/routes/groups/createGroup.js" />
         <option value="$PROJECT_DIR$/routes/movies/editMovie.js" />
         <option value="$PROJECT_DIR$/src/lib/handleGroupMeAutomatedMessage.js" />
         <option value="$PROJECT_DIR$/src/lib/cron/handleCutoffNotifications.js" />
         <option value="$PROJECT_DIR$/src/lib/addMovieToSeason.js" />
-        <option value="$PROJECT_DIR$/src/lib/calculateRankings.js" />
         <option value="$PROJECT_DIR$/helpers/index.js" />
         <option value="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" />
+        <option value="$PROJECT_DIR$/src/lib/calculateRankings.js" />
+        <option value="$PROJECT_DIR$/routes/groups/createGroup.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -205,9 +182,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="x" value="-389" />
+    <option name="y" value="-1057" />
+    <option name="width" value="1920" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -225,42 +203,7 @@
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-              <item name="groups" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="movies" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="movies" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -362,7 +305,7 @@
       <workItem from="1558983746954" duration="2902000" />
       <workItem from="1559001810357" duration="1271000" />
       <workItem from="1559006121903" duration="1841000" />
-      <workItem from="1559010423189" duration="5134000" />
+      <workItem from="1559010423189" duration="6988000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -665,11 +608,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558992739499</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="refactoring, final touches">
+      <created>1559102124838</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1559102124838</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463422000" />
+    <option name="totallyTimeSpent" value="465276000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -681,7 +631,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="-389" y="-1057" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
@@ -689,8 +639,8 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32882413" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2609047" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17199148" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
@@ -741,7 +691,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tons of updates" />
     <MESSAGE value="tweaks" />
     <MESSAGE value="collect cutoff times, fix movie query" />
     <MESSAGE value="improvements" />
@@ -766,7 +715,8 @@
     <MESSAGE value="test with 5 movie seasons" />
     <MESSAGE value="trying out cron" />
     <MESSAGE value="refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
+    <MESSAGE value="refactoring, final touches" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring, final touches" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -879,9 +829,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/users/services/getUser.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/users/index.js">
@@ -1018,6 +965,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="62" column="28" lean-forward="true" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1617">
+          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/helpers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -1027,22 +988,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/groups/createGroup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        <state relative-caret-position="80">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/calculateRankings.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="68" column="21" lean-forward="true" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+        <state relative-caret-position="360">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
         </state>
       </provider>
     </entry>

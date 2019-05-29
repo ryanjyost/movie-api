@@ -70,7 +70,7 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       const avgDiff = (totalDiff / moviesInCalc).toFixed(1);
 
       let notInSeason = false;
-      if ("season" in movieQuery) {
+      if (movieQuery && "season" in movieQuery) {
         notInSeason = !!movies.find(movie => !(movie._id in user.votes));
       }
 

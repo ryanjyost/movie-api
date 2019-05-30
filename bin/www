@@ -1,7 +1,9 @@
 #!/usr/bin/env node
+const PrettyError = require("pretty-error");
+const pe = new PrettyError();
 
 process.on("uncaughtException", function(exception) {
-	console.log('CRASH',exception); // to see your exception details in the console
+	console.log(pe.render(exception)); // to see your exception details in the console
 	// if you are on production, maybe you can send the exception details to your
 	// email as well ?
 });

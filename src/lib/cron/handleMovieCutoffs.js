@@ -4,6 +4,7 @@ const Groups = require("../../groups");
 const GroupMe = require("../../platforms/groupme");
 const {
   moviePredictionCutoffDate,
+  isMoviePastPredictionDeadline,
   sortArrayByProperty
 } = require("../../../helpers");
 const moment = require("moment");
@@ -13,50 +14,59 @@ const handleMovieCutoffs = async () => {
     const moviesToClose = await Movies.getMovies({
       isClosed: 0
     });
+    console.log("CUTOFFS");
+    console.log("NOW", moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z"));
+    console.log(
+      "Cutoff",
+      moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+    );
 
     for (let movie of moviesToClose) {
-      if (
-        moment
-          .unix(movie.releaseDate)
-          .isAfter(moment.unix(moviePredictionCutoffDate).utc())
-      ) {
-        continue;
-      }
-      movie.isClosed = 1;
-      await movie.save();
+      console.log("==============");
+      console.log(movie.title);
+      console.log(
+        "Release Date",
+        moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+      );
+      console.log("PAST?", isMoviePastPredictionDeadline(movie.releaseDate));
 
-      await Users.updateUserVoteMaps(movie);
+      if (isMoviePastPredictionDeadline(movie.releaseDate)) {
+        movie.isClosed = 1;
+        await movie.save();
 
-      const groups = await Groups.getGroups({}, "members");
+        await Users.updateUserVoteMaps(movie);
 
-      for (let group of groups) {
-        let movieMessage =
-          `🔒 "${movie.title}" predictions are locked in!` + "\n";
+        const groups = await Groups.getGroups({}, "members");
 
-        let sortedMembers = sortArrayByProperty(
-          group.members,
-          `votes.${movie._id}`,
-          false
-        );
+        for (let group of groups) {
+          let movieMessage =
+            `🔒 "${movie.title}" predictions are locked in!` + "\n";
 
-        let voteMessage = ``;
-        for (let user of sortedMembers) {
-          if (user && user.name !== "Movie Medium") {
-            voteMessage =
-              voteMessage +
-              `${user.nickname || user.name}: ${
-                user.votes[movie._id] < 0
-                  ? `Forgot to predict 😬`
-                  : `${user.votes[movie._id]}%`
-              }` +
-              "\n";
+          let sortedMembers = sortArrayByProperty(
+            group.members,
+            `votes.${movie._id}`,
+            false
+          );
+
+          let voteMessage = ``;
+          for (let user of sortedMembers) {
+            if (user && user.name !== "Movie Medium") {
+              voteMessage =
+                voteMessage +
+                `${user.nickname || user.name}: ${
+                  user.votes[movie._id] < 0
+                    ? `Forgot to predict 😬`
+                    : `${user.votes[movie._id]}%`
+                }` +
+                "\n";
+            }
           }
-        }
 
-        await GroupMe.sendBotMessage(
-          movieMessage + "\n" + voteMessage,
-          group.bot.bot_id
-        );
+          await GroupMe.sendBotMessage(
+            movieMessage + "\n" + voteMessage,
+            group.bot.bot_id
+          );
+        }
       }
     }
   } catch (e) {

@@ -1,17 +1,14 @@
 const Movie = require("../movies/model.js");
-const MovieScoreMap = require("../../models/movieScoreMap.js");
-const { to } = require("../helpers/index");
+const MovieScoreMap = require("../movieScoreMap/model");
 
 module.exports = async (movieId, score) => {
-  let currMovieMap;
-  [err, currMovieMap] = await to(MovieScoreMap.findOne({ id: 1 }));
+  const currMovieMap = await MovieScoreMap.findOne({ id: 1 });
   let updatedMap = currMovieMap ? { ...currMovieMap.map } : {};
 
   if (movieId) {
     updatedMap[movieId] = score;
   } else {
-    let err, movies;
-    [err, movies] = await to(Movie.find());
+    const movies = await Movie.find();
 
     for (let movie of movies) {
       if (!(movie._id in updatedMap)) {
@@ -23,13 +20,11 @@ module.exports = async (movieId, score) => {
   }
 
   if (!currMovieMap) {
-    await to(MovieScoreMap.create({ map: updatedMap, id: 1 }));
+    await MovieScoreMap.create({ map: updatedMap, id: 1 });
   } else {
-    await to(
-      MovieScoreMap.findOneAndUpdate(
-        { id: 1 },
-        { $set: { map: updatedMap, id: 1 } }
-      )
+    await MovieScoreMap.findOneAndUpdate(
+      { id: 1 },
+      { $set: { map: updatedMap, id: 1 } }
     );
   }
 };

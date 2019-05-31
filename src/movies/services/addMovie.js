@@ -1,23 +1,14 @@
 const Movie = require("../model");
-const { to, sanitizeTitle } = require("../../helpers");
+const { to, sanitizeTitle } = require("../../../helpers");
 const moment = require("moment-timezone");
 
-/*
-* Add a new movie to the DB
-*/
-const addMovie = async newMovieData => {
-  let err, newMovie;
-
+module.exports = async newMovieData => {
   newMovieData.title_lower = sanitizeTitle(newMovieData.title);
   newMovieData.releaseDate = moment
     .unix(newMovieData.releaseDate)
-    .tz("America/Chicago")
+    .utc()
     .startOf("day")
     .unix();
 
-  [err, newMovie] = await to(Movie.create(newMovieData));
-
-  return newMovie;
+  return await Movie.create(newMovieData);
 };
-
-module.exports = addMovie;

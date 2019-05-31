@@ -1,6 +1,6 @@
 const moment = require("moment");
 const mongoose = require("mongoose");
-const MovieScoreMap = require("../../models/movieScoreMap");
+const MovieScoreMap = require("../src/movieScoreMap/model");
 const _ = require("lodash");
 
 /*
@@ -35,15 +35,18 @@ exports.to = to;
 exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
 
 // what release date does movie need to have to be cutoff to further predictions
-const moviePredictionCutoffDate = moment()
-  .tz("America/Chicago")
+const moviePredictionCutoffDate = moment
+  .utc()
   .endOf("day")
   .add(14, "days")
   .unix();
 exports.moviePredictionCutoffDate = moviePredictionCutoffDate;
 
 exports.isMoviePastPredictionDeadline = releaseTimestamp => {
-  return moment.unix(releaseTimestamp).isBefore(moviePredictionCutoffDate);
+  return moment
+    .unix(releaseTimestamp)
+    .utc()
+    .isBefore(moment.unix(moviePredictionCutoffDate).utc());
 };
 
 /* convert string to object id */
@@ -51,7 +54,7 @@ exports.createObjectId = stringId => mongoose.Types.ObjectId(stringId);
 
 /* Retrieve object of movie ids mapped to rt scores */
 exports.getMovieScoreMap = async () => {
-  let movieScoreMap;
+  let err, movieScoreMap;
   [err, movieScoreMap] = await to(MovieScoreMap.findOne({ id: 1 }));
   if (err) throw new Error();
 
@@ -76,8 +79,24 @@ exports.sortArrayByProperty = (array, property, asc = false) => {
 
 /* Calc movie penalty */
 exports.calcNoPredictionPenalty = movie => {
-  const MMScore = Math.abs(50 - movie.rtScore);
-  return Math.round(
-    Math.min(100, Math.max(MMScore * 1.1, movie.metrics.high * 1.1))
-  );
+  if (movie.metrics) {
+    return Math.abs(
+      Math.ceil(
+        Math.min(
+          100,
+          Math.max(movie.metrics.high * 1.1, Math.abs(movie.metrics.high) + 1)
+        )
+      )
+    );
+  } else {
+    return 0;
+  }
+};
+
+exports.catchErrors = function catchErrors(fn) {
+  return function(req, res, next) {
+    // Make sure to `.catch()` any errors and pass them along to the `next()`
+    // middleware in the chain, in this case the error handler.
+    fn(req, res, next).catch(next);
+  };
 };

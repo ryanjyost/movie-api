@@ -1,8 +1,7 @@
 const {
   moviePredictionCutoffDate,
-  to,
   sanitizeTitle
-} = require("../../helpers");
+} = require("../../../helpers");
 const getMovies = require("./getMovies");
 const Fuse = require("fuse.js");
 
@@ -23,14 +22,11 @@ const fuzzySearchMovies = async textToSearch => {
   let cleanTitle = sanitizeTitle(textToSearch);
 
   // get movies that user could possibly be predicting
-  let err, movies;
-  [err, movies] = await to(
-    getMovies({
-      isClosed: 0,
-      rtScore: { $lt: 0 },
-      releaseDate: { $gt: moviePredictionCutoffDate }
-    })
-  );
+  const movies = await getMovies({
+    isClosed: 0,
+    rtScore: { $lt: 0 },
+    releaseDate: { $gt: moviePredictionCutoffDate }
+  });
 
   const fuse = new Fuse(movies, fuseOptions);
 

@@ -1,4 +1,4 @@
-const { to, createObjectId } = require("../../helpers/index");
+const { createObjectId } = require("../../../helpers/index");
 const Users = require("../../users");
 const Groups = require("../../groups");
 const GroupMe = require("../../platforms/groupme");
@@ -10,20 +10,16 @@ const _ = require("lodash");
 */
 
 module.exports = async () => {
-  console.log("SYNC USERS");
   try {
-    let err, groups;
-    [err, groups] = await to(Groups.getGroups({}, "members"));
+    const groups = await Groups.getGroups({}, "members");
 
     for (let group of groups) {
       let updatedGroupMemberIds = [];
 
-      let err, groupMeData;
-      [err, groupMeData] = await to(GroupMe.getGroup(group.groupmeId));
+      const groupMeData = await GroupMe.getGroup(group.groupmeId);
 
       for (let member of groupMeData.members) {
-        let user;
-        [err, user] = await to(Users.getUser({ groupmeId: member.user_id }));
+        const user = await Users.getUser({ groupmeId: member.user_id });
 
         if (user) {
           // nothing there now so just set
@@ -52,18 +48,17 @@ module.exports = async () => {
             );
           }
 
-          user.save();
+          await user.save();
           updatedGroupMemberIds.push(user._id);
         } else {
-          let err, newUser;
-          [err, newUser] = await to(Users.findOrCreateUser(member, group._id));
+          const newUser = await Users.findOrCreateUser(member, group._id);
 
           updatedGroupMemberIds.push(newUser._id);
         }
       }
 
       group.members = updatedGroupMemberIds;
-      group.save();
+      await group.save();
     }
   } catch (e) {
     console.log("Error syncing users and groups", e);

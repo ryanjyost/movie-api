@@ -12,7 +12,6 @@ const runCronJobs = require("./src/lib/cron");
 
 const app = express();
 
-// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
@@ -36,7 +35,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // Log error message
-  console.error("ERROR HANDLER", err.data || err.message || err);
+  console.error("!!!", err.data || err.message || err);
+  console.error(err.stack);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = process.env.ENV === "development" ? err : {};

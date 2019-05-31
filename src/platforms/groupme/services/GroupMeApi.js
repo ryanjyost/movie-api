@@ -1,7 +1,7 @@
 const { create } = require("apisauce");
 const queryString = require("query-string");
 
-const createApi = token => {
+const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
   const api = create({
     baseURL: "https://api.groupme.com/v3",
     timeout: 30000,
@@ -63,7 +63,7 @@ const createApi = token => {
               : "Movie Bot",
         group_id: groupMeGroupId,
         avatar_url:
-          "https://i.groupme.com/1500x1000.jpeg.b193ff43adf048bba7292952fb85d6d7",
+          "https://i.groupme.com/1200x1200.png.aae8cb764cd447f2b60bd670e8e6ac67",
         callback_url:
           process.env.GROUPME_CALLBACK_URL + "/groupme/receive_message"
       }

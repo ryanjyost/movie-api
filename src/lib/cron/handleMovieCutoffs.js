@@ -3,74 +3,74 @@ const Users = require("../../users");
 const Groups = require("../../groups");
 const GroupMe = require("../../platforms/groupme");
 const {
-  to,
   moviePredictionCutoffDate,
+  isMoviePastPredictionDeadline,
   sortArrayByProperty
-} = require("../../helpers");
+} = require("../../../helpers");
 const moment = require("moment");
 
 const handleMovieCutoffs = async () => {
   try {
+    const moviesToClose = await Movies.getMovies({
+      isClosed: 0
+    });
+    console.log("CUTOFFS");
+    console.log("NOW", moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z"));
     console.log(
-      "cutoff",
-      moment.unix(moviePredictionCutoffDate).format("MM/DD/YYYY hh:mm")
-    );
-
-    let err, moviesToClose;
-    [err, moviesToClose] = await to(
-      Movies.getMovies({
-        isClosed: 0,
-        releaseDate: {
-          $lte: moviePredictionCutoffDate
-        }
-      })
+      "Cutoff",
+      moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z")
     );
 
     for (let movie of moviesToClose) {
-      movie.isClosed = 1;
-      await to(movie.save());
+      console.log("==============");
+      console.log(movie.title);
+      console.log(
+        "Release Date",
+        moment.utc().format("dddd, MMMM Do YYYY, h:mm:ss a Z")
+      );
+      console.log("PAST?", isMoviePastPredictionDeadline(movie.releaseDate));
 
-      let err, response;
-      [err, response] = await to(Users.updateUserVoteMaps(movie));
-      if (err) throw new Error(err);
+      if (isMoviePastPredictionDeadline(movie.releaseDate)) {
+        movie.isClosed = 1;
+        await movie.save();
 
-      let groups;
-      [err, groups] = await to(Groups.getGroups({}, "members"));
-      if (err) throw new Error(err);
+        await Users.updateUserVoteMaps(movie);
 
-      for (let group of groups) {
-        let movieMessage = `🔒 "${movie.title}" predictions are locked in!`;
+        const groups = await Groups.getGroups({}, "members");
 
-        let sortedMembers = sortArrayByProperty(
-          group.members,
-          `votes.${movie._id}`,
-          false
-        );
+        for (let group of groups) {
+          let movieMessage =
+            `🔒 "${movie.title}" predictions are locked in!` + "\n";
 
-        let voteMessage = ``;
-        for (let user of sortedMembers) {
-          if (user && user.name !== "Movie Medium") {
-            voteMessage =
-              voteMessage +
-              `> ${user.nickname || user.name}: ${
-                user.votes[movie._id] < 0
-                  ? `Forgot to predict 😬`
-                  : `${user.votes[movie._id]}%`
-              }` +
-              "\n";
+          let sortedMembers = sortArrayByProperty(
+            group.members,
+            `votes.${movie._id}`,
+            false
+          );
+
+          let voteMessage = ``;
+          for (let user of sortedMembers) {
+            if (user && user.name !== "Movie Medium") {
+              voteMessage =
+                voteMessage +
+                `${user.nickname || user.name}: ${
+                  user.votes[movie._id] < 0
+                    ? `Forgot to predict 😬`
+                    : `${user.votes[movie._id]}%`
+                }` +
+                "\n";
+            }
           }
+
+          await GroupMe.sendBotMessage(
+            movieMessage + "\n" + voteMessage,
+            group.bot.bot_id
+          );
         }
-
-        await GroupMe.sendBotMessage(
-          movieMessage + "\n" + voteMessage,
-          group.bot.bot_id
-        );
       }
-
-      // await GroupMe.sendBotMessage(voteMessage);
     }
   } catch (e) {
-    console.log("CUTOFF ERROR", e);
+    throw new Error(e);
   }
 };
 

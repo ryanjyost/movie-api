@@ -1,15 +1,8 @@
-const Movie = require("./model");
-
-/* Add new movie to the DB */
-exports.addMovie = require("./services/addMovie");
-
-/* Return any movies matching query */
-exports.getMovies = require("./services/getMovies");
-
-/* Return MM user */
-exports.getMovie = (query = {}) => {
-  return Movie.findOne(query);
+module.exports = {
+  addMovie: require("./services/addMovie"),
+  deleteMovie: require("./services/deleteMovie"),
+  editMovie: require("./services/editMovie"),
+  getMovies: require("./services/getMovies"),
+  getMovie: require("./services/getMovie"),
+  fuzzySearchMovies: require("./services/fuzzySearchMovies")
 };
-
-/* Fuzzy search movies */
-exports.fuzzySearchMovies = require("./services/fuzzySearchMovies");

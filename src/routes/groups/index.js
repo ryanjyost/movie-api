@@ -4,6 +4,8 @@ const Boom = require("@hapi/boom");
 
 const { catchErrors } = require("../../util");
 
+const { GroupServices } = require("../../services");
+
 const createGroup = catchErrors(require("./createGroup"));
 const getGroup = catchErrors(require("./getGroup"));
 const getGroupRankings = catchErrors(require("./getGroupRankings"));

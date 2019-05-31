@@ -1,4 +1,11 @@
+const { Groups } = require("../models");
+
 module.exports = {
+  GroupServices: {
+    getGroupById: Groups.getGroupById
+  },
+
+  //////////////////////
   addMovieToSeason: require("./addMovieToSeason"),
   calculateRankings: require("./calculateRankings"),
   calcMovieMetrics: require("./calcMovieMetrics"),

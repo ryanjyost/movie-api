@@ -6,7 +6,6 @@ module.exports = async (req, res) => {
 
   //... get user's groupme data
   const groupMeUser = await GroupMeApi.getCurrentUser();
-  console.log("CURRENT", groupMeUser);
 
   //... find or create user with groupme data
   const user = await Users.findOrCreateUser(groupMeUser.data.response);

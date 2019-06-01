@@ -1,4 +1,4 @@
-const GroupMe = require("../models/platforms/groupme");
+const GroupMe = require("../platforms/groupme");
 const Groups = require("../models/groups");
 
 module.exports = async req => {

@@ -13,7 +13,7 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
     }
   });
 
-  const createGroupMeGroup = () =>
+  const createGroup = () =>
     api.post("/groups", {
       name:
         process.env.ENV === "development"
@@ -70,7 +70,7 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
     });
 
   return {
-    createGroupMeGroup,
+    createGroup,
     getCurrentUsersGroups,
     sendBotMessage,
     getCurrentUser,

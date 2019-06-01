@@ -2,34 +2,11 @@ const moment = require("moment");
 const mongoose = require("mongoose");
 const MovieScoreMap = require("../models/movieScoreMap/model");
 const _ = require("lodash");
+const logger = require("../../config/winston");
 
 /*
 * HELPER FUNCTIONS
 */
-
-/* Catch errors in awaited functions */
-const to = promise => {
-  return promise
-    .then(data => {
-      if (!data) {
-        return [null, data];
-      }
-
-      // handle axios response
-
-      if ("ok" in data) {
-        if (data.ok) {
-          return [null, data.data ? data.data.response : data.data];
-        } else {
-          return [data, null];
-        }
-      } else {
-        return [null, data];
-      }
-    })
-    .catch(err => [err]);
-};
-exports.to = to;
 
 /* Make easier searching/matching */
 exports.sanitizeTitle = text => text.toLowerCase().replace(/[^\w ]/g, "");
@@ -93,10 +70,7 @@ exports.calcNoPredictionPenalty = movie => {
   }
 };
 
-exports.catchErrors = function catchErrors(fn) {
-  return function(req, res, next) {
-    // Make sure to `.catch()` any errors and pass them along to the `next()`
-    // middleware in the chain, in this case the error handler.
-    fn(req, res, next).catch(next);
-  };
-};
+exports.catchErrors = require("./catchErrors");
+exports.to = require("./handleApi");
+exports.logger = logger;
+exports.calculateRankings = require("../services/shared/calculateRankings");

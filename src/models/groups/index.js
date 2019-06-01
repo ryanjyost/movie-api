@@ -1,7 +1,9 @@
 const Group = require("./model");
 
 module.exports = {
-  createGroup: require("./services/createGroup.js"),
+  createGroup: async newGroupData => {
+    return await Group.create(newGroupData);
+  },
   getGroup: async (query = {}, populate = "") => {
     return await Group.findOne(query).populate(populate);
   },

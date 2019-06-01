@@ -1,4 +1,6 @@
 module.exports = {
-  Groups: require("./groups")
-  // Movies: require("./movies")
+  Groups: require("./groups"),
+  Users: require("./users"),
+  Movies: require("./movies"),
+  MovieScoreMap: require("./movieScoreMap")
 };

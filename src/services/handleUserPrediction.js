@@ -1,4 +1,4 @@
-const GroupMe = require("../models/platforms/groupme");
+const GroupMe = require("../platforms/groupme");
 const User = require("../models/users/model");
 const Groups = require("../models/groups");
 const Group = require("../models/groups/model");

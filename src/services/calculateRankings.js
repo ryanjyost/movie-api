@@ -4,14 +4,13 @@ const Users = require("../models/users/index");
 const Seasons = require("../models/seasons/index");
 const { calcNoPredictionPenalty } = require("../util/index");
 const getGroup = require("../models/groups/services/getGroup");
-const { getGroupById } = require("./groups");
+// const { getGroupById } = require("./groups");
 
 /*
 * Send rankings to group
 */
 
 const calculateRankings = async (groupQuery, movieQuery = {}) => {
-  console.log("QUERY", groupQuery, movieQuery);
   try {
     let group = null,
       users = [];

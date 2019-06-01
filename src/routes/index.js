@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { catchErrors } = require("../util/index");
+const logger = require("../../config/winston");
 
 const getGroupPredictionData = require("./misc/getGroupPredictionData");
 
@@ -16,6 +17,8 @@ router.get(
   "/group_breakdowns/:groupId/:type",
   catchErrors(getGroupPredictionData)
 );
+
+router.get("/admin/logs", async (req, res) => {});
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

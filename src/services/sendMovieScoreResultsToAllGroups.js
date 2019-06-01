@@ -1,4 +1,4 @@
-const GroupMe = require("../models/platforms/groupme/index");
+const GroupMe = require("../platforms/groupme/index");
 const Groups = require("../models/groups");
 const Seasons = require("../models/seasons");
 const calculateRankings = require("./calculateRankings");

@@ -2,7 +2,7 @@ const {
   moviePredictionCutoffDate,
   isMoviePastPredictionDeadline
 } = require("../../util");
-const GroupMe = require("../../models/platforms/groupme");
+const GroupMe = require("../../platforms/groupme");
 const Movies = require("../../models/movies");
 const Groups = require("../../models/groups");
 const moment = require("moment");

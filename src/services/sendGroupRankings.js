@@ -1,5 +1,5 @@
 const calculateRankings = require("./calculateRankings");
-const GroupMe = require("../models/platforms/groupme");
+const GroupMe = require("../platforms/groupme");
 const Groups = require("../models/groups");
 
 const sendGroupRankings = async groupmeGroupId => {

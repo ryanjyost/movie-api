@@ -1,7 +1,7 @@
 const Movies = require("../../models/movies");
 const Users = require("../../models/users");
 const Groups = require("../../models/groups");
-const GroupMe = require("../../models/platforms/groupme");
+const GroupMe = require("../../platforms/groupme");
 const {
   moviePredictionCutoffDate,
   sortArrayByProperty

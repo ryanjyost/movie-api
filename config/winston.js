@@ -4,7 +4,6 @@ const { format } = winston;
 
 const options = {
   file: {
-    // level: process.env.NODE_ENV !== "production" ? "error" : "info",
     level: "info",
     filename: `${appRoot}/logs/app.log`,
     handleExceptions: true,
@@ -14,20 +13,33 @@ const options = {
     colorize: false
   },
   console: {
-    level: "warning",
-    format: format.combine(format.colorize(), format.simple())
+    level: "debug",
+    handleExceptions: true,
+    json: false,
+    format: format.combine(
+      format.colorize(),
+      format.simple(),
+      format.printf(
+        info =>
+          process.env.ENV === "development"
+            ? `${info.level}: ${info.message}`
+            : `${info.timestamp} ${info.level}: ${info.message}`
+      )
+    )
   }
 };
 
 const logger = winston.createLogger({
   format: format.combine(
     format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss"
+      format: "MM/DD/YY HH:mm:ss"
     }),
     format.errors({ stack: true }),
     format.splat(),
     format.json()
   ),
+  // format: format.simple(),
+
   transports: [new winston.transports.File(options.file)],
   exitOnError: false // do not exit on handled exceptions
 });

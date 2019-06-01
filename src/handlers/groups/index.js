@@ -1,7 +1,8 @@
 const { GroupServices } = require("../../services");
 
 module.exports = {
-  getGroupById: GroupServices.getGroupById,
+  findGroupById: GroupServices.findGroupById,
   getOverallGroupRankings: require("./getOverallGroupRankings"),
+  getSeasonRankings: require("./getSeasonRankings"),
   createGroup: require("./createGroup")
 };

@@ -73,4 +73,3 @@ exports.calcNoPredictionPenalty = movie => {
 exports.catchErrors = require("./catchErrors");
 exports.to = require("./handleApi");
 exports.logger = logger;
-exports.calculateRankings = require("../services/shared/calculateRankings");

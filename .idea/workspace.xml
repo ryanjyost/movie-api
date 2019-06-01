@@ -1,50 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="refactoring, final touches">
-      <change afterPath="$PROJECT_DIR$/src/EventEmitter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/groups/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/handlers/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/listeners/groups/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/listeners/groups/onCreatedGroup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/listeners/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/movieScoreMap/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/platforms/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/groups/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/movies/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/shared/calculateRankings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/shared/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/users/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/catchErrors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/handleApi.js" afterDir="false" />
+    <list default="true" id="5d8568a5-50da-434e-bb64-6cf4c5acf56d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/handlers/groups/getSeasonRankings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers/movies/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/winston.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/winston.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/groups/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/groups/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/groups/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/groups/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/groups/services/createGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/groups/createGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/movies/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/movies/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/platforms/groupme/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/platforms/groupme/services/GroupMeApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/platforms/groupme/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/users/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/users/services/findOrCreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/users/findOrCreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/groups/createGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/groups/createGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/groups/getGroup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/groups/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/groups/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/seasons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/seasons/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/groups/getGroupRankings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/groups/getGroupSeasonData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/groups/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/groups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/groups/sendMessageToAllGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/admin/sendMessageToAllGroups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/users/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/users/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/movies/getMovies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/movies/getMovies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/movies/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/movies/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/calculateRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/calculateRankings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/cron/handleCutoffNotifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/cron/handleCutoffNotifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/cron/handleMovieCutoffs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/cron/handleMovieCutoffs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/cron/syncUsersAndGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/cron/syncUsersAndGroups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/handleGroupMeAutomatedMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/handleGroupMeAutomatedMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/handleUserPrediction.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/handleUserPrediction.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/sendGroupRankings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/sendGroupRankings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/sendMovieScoreResultsToAllGroups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/sendMovieScoreResultsToAllGroups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,50 +35,32 @@
     <favorites_list name="movie-api" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.7945066">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/services/index.js">
+            <entry file="file://$PROJECT_DIR$/src/routes/movies/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+                <state relative-caret-position="740">
+                  <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
                 </state>
               </provider>
             </entry>
           </file>
           <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/routes/groups/index.js">
+            <entry file="file://$PROJECT_DIR$/src/handlers/movies/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="336">
-                  <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
+                <state relative-caret-position="60">
+                  <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="getOverallGroupRankings.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="calculateRankings.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/services/shared/calculateRankings.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="79" column="43" lean-forward="true" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/models/movies/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="160">
-                  <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+                <state relative-caret-position="300">
+                  <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
                 </state>
               </provider>
             </entry>
@@ -109,28 +68,14 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="calculateRankings.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/services/calculateRankings.js">
+        <leaf>
+          <file leaf-file-name="getMovies.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/handlers/movies/getMovies.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="427">
-                  <caret line="81" column="23" lean-forward="true" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
+                <state relative-caret-position="180">
+                  <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
                 </state>
               </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="getGroupRankings.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroupRankings.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="200">
-                  <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="getUsers.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/models/users/services/getUsers.js">
-              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
         </leaf>
@@ -146,8 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>findOneAndUpdate</find>
-      <find>PARAMS</find>
       <find>POP</find>
       <find>req.body.text</find>
       <find>WORKING</find>
@@ -176,6 +119,8 @@
       <find>calculateRankings</find>
       <find>getUsers</find>
       <find>findUpcomingMovies</find>
+      <find>PlatformServices</find>
+      <find>getGroupById</find>
     </findStrings>
     <replaceStrings>
       <replace>const</replace>
@@ -196,6 +141,7 @@
       <replace>catchErrors</replace>
       <replace>newGroup</replace>
       <replace>text</replace>
+      <replace>findGroupById</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -212,15 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/users/services/updateUserVoteMaps.js" />
-        <option value="$PROJECT_DIR$/src/users/index.js" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/routes/misc/getGroupPredictionData.js" />
-        <option value="$PROJECT_DIR$/src/movies/services/getMovies.js" />
-        <option value="$PROJECT_DIR$/routes/movies/editMovie.js" />
-        <option value="$PROJECT_DIR$/src/lib/handleGroupMeAutomatedMessage.js" />
-        <option value="$PROJECT_DIR$/src/lib/cron/handleCutoffNotifications.js" />
-        <option value="$PROJECT_DIR$/src/lib/addMovieToSeason.js" />
         <option value="$PROJECT_DIR$/helpers/index.js" />
         <option value="$PROJECT_DIR$/src/lib/sendMovieScoreResultsToAllGroups.js" />
         <option value="$PROJECT_DIR$/src/lib/calculateRankings.js" />
@@ -236,7 +173,6 @@
         <option value="$PROJECT_DIR$/db.js" />
         <option value="$PROJECT_DIR$/src/platforms/index.js" />
         <option value="$PROJECT_DIR$/src/services/groups/index.js" />
-        <option value="$PROJECT_DIR$/src/models/groups/index.js" />
         <option value="$PROJECT_DIR$/src/services/groups/createGroup.js" />
         <option value="$PROJECT_DIR$/src/services/users/index.js" />
         <option value="$PROJECT_DIR$/src/EventEmitter.js" />
@@ -249,20 +185,30 @@
         <option value="$PROJECT_DIR$/config/winston.js" />
         <option value="$PROJECT_DIR$/src/routes/movies/getMovies.js" />
         <option value="$PROJECT_DIR$/src/services/calculateRankings.js" />
-        <option value="$PROJECT_DIR$/src/handlers/groups/index.js" />
-        <option value="$PROJECT_DIR$/src/routes/groups/index.js" />
         <option value="$PROJECT_DIR$/src/models/users/index.js" />
-        <option value="$PROJECT_DIR$/src/routes/index.js" />
         <option value="$PROJECT_DIR$/src/models/movieScoreMap/index.js" />
-        <option value="$PROJECT_DIR$/src/models/index.js" />
-        <option value="$PROJECT_DIR$/src/models/movies/index.js" />
-        <option value="$PROJECT_DIR$/src/services/index.js" />
-        <option value="$PROJECT_DIR$/src/util/index.js" />
         <option value="$PROJECT_DIR$/src/util/calculateRankings.js" />
         <option value="$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js" />
         <option value="$PROJECT_DIR$/src/services/shared/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/src/services/shared/calculateRankings.js" />
+        <option value="$PROJECT_DIR$/src/handlers/groups/index.js" />
+        <option value="$PROJECT_DIR$/src/models/seasons/index.js" />
+        <option value="$PROJECT_DIR$/src/services/index.js" />
+        <option value="$PROJECT_DIR$/src/models/index.js" />
+        <option value="$PROJECT_DIR$/src/handlers/groups/getSeasonRankings.js" />
+        <option value="$PROJECT_DIR$/src/routes/index.js" />
+        <option value="$PROJECT_DIR$/src/handlers/admin/index.js" />
+        <option value="$PROJECT_DIR$/src/util/index.js" />
+        <option value="$PROJECT_DIR$/src/routes/admin/index.js" />
+        <option value="$PROJECT_DIR$/src/models/groups/index.js" />
+        <option value="$PROJECT_DIR$/src/handlers/admin/sendMessageToAllGroups.js" />
+        <option value="$PROJECT_DIR$/src/routes/groups/index.js" />
+        <option value="$PROJECT_DIR$/src/routes/groups.js" />
+        <option value="$PROJECT_DIR$/src/handlers/movies/index.js" />
+        <option value="$PROJECT_DIR$/src/routes/movies/index.js" />
+        <option value="$PROJECT_DIR$/src/models/movies/index.js" />
+        <option value="$PROJECT_DIR$/src/handlers/movies/getMovies.js" />
       </list>
     </option>
   </component>
@@ -281,10 +227,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="34" />
-    <option name="y" value="283" />
-    <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="x" value="-310" />
+    <option name="y" value="-1005" />
+    <option name="width" value="1822" />
+    <option name="height" value="1015" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -304,17 +250,20 @@
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="logs" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="movie-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="handlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="handlers" type="462c0819:PsiDirectoryNode" />
+              <item name="movies" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
@@ -328,33 +277,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
               <item name="movies" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="movies" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="movie-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -374,18 +296,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/handlers/groups" />
       <recent name="$PROJECT_DIR$/src/movies/services" />
       <recent name="$PROJECT_DIR$/src/groups/services" />
       <recent name="$PROJECT_DIR$/src/seasons/services" />
       <recent name="$PROJECT_DIR$/src/lib" />
-      <recent name="$PROJECT_DIR$/src/seasons/controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/handlers/movies" />
+      <recent name="$PROJECT_DIR$/src/routes" />
+      <recent name="$PROJECT_DIR$/src/handlers/admin" />
       <recent name="$PROJECT_DIR$/src/services/shared" />
       <recent name="$PROJECT_DIR$/src/models/users" />
-      <recent name="$PROJECT_DIR$/src/services/groups" />
-      <recent name="$PROJECT_DIR$/src/platforms/groupme" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -456,7 +378,7 @@
       <workItem from="1559001810357" duration="1271000" />
       <workItem from="1559006121903" duration="1841000" />
       <workItem from="1559010423189" duration="6988000" />
-      <workItem from="1559400798006" duration="1975000" />
+      <workItem from="1559400798006" duration="6437000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1546657119664</created>
@@ -766,11 +688,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559102124838</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="refactoring, final touches">
+      <created>1559406164166</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1559406164166</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493471000" />
+    <option name="totallyTimeSpent" value="497933000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -782,7 +711,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
+    <frame x="-389" y="-1057" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3298193" />
@@ -791,7 +720,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32932332" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32882413" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3554217" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20516963" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15388711" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.328125" />
@@ -875,67 +804,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/models/groups/services/prepSortGroupPredictions.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroupSeasonData.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/movieScoreMap/model.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/handleUserPrediction.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/movies/services/fuzzySearchMovies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/groups/services/getGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/groups/services/addUserToGroup.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/groups/sendMessageToAllGroups.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroup.js" />
-    <entry file="file://$PROJECT_DIR$/src/util/catchErrors.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/handleApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/platforms/groupme/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -956,24 +828,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/groups/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/groups/createGroup.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="25" selection-start-column="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/platforms/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -1015,20 +873,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/handlers/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/movies/getMovies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -1039,24 +887,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroupRankings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/groups/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/handlers/groups/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -1077,13 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/movies/services/getMovies.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1091,31 +918,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="2" lean-forward="true" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="63" column="78" lean-forward="true" selection-start-line="63" selection-start-column="78" selection-end-line="63" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/movieScoreMap/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/movies/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1133,13 +939,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/calculateRankings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="81" column="23" lean-forward="true" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/winston.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -1154,31 +953,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/index.js">
+    <entry file="file://$PROJECT_DIR$/src/services/shared/calculateRankings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/groups/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
+        <state relative-caret-position="1478">
+          <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/handlers/groups/getOverallGroupRankings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        <state relative-caret-position="280">
+          <caret line="14" column="5" selection-end-line="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/shared/calculateRankings.js">
+    <entry file="file://$PROJECT_DIR$/src/models/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="79" column="43" lean-forward="true" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
+        <state relative-caret-position="140">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/seasons/services/getSeason.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/seasons/services/getSeasons.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/groups/getSeasonRankings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="3" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/misc/getGroupPredictionData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/seasons/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="70" column="2" lean-forward="true" selection-start-line="70" selection-start-column="2" selection-end-line="70" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/calculateRankings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1660">
+          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/admin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="25" column="20" lean-forward="true" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/platforms/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/platforms/groupme/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/groups/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/admin/sendMessageToAllGroups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/admin/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroupRankings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/groups/getGroupSeasonData.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <element signature="e#662#886#0" />
+            <element signature="e#982#1147#0" />
+            <element signature="e#1275#1460#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/movies/getMovies.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/groups/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/movies/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/movies/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="740">
+          <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/movies/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/handlers/movies/getMovies.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
         </state>
       </provider>
     </entry>

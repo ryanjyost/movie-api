@@ -2,11 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Boom = require("@hapi/boom");
 
-const { catchErrors } = require("../../util");
-const Handlers = require("../../handlers/groups");
-
-const getGroupRankings = catchErrors(require("./getGroupRankings"));
-const sendMessageToAllGroups = catchErrors(require("./sendMessageToAllGroups"));
+const { catchErrors } = require("../util/index");
+const Handlers = require("../handlers/groups/index");
 
 /* Get single group info */
 router.get(
@@ -14,7 +11,7 @@ router.get(
   catchErrors(async (req, res) => {
     const { id } = req.params;
 
-    const group = await Handlers.getGroupById(id);
+    const group = await Handlers.findGroupById(id);
 
     if (!group) throw Boom.badData("Failed to get group by id");
 
@@ -51,12 +48,18 @@ router.get(
 );
 
 /* Get group rankings for a specific season */
-router.get("/:id/rankings/:seasonId", getGroupRankings);
+router.get(
+  "/:id/rankings/:seasonId",
+  catchErrors(async (req, res) => {
+    const { id, seasonId } = req.params;
 
-// /* Get season breakdowns for groups */
-// router.get("/:groupId/seasons/:seasonId", getGroupSeasons);
+    const rankings = await Handlers.getSeasonRankings(
+      id === "all" ? null : id,
+      seasonId
+    );
 
-/*  send message to all groups */
-router.post("/message", sendMessageToAllGroups);
+    res.json({ rankings });
+  })
+);
 
 module.exports = router;

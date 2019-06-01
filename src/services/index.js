@@ -3,7 +3,7 @@ const UserServices = require("./users");
 const MovieServices = require("./movies");
 
 // sometimes just wanna pass through a lower level function
-const { Groups, Users, Movies, MovieScoreMap } = require("../models");
+const { Groups, Users, Movies, MovieScoreMap, Seasons } = require("../models");
 const { GroupMe } = require("../platforms");
 
 module.exports = {
@@ -24,6 +24,9 @@ module.exports = {
   },
   MovieScoreMapServices: {
     ...MovieScoreMap
+  },
+  SeasonServices: {
+    ...Seasons
   },
 
   //////////////////////

@@ -7,8 +7,11 @@ module.exports = {
   getGroup: async (query = {}, populate = "") => {
     return await Group.findOne(query).populate(populate);
   },
-  getGroupById: async id => {
+  findGroupById: async id => {
     return await Group.findOne({ _id: id }).populate("members");
+  },
+  findAllGroups: async id => {
+    return await Group.find().populate("members");
   },
   getGroups: require("./services/getGroups.js"),
   addUserToGroup: require("./services/addUserToGroup.js"),

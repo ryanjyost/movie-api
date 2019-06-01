@@ -10,6 +10,15 @@ module.exports = {
   findAllMovies: async () => {
     return await Movie.find();
   },
+  findMoviesInPurgatory: async () => {
+    return await Movie.find({ rtScore: { $lt: 0 }, isClosed: 1 });
+  },
+  findMoviesWithScore: async () => {
+    return await Movie.find({ rtScore: { $gte: 0 } });
+  },
+  findMoviesBySeason: async seasonId => {
+    return await Movie.find({ season: seasonId });
+  },
   addMovie: require("./services/addMovie"),
   deleteMovie: require("./services/deleteMovie"),
   editMovie: require("./services/editMovie"),

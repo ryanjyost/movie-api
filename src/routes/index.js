@@ -6,10 +6,11 @@ const logger = require("../../config/winston");
 const getGroupPredictionData = require("./misc/getGroupPredictionData");
 
 // Hook up routes
-router.use("/groups", require("./groups/index"));
-router.use("/movies", require("./movies/index"));
-router.use("/users", require("./users/index"));
-router.use("/seasons", require("./seasons/index"));
+router.use("/groups", require("./groups"));
+router.use("/movies", require("./movies"));
+router.use("/users", require("./users"));
+router.use("/seasons", require("./seasons"));
+router.use("/admin", require("./admin"));
 router.use("/groupme", require("./platforms/groupme/index"));
 
 /* Misc stuff */
@@ -17,8 +18,6 @@ router.get(
   "/group_breakdowns/:groupId/:type",
   catchErrors(getGroupPredictionData)
 );
-
-router.get("/admin/logs", async (req, res) => {});
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

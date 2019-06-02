@@ -1,5 +1,5 @@
-const Movie = require("../model");
-const { to, sanitizeTitle } = require("../../../util/index");
+const { Movies } = require("../../models");
+const { sanitizeTitle } = require("../../util");
 const moment = require("moment-timezone");
 
 module.exports = async newMovieData => {
@@ -10,5 +10,5 @@ module.exports = async newMovieData => {
     .startOf("day")
     .unix();
 
-  return await Movie.create(newMovieData);
+  return await Movies.addMovie(newMovieData);
 };

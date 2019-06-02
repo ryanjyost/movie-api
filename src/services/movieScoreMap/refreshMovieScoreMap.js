@@ -1,8 +1,8 @@
-const Movie = require("../models/movies/model.js");
-const MovieScoreMap = require("../models/movieScoreMap/model");
+const Movie = require("../../models/movies/model.js");
+const { MovieScoreMap } = require("../../models");
 
 module.exports = async (movieId, score) => {
-  const currMovieMap = await MovieScoreMap.findOne({ id: 1 });
+  const currMovieMap = await MovieScoreMap.get();
   let updatedMap = currMovieMap ? { ...currMovieMap.map } : {};
 
   if (movieId) {

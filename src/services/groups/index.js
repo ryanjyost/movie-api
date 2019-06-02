@@ -1,3 +1,4 @@
 module.exports = {
-  createGroup: require("./createGroup")
+  createGroup: require("./createGroup"),
+  calcGroupRankingsForSingleMovie: require("./calcGroupRankingsForSingleMovie")
 };

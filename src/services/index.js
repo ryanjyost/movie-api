@@ -1,6 +1,9 @@
 const GroupServices = require("./groups");
 const UserServices = require("./users");
 const MovieServices = require("./movies");
+const MovieScoreMapServices = require("./movieScoreMap");
+const SeasonServices = require("./seasons");
+const SharedServices = require("./shared");
 
 // sometimes just wanna pass through a lower level function
 const { Groups, Users, Movies, MovieScoreMap, Seasons } = require("../models");
@@ -8,33 +11,34 @@ const { GroupMe } = require("../platforms");
 
 module.exports = {
   GroupServices: {
-    ...GroupServices,
-    ...Groups
+    ...Groups,
+    ...GroupServices
   },
   UserServices: {
-    ...UserServices,
-    ...Users
+    ...Users,
+    ...UserServices
   },
   MovieServices: {
-    ...MovieServices,
-    ...Movies
+    ...Movies,
+    ...MovieServices
   },
   PlatformServices: {
     GroupMe
   },
   MovieScoreMapServices: {
-    ...MovieScoreMap
+    ...MovieScoreMap,
+    ...MovieScoreMapServices
   },
   SeasonServices: {
+    ...SeasonServices,
     ...Seasons
   },
+  SharedServices,
 
   //////////////////////
-  addMovieToSeason: require("./addMovieToSeason"),
   calculateRankings: require("./calculateRankings"),
   calcMovieMetrics: require("./calcMovieMetrics"),
-  calcSingleMovieMetrics: require("./calcSingleMovieMetrics"),
-  updateMovieScoreMap: require("./updateMovieScoreMap"),
+  calcSingleMovieMetrics: require("./movies/calcSingleMovieMetrics"),
   sendMovieScoreResultsToAllGroups: require("./sendMovieScoreResultsToAllGroups"),
   handleUserPrediction: require("./handleUserPrediction"),
   handleGroupMeAutomatedMessage: require("./handleGroupMeAutomatedMessage"),

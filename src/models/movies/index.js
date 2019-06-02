@@ -19,10 +19,17 @@ module.exports = {
   findMoviesBySeason: async seasonId => {
     return await Movie.find({ season: seasonId });
   },
-  addMovie: require("./services/addMovie"),
+  findMovieById: async id => {
+    return await Movie.findOne({ _id: id });
+  },
+  addMovie: async newMovieData => {
+    return await Movie.create(newMovieData);
+  },
+  editMovie: async (id, updatedData, returnNew) => {
+    return await Movie.findOneAndUpdate({ _id: id }, updatedData, {
+      new: returnNew
+    });
+  },
   deleteMovie: require("./services/deleteMovie"),
-  editMovie: require("./services/editMovie"),
-  getMovies: require("./services/getMovies"),
-  getMovie: require("./services/getMovie"),
   fuzzySearchMovies: require("./services/fuzzySearchMovies")
 };

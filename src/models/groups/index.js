@@ -10,12 +10,9 @@ module.exports = {
   findGroupById: async id => {
     return await Group.findOne({ _id: id }).populate("members");
   },
-  findAllGroups: async id => {
+  findAllGroups: async () => {
     return await Group.find().populate("members");
   },
   getGroups: require("./services/getGroups.js"),
-  addUserToGroup: require("./services/addUserToGroup.js"),
-  prepSortGroupPredictions: require("./services/prepSortGroupPredictions")
+  addUserToGroup: require("./services/addUserToGroup.js")
 };
-
-// just pass method up service layer if super simple

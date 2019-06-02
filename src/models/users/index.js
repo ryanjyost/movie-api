@@ -8,7 +8,14 @@ module.exports = {
     });
   },
   findAllUsers: async () => User.find(),
-  updateUserVoteMaps: require("./services/updateUserVoteMaps"),
+  updateUserVoteMaps: async movieId => {
+    // this updates any user that hasn't predicted with a placeholder of -1
+    return await User.update(
+      { [`votes.${movieId}`]: { $exists: false } },
+      { $set: { [`votes.${movieId}`]: -1 } },
+      { multi: true }
+    );
+  },
   findOrCreateUser: require("./findOrCreateUser"),
   getUsers: require("./services/getUsers"),
   getUser: require("./services/getUser")

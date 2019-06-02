@@ -2,7 +2,7 @@ const {
   moviePredictionCutoffDate,
   sanitizeTitle
 } = require("../../../util/index");
-const getMovies = require("./getMovies");
+// const getMovies = require("./getMovies");
 const Fuse = require("fuse.js");
 
 /*

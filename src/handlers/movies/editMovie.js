@@ -1,42 +1,52 @@
-const { Movies, Lib, Users, Groups, GroupMe } = require("../../index");
-const { sortArrayByProperty } = require("../../util/index");
+const {
+  MovieServices,
+  MovieScoreMapServices,
+  SeasonServices,
+  UserServices
+} = require("../../services");
+const { sortArrayByProperty } = require("../../util");
+const Boom = require("@hapi/boom");
+const Emitter = require("../../EventEmitter");
 
-module.exports = async (req, res) => {
+module.exports = async (movieId, updatedData) => {
   //... update movie, return before update so can compare for conditional actions below
-  const movieBeforeUpdate = await Movies.editMovie(
-    { _id: req.params.id },
-    req.body,
+  const movieBeforeUpdate = await MovieServices.editMovie(
+    movieId,
+    updatedData,
     false
   );
 
   //... update map of movie keys
-  await Lib.updateMovieScoreMap(req.params.id, Number(req.body.rtScore));
+  await MovieScoreMapServices.update(movieId, Number(updatedData.rtScore));
 
   //... get movie that's being updated
-  const movie = await Movies.getMovie({ _id: req.params.id });
+  const movie = await MovieServices.findMovieById(movieId);
 
   // movie is getting a score
-  if (movieBeforeUpdate.rtScore < 0 && Number(req.body.rtScore) >= 0) {
+  if (movieBeforeUpdate.rtScore < 0 && Number(updatedData.rtScore) >= 0) {
     // ...b/c the movie has an RT Score, calc user prediction metrics
-    const metrics = await Lib.calcSingleMovieMetrics({
+    const metrics = await MovieServices.calcSingleMovieMetrics({
       ...movie.toObject(),
-      ...{ rtScore: req.body.rtScore }
+      ...{ rtScore: updatedData.rtScore }
     });
 
+    if (!metrics) throw Boom.badImplementation("Failed to calc movie metrics");
     movie.metrics = metrics;
 
     //... add movie to season and update movie with the season it's been added to
-    const season = await Lib.addMovieToSeason(movieBeforeUpdate);
+    const season = await SeasonServices.addMovieToSeason(movieBeforeUpdate);
     movie.season = season.id;
     movie.save();
 
-    // ... send movie (and season if applicable) results to groups
-    await Lib.sendMovieScoreResultsToAllGroups(movie, Number(req.body.rtScore));
+    Emitter.emit("movieGotScore", {
+      ...movie.toObject(),
+      ...{ rtScore: updatedData.rtScore }
+    });
   }
 
   // ...add movie to user vote map with -1 if no vote
-  if (!movieBeforeUpdate.isClosed && Number(req.body.isClosed) > 0) {
-    await Users.updateUserVoteMaps(movieBeforeUpdate);
+  if (!movieBeforeUpdate.isClosed && Number(updatedData.isClosed) > 0) {
+    await MovieServices.handleMovieClose(movieBeforeUpdate);
 
     const groups = await Groups.getGroups({}, "members");
 
@@ -72,7 +82,5 @@ module.exports = async (req, res) => {
   }
 
   //...return all movies to make updating admin easier
-  const movies = await Movies.getMovies();
-
-  res.json({ movies });
+  return await MovieServices.findAllMovies();
 };

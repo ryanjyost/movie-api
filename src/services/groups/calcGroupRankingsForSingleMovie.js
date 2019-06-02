@@ -1,6 +1,6 @@
-const { calcNoPredictionPenalty } = require("../../../util/index");
+const { calcNoPredictionPenalty } = require("../../util");
 
-const prepSortGroupPredictions = (groupWithMemberData, movie = {}) => {
+module.exports = (groupWithMemberData, movie = {}) => {
   // console.log("PREP", groupWithMemberData, movie);
   let votes = [];
   for (let user of groupWithMemberData.members) {
@@ -51,5 +51,3 @@ const prepSortGroupPredictions = (groupWithMemberData, movie = {}) => {
     }
   });
 };
-
-module.exports = prepSortGroupPredictions;

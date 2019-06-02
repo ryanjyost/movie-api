@@ -1,6 +1,6 @@
 const Movie = require("../models/movies/model.js");
 
-const calculateSingleMovieMetrics = require("./calcSingleMovieMetrics");
+const calculateSingleMovieMetrics = require("./movies/calcSingleMovieMetrics");
 
 module.exports = async () => {
   const movies = await Movie.find();

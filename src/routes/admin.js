@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Boom = require("@hapi/boom");
-const Handler = require("../../handlers/admin");
+const Handler = require("../handlers/admin");
 
-const { catchErrors } = require("../../util");
+const { catchErrors } = require("../util/index");
 
 router.post(
   "/message/all",

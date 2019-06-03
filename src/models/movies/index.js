@@ -22,6 +22,9 @@ module.exports = {
   findMovieById: async id => {
     return await Movie.findOne({ _id: id });
   },
+  findMovieByCleanTitle: async cleanTitle => {
+    return await Movie.findOne({ title_lower: cleanTitle });
+  },
   addMovie: async newMovieData => {
     return await Movie.create(newMovieData);
   },
@@ -30,6 +33,7 @@ module.exports = {
       new: returnNew
     });
   },
-  deleteMovie: require("./services/deleteMovie"),
-  fuzzySearchMovies: require("./services/fuzzySearchMovies")
+  deleteMovie: async id => {
+    return await Movie.deleteOne({ _id: id });
+  }
 };

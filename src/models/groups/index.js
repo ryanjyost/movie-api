@@ -10,9 +10,16 @@ module.exports = {
   findGroupById: async id => {
     return await Group.findOne({ _id: id }).populate("members");
   },
+  findGroupByGroupMeId: async id => {
+    return await Group.findOne({ groupmeId: id }).populate("members");
+  },
   findAllGroups: async () => {
     return await Group.find().populate("members");
   },
-  getGroups: require("./services/getGroups.js"),
-  addUserToGroup: require("./services/addUserToGroup.js")
+  addUserToGroup: async (groupQuery, userId) => {
+    return await Group.findOneAndUpdate(groupQuery, {
+      $push: { members: userId }
+    });
+  },
+  getGroups: require("./services/getGroups.js")
 };

@@ -1,4 +1,5 @@
 module.exports = {
   onAddedMovie: require("./onAddedMovie"),
-  onMovieGotScore: require("./onMovieGotScore")
+  onMovieGotScore: require("./onMovieGotScore"),
+  onMovieClosed: require("./onMovieClosed")
 };

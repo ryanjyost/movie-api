@@ -1,6 +1,12 @@
 const appRoot = require("app-root-path");
 const winston = require("winston");
 const { format } = winston;
+const moment = require("moment");
+
+const appendTimestamp = format((info, opts) => {
+  info.timestamp = moment.utc().format(`MM/DD/YYYY, H:mm:ss Z`);
+  return info;
+});
 
 const options = {
   file: {
@@ -10,10 +16,13 @@ const options = {
     json: true,
     maxsize: 5242880, // 5MB
     maxFiles: 5,
-    colorize: false
+    colorize: false,
+    timestamp: () => {
+      return new Date();
+    }
   },
   console: {
-    level: "debug",
+    level: "warn",
     handleExceptions: true,
     json: false,
     format: format.combine(
@@ -34,6 +43,7 @@ const logger = winston.createLogger({
     format.timestamp({
       format: "MM/DD/YY HH:mm:ss"
     }),
+    appendTimestamp(),
     format.errors({ stack: true }),
     format.splat(),
     format.json()

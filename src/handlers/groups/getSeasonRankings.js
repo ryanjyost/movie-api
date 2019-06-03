@@ -14,7 +14,7 @@ module.exports = async (groupId, seasonId) => {
   }
 
   if (seasonId === "recent") {
-    const recentSeason = SeasonServices.findRecentSeason();
+    const recentSeason = await SeasonServices.findRecentSeason();
     seasonId = recentSeason.id;
   }
 

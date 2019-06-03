@@ -13,7 +13,7 @@ module.exports = (users, movies, movieScoreMap, season) => {
       totalDiff = 0;
 
     for (let movie of movies) {
-      let actualScore = movieScoreMap.map[movie._id];
+      let actualScore = movie.rtScore;
       let userPrediction = user.votes[movie._id];
 
       if (

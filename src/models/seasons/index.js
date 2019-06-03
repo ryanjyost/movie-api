@@ -2,7 +2,9 @@ const Season = require("./model");
 
 module.exports = {
   findRecentSeason: async () => {
-    const seasons = await Season.find().sort({ id: -1 });
+    const seasons = await Season.find()
+      .populate("movies")
+      .sort({ id: -1 });
     return seasons[0] || null;
   },
   createNewSeason: async newSeasonId => {
@@ -14,8 +16,11 @@ module.exports = {
     });
   },
   findSeasonById: async id => {
-    return await Season.findOne({ id });
+    return await Season.findOne({ id }).populate("movies");
   },
-  getSeasons: require("./services/getSeasons"),
-  getSeason: require("./services/getSeason")
+  findAllSeasons: async () => {
+    return await Season.find()
+      .populate("movies")
+      .sort({ id: -1 });
+  }
 };

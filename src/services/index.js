@@ -33,14 +33,12 @@ module.exports = {
     ...SeasonServices,
     ...Seasons
   },
-  SharedServices,
+  SharedServices
 
-  //////////////////////
-  calculateRankings: require("./calculateRankings"),
-  calcMovieMetrics: require("./calcMovieMetrics"),
-  calcSingleMovieMetrics: require("./movies/calcSingleMovieMetrics"),
-  sendMovieScoreResultsToAllGroups: require("./sendMovieScoreResultsToAllGroups"),
-  handleUserPrediction: require("./handleUserPrediction"),
-  handleGroupMeAutomatedMessage: require("./handleGroupMeAutomatedMessage"),
-  sendGroupRankings: require("./sendGroupRankings")
+  // //////////////////////
+  // calculateRankings: require("./calculateRankings"),
+  // calcMovieMetrics: require("./calcMovieMetrics"),
+  // calcSingleMovieMetrics: require("./movies/calcSingleMovieMetrics"),
+  // // sendMovieScoreResultsToAllGroups: require("./sendMovieScoreResultsToAllGroups"),
+  // handleGroupMeAutomatedMessage: require("../handlers/platforms/groupme/handleGroupMeAutomatedMessage")
 };

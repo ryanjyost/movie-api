@@ -62,4 +62,15 @@ router.get(
   })
 );
 
+router.get(
+  "/:id/breakdowns/:type",
+  catchErrors(async (req, res) => {
+    const { id, type } = req.params;
+
+    const breakdowns = await Handlers.getGroupBreakdowns(id, type);
+
+    res.json({ breakdowns });
+  })
+);
+
 module.exports = router;

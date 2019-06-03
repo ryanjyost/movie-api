@@ -2,16 +2,10 @@ const express = require("express");
 const router = express.Router();
 const moment = require("moment");
 
-const { catchErrors, moviePredictionCutoffDate } = require("../../util");
+const { catchErrors, moviePredictionCutoffDate } = require("../util/index");
 
-const Handlers = require("../../handlers/movies");
-
-const editMovie = catchErrors(require("../../handlers/movies/editMovie"));
-const deleteMovie = catchErrors(require("./deleteMovie"));
-const updateMovieVotes = catchErrors(require("./updateMovieVotes"));
-const updateUserPrediction = catchErrors(
-  require("../users/updateUserPrediction")
-);
+const { MovieServices } = require("../services/index");
+const Handlers = require("../handlers/movies/index");
 
 /* Get all movies */
 router.get(
@@ -54,9 +48,17 @@ router.post(
 );
 
 /* Delete movie */
-router.post("/delete/:id", deleteMovie);
+router.post(
+  "/delete/:id",
+  catchErrors(async (req, res) => {
+    const { id } = req.params;
 
-/* Update a user's movie prediction */
-router.post("/predict/:movieId", updateMovieVotes, updateUserPrediction);
+    await MovieServices.deleteMovie(id);
+
+    const movies = MovieServices.findAllMovies();
+
+    res.json({ movies });
+  })
+);
 
 module.exports = router;

@@ -1,7 +1,7 @@
-const { createObjectId } = require("../../util/index");
-const Users = require("../../models/users");
-const Groups = require("../../models/groups");
-const GroupMe = require("../../platforms/groupme");
+const { createObjectId } = require("../util/index");
+const Users = require("../models/users/index");
+const Groups = require("../models/groups/index");
+const GroupMe = require("../platforms/groupme/index");
 const _ = require("lodash");
 
 /*

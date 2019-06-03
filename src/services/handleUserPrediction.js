@@ -1,9 +1,12 @@
-const GroupMe = require("../platforms/groupme");
+const GroupMe = require("../platforms/groupme/index");
 const User = require("../models/users/model");
-const Groups = require("../models/groups");
+const Groups = require("../models/groups/index");
 const Group = require("../models/groups/model");
-const Movies = require("../models/movies");
-const { isMoviePastPredictionDeadline, sanitizeTitle } = require("../util");
+const Movies = require("../models/movies/index");
+const {
+  isMoviePastPredictionDeadline,
+  sanitizeTitle
+} = require("../util/index");
 const stringSimilarity = require("string-similarity");
 
 /*

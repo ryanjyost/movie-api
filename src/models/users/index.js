@@ -7,6 +7,12 @@ module.exports = {
       populate: { path: "members" }
     });
   },
+  findUserById: async id => {
+    return await User.findOne({ _id: id }).populate({
+      path: "groups",
+      populate: { path: "members" }
+    });
+  },
   findAllUsers: async () => User.find(),
   updateUserVoteMaps: async movieId => {
     // this updates any user that hasn't predicted with a placeholder of -1
@@ -15,6 +21,9 @@ module.exports = {
       { $set: { [`votes.${movieId}`]: -1 } },
       { multi: true }
     );
+  },
+  createUser: async userData => {
+    return await User.create(userData);
   },
   findOrCreateUser: require("./findOrCreateUser"),
   getUsers: require("./services/getUsers"),

@@ -12,8 +12,9 @@ const pe = new PrettyError();
 require("dotenv").config();
 
 const db = require("./db");
-const runCronJobs = require("./src/services/cron");
+const runCronJobs = require("./src/cron");
 
+// turn on even listeners
 require("./src/listeners");
 
 const app = express();
@@ -21,7 +22,30 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-// app.use(morgan("combined", { stream: winston.stream }));
+app.use(
+  morgan(
+    function(tokens, req, res) {
+      const log = {
+        method: tokens.method(req, res),
+        url: tokens.url(req, res),
+        status: tokens.status(req, res),
+        contentLength: tokens.res(req, res, "content-length"),
+        responseTime: tokens["response-time"](req, res)
+      };
+
+      if (false) {
+        // if (process.env.ENV === "development") {
+        return `${tokens.method(req, res)} ${tokens.url(
+          req,
+          res
+        )} | ${tokens.status(req, res)}`;
+      } else {
+        return JSON.stringify(log);
+      }
+    },
+    { stream: winston.stream }
+  )
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

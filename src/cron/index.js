@@ -4,7 +4,7 @@ const CronJob = require("cron").CronJob;
 const handleMovieCutoffs = require("./handleMovieCutoffs");
 // const syncUsersAndGroups = require("./syncUsersAndGroups");
 const handleCutoffNotifications = require("./handleCutoffNotifications");
-const calcMovieMetrics = require("../services/calcMovieMetrics");
+const calcMovieMetrics = require("./calcMovieMetrics");
 
 const job1 = new CronJob("0 20 0,1,2 * * *", handleMovieCutoffs, null, true);
 
@@ -19,6 +19,7 @@ const runCronJobs = () => {
 };
 
 // syncUsersAndGroups();
+// handleMovieCutoffs();
 // handleCutoffNotifications();
 // calcMovieMetrics();
 

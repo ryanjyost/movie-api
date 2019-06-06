@@ -15,7 +15,11 @@ module.exports = async (groupId, seasonId) => {
 
   if (seasonId === "recent") {
     const recentSeason = await SeasonServices.findRecentSeason();
-    seasonId = recentSeason.id;
+    if (recentSeason) {
+      seasonId = recentSeason.id;
+    } else {
+      seasonId = 0;
+    }
   }
 
   const group = await GroupServices.findGroupById(groupId);

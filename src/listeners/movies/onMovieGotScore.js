@@ -11,10 +11,10 @@ const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async movie => {
   const score = movie.rtScore;
-  const groups = GroupMeServices.findAllGroups();
-  const season = SeasonServices.findSeasonById(movie.season);
-  const moviesInSeason = MovieServices.findMoviesBySeason(movie.season);
-  const MovieScoreMap = MovieScoreMapServices.get();
+  const groups = await GroupServices.findAllGroups();
+  const season = await SeasonServices.findSeasonById(movie.season);
+  const moviesInSeason = await MovieServices.findMoviesBySeason(movie.season);
+  const MovieScoreMap = await MovieScoreMapServices.get();
 
   let mainMessage =
     `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
@@ -22,10 +22,10 @@ module.exports = async movie => {
     `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
 
   for (let group of groups) {
-    const movieRankings = GroupServices.calcGroupRankingsForSingleMovie(group, {
-      ...movie.toObject(),
-      ...{ rtScore: score }
-    });
+    const movieRankings = await GroupServices.calcGroupRankingsForSingleMovie(
+      group,
+      movie
+    );
 
     for (let i = 0; i < movieRankings.length; i++) {
       let user = movieRankings[i];

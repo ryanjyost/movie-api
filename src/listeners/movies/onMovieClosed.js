@@ -17,7 +17,7 @@ module.exports = async movie => {
 
     let voteMessage = ``;
     for (let user of sortedMembers) {
-      if (user.isMM) continue;
+      if (user.name === "Movie Medium") continue;
 
       if (user) {
         voteMessage =

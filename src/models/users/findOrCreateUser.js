@@ -11,7 +11,12 @@ module.exports = async (
 ) => {
   let isNew = false;
 
-  let user = await User.findOne({ groupmeId: groupmeMemberData.user_id });
+  let user = await User.findOne({
+    groupmeId: groupmeMemberData.user_id
+  }).populate({
+    path: "groups",
+    populate: { path: "members" }
+  });
 
   if (!user) {
     isNew = true;

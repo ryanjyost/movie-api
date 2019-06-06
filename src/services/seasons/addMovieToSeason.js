@@ -7,7 +7,7 @@ const { calculateRankings } = require("../shared");
 module.exports = async movie => {
   try {
     // find the most recent season
-    let seasonToUpdate = Seasons.findRecentSeason();
+    let seasonToUpdate = await Seasons.findRecentSeason();
 
     if (!seasonToUpdate) {
       // no seasons in the DB, so create one
@@ -33,6 +33,7 @@ module.exports = async movie => {
     return seasonToUpdate;
   } catch (e) {
     console.log("Error", e);
+    throw new Error(e);
   }
 };
 
@@ -59,7 +60,6 @@ const createWinnerMap = async season => {
       .map(player => player.id);
   }
 
-  console.log("WINNER MAP", winnerMap);
   return winnerMap;
 };
 

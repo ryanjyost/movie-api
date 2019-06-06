@@ -124,8 +124,6 @@ const calculateRankings = async (groupQuery, movieQuery = {}) => {
       rankingsWithPlaces.push({ ...sorted[i], ...{ place: currRanking } });
     }
 
-    console.log("RANKINGS", rankingsWithPlaces);
-
     return rankingsWithPlaces;
   } catch (e) {
     console.log("ERROR", e);

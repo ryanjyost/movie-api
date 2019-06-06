@@ -15,12 +15,14 @@ module.exports = async token => {
   //... find or create user with groupme data
   const user = await UserServices.findOrCreateUser(groupMeUser);
 
-  let userMongoObject = null;
+  let userMongoObject = null,
+    userMMGroups = [],
+    groupsForResponse = [];
 
   if (user.isNew) {
-    let userMongoObject = await UserServices.findUserById(user._id);
+    userMongoObject = await UserServices.findUserById(user._id);
 
-    let userMMGroups = [...userMongoObject.groups];
+    userMMGroups = [...userMongoObject.groups];
     //... get user's groups
     const usersGroups = await to(GroupMeApi.getCurrentUsersGroups());
 
@@ -37,12 +39,18 @@ module.exports = async token => {
           userMongoObject._id
         );
         userMMGroups.push(existingGroup._id);
+        groupsForResponse.push(existingGroup);
       }
     }
 
     userMongoObject.groups = userMMGroups;
-    userMongoObject.save();
+    await userMongoObject.save();
   }
 
-  return user;
+  if (user.isNew) {
+    const finalNewUserData = await UserServices.findUserById(user._id);
+    return { ...finalNewUserData.toObject(), ...{ isNew: true } };
+  } else {
+    return user;
+  }
 };

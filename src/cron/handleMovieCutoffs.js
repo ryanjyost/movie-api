@@ -7,7 +7,6 @@ const {
 const GroupMeServices = PlatformServices.GroupMe;
 
 const {
-  moviePredictionCutoffDate,
   isMoviePastPredictionDeadline,
   sortArrayByProperty
 } = require("../util/index");

@@ -79,6 +79,6 @@ app.use(function(err, req, res, next) {
 });
 
 /* RUN CRON JOBS */
-// runCronJobs();
+runCronJobs();
 
 module.exports = app;

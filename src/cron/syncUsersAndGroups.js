@@ -1,7 +1,10 @@
-const { createObjectId } = require("../util/index");
-const Users = require("../models/users/index");
-const Groups = require("../models/groups/index");
-const GroupMe = require("../platforms/groupme/index");
+const { createObjectId, to } = require("../util/index");
+const {
+  GroupServices,
+  PlatformServices,
+  UserServices
+} = require("../services");
+const GroupMeServices = PlatformServices.GroupMe;
 const _ = require("lodash");
 
 /*
@@ -11,15 +14,15 @@ const _ = require("lodash");
 
 module.exports = async () => {
   try {
-    const groups = await Groups.getGroups({}, "members");
+    const groups = await GroupServices.findAllGroups();
 
     for (let group of groups) {
       let updatedGroupMemberIds = [];
 
-      const groupMeData = await GroupMe.getGroup(group.groupmeId);
+      const groupMeData = await to(GroupMeServices.getGroup(group.groupmeId));
 
       for (let member of groupMeData.members) {
-        const user = await Users.getUser({ groupmeId: member.user_id });
+        const user = await UserServices.findUserByGroupMeId(member.user_id);
 
         if (user) {
           // nothing there now so just set
@@ -27,7 +30,9 @@ module.exports = async () => {
             user.groups = [group._id];
           } else {
             // strings to easily compare and remove dups
-            let groupStrings = [...user.groups].map(group => group.toString());
+            let groupStrings = [...user.groups].map(group =>
+              group._id.toString()
+            );
             // get rid of any duplicates
             const noDupsOfGroupStrings = _.uniq(groupStrings);
 
@@ -42,6 +47,7 @@ module.exports = async () => {
               ];
             }
 
+            console.log("STRINGS", finalGroupStrings);
             // convert back and add to user document
             user.groups = finalGroupStrings.map(string =>
               createObjectId(string)
@@ -51,8 +57,10 @@ module.exports = async () => {
           await user.save();
           updatedGroupMemberIds.push(user._id);
         } else {
-          const newUser = await Users.findOrCreateUser(member, group._id);
-
+          const newUser = await UserServices.findOrCreateUser(
+            member,
+            group._id
+          );
           updatedGroupMemberIds.push(newUser._id);
         }
       }

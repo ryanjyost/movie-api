@@ -25,6 +25,14 @@ module.exports = {
   createUser: async userData => {
     return await User.create(userData);
   },
+  addGroupToUser: async (userId, groupId) => {
+    return await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $push: { groups: groupId }
+      }
+    );
+  },
   findOrCreateUser: require("./findOrCreateUser"),
   getUsers: require("./services/getUsers"),
   getUser: require("./services/getUser")

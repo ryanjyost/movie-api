@@ -23,10 +23,6 @@ module.exports = async reqBody => {
   if (isNaN(scoreNum)) {
     return;
   } else if (!(scoreNum >= 0 && scoreNum <= 100)) {
-    // await GroupMeServices.sendBotMessage(
-    //   `Your prediction has to be a percentage between 0% and 100%️`,
-    //   group.bot.bot_id
-    // );
     return;
   }
 
@@ -48,6 +44,7 @@ module.exports = async reqBody => {
   }
 
   const user = await UserServices.findUserByGroupMeId(userGroupmeId);
+  const group = await GroupServices.findGroupByGroupMeId(groupmeGroupId);
 
   if (movie && user) {
     const updatedUser = await UserServices.updateUserPrediction(
@@ -65,9 +62,19 @@ module.exports = async reqBody => {
       Emitter.emit("userPredictionOnPlatformSaved", groupmeGroupId, messageId);
       return;
     }
-  } else if (!user && movie) {
-    const group = await GroupServices.findUserByGroupMeId(groupmeGroupId);
 
+    const isUserInGroupWherePredicted = user.groups.find(group => {
+      return group.groupme.id === groupmeGroupId;
+    });
+
+    if (!isUserInGroupWherePredicted) {
+      await GroupServices.addUserToGroup(
+        { groupmeId: groupmeGroupId },
+        user._id
+      );
+      await UserServices.addGroupToUser(user._id, group._id);
+    }
+  } else if (!user && movie) {
     const newUser = await UserServices.createUser({
       groupme: reqBody,
       groupmeId: userGroupmeId,
@@ -77,6 +84,7 @@ module.exports = async reqBody => {
       groups: group ? [group._id] : []
     });
 
+    // first time user
     if (newUser) {
       await GroupServices.addUserToGroup({ _id: group._id }, newUser._id);
       Emitter.emit(

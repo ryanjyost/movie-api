@@ -47,7 +47,6 @@ module.exports = async () => {
               ];
             }
 
-            console.log("STRINGS", finalGroupStrings);
             // convert back and add to user document
             user.groups = finalGroupStrings.map(string =>
               createObjectId(string)

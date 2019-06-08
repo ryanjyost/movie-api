@@ -2,6 +2,7 @@ const Emitter = require("../EventEmitter");
 const GroupListeners = require("./groups");
 const MovieListeners = require("./movies");
 const GroupMeListeners = require("./platforms/groupme");
+const Util = require("./util");
 
 // when someone creates a new movie medium group
 Emitter.on("createdGroup", GroupListeners.onCreatedGroup);
@@ -18,9 +19,13 @@ Emitter.on("movieClosed", MovieListeners.onMovieClosed);
 // existing user invited someone to their group
 Emitter.on("userAddedInGroupMe", GroupMeListeners.onUserAddedInGroupMe);
 
-Emitter.on("userPredictionOnPlatformSaved", GroupMeListeners.likeMessage);
+Emitter.on("userPredictionOnPlatformSaved", Util.likeMessage);
 
 Emitter.on(
   "userMadeFirstPredictionOnPlatform",
   GroupMeListeners.onUserMadeFirstPredictionOnPlatform
 );
+
+Emitter.on("feedback", Util.likeMessage);
+
+Emitter.on("respondedToFeedback", Util.sendMessageToGroup);

@@ -1,3 +1,4 @@
 module.exports = {
-  sendMessageToAllGroups: require("./sendMessageToAllGroups")
+  sendMessageToAllGroups: require("./sendMessageToAllGroups"),
+  handleFeedbackResponse: require("./handleFeedbackResponse")
 };

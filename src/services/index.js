@@ -6,7 +6,14 @@ const SeasonServices = require("./seasons");
 const SharedServices = require("./shared");
 
 // sometimes just wanna pass through a lower level function
-const { Groups, Users, Movies, MovieScoreMap, Seasons } = require("../models");
+const {
+  Groups,
+  Users,
+  Movies,
+  MovieScoreMap,
+  Seasons,
+  Feedback
+} = require("../models");
 const { GroupMe } = require("../platforms");
 
 module.exports = {
@@ -33,6 +40,7 @@ module.exports = {
     ...SeasonServices,
     ...Seasons
   },
+  FeedbackServices: Feedback,
   SharedServices
 
   // //////////////////////

@@ -8,5 +8,6 @@ module.exports = {
   sendBotMessage: API.sendBotMessage,
   likeMessage: API.likeMessage,
   addMemberToGroup: API.addMemberToGroup,
-  createBot: API.createBot
+  createBot: API.createBot,
+  sendMessageToGroup: API.sendMessageToGroup
 };

@@ -1,3 +1,5 @@
 module.exports = {
-  messageAllGroups: require("./messageAllGroups")
+  messageAllGroups: require("./messageAllGroups"),
+  likeMessage: require("./likeMessage"),
+  sendMessageToGroup: require("./sendMessageToGroup")
 };

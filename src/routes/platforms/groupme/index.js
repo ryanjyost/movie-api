@@ -20,6 +20,14 @@ router.post(
     const { text, user_id, group_id } = reqBody;
     let cleanText = text.toLowerCase().trim();
 
+    if (
+      text
+        .toLowerCase()
+        .replace(/ /g, "")
+        .includes("moviemedium")
+    ) {
+      await Handlers.saveFeedback(reqBody);
+    }
     if (user_id === "0") {
       await Handlers.handleGroupMeAutomatedMessage(group_id, text);
     } else if (

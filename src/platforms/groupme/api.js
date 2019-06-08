@@ -1,5 +1,6 @@
 const { create } = require("apisauce");
 const queryString = require("query-string");
+const uuidv1 = require("uuid/v1");
 
 const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
   const api = create({
@@ -31,6 +32,16 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
       text,
       bot_id: bot_id
     });
+
+  const sendMessageToGroup = (group_id, text) => {
+    console.log("text", text);
+    return api.post(`/groups/${group_id}/messages`, {
+      message: {
+        text: text,
+        source_guid: uuidv1()
+      }
+    });
+  };
 
   const getCurrentUser = () => api.get("/users/me");
 
@@ -77,7 +88,8 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
     getGroup,
     likeMessage,
     addMemberToGroup,
-    createBot
+    createBot,
+    sendMessageToGroup
   };
 };
 

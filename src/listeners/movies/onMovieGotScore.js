@@ -9,8 +9,7 @@ const {
 
 const GroupMeServices = PlatformServices.GroupMe;
 
-module.exports = async (movie, updatedSeason) => {
-  console.log("UPDATED SEASON", updatedSeason);
+module.exports = async movie => {
   const score = movie.rtScore;
   const groups = await GroupServices.findAllGroups();
   const season = await SeasonServices.findSeasonById(movie.season);

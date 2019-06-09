@@ -37,12 +37,16 @@ module.exports = async (movieId, updatedData) => {
       ...{ rtScore: updatedData.rtScore }
     });
     movie.season = season.id;
-    movie.save();
+    await movie.save();
 
-    Emitter.emit("movieGotScore", {
-      ...movie.toObject(),
-      ...{ rtScore: updatedData.rtScore }
-    });
+    Emitter.emit(
+      "movieGotScore",
+      {
+        ...movie.toObject(),
+        ...{ rtScore: updatedData.rtScore }
+      },
+      season.toObject()
+    );
   }
 
   // ...add movie to user vote map with -1 if no vote

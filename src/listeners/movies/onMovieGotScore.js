@@ -9,23 +9,26 @@ const {
 
 const GroupMeServices = PlatformServices.GroupMe;
 
-module.exports = async movie => {
+module.exports = async (movie, updatedSeason) => {
+  console.log("UPDATED SEASON", updatedSeason);
   const score = movie.rtScore;
   const groups = await GroupServices.findAllGroups();
   const season = await SeasonServices.findSeasonById(movie.season);
   const moviesInSeason = await MovieServices.findMoviesBySeason(movie.season);
   const MovieScoreMap = await MovieScoreMapServices.get();
 
-  let mainMessage =
-    `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
-  let scoreMessage =
-    `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
-
   for (let group of groups) {
+    let mainMessage =
+      `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
+    let scoreMessage =
+      `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
+
     const movieRankings = await GroupServices.calcGroupRankingsForSingleMovie(
       group,
       movie
     );
+
+    console.log("RANKINGS", movieRankings);
 
     for (let i = 0; i < movieRankings.length; i++) {
       let user = movieRankings[i];
@@ -46,7 +49,7 @@ module.exports = async movie => {
     }
 
     let seasonMessage = "";
-    let moviesLeftInSeason = season.length - season.movies.length;
+    let moviesLeftInSeason = season.length - moviesInSeason.length;
 
     if (moviesLeftInSeason) {
       seasonMessage = `Only ${moviesLeftInSeason} movies left in the current season...`;

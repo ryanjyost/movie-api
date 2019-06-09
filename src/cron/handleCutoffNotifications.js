@@ -79,9 +79,6 @@ module.exports = async daysBeforeCutoff => {
         }
       }
 
-      console.log(fullMessage, userIdsBeingMentioned);
-
-      // let user_ids = group.members.map(member => member.groupme.user_id);
       await GroupMeServices.sendMessageToGroup(
         group.groupme.id,
         fullMessage,

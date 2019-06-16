@@ -1,8 +1,13 @@
-const createApi = require("./services/GroupMeApi");
-const API = createApi(process.env.GROUPME_ACCESS_TOKEN);
+const createApi = require("./api");
+const API = createApi();
 
-exports.createApi = createApi;
-exports.sendBotMessage = API.sendBotMessage;
-exports.likeMessage = API.likeMessage;
-exports.getCurrentUser = API.getCurrentUser;
-exports.getGroup = API.getGroup;
+module.exports = {
+  createApi,
+  createGroup: API.createGroup,
+  getGroup: API.getGroup,
+  sendBotMessage: API.sendBotMessage,
+  likeMessage: API.likeMessage,
+  addMemberToGroup: API.addMemberToGroup,
+  createBot: API.createBot,
+  sendMessageToGroup: API.sendMessageToGroup
+};

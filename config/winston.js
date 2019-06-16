@@ -1,33 +1,55 @@
 const appRoot = require("app-root-path");
 const winston = require("winston");
 const { format } = winston;
+const moment = require("moment");
+
+const appendTimestamp = format((info, opts) => {
+  info.timestamp = moment.utc().format(`MM/DD/YYYY, H:mm:ss Z`);
+  return info;
+});
 
 const options = {
   file: {
-    // level: process.env.NODE_ENV !== "production" ? "error" : "info",
     level: "info",
     filename: `${appRoot}/logs/app.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
     maxFiles: 5,
-    colorize: false
+    colorize: false,
+    timestamp: () => {
+      return new Date();
+    }
   },
   console: {
-    level: "warning",
-    format: format.combine(format.colorize(), format.simple())
+    level: "warn",
+    handleExceptions: true,
+    json: false,
+    format: format.combine(
+      format.colorize(),
+      format.simple(),
+      format.printf(
+        info =>
+          process.env.ENV === "development"
+            ? `${info.level}: ${info.message}`
+            : `${info.timestamp} ${info.level}: ${info.message}`
+      )
+    )
   }
 };
 
 const logger = winston.createLogger({
   format: format.combine(
     format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss"
+      format: "MM/DD/YY HH:mm:ss"
     }),
+    appendTimestamp(),
     format.errors({ stack: true }),
     format.splat(),
     format.json()
   ),
+  // format: format.simple(),
+
   transports: [new winston.transports.File(options.file)],
   exitOnError: false // do not exit on handled exceptions
 });

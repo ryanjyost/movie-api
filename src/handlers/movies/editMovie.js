@@ -37,7 +37,7 @@ module.exports = async (movieId, updatedData) => {
       ...{ rtScore: updatedData.rtScore }
     });
     movie.season = season.id;
-    movie.save();
+    await movie.save();
 
     Emitter.emit("movieGotScore", {
       ...movie.toObject(),

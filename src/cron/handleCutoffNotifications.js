@@ -8,6 +8,7 @@ const GroupMeServices = PlatformServices.GroupMe;
 const { moviePredictionCutoffDate } = require("../util");
 const moment = require("moment");
 const Boom = require("@hapi/boom");
+const logger = require("../../config/winston");
 
 module.exports = async daysBeforeCutoff => {
   try {
@@ -31,6 +32,11 @@ module.exports = async daysBeforeCutoff => {
           .utc()
           .diff(moment.unix(moviePredictionCutoffDate), "day") === 4
       ) {
+        logger.info(
+          `Countdown for ${movie.title} at ${moment
+            .utc()
+            .format("MM/DD/YYYY H:mm")}`
+        );
         atleastOneMovie = true;
         // text = text + "\n" + `${movie.title}`;
         moviesClosingSoon[movie._id] = movie;

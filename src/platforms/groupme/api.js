@@ -35,7 +35,8 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
 
   const sendMessageToGroup = (group_id, text, user_ids) => {
     let attachments = [];
-    if (user_ids) {
+
+    if (user_ids.length) {
       attachments.push({
         type: "mentions",
         user_ids

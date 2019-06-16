@@ -13,6 +13,7 @@ const movieSchema = new mongoose.Schema({
   votes: mongoose.Schema.Types.Mixed,
   season: Number,
   metrics: mongoose.Schema.Types.Mixed,
+  rankingsByGroup: mongoose.Schema.Types.Mixed,
   created_at: { type: Date, default: new Date() }
 });
 

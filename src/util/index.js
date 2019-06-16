@@ -70,6 +70,10 @@ exports.calcNoPredictionPenalty = movie => {
   }
 };
 
+exports.emojiMap = [`🥇`, `🥈`, `🥉`];
 exports.catchErrors = require("./catchErrors");
+exports.calcGroupRankingsForSingleMovie = require("./calcGroupRankingsForSingleMovie");
+exports.buildSingleUserSingleMovieData = require("./buildSingleUserSingleMovieData");
+exports.buildSingleUserManyMovieData = require("./buildSingleUserManyMovieData");
 exports.to = require("./handleApi");
 exports.logger = logger;

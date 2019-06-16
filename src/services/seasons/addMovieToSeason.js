@@ -1,5 +1,5 @@
 const { Seasons, Groups, Movies, MovieScoreMap } = require("../../models");
-const { calculateRankings } = require("../shared");
+const { calculateGroupSeasonRankings } = require("../shared");
 
 /*
 * Handle movie getting an RT Scores
@@ -24,6 +24,8 @@ module.exports = async movie => {
       // create a new season
       seasonToUpdate = await Seasons.createNewSeason(seasonToUpdate.id + 1);
       seasonToUpdate.movies.push(movie._id);
+    } else if (movie.season === seasonToUpdate.id) {
+      // nothing, movie is already in the season
     } else {
       // just adding a movie to the season
       seasonToUpdate.movies.push(movie._id);
@@ -43,19 +45,13 @@ module.exports = async movie => {
 const createWinnerMap = async season => {
   const groups = await Groups.findAllGroups();
   const movies = await Movies.findMoviesBySeason(season.id);
-  const scoreMap = await MovieScoreMap.get();
   const winnerMap = {};
 
   for (let group of groups) {
-    const rankings = await calculateRankings(
-      group.members,
-      movies,
-      scoreMap,
-      season
-    );
+    const rankings = await calculateGroupSeasonRankings(group, movies, season);
     winnerMap[group._id] = rankings
       .filter(player => {
-        return player.place === 1 && !player.notInSeason;
+        return player.place === 1;
       })
       .map(player => player.id);
   }

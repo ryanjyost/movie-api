@@ -34,7 +34,6 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
     });
 
   const sendMessageToGroup = (group_id, text) => {
-    console.log("text", text);
     return api.post(`/groups/${group_id}/messages`, {
       message: {
         text: text,

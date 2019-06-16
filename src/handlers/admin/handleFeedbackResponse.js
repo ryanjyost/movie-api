@@ -13,8 +13,6 @@ module.exports = async (id, message) => {
     message
   );
 
-  console.log("MESSAGE RESPONSE", messageResponse.data);
-
   if (messageResponse) {
     return updatedFeedback;
   }

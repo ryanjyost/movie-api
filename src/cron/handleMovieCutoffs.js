@@ -5,11 +5,9 @@ const {
   PlatformServices
 } = require("../services");
 const GroupMeServices = PlatformServices.GroupMe;
+const Emitter = require("../EventEmitter");
 
-const {
-  isMoviePastPredictionDeadline,
-  sortArrayByProperty
-} = require("../util/index");
+const { isMoviePastPredictionDeadline } = require("../util/index");
 const moment = require("moment");
 
 const handleMovieCutoffs = async () => {
@@ -22,38 +20,7 @@ const handleMovieCutoffs = async () => {
         await movie.save();
 
         await UserServices.updateUserVoteMaps(movie._id);
-
-        const groups = await GroupServices.findAllGroups();
-
-        for (let group of groups) {
-          let movieMessage =
-            `🔒 "${movie.title}" predictions are locked in!` + "\n";
-
-          let sortedMembers = sortArrayByProperty(
-            group.members,
-            `votes.${movie._id}`,
-            false
-          );
-
-          let voteMessage = ``;
-          for (let user of sortedMembers) {
-            if (user && user.name !== "Movie Medium") {
-              voteMessage =
-                voteMessage +
-                `${user.nickname || user.name}: ${
-                  user.votes[movie._id] < 0
-                    ? `Forgot to predict 😬`
-                    : `${user.votes[movie._id]}%`
-                }` +
-                "\n";
-            }
-          }
-
-          await GroupMeServices.sendBotMessage(
-            movieMessage + "\n" + voteMessage,
-            group.bot.bot_id
-          );
-        }
+        Emitter.emit("movieClosed", movie);
       }
     }
   } catch (e) {

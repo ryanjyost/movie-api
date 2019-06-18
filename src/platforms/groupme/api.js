@@ -33,7 +33,7 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
       bot_id: bot_id
     });
 
-  const sendMessageToGroup = (group_id, text, user_ids) => {
+  const sendMessageToGroup = (group_id, text, user_ids = []) => {
     let attachments = [];
 
     if (user_ids.length) {

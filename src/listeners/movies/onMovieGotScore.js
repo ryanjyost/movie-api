@@ -7,6 +7,8 @@ const {
   MovieScoreMapServices
 } = require("../../services");
 
+const { emojiMap, calcGroupRankingsForSingleMovie } = require("../../util");
+
 const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async movie => {
@@ -14,35 +16,35 @@ module.exports = async movie => {
   const groups = await GroupServices.findAllGroups();
   const season = await SeasonServices.findSeasonById(movie.season);
   const moviesInSeason = await MovieServices.findMoviesBySeason(movie.season);
-  const MovieScoreMap = await MovieScoreMapServices.get();
 
   for (let group of groups) {
     let mainMessage =
       `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
-    let scoreMessage =
-      `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
+    let scoreMessage = ``;
+    // `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
 
-    const movieRankings = await GroupServices.calcGroupRankingsForSingleMovie(
-      group,
-      movie
-    );
-
-    console.log("RANKINGS", movieRankings);
+    const movieRankings = await calcGroupRankingsForSingleMovie(group, movie);
 
     for (let i = 0; i < movieRankings.length; i++) {
       let user = movieRankings[i];
 
-      const noPredictionMessage = "Penalty for not predicting";
+      const noPredictionMessage = "No prediction";
       const notActiveMessage = `N/A (Not a user when predictions closed)`;
 
       if (!user.wasActiveForMovie) {
-        scoreMessage = scoreMessage + `${user.name}:` + notActiveMessage + "\n";
+        scoreMessage =
+          scoreMessage + `${user.name}: ` + notActiveMessage + "\n";
+      } else if (!user.didVote) {
+        scoreMessage =
+          scoreMessage + `${user.name}: ` + noPredictionMessage + "\n";
       } else {
         scoreMessage =
           scoreMessage +
-          `${user.name}: ${Math.abs(user.diff)}% (${
-            !user.didVote ? noPredictionMessage : user.vote
-          }${!user.didVote ? "" : "% prediction"})` +
+          `${
+            emojiMap[user.place - 1] && user.didVote
+              ? emojiMap[user.place - 1]
+              : ""
+          } ${user.name}: ${user.absDiff}% (${user.vote}% prediction)` +
           "\n";
       }
     }
@@ -54,35 +56,24 @@ module.exports = async movie => {
       seasonMessage = `Only ${moviesLeftInSeason} movies left in the current season...`;
     } else {
       // season ended, so send season results
-      const seasonRankings = await SharedServices.calculateRankings(
-        group.members,
+      const seasonRankings = await SharedServices.calculateGroupSeasonRankings(
+        group,
         moviesInSeason,
-        MovieScoreMap,
         season
       );
 
-      const emojiMap = [`🥇`, `🥈`, `🥉`];
       let rankingMessage = "";
       for (let user of seasonRankings) {
-        if (user.notInSeason) {
-          rankingMessage =
-            rankingMessage +
-            `${user.name}: Joined mid-season, will be eligible next season.` +
-            "\n";
-        } else {
-          rankingMessage =
-            rankingMessage + `${user.name}: ${Math.abs(user.avgDiff)}%` + "\n";
-        }
+        rankingMessage =
+          rankingMessage +
+          `${emojiMap[user.place - 1] || ""}${user.name}: ${
+            user.points
+          } points` +
+          "\n";
       }
 
       seasonMessage =
-        `🏆 Season ${
-          season.id
-        } is over! Here are the results, sorted from best to worst average MM Metric for the season.` +
-        "\n" +
-        rankingMessage +
-        "\n" +
-        `See more details at https://www.moviemedium.io/current`;
+        `🏆 Season ${season.id} is over!` + "\n" + "\n" + rankingMessage;
     }
 
     await GroupMeServices.sendBotMessage(

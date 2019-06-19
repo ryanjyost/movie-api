@@ -33,12 +33,20 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
       bot_id: bot_id
     });
 
-  const sendMessageToGroup = (group_id, text) => {
-    console.log("text", text);
+  const sendMessageToGroup = (group_id, text, user_ids = []) => {
+    let attachments = [];
+
+    if (user_ids.length) {
+      attachments.push({
+        type: "mentions",
+        user_ids
+      });
+    }
     return api.post(`/groups/${group_id}/messages`, {
       message: {
         text: text,
-        source_guid: uuidv1()
+        source_guid: uuidv1(),
+        attachments
       }
     });
   };

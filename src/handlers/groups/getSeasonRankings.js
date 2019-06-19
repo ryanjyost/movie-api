@@ -6,7 +6,7 @@ const {
 } = require("../../services");
 const Boom = require("@hapi/boom");
 
-const { calculateRankings } = require("../../services/shared");
+const { calculateGroupSeasonRankings } = require("../../services/shared");
 
 module.exports = async (groupId, seasonId) => {
   if (!groupId || !seasonId) {
@@ -23,10 +23,7 @@ module.exports = async (groupId, seasonId) => {
   }
 
   const group = await GroupServices.findGroupById(groupId);
-  let users = group.members;
-
-  const movieScoreMap = await MovieScoreMapServices.get();
   const moviesInSeason = await MovieServices.findMoviesBySeason(seasonId);
 
-  return calculateRankings(users, moviesInSeason, movieScoreMap, seasonId);
+  return calculateGroupSeasonRankings(group, moviesInSeason);
 };

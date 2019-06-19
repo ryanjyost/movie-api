@@ -24,7 +24,7 @@ module.exports = async movie => {
           voteMessage +
           `${user.name}: ${
             user.votes[movie._id] < 0
-              ? `Forgot to predict 😬`
+              ? `No prediction`
               : `${user.votes[movie._id]}%`
           }` +
           "\n";

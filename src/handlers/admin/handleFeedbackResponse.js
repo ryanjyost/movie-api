@@ -2,7 +2,6 @@ const { FeedbackServices, PlatformServices } = require("../../services");
 const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async (id, message) => {
-  console.log("handle", id, message);
   const updatedFeedback = await FeedbackServices.saveFeedbackResponse(
     id,
     message
@@ -12,8 +11,6 @@ module.exports = async (id, message) => {
     updatedFeedback.group.groupme.id,
     message
   );
-
-  console.log("MESSAGE RESPONSE", messageResponse.data);
 
   if (messageResponse) {
     return updatedFeedback;

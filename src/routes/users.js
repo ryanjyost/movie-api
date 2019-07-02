@@ -19,6 +19,7 @@ router.post(
     });
   })
 );
+
 router.get(
   "/:id",
   catchErrors(async (req, res) => {
@@ -27,6 +28,17 @@ router.get(
     const user = await UserServices.findUserById(id);
 
     res.json({ user });
+  })
+);
+
+router.get(
+  "/:id/overall",
+  catchErrors(async (req, res) => {
+    const { id } = req.params;
+
+    const overall = await Handlers.getUserOverall(id);
+
+    res.json({ overall });
   })
 );
 

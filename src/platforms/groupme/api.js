@@ -24,7 +24,7 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
             : "Movie Medium",
       share: true,
       image_url:
-        "https://i.groupme.com/1200x1200.png.aae8cb764cd447f2b60bd670e8e6ac67"
+        "https://i.groupme.com/310x310.png.0dc54244ee324183bd4fb3ce76888f52.avatar"
     });
 
   const sendBotMessage = (text, bot_id) =>
@@ -82,7 +82,7 @@ const createApi = (token = process.env.GROUPME_ACCESS_TOKEN) => {
               : "Movie Bot",
         group_id: groupMeGroupId,
         avatar_url:
-          "https://i.groupme.com/1200x1200.png.aae8cb764cd447f2b60bd670e8e6ac67",
+          "https://i.groupme.com/310x310.png.0dc54244ee324183bd4fb3ce76888f52.avatar",
         callback_url:
           process.env.GROUPME_CALLBACK_URL + "/groupme/receive_message"
       }

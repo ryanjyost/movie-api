@@ -39,6 +39,7 @@ module.exports = async accessToken => {
 
   // ...send updated user info for inital entry into the app
   const user = await UserServices.findUserByGroupMeId(currentUser.user_id);
+  user.groups = [...user.groups, ...[createdGroup]];
 
   Emitter.emit("createdGroup", newBot.bot.bot_id);
 

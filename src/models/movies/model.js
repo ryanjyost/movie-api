@@ -7,6 +7,7 @@ const movieSchema = new mongoose.Schema({
   summary: String,
   trailer: String,
   rtLink: String,
+  poster: String,
   rtScore: Number,
   releaseDate: Number,
   isClosed: mongoose.Schema.Types.Mixed,

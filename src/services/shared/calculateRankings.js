@@ -16,6 +16,7 @@ module.exports = (users, movies, movieScoreMap, season) => {
       movies,
       season
     );
+
     dataForRankings.push(singleUserManyMovieData);
   }
 

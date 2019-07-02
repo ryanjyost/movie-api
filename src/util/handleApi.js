@@ -11,14 +11,14 @@ const handleApi = promise => {
         if (response.ok) {
           return response.data ? response.data.response : null;
         } else {
-          throw new Boom.badGateway(response);
+          throw Boom.badGateway(response.data);
         }
       } else {
         return response;
       }
     })
     .catch(err => {
-      throw new Boom.badGateway(err);
+      throw Boom.badGateway(err);
     });
 };
 

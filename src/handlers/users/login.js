@@ -25,6 +25,7 @@ module.exports = async token => {
     userMMGroups = [...userMongoObject.groups];
     //... get user's groups
     const usersGroups = await to(GroupMeApi.getCurrentUsersGroups());
+    console.log("NEW USEr");
 
     for (let group of usersGroups) {
       const existingGroup = await GroupServices.findGroupByGroupMeId(
@@ -32,6 +33,7 @@ module.exports = async token => {
       );
 
       if (existingGroup) {
+        console.log("EXISTING");
         await GroupServices.addUserToGroup(
           {
             groupmeId: group.group_id

@@ -8,7 +8,6 @@ module.exports = (groupWithMemberData, movie = {}) => {
     if (user.isMM || user.name === "Movie Medium") continue;
 
     let userMovieData = buildSingleUserSingleMovieData(user, movie);
-
     votes.push(userMovieData);
   }
 

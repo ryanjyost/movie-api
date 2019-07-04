@@ -2,7 +2,6 @@ const _ = require("lodash");
 const calcPointsFromPlace = require("./calcPointsFromPlace");
 
 module.exports = (data, propertyToUse = "points", asc) => {
-  console.log("DATA", data);
   const sorted = _.orderBy(data, propertyToUse, [asc ? "asc" : "desc"]);
 
   const rankingsWithPlaces = [];
@@ -12,7 +11,7 @@ module.exports = (data, propertyToUse = "points", asc) => {
   for (let i = 0; i < sorted.length; i++) {
     let currItem = sorted[i];
     currRanking =
-      currItem[propertyToUse] === lastRankingScore
+      currItem[propertyToUse] == lastRankingScore
         ? currRanking
         : currRanking + 1;
 

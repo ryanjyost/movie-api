@@ -20,7 +20,7 @@ module.exports = async groupmeGroupId => {
     movieScoreMap
   );
 
-  let text = `🏆 GROUP RANKINGS 🏆` + "\n";
+  let text = `🏆 OVERALL RANKINGS 🏆` + "\n";
 
   for (let i = 0; i < rankings.length; i++) {
     if (!rankings[i].moviesInCalc) {

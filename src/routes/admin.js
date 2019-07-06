@@ -5,7 +5,11 @@ const fs = require("fs");
 const readline = require("readline");
 
 const Handler = require("../handlers/admin");
-const { FeedbackServices } = require("../services");
+const {
+  FeedbackServices,
+  UserServices,
+  GroupServices
+} = require("../services");
 const Emitter = require("../EventEmitter");
 
 const { catchErrors } = require("../util/index");
@@ -35,7 +39,9 @@ router.get(
       logs.push(JSON.parse(line));
     });
     rd.on("close", function(d) {
-      res.json({ logs });
+      res.json({
+        logs
+      });
     });
   })
 );
@@ -44,7 +50,15 @@ router.get(
   "/feedback",
   catchErrors(async (req, res) => {
     const feedback = await FeedbackServices.findAllFeedback();
-    res.json({ feedback });
+    const users = await UserServices.findAllUsers();
+    const groups = await GroupServices.findAllGroups();
+    res.json({
+      feedback,
+      stats: {
+        users: users.length,
+        groups: groups.length
+      }
+    });
   })
 );
 

@@ -1,10 +1,8 @@
 module.exports = place => {
-  if (place === 1) {
-    return 30;
-  } else if (place === 2) {
-    return 20;
-  } else if (place === 3) {
-    return 10;
+  const pointsByPlace = [0, 25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+
+  if (pointsByPlace[place]) {
+    return pointsByPlace[place];
   }
 
   return 0;

@@ -16,6 +16,7 @@ module.exports = async reqBody => {
     // send rankings to the group
     await Lib.sendGroupRankings(req.body.group_id);
     res.json({ message: "No op" });
+  } else if (text.toLowerCase().includes("season?")) {
   } else if (text.includes("=") || text.includes("-")) {
     await Lib.handleUserPrediction(req);
     res.json({ message: "No op" });

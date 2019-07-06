@@ -31,11 +31,12 @@ router.post(
     if (user_id === "0") {
       await Handlers.handleGroupMeAutomatedMessage(group_id, text);
     } else if (
-      cleanText === "ranking?" ||
+      cleanText === "season?" ||
       cleanText === "rankings?" ||
-      cleanText === "scoreboard?" ||
-      cleanText === "leaderboard?"
+      cleanText === "standings?"
     ) {
+      await Handlers.sendSeasonRankings(group_id);
+    } else if (cleanText === "overall?") {
       await Handlers.sendGroupRankings(group_id);
     } else if (text.includes("=") || text.includes("-")) {
       await Handlers.handleUserPredictionOnPlatform(reqBody);

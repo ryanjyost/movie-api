@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "dependencies": {
     "@hapi/boom": "^7.4.2",
@@ -30,6 +30,7 @@
     "mongoose": "^5.4.1",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "^1.9.1",
+    "pm2": "^3.5.1",
     "pretty-error": "^2.1.1",
     "query-string": "^6.2.0",
     "serve-favicon": "^2.5.0",

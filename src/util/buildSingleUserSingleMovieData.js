@@ -13,8 +13,6 @@ module.exports = (user, movie, season = null) => {
       diff = Math.abs(actualScore - userPrediction);
     }
 
-    console.log(userPrediction, noVote);
-
     return {
       id: user._id,
       name: user.nickname || user.name,

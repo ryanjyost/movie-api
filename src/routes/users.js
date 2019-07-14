@@ -5,13 +5,19 @@ const { UserServices } = require("../services/index");
 
 const { catchErrors } = require("../util/index");
 
-/* With auth token */
 router.post(
-  "/login",
+  "/login/:platform",
   catchErrors(async (req, res) => {
     const token = req.body.access_token;
+    const platform = req.params.platform;
 
-    const user = await Handlers.login(token);
+    let user = null;
+
+    if (platform === "groupme") {
+      user = await Handlers.login(token);
+    } else if (platform === "slack") {
+      user = await Handlers.loginSlack(token);
+    }
 
     res.json({
       user,

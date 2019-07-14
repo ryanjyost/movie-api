@@ -6,9 +6,8 @@ const {
   MovieServices,
   MovieScoreMapServices
 } = require("../../services");
-
+const { WebClient } = require("@slack/web-api");
 const { emojiMap, calcGroupRankingsForSingleMovie } = require("../../util");
-
 const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async movie => {
@@ -76,11 +75,47 @@ module.exports = async movie => {
         `🏆 Season ${season.id} is over!` + "\n" + "\n" + rankingMessage;
     }
 
-    await GroupMeServices.sendBotMessage(
-      mainMessage + "\n" + scoreMessage,
-      group.bot.bot_id
-    );
+    if (group.platform === "groupme") {
+      await GroupMeServices.sendBotMessage(
+        mainMessage + "\n" + scoreMessage,
+        group.bot.bot_id
+      );
+      await GroupMeServices.sendBotMessage(seasonMessage, group.bot.bot_id);
+    } else if (group.platform === "slack") {
+      const client = new WebClient(group.bot.bot_access_token);
 
-    await GroupMeServices.sendBotMessage(seasonMessage, group.bot.bot_id);
+      await client.chat.postMessage({
+        channel: group.slackId,
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*${mainMessage}*` + "\n" + scoreMessage
+            }
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: seasonMessage
+            }
+          },
+          {
+            type: "divider"
+          }
+        ]
+      });
+
+      // await client.chat.postMessage({
+      //   channel: group.slackId,
+      //   text: mainMessage + "\n" + scoreMessage
+      // });
+      //
+      // await client.chat.postMessage({
+      //   channel: group.slackId,
+      //   text: seasonMessage
+      // });
+    }
   }
 };

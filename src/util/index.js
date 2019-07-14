@@ -77,3 +77,4 @@ exports.buildSingleUserSingleMovieData = require("./buildSingleUserSingleMovieDa
 exports.buildSingleUserManyMovieData = require("./buildSingleUserManyMovieData");
 exports.to = require("./handleApi");
 exports.logger = logger;
+exports.messages = require("./messages");

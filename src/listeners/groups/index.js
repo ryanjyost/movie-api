@@ -1,3 +1,4 @@
 module.exports = {
-  onCreatedGroup: require("./onCreatedGroup")
+  onCreatedGroup: require("./onCreatedGroup"),
+  onCreatedSlackGroup: require("./onCreatedSlackGroup")
 };

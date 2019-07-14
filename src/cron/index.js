@@ -17,8 +17,7 @@ const runCronJobs = () => {
   job2.start();
   job3.start();
 };
-
-// handleMovieCutoffs();
+//
 // syncUsersAndGroups();
 // handleMovieCutoffs();
 // handleCutoffNotifications();

@@ -7,6 +7,12 @@ module.exports = {
       populate: { path: "members" }
     });
   },
+  findUserBySlackId: async slackId => {
+    return await User.findOne({ slackId }).populate({
+      path: "groups",
+      populate: { path: "members" }
+    });
+  },
   findUserById: async id => {
     return await User.findOne({ _id: id }).populate({
       path: "groups",
@@ -34,6 +40,5 @@ module.exports = {
     );
   },
   findOrCreateUser: require("./findOrCreateUser"),
-  getUsers: require("./services/getUsers"),
-  getUser: require("./services/getUser")
+  findOrCreateSlackUser: require("./findOrCreateSlackUser")
 };

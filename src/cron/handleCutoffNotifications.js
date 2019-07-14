@@ -4,6 +4,7 @@ const {
   PlatformServices
 } = require("../services");
 const GroupMeServices = PlatformServices.GroupMe;
+const { WebClient } = require("@slack/web-api");
 
 const { moviePredictionCutoffDate } = require("../util");
 const moment = require("moment");
@@ -70,6 +71,7 @@ module.exports = async daysBeforeCutoff => {
             // if user id not in mention list, add it
             if (
               userIdsBeingMentioned.indexOf(member.groupme.user_id) < 0 &&
+              member.preferences &&
               member.preferences.notifications.platforms.mentions
             ) {
               userIdsBeingMentioned.push(member.groupme.user_id);
@@ -84,14 +86,23 @@ module.exports = async daysBeforeCutoff => {
             fullMessage + movieText + `Everyone predicted 👌` + "\n";
         }
       }
+      if (group.platform === "groupme") {
+        await GroupMeServices.sendMessageToGroup(
+          group.groupme.id,
+          fullMessage,
+          userIdsBeingMentioned
+        );
+      } else if (group.platform === "slack") {
+        const client = new WebClient(group.bot.bot_access_token);
 
-      await GroupMeServices.sendMessageToGroup(
-        group.groupme.id,
-        fullMessage,
-        userIdsBeingMentioned
-      );
+        await client.chat.postMessage({
+          channel: group.slackId,
+          text: fullMessage
+        });
+      }
     }
   } catch (e) {
+    console.log(e);
     throw Boom.badImplementation("Cutoff notifications failed");
   }
 };

@@ -1,3 +1,4 @@
 module.exports = {
-  GroupMe: require("./groupme")
+  GroupMe: require("./groupme"),
+  Slack: require("./slack")
 };

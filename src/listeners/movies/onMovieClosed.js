@@ -1,5 +1,6 @@
 const { GroupServices, PlatformServices } = require("../../services");
 const { sortArrayByProperty } = require("../../util");
+const { WebClient } = require("@slack/web-api");
 
 const GroupMeServices = PlatformServices.GroupMe;
 
@@ -31,9 +32,28 @@ module.exports = async movie => {
       }
     }
 
-    await GroupMeServices.sendBotMessage(
-      movieMessage + "\n" + voteMessage,
-      group.bot.bot_id
-    );
+    if (group.platform === "groupme") {
+      await GroupMeServices.sendBotMessage(
+        `*${movieMessage}*` + "\n" + voteMessage,
+        group.bot.bot_id
+      );
+    } else if (group.platform === "slack") {
+      const client = new WebClient(group.bot.bot_access_token);
+      await client.chat.postMessage({
+        channel: group.slackId,
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: movieMessage + "\n" + voteMessage
+            }
+          },
+          {
+            type: "divider"
+          }
+        ]
+      });
+    }
   }
 };

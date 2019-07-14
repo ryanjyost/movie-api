@@ -13,6 +13,9 @@ module.exports = {
   findGroupByGroupMeId: async id => {
     return await Group.findOne({ groupmeId: id }).populate("members");
   },
+  findGroupBySlackId: async id => {
+    return await Group.findOne({ slackId: id }).populate("members");
+  },
   findAllGroups: async () => {
     return await Group.find().populate("members");
   },

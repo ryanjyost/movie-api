@@ -45,23 +45,29 @@ module.exports = async code => {
         groupsForResponse.push(existingGroup);
       }
 
-      userMongoObject.groups = userMMGroups;
-      await userMongoObject.save();
-
       // if user isn't part of an existing group, create a new one
       if (!userMMGroups.length) {
         const UserSlackApi = await createApi(access_token);
-        await UserSlackApi.createChannel(token);
+        const channel = await UserSlackApi.createChannel();
+
+        let newSlackGroup = await GroupServices.createSlackGroup({
+          ...channel.data.channel,
+          ...{ bot, members: [userMongoObject._id] }
+        });
+
+        userMMGroups = [newSlackGroup._id];
         madeNewGroup = true;
       }
-    }
 
-    // CHECK THAT CHANNEL ID MATCHEX CURRENT
-    // const { group, user } = await createChannel(access_token);
+      userMongoObject.groups = userMMGroups;
+      await userMongoObject.save();
+    }
   }
 
-  // const channel = await userClient.channels.create({ name: "moviemedium" });
-  console.log("WORKING", user);
-
-  // console.log("RESPONSE", response.data);
+  if (user.isNew) {
+    const finalNewUserData = await UserServices.findUserById(user._id);
+    return { ...finalNewUserData.toObject(), ...{ isNew: true, madeNewGroup } };
+  } else {
+    return user;
+  }
 };

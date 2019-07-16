@@ -6,7 +6,7 @@ const {
 const { Slack } = require("../../platforms");
 const { WebClient } = require("@slack/web-api");
 const Emitter = require("../../EventEmitter");
-const createChannel = require("../platforms/slack/createChannel");
+const { createApi, createChannel } = require("../platforms/slack");
 
 module.exports = async code => {
   // get auth token
@@ -17,21 +17,51 @@ module.exports = async code => {
   const userClient = new WebClient(access_token);
   const currentUserInfo = await userClient.users.info({ user: user_id });
 
-  let newMMUser = await UserServices.findOrCreateSlackUser(
-    currentUserInfo.user
-  );
+  let user = await UserServices.findOrCreateSlackUser(currentUserInfo.user);
 
-  if (!newMMUser) return null;
+  let userMongoObject = null,
+    userMMGroups = [],
+    groupsForResponse = [];
 
-  if (!newMMUser.groups.length) {
+  let madeNewGroup = false;
+  if (!user.isNew) {
+    let userMongoObject = await UserServices.findUserById(user._id);
+    let userMMGroups = [...userMongoObject.groups];
+
     const userConvos = await userClient.users.conversations();
     console.log("CONVOS", userConvos);
-    CHECK THAT CHANNEL ID MATCHEX CURRENT
+
+    for (let channel of userConvos.channels) {
+      const existingGroup = await GroupServices.findGroupBySlackId(channel.id);
+
+      if (existingGroup) {
+        await GroupServices.addUserToGroup(
+          {
+            slackId: channel.id
+          },
+          userMongoObject._id
+        );
+        userMMGroups.push(existingGroup._id);
+        groupsForResponse.push(existingGroup);
+      }
+
+      userMongoObject.groups = userMMGroups;
+      await userMongoObject.save();
+
+      // if user isn't part of an existing group, create a new one
+      if (!userMMGroups.length) {
+        const UserSlackApi = await createApi(access_token);
+        await UserSlackApi.createChannel(token);
+        madeNewGroup = true;
+      }
+    }
+
+    // CHECK THAT CHANNEL ID MATCHEX CURRENT
     // const { group, user } = await createChannel(access_token);
   }
 
   // const channel = await userClient.channels.create({ name: "moviemedium" });
-  console.log("WORKING", newMMUser);
+  console.log("WORKING", user);
 
   // console.log("RESPONSE", response.data);
 };

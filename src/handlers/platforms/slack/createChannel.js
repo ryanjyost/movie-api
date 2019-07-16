@@ -8,9 +8,9 @@ module.exports = async userAccessToken => {
   const channel = await UserSlackApi.createChannel();
   // console.log("CHANNEL", channel);
 
-  const botWeb = new WebClient(bot.bot_access_token);
+  const client = new WebClient(bot.bot_access_token);
 
-  const currentUserInfo = await botWeb.users.info({ user: user_id });
+  const currentUserInfo = await client.users.info({ user: user_id });
   // console.log("USER", currentUserInfo);
   const newMMUser = await UserServices.findOrCreateSlackUser(
     currentUserInfo.user

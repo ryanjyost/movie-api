@@ -70,7 +70,9 @@ module.exports = async daysBeforeCutoff => {
             // if user id not in mention list, add it
             if (
               userIdsBeingMentioned.indexOf(member.groupme.user_id) < 0 &&
-              member.preferences.notifications.platforms.mentions
+              (member.preferences
+                ? member.preferences.notifications.platforms.mentions
+                : true)
             ) {
               userIdsBeingMentioned.push(member.groupme.user_id);
             }
@@ -92,6 +94,7 @@ module.exports = async daysBeforeCutoff => {
       );
     }
   } catch (e) {
+    logger.error(e);
     throw Boom.badImplementation("Cutoff notifications failed");
   }
 };

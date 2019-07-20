@@ -24,5 +24,11 @@ module.exports = {
       $push: { members: userId }
     });
   },
+  findGroupBySlackTeamId: async slackTeamId => {
+    console.log(slackTeamId);
+    return await Group.find({ "slack.team_id": slackTeamId }).populate(
+      "members"
+    );
+  },
   getGroups: require("./services/getGroups.js")
 };

@@ -20,7 +20,7 @@ const runCronJobs = () => {
 //
 // syncUsersAndGroups();
 // handleMovieCutoffs();
-// handleCutoffNotifications();
+handleCutoffNotifications();
 // calcMovieMetrics();
 
 module.exports = runCronJobs;

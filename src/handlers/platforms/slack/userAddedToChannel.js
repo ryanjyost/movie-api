@@ -2,9 +2,9 @@ const { WebClient } = require("@slack/web-api");
 const Emitter = require("../../../EventEmitter");
 const { UserServices, GroupServices } = require("../../../services");
 
-module.exports = async (userId, channelId) => {
+module.exports = async (userId, channelId, botAccessToken) => {
   try {
-    const client = new WebClient(process.env.SLACK_ACCESS_TOKEN);
+    const client = new WebClient(botAccessToken);
     const userResponse = await client.users.info({ user: userId });
 
     const existingUser = await UserServices.findUserBySlackId(userId);

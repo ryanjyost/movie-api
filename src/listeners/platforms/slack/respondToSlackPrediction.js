@@ -1,13 +1,13 @@
 const { WebClient } = require("@slack/web-api");
 
-module.exports = async (channelId, userId, bot, movie, prediction) => {
-  const client = new WebClient(bot.bot_access_token);
+module.exports = async (user, group) => {
+  const client = new WebClient(group.bot.bot_access_token);
 
   await client.chat.postEphemeral({
     response_type: "ephemeral",
-    user: userId,
-    channel: channelId,
-    text: `Your prediction for ${movie.title} of ${prediction}% was saved 👍`,
+    user: user.slackId,
+    channel: group.slackId,
+    text: `Prediction saved 👍`,
     attachments: []
   });
 };

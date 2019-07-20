@@ -8,7 +8,7 @@ module.exports = async userAccessToken => {
   const channel = await UserSlackApi.createChannel();
   // console.log("CHANNEL", channel);
 
-  const client = new WebClient(bot.bot_access_token);
+  const client = new WebClient(process.env.SLACK_BOT_ACCESS_TOKEN);
 
   const currentUserInfo = await client.users.info({ user: user_id });
   // console.log("USER", currentUserInfo);
@@ -19,13 +19,11 @@ module.exports = async userAccessToken => {
 
   let newSlackGroup = await GroupServices.createSlackGroup({
     ...channel.data.channel,
-    ...{ bot, members: [newMMUser._id] }
+    ...{ bot, members: [newMMUser._id], name: "#moviemedium" }
   });
 
   newMMUser.groups = [newSlackGroup._id];
   newMMUser.save();
-
-  Emitter.emit("createdSlackGroup", newSlackGroup);
 
   return { group: newSlackGroup, user: newMMUser };
 };

@@ -5,7 +5,7 @@ const Groups = require("../groups");
 * Find or create a MM user based on GroupMe info
 */
 
-module.exports = async (userData, groupId) => {
+module.exports = async (userData, groupId, returnMongoObject = false) => {
   let isNew = false;
 
   let user = await User.findOne({
@@ -21,18 +21,25 @@ module.exports = async (userData, groupId) => {
       platform: "slack",
       slack: userData,
       slackId: userData.id,
-      name: userData.display_name,
+      name:
+        userData.profile.display_name ||
+        userData.profile.real_name ||
+        userData.real_name,
       nickname:
         userData.profile.display_name ||
         userData.profile.real_name ||
-        userData.real_name ||
-        user.name,
+        userData.real_name,
       votes: { placeholder: 1 },
       groups: groupId ? [groupId] : []
     });
 
-    await Groups.addUserToGroup({ _id: groupId }, user._id);
+    if (groupId) {
+      await Groups.addUserToGroup({ _id: groupId }, user._id);
+    }
   }
 
-  return user;
+  if (returnMongoObject) {
+    return user;
+  }
+  return { ...user.toObject(), ...{ isNew } };
 };

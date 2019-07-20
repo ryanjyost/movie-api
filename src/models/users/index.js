@@ -39,6 +39,9 @@ module.exports = {
       }
     );
   },
+  deleteUser: async userId => {
+    return await User.remove({ _id: userId });
+  },
   findOrCreateUser: require("./findOrCreateUser"),
   findOrCreateSlackUser: require("./findOrCreateSlackUser")
 };

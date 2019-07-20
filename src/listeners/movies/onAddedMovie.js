@@ -22,7 +22,7 @@ module.exports = async movie => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `*${messages[0]}*`
+              text: `🎥 *<${movie.rtLink}|${movie.title}>*`
             },
             accessory: {
               type: "button",

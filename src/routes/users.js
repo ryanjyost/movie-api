@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Handlers = require("../handlers/users/index");
 const { UserServices } = require("../services/index");
+const Boom = require("@hapi/boom");
 
 const { catchErrors } = require("../util/index");
 
 router.post(
   "/login/:platform",
-  catchErrors(async (req, res) => {
+  catchErrors(async (req, res, next) => {
     const token = req.body.access_token;
     const platform = req.params.platform;
 
@@ -17,6 +18,10 @@ router.post(
       user = await Handlers.login(token);
     } else if (platform === "slack") {
       user = await Handlers.loginSlack(token);
+      if (user && "error" in user) {
+        console.log("ERROR");
+        return res.json(user);
+      }
     }
 
     res.json({

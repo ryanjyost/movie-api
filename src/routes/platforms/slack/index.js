@@ -7,20 +7,29 @@ const { catchErrors } = require("../../../util/index");
 const Handlers = require("../../../handlers/platforms/slack");
 const GroupHandlers = require("../../../handlers/groups");
 const UserHandlers = require("../../../handlers/users");
-const { GroupServices, UserServices } = require("../../../services");
+const {
+  GroupServices,
+  UserServices,
+  MovieServices
+} = require("../../../services");
 const { messages } = require("../../../util");
 const { Slack } = require("../../../platforms");
+const Emitter = require("../../../EventEmitter");
 
 router.post("/events", async (req, res) => {
-  console.log("EVENT", req.body);
   if (req.body.event) {
     const eventType = req.body.event.type;
     const { event } = req.body;
-    const client = new WebClient(process.env.SLACK_ACCESS_TOKEN);
+    const group = await GroupServices.findGroupBySlackId(event.channel);
+    const client = new WebClient(group.bot.bot_access_token);
 
     switch (eventType) {
       case "member_joined_channel":
-        Handlers.userAddedToChannel(event.user, event.channel);
+        Handlers.userAddedToChannel(
+          event.user,
+          event.channel,
+          group.bot.bot_access_token
+        );
         res.send();
         return;
     }
@@ -50,17 +59,32 @@ router.post(
     const payload = JSON.parse(req.body.payload);
     res.send();
     // console.log(payload);
-    const client = new WebClient(process.env.SLACK_ACCESS_TOKEN);
+    const group = await GroupServices.findGroupBySlackId(payload.channel.id);
+    const client = new WebClient(group.bot.bot_access_token);
+
+    // user submits score
     if (payload.type === "dialog_submission") {
       if (payload.callback_id.includes("predict_movie")) {
         const movieId = payload.state;
-        const user = await UserServices.findOrCreateSlackUser(payload.user);
+        const currentUserInfo = await client.users.info({
+          user: payload.user.id
+        });
+
+        const user = await UserServices.findOrCreateSlackUser(
+          currentUserInfo.user,
+          group._id
+        );
+
         const { prediction } = payload.submission;
         const updatedUser = await UserHandlers.handleUserPrediction(
           user._id,
           movieId,
           Number(prediction.trim().replace("%", ""))
         );
+
+        if (updatedUser) {
+          Emitter.emit("userPredictionOnSlackSaved", user, group);
+        }
       }
     }
 
@@ -68,28 +92,24 @@ router.post(
       const action = payload.actions[0] ? payload.actions[0].value : null;
       if (action.includes("predict_movie")) {
         // console.log(payload);
-        let blockWithMovieTitle = payload.message.blocks.find(
-          block => block.text && block.text.text
-        );
-        let movieTitle = blockWithMovieTitle.text.text;
-        movieTitle = movieTitle.split(":movie_camera: ")[1];
         const movieId = action.split("_")[2];
+        const movie = await MovieServices.findMovieById(movieId);
 
-        const response = client.dialog.open({
+        client.dialog.open({
           trigger_id: payload.trigger_id,
           dialog: {
             callback_id: "predict_movie",
             title:
-              movieTitle.length > 24
-                ? `${movieTitle.slice(0, 20)}...`
-                : movieTitle,
+              movie.title.length > 24
+                ? `${movie.title.slice(0, 20)}...`
+                : movie.title,
             submit_label: "Save",
             notify_on_cancel: true,
             state: movieId,
             elements: [
               {
                 label: `Prediction (%)`,
-                hint: `Rotten Tomatoes Score for ${movieTitle} will be...`,
+                hint: `Rotten Tomatoes Score for ${movie.title} will be...`,
                 name: "prediction",
                 type: "text",
                 subtype: "number",
@@ -118,7 +138,6 @@ router.post(
         );
 
         const text = messages.overallRankings(overallRankings);
-        console.log("GROUP", overallRankings);
 
         res.json({
           text,

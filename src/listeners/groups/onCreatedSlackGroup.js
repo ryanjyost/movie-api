@@ -12,23 +12,14 @@ module.exports = async group => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: "*👋 Welcome to Movie Medium!*"
+          text: `Welcome to Movie Medium, the game where you *predict Rotten Tomatoes Scores of upcoming movies against your coworkers.*`
         }
       },
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text:
-            "You're ready to start predicting the Rotten Tomatoes Scores of upcoming movies."
-        }
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text:
-            "Invite coworkers to this channel and they'll be ready to play, too."
+          text: "Invite coworkers to this channel to get them in on the action."
         }
       },
       {

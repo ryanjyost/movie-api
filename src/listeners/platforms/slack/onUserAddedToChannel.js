@@ -30,7 +30,7 @@ module.exports = async (userSlackInfo, groupInfo) => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `Predict a movie in this channel with the "/predict" command or go to moviemedium.io to officially start proving your movie prowess. _(Btw, the lawyers told me to tell you that playing the game means you agree to our terms of service and privacy policy, available at moviemedium.io️.)_`
+          text: `_(Playing the game means you agree to our terms of service and privacy policy, available at moviemedium.io️.)_`
         }
       },
       {

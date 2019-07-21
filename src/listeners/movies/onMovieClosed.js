@@ -8,7 +8,11 @@ module.exports = async movie => {
   const groups = await GroupServices.findAllGroups();
 
   for (let group of groups) {
-    let movieMessage = `🔒 "${movie.title}" predictions are locked in!` + "\n";
+    const isSlackGroup = group.platform === "slack";
+    let movieMessage = isSlackGroup
+      ? `🔒 *${movie.title}* predictions are locked in!`
+      : `🔒 "${movie.title}" predictions are locked in!`;
+    movieMessage = movieMessage + "\n";
 
     let sortedMembers = sortArrayByProperty(
       group.members,
@@ -23,18 +27,23 @@ module.exports = async movie => {
       if (user) {
         voteMessage =
           voteMessage +
-          `${user.name}: ${
-            user.votes[movie._id] < 0
-              ? `No prediction`
-              : `${user.votes[movie._id]}%`
-          }` +
-          "\n";
+          (isSlackGroup
+            ? `*${user.name}* - ${
+                user.votes[movie._id] < 0
+                  ? `No prediction`
+                  : `${user.votes[movie._id]}% \n`
+              }`
+            : `${user.name}: ${
+                user.votes[movie._id] < 0
+                  ? `No prediction`
+                  : `${user.votes[movie._id]}%`
+              }` + "\n");
       }
     }
 
     if (group.platform === "groupme") {
       await GroupMeServices.sendBotMessage(
-        `*${movieMessage}*` + "\n" + voteMessage,
+        `${movieMessage}` + "\n" + voteMessage,
         group.bot.bot_id
       );
     } else if (group.platform === "slack") {

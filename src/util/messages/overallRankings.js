@@ -1,5 +1,7 @@
-module.exports = rankings => {
-  let text = `🏆 OVERALL RANKINGS 🏆` + "\n";
+module.exports = (rankings, platform) => {
+  let isSlack = platform === "slack";
+  let text = isSlack ? `*🏆 Overall Rankings 🏆*` : `🏆 OVERALL RANKINGS 🏆`;
+  text = text + "\n";
 
   for (let i = 0; i < rankings.length; i++) {
     if (!rankings[i].moviesInCalc) {
@@ -17,7 +19,9 @@ module.exports = rankings => {
 
   text =
     text +
-    `*percentage is how close your predictions are on average. Low scores are good, high scores are bad.`;
+    (isSlack
+      ? `_percentage is how close your predictions are on average. Low scores are good, high scores are bad_`
+      : `*percentage is how close your predictions are on average. Low scores are good, high scores are bad.`);
 
   return text;
 };

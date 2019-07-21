@@ -27,6 +27,10 @@ Emitter.on(
   "userPredictionOnSlackSaved",
   PlatformListeners.respondToSlackPrediction
 );
+Emitter.on(
+  "slackUserMadeBadPrediction",
+  PlatformListeners.onSlackUserMadeBadPrediction
+);
 
 Emitter.on(
   "userMadeFirstPredictionOnPlatform",

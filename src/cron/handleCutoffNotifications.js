@@ -5,6 +5,7 @@ const {
 } = require("../services");
 const GroupMeServices = PlatformServices.GroupMe;
 const { WebClient } = require("@slack/web-api");
+const slackMessageUtil = require("../listeners/platforms/slack/util");
 
 const { moviePredictionCutoffDate } = require("../util");
 const moment = require("moment");
@@ -111,33 +112,41 @@ module.exports = async daysBeforeCutoff => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `⏳ Predictions for some movies are closing soon! Here they are with the jabronis who haven't predicted yet.`
+              text: `*⏳ Predictions for some movies are closing soon!* Here they are with the jabronis who haven't predicted yet.`
             }
           }
         ];
 
         for (let movieId in moviesClosingSoon) {
           let movie = moviesClosingSoon[movieId];
-          blocks.push({
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text:
-                `🎥 <${movie.rtLink}|${movie.title}> - ` +
-                (usersPerMovie[movie._id] && usersPerMovie[movie._id].length
-                  ? usersPerMovie[movie._id]
-                  : `Everyone predicted 👌`)
-            },
-            accessory: {
-              type: "button",
-              text: {
-                type: "plain_text",
-                text: "Make your prediction",
-                emoji: true
-              },
-              value: `predict_movie_${movie._id}`
-            }
-          });
+          blocks.push(
+            slackMessageUtil.singleMovieSlackMessage(
+              moviesClosingSoon[movieId],
+              usersPerMovie[movie._id] && usersPerMovie[movie._id].length
+                ? `Missing predictions from ${usersPerMovie[movie._id]}`
+                : `Everyone predicted 👌`
+            )
+          );
+          // blocks.push({
+          //   type: "section",
+          //   text: {
+          //     type: "mrkdwn",
+          //     text:
+          //       `🎥 <${movie.rtLink}|${movie.title}> - ` +
+          //       (usersPerMovie[movie._id] && usersPerMovie[movie._id].length
+          //         ? usersPerMovie[movie._id]
+          //         : `Everyone predicted 👌`)
+          //   },
+          //   accessory: {
+          //     type: "button",
+          //     text: {
+          //       type: "plain_text",
+          //       text: "Make your prediction",
+          //       emoji: true
+          //     },
+          //     value: `predict_movie_${movie._id}`
+          //   }
+          // });
         }
 
         await client.chat.postMessage({

@@ -76,10 +76,21 @@ router.post(
         );
 
         const { prediction } = payload.submission;
+        let numPrediction = Number(prediction.trim().replace("%", ""));
+
+        if (
+          !Number.isInteger(numPrediction) ||
+          numPrediction < 0 ||
+          numPrediction > 100
+        ) {
+          Emitter.emit("slackUserMadeBadPrediction", user, group);
+          return;
+        }
+
         const updatedUser = await UserHandlers.handleUserPrediction(
           user._id,
           movieId,
-          Number(prediction.trim().replace("%", ""))
+          numPrediction
         );
 
         if (updatedUser) {
@@ -137,7 +148,7 @@ router.post(
           group._id
         );
 
-        const text = messages.overallRankings(overallRankings);
+        const text = messages.overallRankings(overallRankings, "slack");
 
         res.json({
           text,
@@ -145,9 +156,12 @@ router.post(
         });
         break;
       case "/predict":
-      case "/p":
         Handlers.handleUserPrediction(req.body);
         res.send("Saving prediction...");
+        break;
+      case "/season":
+        res.send();
+        Handlers.sendSeasonRankings(req.body.channel_id);
         break;
       default:
         break;

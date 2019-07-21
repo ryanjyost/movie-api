@@ -17,10 +17,16 @@ module.exports = async reqBody => {
     const rawScore = split[1].trim().replace("%", "");
     const scoreNum = Number(rawScore);
 
+    let user = await UserServices.findUserBySlackId(reqBody.user_id);
+    const group = await GroupServices.findGroupBySlackId(reqBody.channel_id);
+
     // handle invalid prediction
-    if (isNaN(scoreNum)) {
-      return;
-    } else if (!(scoreNum >= 0 && scoreNum <= 100)) {
+    if (
+      isNaN(scoreNum) ||
+      !(scoreNum >= 0 && scoreNum <= 100) ||
+      !Number.isInteger(scoreNum)
+    ) {
+      Emitter.emit("slackUserMadeBadPrediction", user, group);
       return;
     }
 
@@ -36,10 +42,6 @@ module.exports = async reqBody => {
     if (movie.isClosed) {
       return;
     }
-
-    let user = await UserServices.findUserBySlackId(reqBody.user_id);
-
-    const group = await GroupServices.findGroupBySlackId(reqBody.channel_id);
 
     if (!user) {
       const client = new WebClient(group.bot.bot_access_token);

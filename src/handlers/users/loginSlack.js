@@ -29,6 +29,46 @@ module.exports = async code => {
     // Did a non-existent user click the sign-in button? Limited in what we can handle here
     if (!data.bot) {
       console.log("NO USER SIGN IN ATTEMPT", data);
+      const existingGroup = await GroupServices.findGroupBySlackTeamId(
+        data.team.id
+      );
+      console.log("EXISTING", existingGroup);
+
+      if (existingGroup.length) {
+        let group = existingGroup[0];
+        let userClient = new WebClient(group.bot.bot_access_token);
+
+        const currentUserInfo = await userClient.users.info({
+          user: data.user ? data.user.id : data.user_id
+        });
+
+        user = await UserServices.findOrCreateSlackUser(currentUserInfo.user);
+        let userMongoObject = null,
+          userMMGroups = [];
+        if (user) {
+          userMongoObject = await UserServices.findUserById(user._id);
+          userMMGroups = [...userMongoObject.groups];
+        }
+
+        await GroupServices.addUserToGroup(
+          {
+            slackId: group.slackId
+          },
+          user._id
+        );
+        userMMGroups.push(existingGroup[0]._id);
+        userMongoObject.groups = userMMGroups;
+        await userMongoObject.save();
+
+        const finalNewUserData = await UserServices.findUserById(user._id);
+
+        return {
+          ...(finalNewUserData ? finalNewUserData.toObject() : user),
+          ...{ isNew: true }
+        };
+      } else {
+        return { error: "Need to sign up" };
+      }
       return;
     }
 

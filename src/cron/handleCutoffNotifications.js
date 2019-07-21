@@ -52,8 +52,12 @@ module.exports = async daysBeforeCutoff => {
         `️⏳ Predictions for some movies are closing soon! Here they are with the jabronis who haven't predicted yet.` +
         "\n" +
         "\n";
+
+      let usersPerMovie = {};
       // for each movie that's closing soon
       for (let movieId in moviesClosingSoon) {
+        usersPerMovie[movieId] = ``;
+
         let atLeastOneMember = false;
         // generate a meesage with members of the group who haven't predicted yet
         let movieText = `${moviesClosingSoon[movieId].title}: `;
@@ -67,9 +71,14 @@ module.exports = async daysBeforeCutoff => {
             atLeastOneMember = true;
             // add user name to warning textc
             movieText = movieText + `@${member.name} `;
+            if (member.slack) {
+              usersPerMovie[movieId] =
+                usersPerMovie[movieId] + `@${member.slack.name} `;
+            }
 
             // if user id not in mention list, add it
             if (
+              member.groupme &&
               userIdsBeingMentioned.indexOf(member.groupme.user_id) < 0 &&
               (member.preferences
                 ? member.preferences.notifications.platforms.mentions
@@ -87,6 +96,8 @@ module.exports = async daysBeforeCutoff => {
             fullMessage + movieText + `Everyone predicted 👌` + "\n";
         }
       }
+
+      // send the message
       if (group.platform === "groupme") {
         await GroupMeServices.sendMessageToGroup(
           group.groupme.id,
@@ -95,14 +106,48 @@ module.exports = async daysBeforeCutoff => {
         );
       } else if (group.platform === "slack") {
         const client = new WebClient(group.bot.bot_access_token);
+        let blocks = [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `⏳ Predictions for some movies are closing soon! Here they are with the jabronis who haven't predicted yet.`
+            }
+          }
+        ];
+
+        for (let movieId in moviesClosingSoon) {
+          let movie = moviesClosingSoon[movieId];
+          blocks.push({
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text:
+                `🎥 <${movie.rtLink}|${movie.title}> - ` +
+                (usersPerMovie[movie._id] && usersPerMovie[movie._id].length
+                  ? usersPerMovie[movie._id]
+                  : `Everyone predicted 👌`)
+            },
+            accessory: {
+              type: "button",
+              text: {
+                type: "plain_text",
+                text: "Make your prediction",
+                emoji: true
+              },
+              value: `predict_movie_${movie._id}`
+            }
+          });
+        }
 
         await client.chat.postMessage({
           channel: group.slackId,
-          text: fullMessage
+          blocks
         });
       }
     }
   } catch (e) {
+    console.log(e);
     logger.error(e);
     throw Boom.badImplementation("Cutoff notifications failed");
   }

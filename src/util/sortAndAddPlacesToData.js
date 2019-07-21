@@ -2,8 +2,14 @@ const _ = require("lodash");
 const calcPointsFromPlace = require("./calcPointsFromPlace");
 
 module.exports = (data, propertyToUse = "points", asc) => {
+  if (Array.isArray(data) && !data.length) {
+    return [];
+  }
+
   // console.log("DATA", data);
   const sorted = _.orderBy(data, propertyToUse, [asc ? "asc" : "desc"]);
+
+  if (!sorted[0]) return [];
 
   const rankingsWithPlaces = [];
 

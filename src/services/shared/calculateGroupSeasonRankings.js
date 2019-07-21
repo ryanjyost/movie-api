@@ -42,6 +42,5 @@ module.exports = async (group, movies, season) => {
   }
 
   //TODO avg diff tiebraker
-
   return sortAndAddPlacesToData(arrayWithTotalPoints, "points", false);
 };

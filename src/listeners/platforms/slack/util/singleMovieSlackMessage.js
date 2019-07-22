@@ -19,7 +19,7 @@ module.exports = (movie, userMentionMessage) => {
         " | " +
         `_*${daysUntilCutoff || "< 1"} days* left to predict_` +
         "\n" +
-        userMentionMessage
+        (userMentionMessage || "")
     },
     accessory: {
       type: "button",

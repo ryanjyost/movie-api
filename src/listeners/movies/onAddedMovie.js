@@ -1,6 +1,7 @@
 const { messageAllGroups } = require("../util");
 const { GroupServices, PlatformServices } = require("../../services");
 const GroupMeServices = PlatformServices.GroupMe;
+const { singleMovieSlackMessage } = require("../platforms/slack/util");
 const { WebClient } = require("@slack/web-api");
 
 module.exports = async movie => {
@@ -13,43 +14,22 @@ module.exports = async movie => {
         await GroupMeServices.sendBotMessage(message, group.bot.bot_id);
       }
     } else if (group.platform === "slack") {
+      console.log("NEW MOVIE SLACK");
       const client = new WebClient(group.bot.bot_access_token);
 
       await client.chat.postMessage({
         channel: group.slackId,
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `🎥 *<${movie.rtLink}|${movie.title}>*`
-            },
-            accessory: {
-              type: "button",
-              text: {
-                type: "plain_text",
-                text: "Make your prediction",
-                emoji: true
-              },
-              value: `predict_movie_${movie._id}`
-            }
-          }
-        ]
+        blocks: [singleMovieSlackMessage(movie)]
       });
 
-      await client.chat.postMessage({
-        channel: group.slackId,
-        text: `${movie.trailer}`
-      });
-
-      await client.chat.postMessage({
-        channel: group.slackId,
-        blocks: [
-          {
-            type: "divider"
-          }
-        ]
-      });
+      // await client.chat.postMessage({
+      //   channel: group.slackId,
+      //   blocks: [
+      //     {
+      //       type: "divider"
+      //     }
+      //   ]
+      // });
     }
   }
 };

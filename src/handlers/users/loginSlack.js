@@ -11,12 +11,14 @@ const { to } = require("../../util");
 const Boom = require("@hapi/boom");
 
 module.exports = async code => {
+  console.log("CODE", code);
   try {
     // get auth token
     const SlackAPI = Slack.createApi();
     const response = await SlackAPI.authenticate(code);
 
     const { data } = response;
+    console.log("DATA", data);
 
     // check if just existing user logging in
     let user = await UserServices.findUserBySlackId(

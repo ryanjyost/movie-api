@@ -3,7 +3,7 @@ const sendUpcomingMovieInfo = require("./sendUpcomingMovieInfo");
 
 module.exports = async (userSlackInfo, groupInfo) => {
   const client = new WebClient(groupInfo.bot.bot_access_token);
-  console.log("SLACK INFO", userSlackInfo);
+  console.log("SLACK INFO", userSlackInfo, groupInfo);
 
   await client.chat.postEphemeral({
     response_type: "ephemeral",

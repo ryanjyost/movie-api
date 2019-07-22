@@ -37,7 +37,8 @@ module.exports = async movie => {
                 user.votes[movie._id] < 0
                   ? `No prediction`
                   : `${user.votes[movie._id]}%`
-              }` + "\n");
+              }`) +
+          "\n";
       }
     }
 

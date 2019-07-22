@@ -100,7 +100,12 @@ module.exports = async movie => {
         ? `*🏆 Season ${season.id} is over!*`
         : `🏆 Season ${season.id} is over!`;
       seasonMessage =
-        seasonMessage + "\n" + movieLabel + "\n" + "\n" + rankingMessage;
+        seasonMessage +
+        "\n" +
+        (isSlackGroup ? movieLabel : "") +
+        "\n" +
+        "\n" +
+        rankingMessage;
     }
 
     if (group.platform === "groupme") {

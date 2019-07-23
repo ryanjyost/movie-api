@@ -28,7 +28,7 @@ module.exports = async movie => {
     let isSlackGroup = group.platform === "slack";
 
     let mainMessage = isSlackGroup
-      ? `*🍅 ${movie.title}* has a Rotten Tomatoes Score of ${score}%`
+      ? `*🍅 ${movie.title}* has a Rotten Tomatoes Score of *${score}%*`
       : `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}%`;
 
     mainMessage = mainMessage + "\n";

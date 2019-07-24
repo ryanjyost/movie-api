@@ -17,10 +17,6 @@ const { Slack } = require("../../../platforms");
 const Emitter = require("../../../EventEmitter");
 
 router.post("/events", async (req, res) => {
-  if (req.body && req.body.challenge) {
-    res.json({ challenge: req.body.challenge });
-  }
-
   if (req.body.event) {
     const eventType = req.body.event.type;
     const { event } = req.body;
@@ -38,6 +34,8 @@ router.post("/events", async (req, res) => {
         return;
     }
   }
+
+  res.json({ challenge: req.body.challenge });
 });
 
 router.post(

@@ -19,6 +19,9 @@ module.exports = async code => {
 
     const { data } = response;
     console.log("DATA", data);
+    if (!data.ok) {
+      return { error: "Something went wrong" };
+    }
 
     // check if just existing user logging in
     let user = await UserServices.findUserBySlackId(

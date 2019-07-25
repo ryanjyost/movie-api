@@ -10,15 +10,19 @@ const { WebClient } = require("@slack/web-api");
 module.exports = async reqBody => {
   try {
     const { text } = reqBody;
+    let user = await UserServices.findUserBySlackId(reqBody.user_id);
+    const group = await GroupServices.findGroupBySlackId(reqBody.channel_id);
 
     const split = text.includes("=") ? text.split("=") : text.split("-");
+    if (!split[1]) {
+      Emitter.emit("slackUserMadeBadPrediction", user, group);
+      return;
+    }
+
     let title = split[0].trim();
     let cleanTitle = sanitizeTitle(title);
     const rawScore = split[1].trim().replace("%", "");
     const scoreNum = Number(rawScore);
-
-    let user = await UserServices.findUserBySlackId(reqBody.user_id);
-    const group = await GroupServices.findGroupBySlackId(reqBody.channel_id);
 
     // handle invalid prediction
     if (
@@ -40,6 +44,7 @@ module.exports = async reqBody => {
     }
 
     if (movie.isClosed) {
+      Emitter.emit("userPredictedClosedMovie", user, group);
       return;
     }
 

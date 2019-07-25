@@ -106,29 +106,33 @@ router.post(
         const movieId = action.split("_")[2];
         const movie = await MovieServices.findMovieById(movieId);
 
-        client.dialog.open({
-          trigger_id: payload.trigger_id,
-          dialog: {
-            callback_id: "predict_movie",
-            title:
-              movie.title.length > 24
-                ? `${movie.title.slice(0, 20)}...`
-                : movie.title,
-            submit_label: "Save",
-            notify_on_cancel: true,
-            state: movieId,
-            elements: [
-              {
-                label: `Prediction (%)`,
-                hint: `Rotten Tomatoes Score for ${movie.title} will be...`,
-                name: "prediction",
-                type: "text",
-                subtype: "number",
-                placeholder: "50"
-              }
-            ]
-          }
-        });
+        if (!movie.isClosed) {
+          client.dialog.open({
+            trigger_id: payload.trigger_id,
+            dialog: {
+              callback_id: "predict_movie",
+              title:
+                movie.title.length > 24
+                  ? `${movie.title.slice(0, 20)}...`
+                  : movie.title,
+              submit_label: "Save",
+              notify_on_cancel: true,
+              state: movieId,
+              elements: [
+                {
+                  label: `Prediction (%)`,
+                  hint: `Rotten Tomatoes Score for ${movie.title} will be...`,
+                  name: "prediction",
+                  type: "text",
+                  subtype: "number",
+                  placeholder: "50"
+                }
+              ]
+            }
+          });
+        } else {
+          Emitter.emit("userPredictedClosedMovie", user, group);
+        }
       }
     }
   })

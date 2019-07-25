@@ -33,6 +33,11 @@ Emitter.on(
 );
 
 Emitter.on(
+  "userPredictedClosedMovie",
+  PlatformListeners.onPredictedClosedMovie
+);
+
+Emitter.on(
   "userMadeFirstPredictionOnPlatform",
   PlatformListeners.onUserMadeFirstPredictionOnPlatform
 );

@@ -27,8 +27,12 @@ module.exports = async code => {
     let user = await UserServices.findUserBySlackId(
       data.user ? data.user.id : data.user_id
     );
-    if (user) {
+    if (user && user.groups.length) {
+      console.log("USER", user);
       return user;
+    } else if (user && !user.groups.length) {
+      await UserServices.deleteUser(user._id);
+      user = null;
     }
 
     // Did a non-existent user click the sign-in button? Limited in what we can handle here
@@ -142,15 +146,40 @@ module.exports = async code => {
     // if user isn't part of an existing group, create a new one
     if (user.isNew && !userMMGroups.length) {
       const UserSlackApi = await createApi(data.access_token);
-      const channel = await UserSlackApi.createChannel();
+      let channel = await UserSlackApi.createChannel();
       if (!channel.data.ok) {
-        // remove user to avoid weirdness
-        UserServices.deleteUser(user._id);
-        return channel.data;
+        console.log("ERROR with channel creation", channel);
+        const channels = await userClient.channels.list({ limit: 0 });
+        console.log("ALL CHANNELS", channels);
+
+        let existingChannel = channels.channels.find(item => {
+          return (
+            item.name ===
+            (process.env.ENV === "development"
+              ? "mmdev"
+              : process.env.ENV === "staging"
+                ? "mmstaging"
+                : "moviemedium")
+          );
+        });
+
+        if (existingChannel) {
+          channel = await userClient.channels.info({
+            channel: existingChannel.id
+          });
+
+          console.log("EXISTINg CHANNEL", channel);
+        }
+
+        if (!channel) {
+          // remove user to avoid weirdness
+          await UserServices.deleteUser(user._id);
+          return channel.data;
+        }
       }
 
       let newSlackGroup = await GroupServices.createSlackGroup({
-        ...channel.data.channel,
+        ...(channel.channel ? channel.channel : channel.data.channel),
         ...{ bot: data.bot, members: [user._id], team_id: user.slack.team_id }
       });
 

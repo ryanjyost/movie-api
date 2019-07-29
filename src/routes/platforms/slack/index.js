@@ -21,7 +21,11 @@ router.post("/events", async (req, res) => {
     const eventType = req.body.event.type;
     const { event } = req.body;
     const group = await GroupServices.findGroupBySlackId(event.channel);
-    const client = new WebClient(group.bot.bot_access_token);
+
+    if (!group) {
+      res.send();
+      return;
+    }
 
     switch (eventType) {
       case "member_joined_channel":

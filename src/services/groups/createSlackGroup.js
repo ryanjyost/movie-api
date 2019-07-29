@@ -1,4 +1,5 @@
 const { Groups, Users } = require("../../models");
+const moment = require("moment");
 
 /*
 * Create an MM group from GroupMe group
@@ -11,7 +12,8 @@ module.exports = async channelData => {
     slack: { ...channelData },
     bot: channelData.bot,
     platform: "slack",
-    members: channelData.members
+    members: channelData.members,
+    groupmeId: moment().unix()
   };
 
   // actually create the MM group

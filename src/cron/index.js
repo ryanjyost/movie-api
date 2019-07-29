@@ -15,7 +15,7 @@ const job3 = new CronJob("0 0 1 * * *", syncUsersAndGroups, null, true);
 const runCronJobs = () => {
   job1.start();
   job2.start();
-  job3.start();
+  // job3.start();
 };
 //
 // syncUsersAndGroups();

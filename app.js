@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
@@ -8,8 +9,6 @@ const cors = require("cors");
 
 const PrettyError = require("pretty-error");
 const pe = new PrettyError();
-
-require("dotenv").config();
 
 const db = require("./db");
 const runCronJobs = require("./src/cron");
@@ -80,5 +79,8 @@ app.use(function(err, req, res, next) {
 
 /* RUN CRON JOBS */
 runCronJobs();
+
+/* Migrations */
+// require("./migrations/add-groupme-platform-field")();
 
 module.exports = app;

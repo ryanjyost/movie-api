@@ -117,28 +117,32 @@ module.exports = async movie => {
     } else if (group.platform === "slack") {
       const client = new WebClient(group.bot.bot_access_token);
 
-      await client.chat.postMessage({
-        channel: group.slackId,
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `${mainMessage}` + "\n" + scoreMessage
+      try {
+        await client.chat.postMessage({
+          channel: group.slackId,
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `${mainMessage}` + "\n" + scoreMessage
+              }
+            },
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: seasonMessage
+              }
+            },
+            {
+              type: "divider"
             }
-          },
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: seasonMessage
-            }
-          },
-          {
-            type: "divider"
-          }
-        ]
-      });
+          ]
+        });
+      } catch (e) {
+        console.log("ERROR sending movie score results", e);
+      }
 
       // await client.chat.postMessage({
       //   channel: group.slackId,

@@ -149,10 +149,14 @@ module.exports = async daysBeforeCutoff => {
           // });
         }
 
-        await client.chat.postMessage({
-          channel: group.slackId,
-          blocks
-        });
+        try {
+          await client.chat.postMessage({
+            channel: group.slackId,
+            blocks
+          });
+        } catch (e) {
+          console.log("ERROR posting cutoff message");
+        }
       }
     }
   } catch (e) {

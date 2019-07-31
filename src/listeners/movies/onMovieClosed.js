@@ -49,21 +49,25 @@ module.exports = async movie => {
       );
     } else if (group.platform === "slack") {
       const client = new WebClient(group.bot.bot_access_token);
-      await client.chat.postMessage({
-        channel: group.slackId,
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: movieMessage + "\n" + voteMessage
+      try {
+        await client.chat.postMessage({
+          channel: group.slackId,
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: movieMessage + "\n" + voteMessage
+              }
+            },
+            {
+              type: "divider"
             }
-          },
-          {
-            type: "divider"
-          }
-        ]
-      });
+          ]
+        });
+      } catch (e) {
+        console.log("ERROR when movie closed", e);
+      }
     }
   }
 };

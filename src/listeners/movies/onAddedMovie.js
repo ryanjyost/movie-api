@@ -17,10 +17,14 @@ module.exports = async movie => {
       console.log("NEW MOVIE SLACK");
       const client = new WebClient(group.bot.bot_access_token);
 
-      await client.chat.postMessage({
-        channel: group.slackId,
-        blocks: [singleMovieSlackMessage(movie)]
-      });
+      try {
+        await client.chat.postMessage({
+          channel: group.slackId,
+          blocks: [singleMovieSlackMessage(movie)]
+        });
+      } catch (e) {
+        console.log("ERROR sending new movie message", e);
+      }
 
       // await client.chat.postMessage({
       //   channel: group.slackId,

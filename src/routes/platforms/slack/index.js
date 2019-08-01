@@ -16,31 +16,42 @@ const { messages } = require("../../../util");
 const { Slack } = require("../../../platforms");
 const Emitter = require("../../../EventEmitter");
 
-router.post("/events", async (req, res) => {
-  if (req.body.event) {
-    const eventType = req.body.event.type;
-    const { event } = req.body;
-    const group = await GroupServices.findGroupBySlackId(event.channel);
+router.post(
+  "/events",
+  catchErrors(async (req, res) => {
+    if (req.body.event) {
+      const eventType = req.body.event.type;
+      const { event } = req.body;
 
-    if (!group) {
-      res.send();
-      return;
+      switch (eventType) {
+        case "message":
+          if (event.channel_type === "im") {
+            console.log("APP MENTION", req.body);
+            res.send();
+            await Handlers.saveFeedback(event, req.body.token);
+          }
+
+          return;
+        case "member_joined_channel":
+          const group = await GroupServices.findGroupBySlackId(event.channel);
+          if (!group) {
+            res.send();
+            return;
+          }
+
+          Handlers.userAddedToChannel(
+            event.user,
+            event.channel,
+            group.bot.bot_access_token
+          );
+          res.send();
+          return;
+      }
     }
 
-    switch (eventType) {
-      case "member_joined_channel":
-        Handlers.userAddedToChannel(
-          event.user,
-          event.channel,
-          group.bot.bot_access_token
-        );
-        res.send();
-        return;
-    }
-  }
-
-  res.json({ challenge: req.body.challenge });
-});
+    res.json({ challenge: req.body.challenge });
+  })
+);
 
 router.post(
   "/create_channel",

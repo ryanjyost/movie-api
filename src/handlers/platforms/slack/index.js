@@ -3,5 +3,6 @@ module.exports = {
   handleUserPrediction: require("./handleUserPrediction"),
   predictMovieFromDialog: require("./predictMovieFromDialog"),
   userAddedToChannel: require("./userAddedToChannel"),
-  sendSeasonRankings: require("./sendSeasonRankings")
+  sendSeasonRankings: require("./sendSeasonRankings"),
+  saveFeedback: require("./saveFeedback")
 };

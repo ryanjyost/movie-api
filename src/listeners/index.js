@@ -43,5 +43,6 @@ Emitter.on(
 );
 
 Emitter.on("feedback", Util.likeMessage);
+Emitter.on("feedbackSlack", Util.likeSlackMessage);
 
 Emitter.on("respondedToFeedback", Util.sendMessageToGroup);

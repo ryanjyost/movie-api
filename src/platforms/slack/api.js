@@ -25,16 +25,14 @@ const createApi = accessToken => {
   const createChannel = params =>
     api.post(
       "/channels.create",
-      queryString.stringify(
-        params || {
-          name:
-            process.env.ENV === "development"
-              ? "mmdev"
-              : process.env.ENV === "staging"
-                ? "mmstaging"
-                : "moviemedium"
-        }
-      )
+      params || {
+        name:
+          process.env.ENV === "development"
+            ? "mmdev"
+            : process.env.ENV === "staging"
+              ? "mmstaging"
+              : "moviemedium"
+      }
     );
 
   return {

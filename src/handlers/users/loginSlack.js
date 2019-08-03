@@ -146,7 +146,7 @@ module.exports = async code => {
     // if user isn't part of an existing group, create a new one
     if (user.isNew && !userMMGroups.length) {
       const UserSlackApi = await createApi(data.access_token);
-      let channel = await UserSlackApi.createChannel();
+      let channel = await UserSlackApi.createChannel({ validate: true });
       if (!channel.data.ok) {
         console.log("ERROR with channel creation", channel);
         const channels = await userClient.channels.list({ limit: 0 });

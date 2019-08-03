@@ -145,15 +145,23 @@ module.exports = async code => {
 
     // if user isn't part of an existing group, create a new one
     if (user.isNew || !userMMGroups.length) {
-      const UserSlackApi = await createApi(data.access_token);
-      let channel = await UserSlackApi.createChannel();
-      if (!channel.data.ok) {
-        channel = await UserSlackApi.createChannel({
-          name: "moviemediums",
+      const UserSlackApi = new WebClient(data.access_token);
+      let channel = await UserSlackApi.channels.create({
+        validate: true,
+        name:
+          process.env.ENV === "development"
+            ? "mmdev"
+            : process.env.ENV === "staging"
+              ? "mmstaging"
+              : "movie_medium"
+      });
+      if (!channel.ok) {
+        channel = await UserSlackApi.channels.create({
+          name: "movie_mediums",
           validate: true
         });
 
-        if (!channel.data.ok) {
+        if (!channel.ok) {
           console.log("ERROR with channel creation", channel);
           const channels = await userClient.channels.list({ limit: 0 });
           console.log("ALL CHANNELS", channels);

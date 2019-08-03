@@ -24,18 +24,38 @@ router.post(
       const { event } = req.body;
 
       switch (eventType) {
+        case "app_home_opened":
+          res.send();
+          const user = await UserServices.findUserBySlackId(event.user);
+          if (user) {
+            if (!user.events.slackAppHomeOpened) {
+              Emitter.emit("slackAppHomeOpened", req.body);
+
+              user.events = {
+                ...user.events,
+                ...{ slackAppHomeOpened: true }
+              };
+              await user.save();
+            }
+          }
         case "message":
+          res.send();
           if (event.channel_type === "im") {
-            console.log("APP MENTION", req.body);
-            res.send();
-            await Handlers.saveFeedback(event, req.body.token);
+            if (
+              event.username !== "MM Dev" ||
+              event.username !== "Movie Medium" ||
+              event.username !== "MM Staging"
+            ) {
+              console.log("APP MENTION", req.body);
+              await Handlers.saveFeedback(event, req.body.token);
+            }
           }
 
           return;
         case "member_joined_channel":
+          res.send();
           const group = await GroupServices.findGroupBySlackId(event.channel);
           if (!group) {
-            res.send();
             return;
           }
 

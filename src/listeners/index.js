@@ -32,6 +32,8 @@ Emitter.on(
   PlatformListeners.onSlackUserMadeBadPrediction
 );
 
+Emitter.on("slackAppHomeOpened", PlatformListeners.handleSlackAppHomeOpened);
+
 Emitter.on(
   "userPredictedClosedMovie",
   PlatformListeners.onPredictedClosedMovie

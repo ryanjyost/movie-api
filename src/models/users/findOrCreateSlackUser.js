@@ -21,6 +21,7 @@ module.exports = async (userData, groupId, returnMongoObject = false) => {
       platform: "slack",
       slack: userData,
       slackId: userData.id,
+      events: { created: 1 },
       name:
         userData.profile.display_name ||
         userData.profile.real_name ||

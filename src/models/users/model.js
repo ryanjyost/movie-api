@@ -13,7 +13,9 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String },
   votes: mongoose.Schema.Types.Mixed,
   groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "group" }],
-  created_at: { type: Date, default: new Date() }
+  created_at: { type: Date, default: new Date() },
+  preferences: mongoose.Schema.Types.Mixed,
+  events: mongoose.Schema.Types.Mixed
 });
 
 userSchema.plugin(uniqueValidator);

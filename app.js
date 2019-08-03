@@ -81,6 +81,6 @@ app.use(function(err, req, res, next) {
 runCronJobs();
 
 /* Migrations */
-// require("./migrations/add-groupme-platform-field")();
+require("./migrations/init_events.js")();
 
 module.exports = app;

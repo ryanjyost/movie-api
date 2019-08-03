@@ -1,7 +1,7 @@
 const { WebClient } = require("@slack/web-api");
 const { GroupServices } = require("../../services");
 
-module.exports = async (event, token) => {
+module.exports = async event => {
   const groups = await GroupServices.findGroupBySlackTeamId(event.team);
   const client = new WebClient(groups[0].bot.bot_access_token);
   await client.reactions.add({

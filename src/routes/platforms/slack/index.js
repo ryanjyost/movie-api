@@ -38,19 +38,25 @@ router.post(
               await user.save();
             }
           }
+          return;
         case "message":
           res.send();
           if (event.channel_type === "im") {
             if (
-              event.username !== "MM Dev" ||
-              event.username !== "Movie Medium" ||
+              !event.subtype &&
+              event.username !== "MM Dev" &&
+              event.username !== "Movie Medium" &&
               event.username !== "MM Staging"
             ) {
-              console.log("APP MENTION", req.body);
               await Handlers.saveFeedback(event, req.body.token);
             }
           }
-
+          // else if (
+          //   event.message &&
+          //   event.message.text.includes("mentioned")
+          // ) {
+          //   console.log("IN CHANNEL FEEDBACK", event);
+          // }
           return;
         case "member_joined_channel":
           res.send();

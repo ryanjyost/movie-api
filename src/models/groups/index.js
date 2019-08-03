@@ -25,7 +25,6 @@ module.exports = {
     });
   },
   findGroupBySlackTeamId: async slackTeamId => {
-    console.log(slackTeamId);
     return await Group.find({ "slack.team_id": slackTeamId }).populate(
       "members"
     );

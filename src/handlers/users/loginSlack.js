@@ -146,35 +146,45 @@ module.exports = async code => {
     // if user isn't part of an existing group, create a new one
     if (user.isNew || !userMMGroups.length) {
       const UserSlackApi = await createApi(data.access_token);
-      let channel = await UserSlackApi.createChannel({ validate: true });
+      let channel = await UserSlackApi.createChannel();
       if (!channel.data.ok) {
-        console.log("ERROR with channel creation", channel);
-        const channels = await userClient.channels.list({ limit: 0 });
-        console.log("ALL CHANNELS", channels);
-
-        let existingChannel = channels.channels.find(item => {
-          return (
-            item.name ===
-            (process.env.ENV === "development"
-              ? "mmdev"
-              : process.env.ENV === "staging"
-                ? "mmstaging"
-                : "moviemedium")
-          );
+        channel = await UserSlackApi.createChannel({
+          name: "moviemediums",
+          validate: true
         });
 
-        if (existingChannel) {
-          channel = await userClient.channels.info({
-            channel: existingChannel.id
+        if (!channel.data.ok) {
+          console.log("ERROR with channel creation", channel);
+          const channels = await userClient.channels.list({ limit: 0 });
+          console.log("ALL CHANNELS", channels);
+
+          let existingChannel = channels.channels.find(item => {
+            return (
+              item.name ===
+              (process.env.ENV === "development"
+                ? "mmdev"
+                : process.env.ENV === "staging"
+                  ? "mmstaging"
+                  : "moviemedium")
+            );
           });
 
-          console.log("EXISTINg CHANNEL", channel);
-        }
+          if (existingChannel) {
+            channel = await userClient.channels.info({
+              channel: existingChannel.id
+            });
 
-        if (!channel) {
-          // remove user to avoid weirdness
-          await UserServices.deleteUser(user._id);
-          return channel.data;
+            console.log("EXISTINg CHANNEL", channel);
+          } else {
+            await UserServices.deleteUser(user._id);
+            return channel.data;
+          }
+
+          if (!channel) {
+            // remove user to avoid weirdness
+            await UserServices.deleteUser(user._id);
+            return channel.data;
+          }
         }
       }
 

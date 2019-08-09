@@ -58,3 +58,5 @@ Emitter.on("feedback", Util.likeMessage);
 Emitter.on("feedbackSlack", Util.likeSlackMessage);
 
 Emitter.on("respondedToFeedback", Util.sendMessageToGroup);
+
+Emitter.on("sendMovieWarning", Util.sendMessageToGroup);

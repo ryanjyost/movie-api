@@ -12,9 +12,15 @@ const moment = require("moment");
 const Boom = require("@hapi/boom");
 const logger = require("../../config/winston");
 
-module.exports = async daysBeforeCutoff => {
+module.exports = async movieId => {
   try {
-    const movies = await MovieServices.findUpcomingMovies();
+    let movies = [];
+    if (movieId) {
+      let movie = await MovieServices.findMovieById(movieId);
+      movies = [movie];
+    } else {
+      movies = await MovieServices.findUpcomingMovies();
+    }
 
     if (!movies.length) {
       return null;
@@ -28,17 +34,24 @@ module.exports = async daysBeforeCutoff => {
 
     // find movies that need a cutoff notification
     for (let movie of movies) {
-      if (
-        moment
-          .unix(movie.releaseDate)
-          .utc()
-          .diff(moment.unix(moviePredictionCutoffDate), "day") === 4
-      ) {
-        logger.info(
-          `Countdown for ${movie.title} at ${moment
+      if (!movieId) {
+        if (
+          moment
+            .unix(movie.releaseDate)
             .utc()
-            .format("MM/DD/YYYY H:mm")}`
-        );
+            .diff(moment.unix(moviePredictionCutoffDate), "day") === 4
+        ) {
+          logger.info(
+            `Countdown for ${movie.title} at ${moment
+              .utc()
+              .format("MM/DD/YYYY H:mm")}`
+          );
+
+          atleastOneMovie = true;
+          // text = text + "\n" + `${movie.title}`;
+          moviesClosingSoon[movie._id] = movie;
+        }
+      } else {
         atleastOneMovie = true;
         // text = text + "\n" + `${movie.title}`;
         moviesClosingSoon[movie._id] = movie;
@@ -50,7 +63,9 @@ module.exports = async daysBeforeCutoff => {
     // craft the message for each group
     for (let group of groups) {
       let fullMessage =
-        `️⏳ Predictions for some movies are closing soon! Here they are with the jabronis who haven't predicted yet.` +
+        (movieId
+          ? `⏳ Just a reminder about this movie closing soonish...`
+          : `️⏳ Predictions for some movies are closing soon! Here they are with the jabronis who haven't predicted yet.`) +
         "\n" +
         "\n";
 
@@ -107,15 +122,25 @@ module.exports = async daysBeforeCutoff => {
         );
       } else if (group.platform === "slack") {
         const client = new WebClient(group.bot.bot_access_token);
-        let blocks = [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `*⏳ Predictions for some movies are closing soon!* Here they are with the jabronis who haven't predicted yet.`
-            }
-          }
-        ];
+        let blocks = movieId
+          ? [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*Just a reminder about this movie closing soonish...*`
+                }
+              }
+            ]
+          : [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*⏳ Predictions for some movies are closing soon!* Here they are with the jabronis who haven't predicted yet.`
+                }
+              }
+            ];
 
         for (let movieId in moviesClosingSoon) {
           let movie = moviesClosingSoon[movieId];
@@ -127,26 +152,6 @@ module.exports = async daysBeforeCutoff => {
                 : `Everyone predicted 👌`
             )
           );
-          // blocks.push({
-          //   type: "section",
-          //   text: {
-          //     type: "mrkdwn",
-          //     text:
-          //       `🎥 <${movie.rtLink}|${movie.title}> - ` +
-          //       (usersPerMovie[movie._id] && usersPerMovie[movie._id].length
-          //         ? usersPerMovie[movie._id]
-          //         : `Everyone predicted 👌`)
-          //   },
-          //   accessory: {
-          //     type: "button",
-          //     text: {
-          //       type: "plain_text",
-          //       text: "Make your prediction",
-          //       emoji: true
-          //     },
-          //     value: `predict_movie_${movie._id}`
-          //   }
-          // });
         }
 
         try {

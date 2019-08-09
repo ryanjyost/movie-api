@@ -28,8 +28,6 @@ module.exports = async (user, group, movieId, prediction) => {
 
   await client.chat.postMessage({
     channel: group.slackId,
-    text: `🍿 *${userName}* predicted an *${prediction}%* score for *${
-      movie.title
-    }*`
+    text: `🍿 *${userName}* predicted *${prediction}%* for *${movie.title}*`
   });
 };

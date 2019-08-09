@@ -44,6 +44,16 @@ Emitter.on(
   PlatformListeners.onUserMadeFirstPredictionOnPlatform
 );
 
+Emitter.on(
+  "slackUserPredictingGeneral",
+  PlatformListeners.sendMoviesForUserPrediction
+);
+
+Emitter.on(
+  "slackUserPredictingSpecific",
+  PlatformListeners.sendSingleMovieForPrediction
+);
+
 Emitter.on("feedback", Util.likeMessage);
 Emitter.on("feedbackSlack", Util.likeSlackMessage);
 

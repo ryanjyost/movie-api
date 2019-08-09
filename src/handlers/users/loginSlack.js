@@ -7,7 +7,7 @@ const { Slack } = require("../../platforms");
 const { WebClient } = require("@slack/web-api");
 const Emitter = require("../../EventEmitter");
 const { createApi, createChannel } = require("../../platforms/slack");
-const { to } = require("../../util");
+const { catchAsync } = require("../../util");
 const Boom = require("@hapi/boom");
 
 module.exports = async code => {
@@ -146,55 +146,66 @@ module.exports = async code => {
     // if user isn't part of an existing group, create a new one
     if (user.isNew || !userMMGroups.length) {
       const UserSlackApi = new WebClient(data.access_token);
-      let channel = await UserSlackApi.channels.create({
-        validate: true,
-        name:
-          process.env.ENV === "development"
-            ? "mmdev"
-            : process.env.ENV === "staging"
-              ? "mmstaging"
-              : "movie_medium"
-      });
-      if (!channel.ok) {
-        channel = await UserSlackApi.channels.create({
-          name: "movie_mediums",
-          validate: true
+      let err,
+        channel = null;
+      console.log("made it");
+      [err, channel] = await catchAsync(
+        UserSlackApi.channels.create({
+          validate: true,
+          name:
+            process.env.ENV === "development"
+              ? "mmdev"
+              : process.env.ENV === "staging"
+                ? "mmstaging"
+                : "movie_medium"
+        })
+      );
+
+      console.log("CREATED CHANNEL", channel);
+
+      if (err || !channel.ok) {
+        console.log("ERROR with channel creation", channel);
+        const channels = await userClient.channels.list({ limit: 0 });
+        console.log("ALL CHANNELS", channels);
+
+        let existingChannel = channels.channels.find(item => {
+          return (
+            item.name ===
+            (process.env.ENV === "development"
+              ? "mmdev"
+              : process.env.ENV === "staging"
+                ? "mmstaging"
+                : "movie_medium")
+          );
         });
 
-        if (!channel.ok) {
-          console.log("ERROR with channel creation", channel);
-          const channels = await userClient.channels.list({ limit: 0 });
-          console.log("ALL CHANNELS", channels);
-
-          let existingChannel = channels.channels.find(item => {
-            return (
-              item.name ===
-              (process.env.ENV === "development"
-                ? "mmdev"
-                : process.env.ENV === "staging"
-                  ? "mmstaging"
-                  : "moviemedium")
-            );
+        if (existingChannel) {
+          channel = await userClient.channels.info({
+            channel: existingChannel.id
           });
 
-          if (existingChannel) {
-            channel = await userClient.channels.info({
-              channel: existingChannel.id
-            });
+          console.log("EXISTINg CHANNEL", channel);
+        } else {
+          await UserServices.deleteUser(user._id);
+          return channel.data;
+        }
 
-            console.log("EXISTINg CHANNEL", channel);
-          } else {
-            await UserServices.deleteUser(user._id);
-            return channel.data;
-          }
-
-          if (!channel) {
-            // remove user to avoid weirdness
-            await UserServices.deleteUser(user._id);
-            return channel.data;
-          }
+        if (!channel) {
+          // remove user to avoid weirdness
+          await UserServices.deleteUser(user._id);
+          return channel.data;
         }
       }
+
+      let addBotToChannelResponse;
+      [err, addBotToChannelResponse] = await catchAsync(
+        UserSlackApi.channels.invite({
+          channel: channel.channel.id,
+          user: data.bot.bot_user_id
+        })
+      );
+
+      console.log("ADDED BOT TO CHANNEL", addBotToChannelResponse);
 
       let newSlackGroup = await GroupServices.createSlackGroup({
         ...(channel.channel ? channel.channel : channel.data.channel),

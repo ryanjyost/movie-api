@@ -10,17 +10,17 @@ const handleApi = promise => {
       console.log("RESPONSE!", response);
 
       if ("ok" in response) {
-        if (response.ok) {
-          return response.data ? response.data.response : null;
-        } else {
-          throw Boom.badGateway(response.data);
-        }
+        return response.ok
+          ? response.data
+            ? response.data.response
+            : [response, null]
+          : [response, null];
       } else {
-        return response;
+        return [null, response];
       }
     })
     .catch(err => {
-      throw Boom.badGateway(err);
+      return [err, null];
     });
 };
 

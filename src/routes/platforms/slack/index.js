@@ -201,8 +201,9 @@ router.post(
         });
         break;
       case "/predict":
+        res.send();
         Handlers.handleUserPrediction(req.body);
-        res.send("Saving prediction...");
+
         break;
       case "/season":
         res.send();

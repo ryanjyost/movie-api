@@ -76,5 +76,6 @@ exports.calcGroupRankingsForSingleMovie = require("./calcGroupRankingsForSingleM
 exports.buildSingleUserSingleMovieData = require("./buildSingleUserSingleMovieData");
 exports.buildSingleUserManyMovieData = require("./buildSingleUserManyMovieData");
 exports.to = require("./handleApi");
+exports.catchAsync = require("./catchAsync");
 exports.logger = logger;
 exports.messages = require("./messages");

@@ -3,7 +3,6 @@ const { MovieServices, UserServices } = require("../../../services");
 const { singleMovieSlackMessage, slackHotTips } = require("./util");
 
 module.exports = async (group, userId) => {
-  console.log("PREDICT", group, userId);
   const client = new WebClient(group.bot.bot_access_token);
   const user = await UserServices.findUserBySlackId(userId);
   //.... get upcoming movies to show example of one to predict

@@ -9,7 +9,6 @@ const { WebClient } = require("@slack/web-api");
 
 module.exports = async reqBody => {
   try {
-    console.log(reqBody);
     const { text } = reqBody;
 
     // let user = await UserServices.findUserBySlackId(reqBody.user_id);
@@ -43,7 +42,6 @@ module.exports = async reqBody => {
 
     // look for exact match
     let movie = await MovieServices.findMovieByCleanTitle(cleanTitle);
-    console.log("MOVIE", movie);
 
     if (!movie) {
       movie = await MovieServices.fuzzySearchMovies(cleanTitle);

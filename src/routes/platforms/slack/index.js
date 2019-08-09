@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { WebClient } = require("@slack/web-api");
-var prettyjson = require("prettyjson");
+const crypto = require("crypto");
+const qs = require("query-string");
+const validateSlackRequest = require("../../../util/validateSlackRequest");
 
 const { catchErrors } = require("../../../util/index");
 const Handlers = require("../../../handlers/platforms/slack");
@@ -135,7 +137,13 @@ router.post(
         );
 
         if (updatedUser) {
-          Emitter.emit("userPredictionOnSlackSaved", user, group);
+          Emitter.emit(
+            "userPredictionOnSlackSaved",
+            user,
+            group,
+            movieId,
+            numPrediction
+          );
         }
       }
     }
@@ -182,6 +190,17 @@ router.post(
 router.post(
   "/commands",
   catchErrors(async (req, res) => {
+    console.log("REQ", req.headers, req.body);
+
+    let timestamp = req.headers["x-slack-request-timestamp"];
+    const time = Math.floor(new Date().getTime() / 1000);
+    if (Math.abs(time - timestamp) > 300) {
+      return res.status(400).send("Ignore this request.");
+    }
+
+    if (!validateSlackRequest(process.env.SLACK_SIGNING_SECRET, req)) {
+      return res.status(400).send("Verification failed");
+    }
     const { command } = req.body;
 
     switch (command) {
@@ -212,6 +231,8 @@ router.post(
       default:
         break;
     }
+
+    res.send();
   })
 );
 

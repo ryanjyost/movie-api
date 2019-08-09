@@ -23,12 +23,12 @@ module.exports = async (userData, groupId, returnMongoObject = false) => {
       slackId: userData.id,
       events: { created: 1 },
       name:
-        userData.profile.display_name ||
         userData.profile.real_name ||
+        userData.profile.display_name ||
         userData.real_name,
       nickname:
-        userData.profile.display_name ||
         userData.profile.real_name ||
+        userData.profile.display_name ||
         userData.real_name,
       votes: { placeholder: 1 },
       groups: groupId ? [groupId] : []

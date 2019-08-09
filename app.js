@@ -45,6 +45,7 @@ app.use(
     { stream: winston.stream }
   )
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -79,8 +80,5 @@ app.use(function(err, req, res, next) {
 
 /* RUN CRON JOBS */
 runCronJobs();
-
-/* Migrations */
-require("./migrations/init_events.js")();
 
 module.exports = app;

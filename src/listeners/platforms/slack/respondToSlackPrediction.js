@@ -28,6 +28,25 @@ module.exports = async (user, group, movieId, prediction) => {
 
   await client.chat.postMessage({
     channel: group.slackId,
-    text: `🍿 *${userName}* predicted *${prediction}%* for *${movie.title}*`
+    blocks: [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `🍿 *${userName}* predicted *${prediction}%* for *${
+            movie.title
+          }*`
+        },
+        accessory: {
+          type: "button",
+          text: {
+            type: "plain_text",
+            text: "Predict",
+            emoji: true
+          },
+          value: `predict_movie_${movie._id}`
+        }
+      }
+    ]
   });
 };

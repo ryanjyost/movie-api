@@ -23,13 +23,13 @@ module.exports = async (group, userId) => {
     }
   }
 
-  const blocks = [
+  let blocks = [
     {
       type: "section",
       text: {
         type: "mrkdwn",
         text:
-          `Here are *${moviesToSend.length} upcoming movies* ${
+          `There are *${moviesToSend.length} upcoming movies* ${
             hasPredictedAllMovies
               ? "for you to predict."
               : `you haven't predicted yet.`
@@ -41,7 +41,8 @@ module.exports = async (group, userId) => {
   ];
 
   for (let i = 0; i < moviesToSend.length && i < 3; i++) {
-    blocks.push(singleMovieSlackMessage(moviesToSend[i]));
+    // blocks.push(singleMovieSlackMessage(moviesToSend[i]));
+    blocks = [...blocks, ...singleMovieSlackMessage(moviesToSend[i])];
   }
 
   if (moviesToSend.length > 3) {

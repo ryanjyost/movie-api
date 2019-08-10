@@ -48,7 +48,10 @@ module.exports = async movie => {
           scoreMessage + `${user.name}: ` + notActiveMessage + "\n";
       } else if (!user.didVote) {
         scoreMessage =
-          scoreMessage + `${user.name}: ` + noPredictionMessage + "\n";
+          scoreMessage +
+          (isSlackGroup ? `${user.name}: ` : `${user.name}: `) +
+          noPredictionMessage +
+          "\n";
       } else {
         scoreMessage =
           scoreMessage +
@@ -57,7 +60,9 @@ module.exports = async movie => {
                 emojiMap[user.place - 1] && user.didVote
                   ? emojiMap[user.place - 1]
                   : ""
-              } ${user.name}: ${user.absDiff}% _(${user.vote}% prediction)_`
+              } *${user.name}*: ${user.absDiff}% off _(${
+                user.vote
+              }% prediction)_`
             : `${
                 emojiMap[user.place - 1] && user.didVote
                   ? emojiMap[user.place - 1]
@@ -126,7 +131,16 @@ module.exports = async movie => {
               text: {
                 type: "mrkdwn",
                 text: `${mainMessage}` + "\n" + scoreMessage
-              }
+              },
+              accessory: movie.poster
+                ? {
+                    type: "image",
+                    image_url: `https://mm-posters.s3.amazonaws.com/${
+                      movie.poster
+                    }`,
+                    alt_text: "movie poster"
+                  }
+                : null
             },
             {
               type: "section",

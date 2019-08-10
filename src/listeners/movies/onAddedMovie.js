@@ -20,7 +20,7 @@ module.exports = async movie => {
       try {
         await client.chat.postMessage({
           channel: group.slackId,
-          blocks: [singleMovieSlackMessage(movie)]
+          blocks: singleMovieSlackMessage(movie)
         });
       } catch (e) {
         console.log("ERROR sending new movie message", e);

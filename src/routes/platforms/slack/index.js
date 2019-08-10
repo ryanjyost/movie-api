@@ -61,6 +61,7 @@ router.post(
           // }
           return;
         case "member_joined_channel":
+          console.log("ADDED TO CHANNEL");
           res.send();
           const group = await GroupServices.findGroupBySlackId(event.channel);
           if (!group) {
@@ -214,7 +215,7 @@ router.post(
 
         const text = messages.overallRankings(overallRankings, "slack");
 
-        res.json({
+        res.status(200).json({
           text,
           response_type: "in_channel"
         });

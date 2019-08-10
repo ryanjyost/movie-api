@@ -144,14 +144,23 @@ module.exports = async movieId => {
 
         for (let movieId in moviesClosingSoon) {
           let movie = moviesClosingSoon[movieId];
-          blocks.push(
-            slackMessageUtil.singleMovieSlackMessage(
+          blocks = [
+            ...blocks,
+            ...slackMessageUtil.singleMovieSlackMessage(
               moviesClosingSoon[movieId],
               usersPerMovie[movie._id] && usersPerMovie[movie._id].length
                 ? `Missing predictions from ${usersPerMovie[movie._id]}`
                 : `Everyone predicted 👌`
             )
-          );
+          ];
+          // blocks.push(
+          //   slackMessageUtil.singleMovieSlackMessage(
+          //     moviesClosingSoon[movieId],
+          //     usersPerMovie[movie._id] && usersPerMovie[movie._id].length
+          //       ? `Missing predictions from ${usersPerMovie[movie._id]}`
+          //       : `Everyone predicted 👌`
+          //   )
+          // );
         }
 
         try {

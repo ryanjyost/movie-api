@@ -7,7 +7,7 @@ module.exports = async (group, user) => {
   //.... get upcoming movies to show example of one to predict
   const upcomingMovies = await MovieServices.findUpcomingMovies();
 
-  const blocks = [
+  let blocks = [
     {
       type: "section",
       text: {
@@ -23,7 +23,8 @@ module.exports = async (group, user) => {
   ];
 
   for (let i = 0; i < upcomingMovies.length && i < 3; i++) {
-    blocks.push(singleMovieSlackMessage(upcomingMovies[i]));
+    // blocks.push(singleMovieSlackMessage(upcomingMovies[i]));
+    blocks = [...blocks, ...singleMovieSlackMessage(upcomingMovies[i])];
   }
 
   if (upcomingMovies.length > 3) {

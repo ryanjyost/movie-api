@@ -8,6 +8,6 @@ module.exports = async (group, userId, movie) => {
     response_type: "ephemeral",
     user: userId,
     channel: group.slackId,
-    blocks: [singleMovieSlackMessage(movie)]
+    blocks: singleMovieSlackMessage(movie)
   });
 };

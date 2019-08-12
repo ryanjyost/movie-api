@@ -19,7 +19,7 @@ module.exports = async userAccessToken => {
 
   let newSlackGroup = await GroupServices.createSlackGroup({
     ...channel.data.channel,
-    ...{ bot, members: [newMMUser._id], name: "#moviemedium" }
+    ...{ bot, members: [newMMUser._id], name: "#movie_medium" }
   });
 
   newMMUser.groups = [newSlackGroup._id];

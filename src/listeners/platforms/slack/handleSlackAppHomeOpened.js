@@ -20,7 +20,7 @@ module.exports = async body => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `In addition to the #moviemedium channel, don't forget that you can use moviemedium.io to play the game, too!`
+          text: `In addition to the #movie_medium channel, don't forget that you can use moviemedium.io to play the game, too!`
         }
       },
       {

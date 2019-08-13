@@ -1,4 +1,4 @@
-const { PlatformServices, GroupServices } = require("../../../services");
+const { PlatformServices, GroupServices } = require("../../../services/index");
 const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async (groupmeGroupId, text) => {

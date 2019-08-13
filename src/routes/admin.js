@@ -10,6 +10,7 @@ const {
   UserServices,
   GroupServices
 } = require("../services");
+const handleCutoffNotifications = require("../cron/handleCutoffNotifications");
 const Emitter = require("../EventEmitter");
 
 const { catchErrors } = require("../util/index");
@@ -70,6 +71,15 @@ router.post(
 
     const updatedFeedback = await Handler.handleFeedbackResponse(id, message);
     res.json({ response: updatedFeedback });
+  })
+);
+
+router.post(
+  "/send_warning/:movieId",
+  catchErrors(async (req, res) => {
+    const { movieId } = req.params;
+    await handleCutoffNotifications(movieId);
+    res.status(200).send();
   })
 );
 

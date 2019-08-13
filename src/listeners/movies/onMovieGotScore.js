@@ -6,9 +6,8 @@ const {
   MovieServices,
   MovieScoreMapServices
 } = require("../../services");
-
+const { WebClient } = require("@slack/web-api");
 const { emojiMap, calcGroupRankingsForSingleMovie } = require("../../util");
-
 const GroupMeServices = PlatformServices.GroupMe;
 
 module.exports = async movie => {
@@ -17,9 +16,22 @@ module.exports = async movie => {
   const season = await SeasonServices.findSeasonById(movie.season);
   const moviesInSeason = await MovieServices.findMoviesBySeason(movie.season);
 
+  let movieLabel = ``;
+  for (let i = 0; i < moviesInSeason.length; i++) {
+    movieLabel =
+      movieLabel +
+      `_${moviesInSeason[i].title}_` +
+      (i === moviesInSeason.length - 1 ? `` : `, `);
+  }
+
   for (let group of groups) {
-    let mainMessage =
-      `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}% ` + "\n";
+    let isSlackGroup = group.platform === "slack";
+
+    let mainMessage = isSlackGroup
+      ? `*🍅 ${movie.title}* has a Rotten Tomatoes Score of *${score}%*`
+      : `🍅 "${movie.title}" has a Rotten Tomatoes Score of ${score}%`;
+
+    mainMessage = mainMessage + "\n";
     let scoreMessage = ``;
     // `👇 Here are the MM Metrics, sorted from best to worst.` + "\n";
 
@@ -36,15 +48,26 @@ module.exports = async movie => {
           scoreMessage + `${user.name}: ` + notActiveMessage + "\n";
       } else if (!user.didVote) {
         scoreMessage =
-          scoreMessage + `${user.name}: ` + noPredictionMessage + "\n";
+          scoreMessage +
+          (isSlackGroup ? `${user.name}: ` : `${user.name}: `) +
+          noPredictionMessage +
+          "\n";
       } else {
         scoreMessage =
           scoreMessage +
-          `${
-            emojiMap[user.place - 1] && user.didVote
-              ? emojiMap[user.place - 1]
-              : ""
-          } ${user.name}: ${user.absDiff}% (${user.vote}% prediction)` +
+          (isSlackGroup
+            ? `${
+                emojiMap[user.place - 1] && user.didVote
+                  ? emojiMap[user.place - 1]
+                  : ""
+              } *${user.name}*: ${user.absDiff}% off _(${
+                user.vote
+              }% prediction)_`
+            : `${
+                emojiMap[user.place - 1] && user.didVote
+                  ? emojiMap[user.place - 1]
+                  : ""
+              } ${user.name}: ${user.absDiff}% (${user.vote}% prediction)`) +
           "\n";
       }
     }
@@ -53,7 +76,9 @@ module.exports = async movie => {
     let moviesLeftInSeason = season.length - moviesInSeason.length;
 
     if (moviesLeftInSeason) {
-      seasonMessage = `Only ${moviesLeftInSeason} movies left in the current season...`;
+      seasonMessage = isSlackGroup
+        ? `_Only ${moviesLeftInSeason} movies left in the current season..._`
+        : `Only ${moviesLeftInSeason} movies left in the current season...`;
     } else {
       // season ended, so send season results
       const seasonRankings = await SharedServices.calculateGroupSeasonRankings(
@@ -66,21 +91,82 @@ module.exports = async movie => {
       for (let user of seasonRankings) {
         rankingMessage =
           rankingMessage +
-          `${emojiMap[user.place - 1] || ""}${user.name}: ${
-            user.points
-          } points` +
+          (isSlackGroup
+            ? `*${emojiMap[user.place - 1] || ""}${user.name}* - ${
+                user.points
+              } _pts_`
+            : `${emojiMap[user.place - 1] || ""}${user.name}: ${
+                user.points
+              } pts`) +
           "\n";
       }
 
+      seasonMessage = isSlackGroup
+        ? `*🏆 Season ${season.id} is over!*`
+        : `🏆 Season ${season.id} is over!`;
       seasonMessage =
-        `🏆 Season ${season.id} is over!` + "\n" + "\n" + rankingMessage;
+        seasonMessage +
+        "\n" +
+        (isSlackGroup ? movieLabel : "") +
+        "\n" +
+        "\n" +
+        rankingMessage;
     }
 
-    await GroupMeServices.sendBotMessage(
-      mainMessage + "\n" + scoreMessage,
-      group.bot.bot_id
-    );
+    if (group.platform === "groupme") {
+      await GroupMeServices.sendBotMessage(
+        mainMessage + "\n" + scoreMessage,
+        group.bot.bot_id
+      );
+      await GroupMeServices.sendBotMessage(seasonMessage, group.bot.bot_id);
+    } else if (group.platform === "slack") {
+      const client = new WebClient(group.bot.bot_access_token);
 
-    await GroupMeServices.sendBotMessage(seasonMessage, group.bot.bot_id);
+      try {
+        await client.chat.postMessage({
+          channel: group.slackId,
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `${mainMessage}` + "\n" + scoreMessage
+              },
+              accessory: movie.poster
+                ? {
+                    type: "image",
+                    image_url: `https://mm-posters.s3.amazonaws.com/${
+                      movie.poster
+                    }`,
+                    alt_text: "movie poster"
+                  }
+                : null
+            },
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: seasonMessage
+              }
+            },
+            {
+              type: "divider"
+            }
+          ]
+        });
+      } catch (e) {
+        console.log("ERROR sending movie score results", e);
+      }
+
+      // await client.chat.postMessage({
+      //   channel: group.slackId,
+      //   text: mainMessage + "\n" + scoreMessage
+      // });
+      //
+      // await client.chat.postMessage({
+      //   channel: group.slackId,
+      //   text: seasonMessage
+      // });
+    }
   }
 };

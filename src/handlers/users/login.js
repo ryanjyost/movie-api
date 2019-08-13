@@ -5,6 +5,7 @@ const {
 } = require("../../services");
 const GroupMeServices = PlatformServices.GroupMe;
 const { to } = require("../../util");
+const createGroup = require("../groups/createGroup");
 
 module.exports = async token => {
   const GroupMeApi = GroupMeServices.createApi(token);
@@ -13,19 +14,16 @@ module.exports = async token => {
   const groupMeUser = await to(GroupMeApi.getCurrentUser());
 
   //... find or create user with groupme data
-  const user = await UserServices.findOrCreateUser(groupMeUser);
+  let user = await UserServices.findOrCreateUser(groupMeUser);
 
-  let userMongoObject = null,
-    userMMGroups = [],
-    groupsForResponse = [];
-
+  let madeNewGroup = false;
   if (user.isNew) {
-    userMongoObject = await UserServices.findUserById(user._id);
+    let groupsForResponse = [];
+    let userMongoObject = await UserServices.findUserById(user._id);
 
-    userMMGroups = [...userMongoObject.groups];
+    let userMMGroups = [...userMongoObject.groups];
     //... get user's groups
     const usersGroups = await to(GroupMeApi.getCurrentUsersGroups());
-    console.log("NEW USEr");
 
     for (let group of usersGroups) {
       const existingGroup = await GroupServices.findGroupByGroupMeId(
@@ -33,7 +31,6 @@ module.exports = async token => {
       );
 
       if (existingGroup) {
-        console.log("EXISTING");
         await GroupServices.addUserToGroup(
           {
             groupmeId: group.group_id
@@ -47,11 +44,17 @@ module.exports = async token => {
 
     userMongoObject.groups = userMMGroups;
     await userMongoObject.save();
+
+    // if user isn't part of an existing group, create a new one
+    if (!userMMGroups.length) {
+      await createGroup(token);
+      madeNewGroup = true;
+    }
   }
 
   if (user.isNew) {
     const finalNewUserData = await UserServices.findUserById(user._id);
-    return { ...finalNewUserData.toObject(), ...{ isNew: true } };
+    return { ...finalNewUserData.toObject(), ...{ isNew: true, madeNewGroup } };
   } else {
     return user;
   }

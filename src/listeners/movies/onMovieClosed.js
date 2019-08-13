@@ -1,5 +1,6 @@
 const { GroupServices, PlatformServices } = require("../../services");
 const { sortArrayByProperty } = require("../../util");
+const { WebClient } = require("@slack/web-api");
 
 const GroupMeServices = PlatformServices.GroupMe;
 
@@ -7,7 +8,11 @@ module.exports = async movie => {
   const groups = await GroupServices.findAllGroups();
 
   for (let group of groups) {
-    let movieMessage = `🔒 "${movie.title}" predictions are locked in!` + "\n";
+    const isSlackGroup = group.platform === "slack";
+    let movieMessage = isSlackGroup
+      ? `🔒 *${movie.title}* predictions are locked in!`
+      : `🔒 "${movie.title}" predictions are locked in!`;
+    movieMessage = movieMessage + "\n";
 
     let sortedMembers = sortArrayByProperty(
       group.members,
@@ -22,18 +27,47 @@ module.exports = async movie => {
       if (user) {
         voteMessage =
           voteMessage +
-          `${user.name}: ${
-            user.votes[movie._id] < 0
-              ? `No prediction`
-              : `${user.votes[movie._id]}%`
-          }` +
+          (isSlackGroup
+            ? `*${user.name}* - ${
+                user.votes[movie._id] < 0
+                  ? `No prediction`
+                  : `${user.votes[movie._id]}% \n`
+              }`
+            : `${user.name}: ${
+                user.votes[movie._id] < 0
+                  ? `No prediction`
+                  : `${user.votes[movie._id]}%`
+              }`) +
           "\n";
       }
     }
 
-    await GroupMeServices.sendBotMessage(
-      movieMessage + "\n" + voteMessage,
-      group.bot.bot_id
-    );
+    if (group.platform === "groupme") {
+      await GroupMeServices.sendBotMessage(
+        `${movieMessage}` + "\n" + voteMessage,
+        group.bot.bot_id
+      );
+    } else if (group.platform === "slack") {
+      const client = new WebClient(group.bot.bot_access_token);
+      try {
+        await client.chat.postMessage({
+          channel: group.slackId,
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: movieMessage + "\n" + voteMessage
+              }
+            },
+            {
+              type: "divider"
+            }
+          ]
+        });
+      } catch (e) {
+        console.log("ERROR when movie closed", e);
+      }
+    }
   }
 };

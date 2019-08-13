@@ -26,7 +26,8 @@ module.exports = async (
       name: groupmeMemberData.name,
       nickname: groupmeMemberData.nickname || groupmeMemberData.name,
       votes: { placeholder: 1 },
-      groups: groupId ? [groupId] : []
+      groups: groupId ? [groupId] : [],
+      events: { created: 1 }
     });
   }
 

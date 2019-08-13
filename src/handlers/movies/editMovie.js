@@ -32,12 +32,15 @@ module.exports = async (movieId, updatedData) => {
     movie.metrics = metrics;
 
     //... add movie to season and update movie with the season it's been added to
-    const season = await SeasonServices.addMovieToSeason({
-      ...movie.toObject(),
-      ...{ rtScore: updatedData.rtScore }
-    });
-    movie.season = season.id;
-    await movie.save();
+
+    if (!movie.season) {
+      const season = await SeasonServices.addMovieToSeason({
+        ...movie.toObject(),
+        ...{ rtScore: updatedData.rtScore }
+      });
+      movie.season = season.id;
+      await movie.save();
+    }
 
     Emitter.emit("movieGotScore", {
       ...movie.toObject(),

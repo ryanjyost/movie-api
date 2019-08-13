@@ -3,15 +3,19 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new mongoose.Schema({
   groupme: mongoose.Schema.Types.Mixed,
-  groupmeId: { type: String, unique: true },
+  groupmeId: { type: String, unique: true, sparse: true },
+  slackId: { type: String },
+  slack: mongoose.Schema.Types.Mixed,
+  platform: String,
   email: String,
   name: String,
   nickname: String,
   phoneNumber: { type: String },
-  accessToken: String,
   votes: mongoose.Schema.Types.Mixed,
   groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "group" }],
-  created_at: { type: Date, default: new Date() }
+  created_at: { type: Date, default: new Date() },
+  preferences: mongoose.Schema.Types.Mixed,
+  events: mongoose.Schema.Types.Mixed
 });
 
 userSchema.plugin(uniqueValidator);

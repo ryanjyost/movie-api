@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
@@ -8,8 +9,6 @@ const cors = require("cors");
 
 const PrettyError = require("pretty-error");
 const pe = new PrettyError();
-
-require("dotenv").config();
 
 const db = require("./db");
 const runCronJobs = require("./src/cron");
@@ -46,6 +45,7 @@ app.use(
     { stream: winston.stream }
   )
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

@@ -9,6 +9,7 @@ router.use("/users", require("./users"));
 router.use("/seasons", require("./seasons"));
 router.use("/admin", require("./admin"));
 router.use("/groupme", require("./platforms/groupme"));
+router.use("/slack", require("./platforms/slack"));
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

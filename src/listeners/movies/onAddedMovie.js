@@ -14,7 +14,6 @@ module.exports = async movie => {
         await GroupMeServices.sendBotMessage(message, group.bot.bot_id);
       }
     } else if (group.platform === "slack") {
-      console.log("NEW MOVIE SLACK");
       const client = new WebClient(group.bot.bot_access_token);
 
       try {

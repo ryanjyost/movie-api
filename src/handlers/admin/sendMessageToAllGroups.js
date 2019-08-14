@@ -1,7 +1,6 @@
 const { GroupServices, PlatformServices } = require("../../services");
 const GroupMeServices = PlatformServices.GroupMe;
 const { WebClient } = require("@slack/web-api");
-const logger = require("../../../config/winston");
 
 module.exports = async message => {
   const groups = await GroupServices.findAllGroups();
@@ -18,8 +17,7 @@ module.exports = async message => {
         });
       }
     } catch (e) {
-      logger.log("Error sending message to group" + e);
-      continue;
+      console.log("Error sending message to group" + e);
     }
   }
 

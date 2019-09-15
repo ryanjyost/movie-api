@@ -42,6 +42,17 @@ router.get(
   })
 );
 
+router.delete(
+  "/:id",
+  catchErrors(async (req, res) => {
+    const { id } = req.params;
+
+    await UserServices.deleteUser(id);
+
+    res.json({ test: "test" });
+  })
+);
+
 router.get(
   "/:id/overall",
   catchErrors(async (req, res) => {

@@ -1,3 +1,4 @@
 module.exports = {
-  updateUserPrediction: require("./updateUserPrediction")
+  updateUserPrediction: require("./updateUserPrediction"),
+  deleteUser: require("./deleteUser")
 };

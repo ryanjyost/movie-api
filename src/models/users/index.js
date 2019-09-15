@@ -13,11 +13,15 @@ module.exports = {
       populate: { path: "members" }
     });
   },
-  findUserById: async id => {
-    return await User.findOne({ _id: id }).populate({
-      path: "groups",
-      populate: { path: "members" }
-    });
+  findUserById: async (id, populate = true) => {
+    if (populate) {
+      return await User.findOne({ _id: id }).populate({
+        path: "groups",
+        populate: { path: "members" }
+      });
+    } else {
+      return await User.findOne({ _id: id });
+    }
   },
   findAllUsers: async () => User.find(),
   updateUserVoteMaps: async movieId => {
@@ -39,7 +43,7 @@ module.exports = {
       }
     );
   },
-  deleteUser: async userId => {
+  removeUser: async userId => {
     return await User.remove({ _id: userId });
   },
   findOrCreateUser: require("./findOrCreateUser"),

@@ -7,8 +7,6 @@ const handleApi = promise => {
         return null;
       }
 
-      console.log("RESPONSE!", response);
-
       if ("ok" in response) {
         return response.ok
           ? response.data

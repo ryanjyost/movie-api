@@ -5,7 +5,7 @@ const {
   UserServices
 } = require("../services");
 const GroupMeServices = PlatformServices.GroupMe;
-const _ = require("lodash");
+const { WebClient } = require("@slack/web-api");
 
 /*
 * Loop through every MM group. Fetch the current GroupMe members list of each group, and make sure the user has
@@ -17,55 +17,54 @@ module.exports = async () => {
     const groups = await GroupServices.findAllGroups();
 
     for (let group of groups) {
-      let updatedGroupMemberIds = [];
+      if (group.platform === "slack") {
+        const SlackApi = new WebClient(group.bot.bot_access_token);
+        const channelResponse = await SlackApi.channels.info({
+          channel: group.slackId
+        });
 
-      const groupMeData = await to(GroupMeServices.getGroup(group.groupmeId));
+        if (!channelResponse.ok) {
+          continue;
+        }
 
-      for (let member of groupMeData.members) {
-        const user = await UserServices.findUserByGroupMeId(member.user_id);
+        const { channel } = channelResponse;
 
-        if (user) {
-          // nothing there now so just set
-          if (!("groups" in user) || !user.groups) {
-            user.groups = [group._id];
-          } else {
-            // strings to easily compare and remove dups
-            let groupStrings = [...user.groups].map(group =>
-              group._id.toString()
-            );
-            // get rid of any duplicates
-            const noDupsOfGroupStrings = _.uniq(groupStrings);
-
-            // init var out of if block
-            let finalGroupStrings = [...noDupsOfGroupStrings];
-
-            // add group if new
-            if (noDupsOfGroupStrings.indexOf(group._id.toString()) < 0) {
-              finalGroupStrings = [
-                ...noDupsOfGroupStrings,
-                ...[group._id.toString()]
-              ];
+        for (let member of group.members) {
+          // if the user is not in the channel
+          if (channel.members.indexOf(member.slackId) < 0) {
+            // user is leaving the one group they are part of, so just delete them
+            if (member.groups.length === 1) {
+              await UserServices.deleteUser(member._id);
+            } else {
+              await GroupServices.removeUserFromGroup(group._id, member._id);
+              await UserServices.removeGroupFromUser(member._id, group._id);
             }
-
-            // convert back and add to user document
-            user.groups = finalGroupStrings.map(string =>
-              createObjectId(string)
-            );
           }
+        }
 
-          await user.save();
-          updatedGroupMemberIds.push(user._id);
-        } else {
-          const newUser = await UserServices.findOrCreateUser(
-            member,
-            group._id
+        // console.log("CHANNEL", channel);
+        // console.log("GROUP", groupData);
+
+        // console.log("SLACK", channels);
+      } else if (group.platform === "groupme") {
+        const groupMeData = await to(GroupMeServices.getGroup(group.groupmeId));
+        // console.log("GROUPME", group, groupMeData);
+
+        for (let member of group.members) {
+          const memberInActualGroup = groupMeData.members.find(
+            m => m.user_id === member.groupmeId
           );
-          updatedGroupMemberIds.push(newUser._id);
+          if (!memberInActualGroup) {
+            // user is leaving the one group they are part of, so just delete them
+            if (member.groups.length === 1) {
+              await UserServices.deleteUser(member._id);
+            } else {
+              await GroupServices.removeUserFromGroup(group._id, member._id);
+              await UserServices.removeGroupFromUser(member._id, group._id);
+            }
+          }
         }
       }
-
-      group.members = updatedGroupMemberIds;
-      await group.save();
     }
   } catch (e) {
     console.log("Error syncing users and groups", e);

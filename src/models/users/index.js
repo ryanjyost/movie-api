@@ -43,6 +43,14 @@ module.exports = {
       }
     );
   },
+  removeGroupFromUser: async (userId, groupId) => {
+    return await User.update(
+      { _id: userId },
+      {
+        $pull: { groups: { $in: [groupId] } }
+      }
+    );
+  },
   removeUser: async userId => {
     return await User.remove({ _id: userId });
   },

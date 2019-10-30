@@ -12,6 +12,7 @@ const pe = new PrettyError();
 
 const db = require("./db");
 const runCronJobs = require("./src/cron");
+const synUsersAndGroups = require("./src/cron/syncUsersAndGroups");
 
 // turn on even listeners
 require("./src/listeners");
@@ -80,5 +81,6 @@ app.use(function(err, req, res, next) {
 
 /* RUN CRON JOBS */
 runCronJobs();
+synUsersAndGroups();
 
 module.exports = app;

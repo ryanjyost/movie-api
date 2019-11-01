@@ -53,10 +53,13 @@ router.get(
     const feedback = await FeedbackServices.findAllFeedback();
     const users = await UserServices.findAllUsers();
     const groups = await GroupServices.findAllGroups();
+
+    const filteredUsers = users.filter(u => u.groups.length);
+
     res.json({
       feedback,
       stats: {
-        users: users.length,
+        users: filteredUsers.length,
         groups: groups.length
       }
     });

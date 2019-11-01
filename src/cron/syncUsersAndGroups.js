@@ -33,19 +33,14 @@ module.exports = async () => {
           // if the user is not in the channel
           if (channel.members.indexOf(member.slackId) < 0) {
             // user is leaving the one group they are part of, so just delete them
-            if (member.groups.length === 1) {
-              await UserServices.deleteUser(member._id);
-            } else {
-              await GroupServices.removeUserFromGroup(group._id, member._id);
-              await UserServices.removeGroupFromUser(member._id, group._id);
-            }
+            // if (member.groups.length === 1) {
+            //   await UserServices.deleteUser(member._id);
+            // } else {
+            await GroupServices.removeUserFromGroup(group._id, member._id);
+            await UserServices.removeGroupFromUser(member._id, group._id);
+            // }
           }
         }
-
-        // console.log("CHANNEL", channel);
-        // console.log("GROUP", groupData);
-
-        // console.log("SLACK", channels);
       } else if (group.platform === "groupme") {
         const groupMeData = await to(GroupMeServices.getGroup(group.groupmeId));
         // console.log("GROUPME", group, groupMeData);
@@ -56,12 +51,12 @@ module.exports = async () => {
           );
           if (!memberInActualGroup) {
             // user is leaving the one group they are part of, so just delete them
-            if (member.groups.length === 1) {
-              await UserServices.deleteUser(member._id);
-            } else {
-              await GroupServices.removeUserFromGroup(group._id, member._id);
-              await UserServices.removeGroupFromUser(member._id, group._id);
-            }
+            // if (member.groups.length === 1) {
+            //   await UserServices.deleteUser(member._id);
+            // } else {
+            await GroupServices.removeUserFromGroup(group._id, member._id);
+            await UserServices.removeGroupFromUser(member._id, group._id);
+            // }
           }
         }
       }
